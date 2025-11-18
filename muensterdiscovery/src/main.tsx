@@ -15,7 +15,9 @@ import Help from "./pages/help";
 createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
     <ChakraProvider value={defaultSystem}>
-            <BrowserRouter basename="/muensterdiscovery">
+            <BrowserRouter
+                // basename="/muensterdiscovery"
+            >
                 <Routes>
                     <Route path="/" element={<Welcome />} />
                     <Route path="/login" element={<Login />} />
