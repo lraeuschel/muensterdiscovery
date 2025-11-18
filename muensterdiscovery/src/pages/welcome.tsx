@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, VStack, HStack, Select, Text, Image } from "@chakra-ui/react";
+import { Box, Button, VStack, Text, Image } from "@chakra-ui/react";
 import muensterdiscovery_logo from "../assets/muensterdiscovery_logo.jpg";
 
 export default function Welcome() {
