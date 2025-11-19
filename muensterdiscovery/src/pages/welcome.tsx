@@ -1,10 +1,14 @@
 // import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, VStack, Text, Image } from "@chakra-ui/react";
+// import { Select } from "@chakra-ui/react"
 import muensterdiscovery_logo from "../assets/muensterdiscovery_logo.jpg";
+import { useIntl } from "react-intl";
+import { useState } from "react";
 
 export default function Welcome() {
     const navigate = useNavigate();
+    const intl = useIntl();
 
     return (
         <Box bg="orange.50" minH="100vh">
@@ -17,9 +21,9 @@ export default function Welcome() {
                         textAlign="center"
                         textTransform="uppercase"
                         mb={4}
-                        mt={8}
-                        >
-                        Welcome to
+                        mt={4}
+                    >
+                        {intl.formatMessage({ id: "welcome.title" })}
                     </Text>
                 <Image src={muensterdiscovery_logo} alt="Muenster Discovery Logo" boxSize="400px" mt={3} />
                 <Button
@@ -28,10 +32,10 @@ export default function Welcome() {
                     onClick={() => navigate("/login")}
                     width={"160px"}
                 >
-                    Login
+                    {intl.formatMessage({ id: "welcome.login_button" })}
                 </Button>
                     <Text color="gray.500" fontWeight="semibold" fontSize="sm" whiteSpace="nowrap">
-                        or
+                        {intl.formatMessage({ id: "welcome.or_text" })}
                     </Text>
                 <Button
                     colorPalette={"orange"}
@@ -39,7 +43,7 @@ export default function Welcome() {
                     onClick={() => navigate("/registration")}
                     width={"160px"}
                 >
-                    Create an account
+                    {intl.formatMessage({ id: "welcome.register_button" })} 
                 </Button>
                 <Button
                     colorPalette={"transparent"}
@@ -48,14 +52,14 @@ export default function Welcome() {
                     width={"160px"}
                     mt={15}
                 >
-                    Need help?
+                    {intl.formatMessage({ id: "welcome.help_button" })}
                 </Button>
                 <VStack mt={15}>
                     <Text>
                         @2025 muensterdiscovery
                     </Text>
-                    <Link to="/impressum">
-                        Impressum
+                    <Link to="/imprint">
+                        {intl.formatMessage({ id: "welcome.imprint" })}
                     </Link>
                 </VStack>
             </VStack>
