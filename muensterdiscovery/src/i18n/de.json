@@ -5,5 +5,11 @@
     "welcome.register_button": "Konto erstellen",
     "welcome.help_button": "Brauchst du Hilfe?",
     "welcome.imprint": "Impressum",
-    "welcome.select_language": "Sprache auswählen"
+    "welcome.select_language": "Sprache auswählen",
+
+    "menu.profile": "Profil",
+    "menu.help": "Hilfe",
+    "menu.open-world": "Open World",
+    "menu.routeselection": "Routenauswahl",
+    "menu.leaderboard": "Bestenliste"
 }
