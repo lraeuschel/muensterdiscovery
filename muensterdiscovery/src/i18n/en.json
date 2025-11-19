@@ -4,5 +4,6 @@
     "welcome.or_text": "or",
     "welcome.register_button": "Create an Account",
     "welcome.help_button": "Need Help?",
-    "welcome.imprint": "Imprint"
+    "welcome.imprint": "Imprint",
+    "welcome.select_language": "Select Language"
 }
