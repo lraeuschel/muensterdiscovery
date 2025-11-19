@@ -16,15 +16,15 @@ import deMessages from "./i18n/de.json";
 import enMessages from "./i18n/en.json";
 
 const messages = {
-    de: deMessages,
-    en: enMessages
+    "de": deMessages,
+    "en": enMessages
 }
 
 const language = navigator.language.split(/[-_]/)[0];
 
 createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
-        <IntlProvider locale={language} messages={messages[language]}>
+        <IntlProvider locale={language} messages={messages[language as "de" | "en"]}>
             <ChakraProvider value={defaultSystem}>
                 <BrowserRouter
                     basename="/muensterdiscovery"

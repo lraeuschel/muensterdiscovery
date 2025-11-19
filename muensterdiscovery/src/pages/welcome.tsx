@@ -4,7 +4,6 @@ import { Box, Button, VStack, Text, Image } from "@chakra-ui/react";
 // import { Select } from "@chakra-ui/react"
 import muensterdiscovery_logo from "../assets/muensterdiscovery_logo.jpg";
 import { useIntl } from "react-intl";
-import { useState } from "react";
 
 export default function Welcome() {
     const navigate = useNavigate();
