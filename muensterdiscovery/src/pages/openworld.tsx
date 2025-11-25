@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { LatLngExpression, DivIcon } from 'leaflet';
+import { DivIcon } from 'leaflet';
+import type { LatLngExpression } from 'leaflet';
 import { useState, useEffect } from 'react';
 
 // Custom Christmas Market Icon

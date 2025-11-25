@@ -28,7 +28,7 @@ export default function AppWrapper() {
     );
 
     return (
-        <IntlProvider locale={language} messages={messages[language]}>
+        <IntlProvider locale={language} messages={messages[language as keyof typeof messages]}>
             <ChakraProvider value={defaultSystem}>
                 <BrowserRouter basename="/muensterdiscovery">
                     <Routes>
@@ -37,7 +37,7 @@ export default function AppWrapper() {
                         <Route path="/registration" element={<Registration />} />
                         <Route path="/openworld" element={<OpenWorld />} />
                         <Route path="/routeselection" element={<RouteSelection />} />
-                        <Route path="/routedisplay" element={<RouteDisplay />} />
+                        <Route path="/routedisplay" element={<RouteDisplay setLanguage={setLanguage} />} />
                         <Route path="/leaderboard" element={<Leaderboard />} />
                         <Route path="/imprint" element={<Imprint />} />
                         <Route path="/help" element={<Help />} />

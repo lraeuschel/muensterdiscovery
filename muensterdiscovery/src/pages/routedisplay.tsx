@@ -6,7 +6,7 @@ import "@arcgis/map-components/components/arcgis-zoom";
 interface ArcgisMapElement extends HTMLElement {
   view: import("@arcgis/core/views/MapView").default;
 }
-import { ArcgisMap, ArcgisZoom } from "@arcgis/map-components-react";
+import { ArcgisMap } from "@arcgis/map-components-react";
 
 
 
