@@ -1,0 +1,15 @@
+{
+    "welcome.title": "へようこそ",
+    "welcome.login_button": "ログイン",
+    "welcome.or_text": "または",
+    "welcome.register_button": "アカウント作成",
+    "welcome.help_button": "ヘルプが必要ですか？",
+    "welcome.imprint": "法的情報",
+    "welcome.select_language": "言語を選択",
+
+    "menu.profile": "プロフィール",
+    "menu.help": "ヘルプ",
+    "menu.open-world": "オープンワールド",
+    "menu.routeselection": "ルート選択",
+    "menu.leaderboard": "ランキング"
+}

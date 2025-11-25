@@ -1,0 +1,15 @@
+{
+    "welcome.title": "Bem-vindo ao",
+    "welcome.login_button": "Entrar",
+    "welcome.or_text": "ou",
+    "welcome.register_button": "Criar conta",
+    "welcome.help_button": "Precisa de ajuda?",
+    "welcome.imprint": "Aviso legal",
+    "welcome.select_language": "Selecionar idioma",
+
+    "menu.profile": "Perfil",
+    "menu.help": "Ajuda",
+    "menu.open-world": "Mundo aberto",
+    "menu.routeselection": "Seleção de rota",
+    "menu.leaderboard": "Ranking"
+}

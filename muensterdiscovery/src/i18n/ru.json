@@ -1,0 +1,15 @@
+{
+    "welcome.title": "Добро пожаловать в",
+    "welcome.login_button": "Войти",
+    "welcome.or_text": "или",
+    "welcome.register_button": "Создать аккаунт",
+    "welcome.help_button": "Нужна помощь?",
+    "welcome.imprint": "Выходные данные",
+    "welcome.select_language": "Выбрать язык",
+
+    "menu.profile": "Профиль",
+    "menu.help": "Помощь",
+    "menu.open-world": "Открытый мир",
+    "menu.routeselection": "Выбор маршрута",
+    "menu.leaderboard": "Таблица лидеров"
+}

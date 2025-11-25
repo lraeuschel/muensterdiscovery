@@ -23,7 +23,7 @@ const messages = {
 
 export default function AppWrapper() {
     const browserLang = navigator.language.split(/[-_]/)[0];
-    const [language, setLanguage] = useState<"de" | "en">(
+    const [language, setLanguage] = useState<"de" | "en" | "es" | "fr" | "it" | "nl" | "pl" | "pt" | "tk" | "ru" | "jp">(
         browserLang === "en" ? "en" : "de"
     );
 
