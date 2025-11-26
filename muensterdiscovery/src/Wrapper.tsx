@@ -46,7 +46,7 @@ export default function AppWrapper() {
     );
 
     return (
-        <IntlProvider locale={language} messages={messages[language]}>
+        <IntlProvider locale={language} messages={messages[language as keyof typeof messages]}>
             <ChakraProvider value={defaultSystem}>
                 <BrowserRouter basename="/muensterdiscovery">
                     <Routes>
