@@ -11,7 +11,7 @@ import { ArcgisMap, ArcgisZoom } from "@arcgis/map-components-react";
 
 
 
-export default function RouteDisplay({ setLanguage }: { setLanguage: (lang: "de" | "en") => void }) {
+export default function RouteDisplay({ setLanguage }: { setLanguage: (lang: "de" | "en" | "es" | "fr" | "it" | "nl" | "pl" | "pt" | "tk" | "ru" | "jp") => void }) {
     const languages = createListCollection({
         items: [
             { label: "🇩🇪", value: "de" },
