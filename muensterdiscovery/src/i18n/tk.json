@@ -16,8 +16,24 @@
     "imprint.title": "Yasal Uyarı",
     "imprint.content": "Bu proje, Coğrafi Bilişim ve Mekansal Veri Bilimi Yüksek Lisans programı kapsamında bir öğrenci projesidir. Kaynak kodu ve dokümantasyon GitHub'da mevcuttur:",
     "imprint.github_link_text": "GitHub Deposu",
-    "imprint.home_button": "Ana sayfaya geri dön",
+    "imprint.home_button": "Ana sayfaya dön",
 
     "openworld.loading": "Noel pazarları yükleniyor...",
-    "openworld.more_info": "Daha fazla bilgi"
+    "openworld.more_info": "Daha fazla bilgi",
+
+    "profile.greeting": "Merhaba, {username}!",
+    "profile.change_picture": "Fotoğrafı değiştir",
+    "profile.change_data": "Verileri değiştir",
+    "profile.logout": "Çıkış yap",
+    "profile.explored_areas": "Keşfedilen alanlar",
+    "profile.favorites": "Favoriler",
+    "profile.route1": "Tarihi şehir turu",
+    "profile.route2": "Kordon döngüsü",
+    "profile.achievements": "Başarılar",
+    "profile.achievement1_title": "Şehir kaşifi",
+    "profile.achievement1_desc": "5 farklı alan keşfedildi",
+    "profile.achievement2_title": "Dayanıklılık makinesi",
+    "profile.achievement2_desc": "5 km'den fazla rota tamamlandı",
+    "profile.achievement3_title": "Noel pazarı hayranı",
+    "profile.achievement3_desc": "Tüm Noel pazarları ziyaret edildi"
 }

@@ -19,5 +19,21 @@
     "imprint.home_button": "ホームに戻る",
 
     "openworld.loading": "クリスマスマーケットを読み込んでいます...",
-    "openworld.more_info": "詳細情報"
+    "openworld.more_info": "詳細情報",
+
+    "profile.greeting": "こんにちは、{username}！",
+    "profile.change_picture": "写真を変更",
+    "profile.change_data": "データを変更",
+    "profile.logout": "ログアウト",
+    "profile.explored_areas": "探索したエリア",
+    "profile.favorites": "お気に入り",
+    "profile.route1": "歴史的な市内ツアー",
+    "profile.route2": "プロムナードループ",
+    "profile.achievements": "実績",
+    "profile.achievement1_title": "都市探検家",
+    "profile.achievement1_desc": "5つの異なるエリアを探索",
+    "profile.achievement2_title": "持久力マシン",
+    "profile.achievement2_desc": "5km以上のルートを完了",
+    "profile.achievement3_title": "クリスマスマーケットファン",
+    "profile.achievement3_desc": "すべてのクリスマスマーケットを訪問"
 }

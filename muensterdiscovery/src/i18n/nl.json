@@ -16,8 +16,24 @@
     "imprint.title": "Colofon",
     "imprint.content": "Dit project is een studieproject in het kader van de masteropleiding Geoinformatics and Spatial Data Science. Broncode en documentatie zijn beschikbaar op GitHub:",
     "imprint.github_link_text": "GitHub-repository",
-    "imprint.home_button": "Terug naar startpagina",
+    "imprint.home_button": "Terug naar home",
 
     "openworld.loading": "Kerstmarkten laden...",
-    "openworld.more_info": "Meer informatie"
+    "openworld.more_info": "Meer informatie",
+
+    "profile.greeting": "Hé, {username}!",
+    "profile.change_picture": "Foto wijzigen",
+    "profile.change_data": "Gegevens wijzigen",
+    "profile.logout": "Uitloggen",
+    "profile.explored_areas": "Verkende gebieden",
+    "profile.favorites": "Favorieten",
+    "profile.route1": "Historische stadstour",
+    "profile.route2": "Promenade rondweg",
+    "profile.achievements": "Prestaties",
+    "profile.achievement1_title": "Stadsverkenner",
+    "profile.achievement1_desc": "5 verschillende gebieden verkend",
+    "profile.achievement2_title": "Uithoudingsmachine",
+    "profile.achievement2_desc": "Route van meer dan 5 km voltooid",
+    "profile.achievement3_title": "Kerstmarktfan",
+    "profile.achievement3_desc": "Alle kerstmarkten bezocht"
 }

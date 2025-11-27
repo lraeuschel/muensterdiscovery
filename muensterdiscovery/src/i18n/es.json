@@ -16,8 +16,24 @@
     "imprint.title": "Aviso legal",
     "imprint.content": "Este proyecto es un proyecto de estudio como parte del programa de Máster en Geoinformática y Ciencia de Datos Espaciales. El código fuente y la documentación están disponibles en GitHub:",
     "imprint.github_link_text": "Repositorio de GitHub",
-    "imprint.home_button": "Volver a la página principal",
+    "imprint.home_button": "Volver al inicio",
 
     "openworld.loading": "Cargando mercados navideños...",
-    "openworld.more_info": "Más información"
+    "openworld.more_info": "Más información",
+
+    "profile.greeting": "¡Hola, {username}!",
+    "profile.change_picture": "Cambiar foto",
+    "profile.change_data": "Cambiar datos",
+    "profile.logout": "Cerrar sesión",
+    "profile.explored_areas": "Áreas exploradas",
+    "profile.favorites": "Favoritos",
+    "profile.route1": "Tour histórico de la ciudad",
+    "profile.route2": "Circuito del paseo",
+    "profile.achievements": "Logros",
+    "profile.achievement1_title": "Explorador de la ciudad",
+    "profile.achievement1_desc": "5 áreas diferentes exploradas",
+    "profile.achievement2_title": "Máquina de resistencia",
+    "profile.achievement2_desc": "Ruta de más de 5 km completada",
+    "profile.achievement3_title": "Fan del mercado navideño",
+    "profile.achievement3_desc": "Todos los mercados navideños visitados"
 }

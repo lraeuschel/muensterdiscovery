@@ -19,5 +19,21 @@
     "imprint.home_button": "Retour à l'accueil",
 
     "openworld.loading": "Chargement des marchés de Noël...",
-    "openworld.more_info": "Plus d'informations"
+    "openworld.more_info": "Plus d'informations",
+
+    "profile.greeting": "Salut, {username}!",
+    "profile.change_picture": "Changer la photo",
+    "profile.change_data": "Modifier les données",
+    "profile.logout": "Se déconnecter",
+    "profile.explored_areas": "Zones explorées",
+    "profile.favorites": "Favoris",
+    "profile.route1": "Visite historique de la ville",
+    "profile.route2": "Circuit de la promenade",
+    "profile.achievements": "Réalisations",
+    "profile.achievement1_title": "Explorateur urbain",
+    "profile.achievement1_desc": "5 zones différentes explorées",
+    "profile.achievement2_title": "Machine d'endurance",
+    "profile.achievement2_desc": "Parcours de plus de 5 km terminé",
+    "profile.achievement3_title": "Fan de marché de Noël",
+    "profile.achievement3_desc": "Tous les marchés de Noël visités"
 }
