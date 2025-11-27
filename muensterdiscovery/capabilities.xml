@@ -1,0 +1,479 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wfs:WFS_Capabilities xmlns:gml="http://www.opengis.net/gml" xmlns:wfs="http://www.opengis.net/wfs" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ogc="http://www.opengis.net/ogc" xmlns="http://www.opengis.net/wfs" version="1.1.0" xsi:schemaLocation="http://www.opengis.net/wfs http://schemas.opengis.net/wfs/1.1.0/wfs.xsd">
+  <ows:ServiceIdentification>
+    <ows:Title>Points of Interest</ows:Title>
+    <ows:Abstract>Points of Interest in Münster</ows:Abstract>
+    <!--WARNING: Optional metadata "ows_keywordlist" was missing for ows:KeywordList-->
+    <ows:ServiceType codeSpace="OGC">OGC WFS</ows:ServiceType>
+    <ows:ServiceTypeVersion>1.1.0</ows:ServiceTypeVersion>
+    <ows:Fees>none</ows:Fees>
+    <ows:AccessConstraints>none</ows:AccessConstraints>
+  </ows:ServiceIdentification>
+  <ows:ServiceProvider>
+    <ows:ProviderName>Vermessungs- und Katasteramt</ows:ProviderName>
+    <ows:ProviderSite xlink:type="simple" xlink:href=""/>
+    <!--WARNING: Optional metadata "ows_service_onlineresource" was missing for ows:ProviderSite/@xlink:href-->
+    <ows:ServiceContact>
+      <ows:IndividualName>Norbert Dephoff</ows:IndividualName>
+      <ows:PositionName/>
+      <!--WARNING: Optional metadata "ows_contactposition" was missing for ows:PositionName-->
+      <ows:ContactInfo>
+        <ows:Phone>
+          <ows:Voice/>
+          <!--WARNING: Optional metadata "ows_contactvoicetelephone" was missing for ows:Voice-->
+          <ows:Facsimile/>
+          <!--WARNING: Optional metadata "ows_contactfacsimiletelephone" was missing for ows:Facsimile-->
+        </ows:Phone>
+        <ows:Address>
+          <ows:DeliveryPoint>Albersloher Weg 33</ows:DeliveryPoint>
+          <ows:City>Münster</ows:City>
+          <ows:AdministrativeArea></ows:AdministrativeArea>
+          <ows:PostalCode>48155</ows:PostalCode>
+          <ows:Country>Germany</ows:Country>
+          <ows:ElectronicMailAddress>zgdm@stadt-muenster.de</ows:ElectronicMailAddress>
+        </ows:Address>
+        <ows:OnlineResource xlink:type="simple" xlink:href=""/>
+        <!--WARNING: Optional metadata "ows_service_onlineresource" was missing for ows:OnlineResource/@xlink:href-->
+        <ows:HoursOfService/>
+        <!--WARNING: Optional metadata "ows_hoursofservice" was missing for ows:HoursOfService-->
+        <ows:ContactInstructions/>
+        <!--WARNING: Optional metadata "ows_contactinstructions" was missing for ows:ContactInstructions-->
+      </ows:ContactInfo>
+      <ows:Role/>
+      <!--WARNING: Optional metadata "ows_role" was missing for ows:Role-->
+    </ows:ServiceContact>
+  </ows:ServiceProvider>
+  <ows:OperationsMetadata>
+    <ows:Operation name="GetCapabilities">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:type="simple" xlink:href="http://www.stadt-muenster.de/ows/mapserv706/poiserv?"/>
+          <ows:Post xlink:type="simple" xlink:href="http://www.stadt-muenster.de/ows/mapserv706/poiserv?"/>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="service">
+        <ows:Value>WFS</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="AcceptVersions">
+        <ows:Value>1.0.0</ows:Value>
+        <ows:Value>1.1.0</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="AcceptFormats">
+        <ows:Value>text/xml</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="DescribeFeatureType">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:type="simple" xlink:href="http://www.stadt-muenster.de/ows/mapserv706/poiserv?"/>
+          <ows:Post xlink:type="simple" xlink:href="http://www.stadt-muenster.de/ows/mapserv706/poiserv?"/>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="outputFormat">
+        <ows:Value>XMLSCHEMA</ows:Value>
+        <ows:Value>text/xml; subtype=gml/2.1.2</ows:Value>
+        <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+    <ows:Operation name="GetFeature">
+      <ows:DCP>
+        <ows:HTTP>
+          <ows:Get xlink:type="simple" xlink:href="http://www.stadt-muenster.de/ows/mapserv706/poiserv?"/>
+          <ows:Post xlink:type="simple" xlink:href="http://www.stadt-muenster.de/ows/mapserv706/poiserv?"/>
+        </ows:HTTP>
+      </ows:DCP>
+      <ows:Parameter name="resultType">
+        <ows:Value>results</ows:Value>
+        <ows:Value>hits</ows:Value>
+      </ows:Parameter>
+      <ows:Parameter name="outputFormat">
+        <ows:Value>text/xml; subtype=gml/3.1.1</ows:Value>
+        <ows:Value>SHAPEZIP</ows:Value>
+        <ows:Value>text/csv</ows:Value>
+        <ows:Value>application/vnd.google-earth.kml.xml</ows:Value>
+        <ows:Value>GEOJSON</ows:Value>
+      </ows:Parameter>
+    </ows:Operation>
+  </ows:OperationsMetadata>
+  <FeatureTypeList>
+    <Operations>
+      <Operation>Query</Operation>
+    </Operations>
+    <FeatureType>
+      <Name>Baeder</Name>
+      <Title>Baeder</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.52506214844336 51.8876727088662</ows:LowerCorner>
+        <ows:UpperCorner>7.71465908709898 52.0002334906941</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Behoerden</Name>
+      <Title>Behoerden</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.51848821843794 51.8806240651646</ows:LowerCorner>
+        <ows:UpperCorner>7.7290197324754 51.998832919321</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Buecherbus</Name>
+      <Title>Buecherbus</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>1.74084238577813 0</ows:LowerCorner>
+        <ows:UpperCorner>8.2108988138609 52.0395713209761</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Buechereien</Name>
+      <Title>Buechereien</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.56499214019652 51.9454270880219</ows:LowerCorner>
+        <ows:UpperCorner>7.65024438406386 51.99624832197</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Kriegerdenkmale</Name>
+      <Title>Kriegerdenkmale</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>1.74036531220839 0</ows:LowerCorner>
+        <ows:UpperCorner>8.23505295473763 52.0429658239143</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Friedhoefe</Name>
+      <Title>Friedhoefe</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.51771431687416 51.879847567575</ows:LowerCorner>
+        <ows:UpperCorner>7.75637781546301 52.0357735827731</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Glascontainer</Name>
+      <Title>Glascontainer</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.51766054614553 51.8802747148564</ows:LowerCorner>
+        <ows:UpperCorner>7.73561233961614 52.0433960768791</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Hotels</Name>
+      <Title>Hotels</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.52090222057006 51.8771741965719</ows:LowerCorner>
+        <ows:UpperCorner>7.70236512869129 52.0163011757259</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Kino</Name>
+      <Title>Kino</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.61410992636975 51.9501310177082</ows:LowerCorner>
+        <ows:UpperCorner>7.64313821950143 51.9714946105252</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Krankenhaeuser</Name>
+      <Title>Krankenhaeuser</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.56031873620209 51.8770027969425</ows:LowerCorner>
+        <ows:UpperCorner>7.712855525479 52.0132527631157</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Museen</Name>
+      <Title>Museen</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.55066100591592 51.8762426612188</ows:LowerCorner>
+        <ows:UpperCorner>7.70238787410337 52.0027911152665</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Papierkorb</Name>
+      <Title>Papierkorb</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.51524884871622 51.8764601647686</ows:LowerCorner>
+        <ows:UpperCorner>7.75410311587416 52.0429111403245</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Theater</Name>
+      <Title>Theater</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.61551276348503 51.9041866613239</ows:LowerCorner>
+        <ows:UpperCorner>7.65402757692816 51.9884124466215</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Toiletten</Name>
+      <Title>Toiletten</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>1.75257769107497 0</ows:LowerCorner>
+        <ows:UpperCorner>8.18036487558006 51.965676289646</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>Weihnachtsmaerkte</Name>
+      <Title>Weihnachtsmaerkte</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.62273980489263 51.9589843793608</ows:LowerCorner>
+        <ows:UpperCorner>7.62927042533164 51.9642181099206</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+    <FeatureType>
+      <Name>WLAN-Standorte</Name>
+      <Title>WLAN-Standorte</Title>
+      <DefaultSRS>urn:ogc:def:crs:EPSG::25832</DefaultSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31467</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::4326</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::31466</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::3857</OtherSRS>
+      <OtherSRS>urn:ogc:def:crs:EPSG::102100</OtherSRS>
+      <OutputFormats>
+        <Format>text/xml; subtype=gml/3.1.1</Format>
+        <Format>SHAPEZIP</Format>
+        <Format>text/csv</Format>
+        <Format>application/vnd.google-earth.kml.xml</Format>
+        <Format>GEOJSON</Format>
+      </OutputFormats>
+      <ows:WGS84BoundingBox dimensions="2">
+        <ows:LowerCorner>7.53281457983446 51.887722883151</ows:LowerCorner>
+        <ows:UpperCorner>7.7288244679889 51.9970891045074</ows:UpperCorner>
+      </ows:WGS84BoundingBox>
+    </FeatureType>
+  </FeatureTypeList>
+  <ogc:Filter_Capabilities>
+    <ogc:Spatial_Capabilities>
+      <ogc:GeometryOperands>
+        <ogc:GeometryOperand>gml:Point</ogc:GeometryOperand>
+        <ogc:GeometryOperand>gml:LineString</ogc:GeometryOperand>
+        <ogc:GeometryOperand>gml:Polygon</ogc:GeometryOperand>
+        <ogc:GeometryOperand>gml:Envelope</ogc:GeometryOperand>
+      </ogc:GeometryOperands>
+      <ogc:SpatialOperators>
+        <ogc:SpatialOperator name="Equals"/>
+        <ogc:SpatialOperator name="Disjoint"/>
+        <ogc:SpatialOperator name="Touches"/>
+        <ogc:SpatialOperator name="Within"/>
+        <ogc:SpatialOperator name="Overlaps"/>
+        <ogc:SpatialOperator name="Crosses"/>
+        <ogc:SpatialOperator name="Intersects"/>
+        <ogc:SpatialOperator name="Contains"/>
+        <ogc:SpatialOperator name="DWithin"/>
+        <ogc:SpatialOperator name="Beyond"/>
+        <ogc:SpatialOperator name="BBOX"/>
+      </ogc:SpatialOperators>
+    </ogc:Spatial_Capabilities>
+    <ogc:Scalar_Capabilities>
+      <ogc:LogicalOperators/>
+      <ogc:ComparisonOperators>
+        <ogc:ComparisonOperator>LessThan</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>GreaterThan</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>LessThanEqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>GreaterThanEqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>EqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>NotEqualTo</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>Like</ogc:ComparisonOperator>
+        <ogc:ComparisonOperator>Between</ogc:ComparisonOperator>
+      </ogc:ComparisonOperators>
+    </ogc:Scalar_Capabilities>
+    <ogc:Id_Capabilities>
+      <ogc:EID/>
+      <ogc:FID/>
+    </ogc:Id_Capabilities>
+  </ogc:Filter_Capabilities>
+</wfs:WFS_Capabilities>

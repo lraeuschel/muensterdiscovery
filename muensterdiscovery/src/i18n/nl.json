@@ -1,0 +1,15 @@
+{
+    "welcome.title": "Welkom bij",
+    "welcome.login_button": "Inloggen",
+    "welcome.or_text": "of",
+    "welcome.register_button": "Account aanmaken",
+    "welcome.help_button": "Hulp nodig?",
+    "welcome.imprint": "Colofon",
+    "welcome.select_language": "Taal selecteren",
+
+    "menu.profile": "Profiel",
+    "menu.help": "Help",
+    "menu.open-world": "Open wereld",
+    "menu.routeselection": "Routekeuze",
+    "menu.leaderboard": "Ranglijst"
+}

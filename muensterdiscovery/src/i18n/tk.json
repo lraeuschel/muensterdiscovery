@@ -1,0 +1,15 @@
+{
+    "welcome.title": "Hoş geldiniz",
+    "welcome.login_button": "Giriş Yap",
+    "welcome.or_text": "veya",
+    "welcome.register_button": "Hesap Oluştur",
+    "welcome.help_button": "Yardım lazım mı?",
+    "welcome.imprint": "Yasal Uyarı",
+    "welcome.select_language": "Dil seçin",
+
+    "menu.profile": "Profil",
+    "menu.help": "Yardım",
+    "menu.open-world": "Açık Dünya",
+    "menu.routeselection": "Rota seçimi",
+    "menu.leaderboard": "Liderler Sıralaması"
+}

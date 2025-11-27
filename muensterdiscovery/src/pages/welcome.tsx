@@ -6,7 +6,7 @@ import { useIntl } from "react-intl";
 import MenuComponent from "../components/menu";
 import LanguageSelector from "../components/languageSelector";
 
-export default function Welcome({ setLanguage }: { setLanguage: (lang: "de" | "en") => void }) {
+export default function Welcome({ setLanguage }: { setLanguage: (lang: "de" | "en" | "es" | "fr" | "it" | "nl" | "pl" | "pt" | "tk" | "ru" | "jp") => void }) {
     const navigate = useNavigate();
     const intl = useIntl();
 
