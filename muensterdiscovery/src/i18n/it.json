@@ -11,5 +11,10 @@
     "menu.help": "Aiuto",
     "menu.open-world": "Open World",
     "menu.routeselection": "Selezione percorso",
-    "menu.leaderboard": "Classifica"
+    "menu.leaderboard": "Classifica",
+    
+    "imprint.title": "Note legali",
+    "imprint.content": "Questo progetto è un progetto di studio nell'ambito del corso di laurea magistrale in Geoinformatica e Scienze dei Dati Spaziali. Il codice sorgente e la documentazione sono disponibili su GitHub:",
+    "imprint.github_link_text": "Repository GitHub",
+    "imprint.home_button": "Torna alla home"
 }

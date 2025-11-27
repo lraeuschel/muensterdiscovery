@@ -11,5 +11,10 @@
     "menu.help": "مساعدة",
     "menu.open-world": "العالم المفتوح",
     "menu.routeselection": "اختيار المسار",
-    "menu.leaderboard": "قائمة المتصدرين"
+    "menu.leaderboard": "قائمة المتصدرين",
+    
+    "imprint.title": "العلامات القانونية",
+    "imprint.content": "هذا المشروع هو مشروع دراسي كجزء من برنامج الماجستير في الجغرافيا المعلوماتية وعلوم بيانات الفضاء. الشيفرة المصدرية والوثائق متاحة على GitHub:",
+    "imprint.github_link_text": "مستودع GitHub",
+    "imprint.home_button": "العودة إلى الصفحة الرئيسية"
 }

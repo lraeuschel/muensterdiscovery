@@ -11,5 +11,9 @@
     "menu.help": "Помощь",
     "menu.open-world": "Открытый мир",
     "menu.routeselection": "Выбор маршрута",
-    "menu.leaderboard": "Таблица лидеров"
+    "menu.leaderboard": "Таблица лидеров",
+    "imprint.title": "Выходные данные",
+    "imprint.content": "Этот проект является учебным проектом в рамках магистерской программы «Геоинформатика и наука о пространственных данных». Исходный код и документация доступны на GitHub:",
+    "imprint.github_link_text": "Репозиторий GitHub",
+    "imprint.home_button": "Вернуться на главную"
 }

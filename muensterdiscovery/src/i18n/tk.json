@@ -11,5 +11,10 @@
     "menu.help": "Yardım",
     "menu.open-world": "Açık Dünya",
     "menu.routeselection": "Rota seçimi",
-    "menu.leaderboard": "Liderler Sıralaması"
+    "menu.leaderboard": "Liderler Sıralaması",
+    
+    "imprint.title": "Yasal Uyarı",
+    "imprint.content": "Bu proje, Coğrafi Bilişim ve Mekansal Veri Bilimi Yüksek Lisans programı kapsamında bir öğrenci projesidir. Kaynak kodu ve dokümantasyon GitHub'da mevcuttur:",
+    "imprint.github_link_text": "GitHub Deposu",
+    "imprint.home_button": "Ana sayfaya geri dön"
 }

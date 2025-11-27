@@ -11,5 +11,10 @@
     "menu.help": "Pomoc",
     "menu.open-world": "Otwarty świat",
     "menu.routeselection": "Wybór trasy",
-    "menu.leaderboard": "Ranking"
+    "menu.leaderboard": "Ranking",
+    
+    "imprint.title": "Nota prawna",
+    "imprint.content": "Ten projekt to projekt studencki w ramach studiów magisterskich z Geoinformatics and Spatial Data Science. Kod źródłowy i dokumentacja są dostępne na GitHub:",
+    "imprint.github_link_text": "Repozytorium GitHub",
+    "imprint.home_button": "Powrót do strony głównej"
 }

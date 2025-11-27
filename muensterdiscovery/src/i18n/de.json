@@ -11,5 +11,10 @@
     "menu.help": "Hilfe",
     "menu.open-world": "Open World",
     "menu.routeselection": "Routenauswahl",
-    "menu.leaderboard": "Bestenliste"
+    "menu.leaderboard": "Bestenliste",
+
+    "imprint.title": "Impressum",
+    "imprint.content": "Dieses Projekt ist ein Studienprojekt im Rahmen des Masterstudiengangs Geoinformatics and Spatial Data Science der Universität Münster. Quellcode und Dokumentation sind auf GitHub verfügbar:",
+    "imprint.github_link_text": "GitHub Repository",
+    "imprint.home_button": "Zurück zur Startseite"
 }

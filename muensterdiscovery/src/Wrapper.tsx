@@ -61,7 +61,7 @@ export default function AppWrapper() {
                         <Route path="/routeselection" element={<RouteSelection />} />
                         <Route path="/routedisplay" element={<RouteDisplay setLanguage={setLanguage} />} />
                         <Route path="/leaderboard" element={<Leaderboard />} />
-                        <Route path="/imprint" element={<Imprint />} />
+                        <Route path="/imprint" element={<Imprint setLanguage={setLanguage}/>} />
                         <Route path="/help" element={<Help />} />
                         <Route path="/profile" element={<Profile />} />
                     </Routes>

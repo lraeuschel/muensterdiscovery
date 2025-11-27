@@ -11,5 +11,10 @@
     "menu.help": "Help",
     "menu.open-world": "Open World",
     "menu.routeselection": "Route Selection",
-    "menu.leaderboard": "Leaderboard"
+    "menu.leaderboard": "Leaderboard",
+    
+    "imprint.title": "Imprint",
+    "imprint.content": "This project is a student project as part of the Master's program in Geoinformatics and Spatial Data Science. Source code and documentation are available on GitHub:",
+    "imprint.github_link_text": "GitHub Repository",
+    "imprint.home_button": "Back to Home"
 }

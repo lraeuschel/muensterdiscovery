@@ -11,5 +11,10 @@
     "menu.help": "Help",
     "menu.open-world": "Open wereld",
     "menu.routeselection": "Routekeuze",
-    "menu.leaderboard": "Ranglijst"
+    "menu.leaderboard": "Ranglijst",
+    
+    "imprint.title": "Colofon",
+    "imprint.content": "Dit project is een studieproject in het kader van de masteropleiding Geoinformatics and Spatial Data Science. Broncode en documentatie zijn beschikbaar op GitHub:",
+    "imprint.github_link_text": "GitHub-repository",
+    "imprint.home_button": "Terug naar startpagina"
 }
