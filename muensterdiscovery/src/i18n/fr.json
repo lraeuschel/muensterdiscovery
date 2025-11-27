@@ -16,5 +16,8 @@
     "imprint.title": "Mentions légales",
     "imprint.content": "Ce projet est un projet d'études dans le cadre du master en Géoinformatique et Science des Données Spatiales. Le code source et la documentation sont disponibles sur GitHub :",
     "imprint.github_link_text": "Dépôt GitHub",
-    "imprint.home_button": "Retour à l'accueil"
+    "imprint.home_button": "Retour à l'accueil",
+
+    "openworld.loading": "Chargement des marchés de Noël...",
+    "openworld.more_info": "Plus d'informations"
 }

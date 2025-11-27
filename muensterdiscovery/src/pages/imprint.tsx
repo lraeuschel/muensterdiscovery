@@ -1,6 +1,6 @@
-import { Box, VStack, Text, HStack, Image, Link as ChakraLink, Button } from "@chakra-ui/react";
+import { Box, VStack, Text, Image, Link as ChakraLink, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import MenuComponent from "../components/menu";
+import Header from "../components/Header";
 import LanguageSelector from "../components/languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
 import type { LanguageType } from "../components/languageSelector";
@@ -13,10 +13,10 @@ export default function Imprint({ setLanguage }: { setLanguage: (lang: LanguageT
     return (
         <Box bg="orange.50" minH="100vh" p={4}>
             {/* Header */}
-            <HStack justify="space-between" mb={8}>
-                <MenuComponent />
+            <Header />
+            <Box position="absolute" top="10px" right="10px">
                 <LanguageSelector setLanguage={setLanguage} />
-            </HStack>
+            </Box>
 
             {/* Logo */}
             <VStack align="center">

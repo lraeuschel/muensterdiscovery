@@ -3,6 +3,8 @@ import 'leaflet/dist/leaflet.css';
 import { DivIcon } from 'leaflet';
 import type { LatLngExpression } from 'leaflet';
 import { useState, useEffect } from 'react';
+import { useIntl } from 'react-intl';
+import Header from '../components/Header';
 
 // Custom Christmas Market Icon
 const christmasIcon = new DivIcon({
@@ -52,6 +54,8 @@ interface GeoJSONFeatureCollection {
 }
 
 export default function OpenWorld() {
+    const intl = useIntl();
+    
     // Münster Koordinaten
     const munsterCenter: LatLngExpression = [51.9607, 7.6261];
     const zoom = 14;
@@ -106,13 +110,14 @@ export default function OpenWorld() {
                 fontSize: '18px',
                 color: '#c41e3a'
             }}>
-                🎄 Lade Weihnachtsmärkte...
+                🎄 {intl.formatMessage({ id: 'openworld.loading' })}
             </div>
         );
     }
 
     return (
         <div style={{ width: '100%', height: '100vh' }}>
+            <Header />
             <MapContainer 
                 center={munsterCenter} 
                 zoom={zoom} 
@@ -169,7 +174,7 @@ export default function OpenWorld() {
                                         onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#a01830'}
                                         onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#c41e3a'}
                                     >
-                                        {market.properties.LINK1_TXT} →
+                                        {intl.formatMessage({ id: 'openworld.more_info' })} →
                                     </a>
                                 </div>
                             </Popup>

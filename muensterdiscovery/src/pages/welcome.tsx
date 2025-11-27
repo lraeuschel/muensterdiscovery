@@ -1,9 +1,9 @@
 // import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Button, VStack, Text, Image, HStack } from "@chakra-ui/react";
+import { Box, Button, VStack, Text, Image } from "@chakra-ui/react";
 import muensterdiscovery_logo from "../assets/logo.png";
 import { useIntl } from "react-intl";
-import MenuComponent from "../components/menu";
+import Header from "../components/Header";
 import LanguageSelector from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
 
@@ -13,10 +13,10 @@ export default function Welcome({ setLanguage }: { setLanguage: (lang: LanguageT
 
     return (
         <Box bg="orange.50" minH="100vh">
-            <HStack>
-                <MenuComponent />
+            <Header />
+            <Box position="absolute" top="10px" right="10px">
                 <LanguageSelector setLanguage={setLanguage} />
-            </HStack>
+            </Box>
             
             <VStack>
                 <Text

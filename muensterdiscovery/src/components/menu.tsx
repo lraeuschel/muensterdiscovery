@@ -21,35 +21,33 @@
         ];
 
         return (
-            <Box position="fixed" top="10px" left="10px">
-                <Menu.Root>
-                    <Menu.Trigger asChild>
-                        <Button variant="subtle" size="md">
-                            <RxHamburgerMenu size={24} />
-                        </Button>
-                    </Menu.Trigger>
+            <Menu.Root>
+                <Menu.Trigger asChild>
+                    <Button variant="subtle" size="md">
+                        <RxHamburgerMenu size={24} />
+                    </Button>
+                </Menu.Trigger>
 
-                    <Portal>
-                        <Menu.Positioner>
-                            <Menu.Content>
-                                {menuItems.map((item) => (
-                                    <Menu.Item
-                                        value={item.value}
-                                        onClick={() => navigate(item.path)}
-                                        width={"full"}
-                                    >
-                                        <Box >
-                                            <HStack>
-                                                {intl.formatMessage({ id: `menu.${item.value}` })}
-                                                {item.icon}
-                                            </HStack>
-                                        </Box>
-                                    </Menu.Item>
-                                ))}
-                            </Menu.Content>
-                        </Menu.Positioner>
-                    </Portal>
-                </Menu.Root>
-            </Box>
+                <Portal>
+                    <Menu.Positioner>
+                        <Menu.Content>
+                            {menuItems.map((item) => (
+                                <Menu.Item
+                                    value={item.value}
+                                    onClick={() => navigate(item.path)}
+                                    width={"full"}
+                                >
+                                    <Box >
+                                        <HStack>
+                                            {intl.formatMessage({ id: `menu.${item.value}` })}
+                                            {item.icon}
+                                        </HStack>
+                                    </Box>
+                                </Menu.Item>
+                            ))}
+                        </Menu.Content>
+                    </Menu.Positioner>
+                </Portal>
+            </Menu.Root>
         );
     }

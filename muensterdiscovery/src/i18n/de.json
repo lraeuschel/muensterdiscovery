@@ -16,5 +16,8 @@
     "imprint.title": "Impressum",
     "imprint.content": "Dieses Projekt ist ein Studienprojekt im Rahmen des Masterstudiengangs Geoinformatics and Spatial Data Science der Universität Münster. Quellcode und Dokumentation sind auf GitHub verfügbar:",
     "imprint.github_link_text": "GitHub Repository",
-    "imprint.home_button": "Zurück zur Startseite"
+    "imprint.home_button": "Zurück zur Startseite",
+
+    "openworld.loading": "Lade Weihnachtsmärkte...",
+    "openworld.more_info": "Weitere Informationen"
 }

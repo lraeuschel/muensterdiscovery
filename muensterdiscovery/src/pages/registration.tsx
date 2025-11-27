@@ -5,6 +5,7 @@ import {
   FormControl,
   FormLabel,
 } from "@chakra-ui/form-control";
+import Header from "../components/Header";
 
 
 export default function Signup() {
@@ -27,7 +28,9 @@ export default function Signup() {
   }
 
   return (
-    <Flex justify="center" align="center" minH="100vh" bg="gray.50">
+    <>
+      <Header />
+      <Flex justify="center" align="center" minH="100vh" bg="gray.50">
       <Box
         bg="white"
         p={8}
@@ -75,5 +78,6 @@ export default function Signup() {
         </form>
       </Box>
     </Flex>
+    </>
   );
 }

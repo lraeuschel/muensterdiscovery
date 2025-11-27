@@ -16,5 +16,8 @@
     "imprint.title": "法的情報",
     "imprint.content": "本プロジェクトは、地理情報学および空間データサイエンス修士課程の学習プロジェクトです。ソースコードとドキュメントはGitHubで公開されています：",
     "imprint.github_link_text": "GitHub リポジトリ",
-    "imprint.home_button": "ホームに戻る"
+    "imprint.home_button": "ホームに戻る",
+
+    "openworld.loading": "クリスマスマーケットを読み込んでいます...",
+    "openworld.more_info": "詳細情報"
 }

@@ -16,5 +16,8 @@
     "imprint.title": "Aviso legal",
     "imprint.content": "Este projeto é um projeto de estudo como parte do mestrado em Geoinformática e Ciência de Dados Espaciais. Código-fonte e documentação estão disponíveis no GitHub:",
     "imprint.github_link_text": "Repositório GitHub",
-    "imprint.home_button": "Voltar para a página inicial"
+    "imprint.home_button": "Voltar para a página inicial",
+
+    "openworld.loading": "Carregando mercados de Natal...",
+    "openworld.more_info": "Mais informações"
 }
