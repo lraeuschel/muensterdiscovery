@@ -1,0 +1,15 @@
+{
+    "welcome.title": "مرحبًا بك في",
+    "welcome.login_button": "تسجيل الدخول",
+    "welcome.or_text": "أو",
+    "welcome.register_button": "إنشاء حساب",
+    "welcome.help_button": "هل تحتاج إلى مساعدة؟",
+    "welcome.imprint": "العلامات القانونية",
+    "welcome.select_language": "اختيار اللغة",
+
+    "menu.profile": "الملف الشخصي",
+    "menu.help": "مساعدة",
+    "menu.open-world": "العالم المفتوح",
+    "menu.routeselection": "اختيار المسار",
+    "menu.leaderboard": "قائمة المتصدرين"
+}
