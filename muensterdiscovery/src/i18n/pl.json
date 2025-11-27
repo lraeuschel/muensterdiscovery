@@ -20,5 +20,21 @@
     "imprint.home_button": "Powrót do strony głównej",
 
     "openworld.loading": "Ładowanie jarmarków bożonarodzeniowych...",
-    "openworld.more_info": "Więcej informacji"
+    "openworld.more_info": "Więcej informacji",
+
+    "profile.greeting": "Cześć, {username}!",
+    "profile.change_picture": "Zmień zdjęcie",
+    "profile.change_data": "Zmień dane",
+    "profile.logout": "Wyloguj się",
+    "profile.explored_areas": "Zbadane obszary",
+    "profile.favorites": "Ulubione",
+    "profile.route1": "Historyczna wycieczka po mieście",
+    "profile.route2": "Pętla promenady",
+    "profile.achievements": "Osiągnięcia",
+    "profile.achievement1_title": "Odkrywca miasta",
+    "profile.achievement1_desc": "Zbadano 5 różnych obszarów",
+    "profile.achievement2_title": "Maszyna wytrzymałościowa",
+    "profile.achievement2_desc": "Ukończono trasę dłuższą niż 5 km",
+    "profile.achievement3_title": "Fan jarmarków bożonarodzeniowych",
+    "profile.achievement3_desc": "Odwiedzono wszystkie jarmarki bożonarodzeniowe"
 }

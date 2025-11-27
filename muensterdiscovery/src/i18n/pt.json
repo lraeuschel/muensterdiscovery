@@ -20,5 +20,21 @@
     "imprint.home_button": "Voltar para a página inicial",
 
     "openworld.loading": "Carregando mercados de Natal...",
-    "openworld.more_info": "Mais informações"
+    "openworld.more_info": "Mais informações",
+
+    "profile.greeting": "Olá, {username}!",
+    "profile.change_picture": "Alterar foto",
+    "profile.change_data": "Alterar dados",
+    "profile.logout": "Sair",
+    "profile.explored_areas": "Áreas exploradas",
+    "profile.favorites": "Favoritos",
+    "profile.route1": "Tour histórico da cidade",
+    "profile.route2": "Circuito do passeio",
+    "profile.achievements": "Conquistas",
+    "profile.achievement1_title": "Explorador da cidade",
+    "profile.achievement1_desc": "5 áreas diferentes exploradas",
+    "profile.achievement2_title": "Máquina de resistência",
+    "profile.achievement2_desc": "Rota com mais de 5 km concluída",
+    "profile.achievement3_title": "Fã de mercados de Natal",
+    "profile.achievement3_desc": "Todos os mercados de Natal visitados"
 }

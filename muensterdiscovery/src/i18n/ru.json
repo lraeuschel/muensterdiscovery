@@ -19,5 +19,21 @@
     "imprint.home_button": "Вернуться на главную",
 
     "openworld.loading": "Загрузка рождественских рынков...",
-    "openworld.more_info": "Подробнее"
+    "openworld.more_info": "Подробнее",
+
+    "profile.greeting": "Привет, {username}!",
+    "profile.change_picture": "Изменить фото",
+    "profile.change_data": "Изменить данные",
+    "profile.logout": "Выйти",
+    "profile.explored_areas": "Исследованные области",
+    "profile.favorites": "Избранное",
+    "profile.route1": "Историческая экскурсия по городу",
+    "profile.route2": "Променадный маршрут",
+    "profile.achievements": "Достижения",
+    "profile.achievement1_title": "Исследователь города",
+    "profile.achievement1_desc": "Исследовано 5 различных областей",
+    "profile.achievement2_title": "Машина выносливости",
+    "profile.achievement2_desc": "Завершен маршрут более 5 км",
+    "profile.achievement3_title": "Фанат рождественских рынков",
+    "profile.achievement3_desc": "Посещены все рождественские рынки"
 }

@@ -20,5 +20,21 @@
     "imprint.home_button": "العودة إلى الصفحة الرئيسية",
 
     "openworld.loading": "جاري تحميل أسواق عيد الميلاد...",
-    "openworld.more_info": "مزيد من المعلومات"
+    "openworld.more_info": "مزيد من المعلومات",
+
+    "profile.greeting": "مرحباً، {username}!",
+    "profile.change_picture": "تغيير الصورة",
+    "profile.change_data": "تغيير البيانات",
+    "profile.logout": "تسجيل الخروج",
+    "profile.explored_areas": "المناطق المستكشفة",
+    "profile.favorites": "المفضلة",
+    "profile.route1": "جولة تاريخية في المدينة",
+    "profile.route2": "حلقة الكورنيش",
+    "profile.achievements": "الإنجازات",
+    "profile.achievement1_title": "مستكشف المدينة",
+    "profile.achievement1_desc": "استكشاف 5 مناطق مختلفة",
+    "profile.achievement2_title": "آلة التحمل",
+    "profile.achievement2_desc": "إكمال مسار أكثر من 5 كم",
+    "profile.achievement3_title": "محب أسواق عيد الميلاد",
+    "profile.achievement3_desc": "زيارة جميع أسواق عيد الميلاد"
 }

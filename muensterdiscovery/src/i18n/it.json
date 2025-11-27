@@ -20,5 +20,21 @@
     "imprint.home_button": "Torna alla home",
 
     "openworld.loading": "Caricamento mercatini di Natale...",
-    "openworld.more_info": "Maggiori informazioni"
+    "openworld.more_info": "Maggiori informazioni",
+
+    "profile.greeting": "Ciao, {username}!",
+    "profile.change_picture": "Cambia foto",
+    "profile.change_data": "Modifica dati",
+    "profile.logout": "Disconnetti",
+    "profile.explored_areas": "Aree esplorate",
+    "profile.favorites": "Preferiti",
+    "profile.route1": "Tour storico della città",
+    "profile.route2": "Percorso della passeggiata",
+    "profile.achievements": "Riconoscimenti",
+    "profile.achievement1_title": "Esploratore urbano",
+    "profile.achievement1_desc": "5 aree diverse esplorate",
+    "profile.achievement2_title": "Macchina della resistenza",
+    "profile.achievement2_desc": "Percorso di oltre 5 km completato",
+    "profile.achievement3_title": "Fan dei mercatini di Natale",
+    "profile.achievement3_desc": "Tutti i mercatini di Natale visitati"
 }
