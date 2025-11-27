@@ -13,10 +13,14 @@
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
+        "@chakra-ui/button": "^2.1.0",
+        "@chakra-ui/form-control": "^2.2.0",
+        "@chakra-ui/input": "^2.1.2",
         "@chakra-ui/react": "^3.29.0",
         "@chakra-ui/system": "^2.6.2",
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
+        "@supabase/supabase-js": "^2.84.0",
         "framer-motion": "^12.23.24",
         "i18next": "^25.6.3",
         "i18next-browser-languagedetector": "^8.2.0",
@@ -38,6 +42,7 @@
         "eslint": "^9.39.1",
         "eslint-plugin-react-hooks": "^7.0.1",
         "eslint-plugin-react-refresh": "^0.4.24",
+        "gh-pages": "^6.3.0",
         "globals": "^16.5.0",
         "typescript": "~5.9.3",
         "typescript-eslint": "^8.46.3",
