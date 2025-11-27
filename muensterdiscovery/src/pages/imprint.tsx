@@ -19,7 +19,7 @@ export default function Imprint({ setLanguage }: { setLanguage: (lang: LanguageT
             </HStack>
 
             {/* Logo */}
-            <VStack spacing={6} align="center">
+            <VStack align="center">
                 <Image src={muensterdiscovery_logo} alt="Muenster Discovery Logo" boxSize="200px" />
 
                 {/* Title */}
@@ -36,7 +36,6 @@ export default function Imprint({ setLanguage }: { setLanguage: (lang: LanguageT
 
                 {/* Content */}
                 <VStack
-                    spacing={4}
                     bg="white"
                     p={6}
                     rounded="lg"
@@ -44,20 +43,19 @@ export default function Imprint({ setLanguage }: { setLanguage: (lang: LanguageT
                     maxW="600px"
                     w="full"
                 >
-                    <Text>
+                    <Text textAlign={"center"}>
                         {intl.formatMessage({ id: "imprint.content" })}{" "}
                         <ChakraLink 
                             href="https://github.com/lraeuschel/muensterdiscovery" 
-                            isExternal 
                             color="orange.500"
                         >
-                            GitHub Repository
+                            {intl.formatMessage({ id: "imprint.github_link_text" })}
                         </ChakraLink>
                     </Text>
                 </VStack>
 
                 {/* Footer */}
-                <VStack mt={8} spacing={2}>
+                <VStack mt={8}>
                     <Text color="gray.500" fontSize="sm">
                         © 2025 muensterdiscovery
                     </Text>
