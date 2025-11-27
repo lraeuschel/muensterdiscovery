@@ -12,13 +12,15 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-  async function handleSignup(e) {
+  async function handleSignup(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
     });
+
+    console.log(data);
 
     if (error) setMessage(error.message);
     else setMessage("Bestätigungs-E-Mail wurde gesendet!");

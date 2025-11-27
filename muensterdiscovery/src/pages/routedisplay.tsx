@@ -1,23 +1,23 @@
-import { Select } from "@chakra-ui/react"
 import MenuComponent from "../components/menu";
-import {Box, createListCollection, Portal, HStack, VStack } from "@chakra-ui/react";
+import {Box, HStack, VStack } from "@chakra-ui/react";
 import "@arcgis/map-components/components/arcgis-map";
 import "@arcgis/map-components/components/arcgis-zoom";
+import MapView from "@arcgis/core/views/MapView";
+import type { LanguageType } from "../components/languageSelector";
+import LanguageSelector from "../components/languageSelector";
+
 interface ArcgisMapElement extends HTMLElement {
-  view: import("@arcgis/core/views/MapView").default;
+    // Use the instance type of the MapView constructor so TS treats this as an instance type
+    // instead of attempting to use a potential namespace named `MapView` as a type.
+    view: InstanceType<typeof MapView> | undefined;
 }
+
 import { ArcgisMap } from "@arcgis/map-components-react";
 
 
 
 
-export default function RouteDisplay({ setLanguage }: { setLanguage: (lang: "de" | "en" | "es" | "fr" | "it" | "nl" | "pl" | "pt" | "tk" | "ru" | "jp") => void }) {
-    const languages = createListCollection({
-        items: [
-            { label: "🇩🇪", value: "de" },
-            { label: "🇬🇧", value: "en" },
-        ],
-    });
+export default function RouteDisplay({ setLanguage }: { setLanguage: (lang: LanguageType) => void }) {
     const handleViewReady = (event: CustomEvent) => {
         const mapElement = event.target as ArcgisMapElement;
         const view = mapElement.view;
@@ -39,30 +39,7 @@ export default function RouteDisplay({ setLanguage }: { setLanguage: (lang: "de"
                 bg="whiteAlpha.900"
                 >
                 <MenuComponent />
-                <Select.Root collection={languages} size="sm" width="20%" position={"fixed"} variant={"subtle"} top={"10px"} right={"10px"}>
-                    {/* <Select.HiddenSelect />
-                    <Select.Label>{intl.formatMessage({ id: "welcome.select_language" })}</Select.Label> */}
-                    <Select.Control>
-                        <Select.Trigger>
-                            <Select.ValueText placeholder= "🇩🇪 / 🇬🇧" />
-                        </Select.Trigger>
-                        <Select.IndicatorGroup>
-                            <Select.Indicator />
-                        </Select.IndicatorGroup>
-                    </Select.Control>
-                    <Portal>
-                        <Select.Positioner>
-                            <Select.Content>
-                                {languages.items.map((language) => (
-                                    <Select.Item item={language} key={language.value} onClick={() => setLanguage(language.value === "de" || language.value === "en" ? language.value : "de")}>
-                                        {language.label}
-                                        <Select.ItemIndicator />
-                                    </Select.Item>
-                                ))}
-                            </Select.Content>
-                        </Select.Positioner>
-                    </Portal>
-                </Select.Root>
+                <LanguageSelector setLanguage={setLanguage} />
             </HStack>
 
             <VStack>
