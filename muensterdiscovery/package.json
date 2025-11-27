@@ -13,8 +13,6 @@
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
-        "@arcgis/map-components": "^4.34.9",
-        "@arcgis/map-components-react": "^4.34.9",
         "@chakra-ui/form-control": "^2.2.0",
         "@chakra-ui/react": "^3.29.0",
         "@chakra-ui/system": "^2.6.2",
