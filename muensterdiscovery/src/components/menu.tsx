@@ -6,6 +6,7 @@
     import { MdOutlineLeaderboard } from "react-icons/md";
     import { IoEarthOutline } from "react-icons/io5";
     import { CgProfile } from "react-icons/cg";
+    import { RiHome2Line } from "react-icons/ri";
     import { useIntl } from "react-intl";
 
     export default function MenuComponent() {
@@ -13,6 +14,7 @@
         const intl = useIntl();
 
         const menuItems = [
+            { value: "welcome", icon: <RiHome2Line size={20} />, path: "/" },
             { value: "profile", icon: <CgProfile size={20} />, path: "/profile" },
             { value: "open-world", icon: <IoEarthOutline size={20} />, path: "/openworld" },
             { value: "leaderboard", icon: <MdOutlineLeaderboard size={20} />, path: "/leaderboard" },
