@@ -75,6 +75,11 @@ This project is a student project developed as part of the Master's program in G
 ## Contributors
 
 - Lukas Räuschel
+- Mika Dinnus
+- Julia Ilchmann
+- Anke Nienaber
+- Matteo Weickert
+- Darian Weiß
 
 ---
 
