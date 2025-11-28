@@ -1,4 +1,5 @@
 Änderungen immer im main-branch machen.
+erst in den Unterordner /muensterdiscovery gehen
 Dann pushen
 Dann npm run deploy
 
