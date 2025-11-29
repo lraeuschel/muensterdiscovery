@@ -36,5 +36,16 @@
     "profile.achievement2_title": "Uithoudingsmachine",
     "profile.achievement2_desc": "Route van meer dan 5 km voltooid",
     "profile.achievement3_title": "Kerstmarktfan",
-    "profile.achievement3_desc": "Alle kerstmarkten bezocht"
+    "profile.achievement3_desc": "Alle kerstmarkten bezocht",
+
+    "leaderboard.title": "Ranglijst",
+    "leaderboard.subtitle": "Wie heeft Münster het beste verkend?",
+    "stats.total_km": "Community km",
+    "stats.total_spots": "Ontdekte plekken",
+    "stats.active_users": "Actieve ontdekkingsreizigers",
+    "leaderboard.month": "Deze maand",
+    "leaderboard.alltime": "Alle tijden",
+    "leaderboard.user": "Gebruiker",
+    "leaderboard.areas": "Gebieden",
+    "leaderboard.points": "Punten"
 }

@@ -38,7 +38,7 @@ export default function LanguageSelector({
     >
       <Select.Control>
         <Select.Trigger>
-          <Select.ValueText placeholder="🇩🇪 / 🇬🇧" />
+          <Select.ValueText placeholder="Choose your language" />
         </Select.Trigger>
         <Select.IndicatorGroup>
           <Select.Indicator />

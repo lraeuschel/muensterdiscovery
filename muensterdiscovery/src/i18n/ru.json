@@ -35,5 +35,16 @@
     "profile.achievement2_title": "Машина выносливости",
     "profile.achievement2_desc": "Завершен маршрут более 5 км",
     "profile.achievement3_title": "Фанат рождественских рынков",
-    "profile.achievement3_desc": "Посещены все рождественские рынки"
+    "profile.achievement3_desc": "Посещены все рождественские рынки",
+
+    "leaderboard.title": "Таблица лидеров",
+    "leaderboard.subtitle": "Кто лучше всего исследовал Мюнстер?",
+    "stats.total_km": "Км сообщества",
+    "stats.total_spots": "Обнаруженные места",
+    "stats.active_users": "Активные исследователи",
+    "leaderboard.month": "Этот месяц",
+    "leaderboard.alltime": "За всё время",
+    "leaderboard.user": "Пользователь",
+    "leaderboard.areas": "Области",
+    "leaderboard.points": "Очки"
 }

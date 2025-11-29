@@ -36,5 +36,16 @@
     "profile.achievement2_title": "持久力マシン",
     "profile.achievement2_desc": "5km以上のルートを完了",
     "profile.achievement3_title": "クリスマスマーケットファン",
-    "profile.achievement3_desc": "すべてのクリスマスマーケットを訪問"
+    "profile.achievement3_desc": "すべてのクリスマスマーケットを訪問",
+
+    "leaderboard.title": "ランキング",
+    "leaderboard.subtitle": "誰がミュンスターを最もよく探検しましたか？",
+    "stats.total_km": "コミュニティ km",
+    "stats.total_spots": "発見されたスポット",
+    "stats.active_users": "アクティブな探検者",
+    "leaderboard.month": "今月",
+    "leaderboard.alltime": "通算",
+    "leaderboard.user": "ユーザー",
+    "leaderboard.areas": "エリア",
+    "leaderboard.points": "ポイント"
 }

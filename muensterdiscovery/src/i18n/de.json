@@ -36,5 +36,16 @@
     "profile.achievement2_title": "Ausdauer-Maschine",
     "profile.achievement2_desc": "Route mit mehr als 5 km abgeschlossen",
     "profile.achievement3_title": "Weihnachtsmarkt-Fan",
-    "profile.achievement3_desc": "Alle Weihnachtsmärkte besucht"
+    "profile.achievement3_desc": "Alle Weihnachtsmärkte besucht",
+
+    "leaderboard.title": "Rangliste",
+    "leaderboard.subtitle": "Wer hat Münster am besten erkundet?",
+    "stats.total_km": "Community km",
+    "stats.total_spots": "Entdeckte Orte",
+    "stats.active_users": "Aktive Entdecker",
+    "leaderboard.month": "Dieser Monat",
+    "leaderboard.alltime": "Ewige Tabelle",
+    "leaderboard.user": "Nutzer",
+    "leaderboard.areas": "Bereiche",
+    "leaderboard.points": "Punkte"
 }

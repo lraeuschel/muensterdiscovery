@@ -36,5 +36,16 @@
     "profile.achievement2_title": "Machine d'endurance",
     "profile.achievement2_desc": "Parcours de plus de 5 km terminé",
     "profile.achievement3_title": "Fan de marché de Noël",
-    "profile.achievement3_desc": "Tous les marchés de Noël visités"
+    "profile.achievement3_desc": "Tous les marchés de Noël visités",
+
+    "leaderboard.title": "Classement",
+    "leaderboard.subtitle": "Qui a le mieux exploré Münster ?",
+    "stats.total_km": "km de la communauté",
+    "stats.total_spots": "Lieux découverts",
+    "stats.active_users": "Explorateurs actifs",
+    "leaderboard.month": "Ce mois-ci",
+    "leaderboard.alltime": "Classement toutes périodes confondues",
+    "leaderboard.user": "Utilisateur",
+    "leaderboard.areas": "Zones",
+    "leaderboard.points": "Points"
 }

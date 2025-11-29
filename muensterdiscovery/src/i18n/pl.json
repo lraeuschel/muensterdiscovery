@@ -36,5 +36,16 @@
     "profile.achievement2_title": "Maszyna wytrzymałościowa",
     "profile.achievement2_desc": "Ukończono trasę dłuższą niż 5 km",
     "profile.achievement3_title": "Fan jarmarków bożonarodzeniowych",
-    "profile.achievement3_desc": "Odwiedzono wszystkie jarmarki bożonarodzeniowe"
+    "profile.achievement3_desc": "Odwiedzono wszystkie jarmarki bożonarodzeniowe",
+
+    "leaderboard.title": "Ranking",
+    "leaderboard.subtitle": "Kto najlepiej odkrył Münster?",
+    "stats.total_km": "Km społeczności",
+    "stats.total_spots": "Odkryte miejsca",
+    "stats.active_users": "Aktywni odkrywcy",
+    "leaderboard.month": "Ten miesiąc",
+    "leaderboard.alltime": "Wszystkie czasy",
+    "leaderboard.user": "Użytkownik",
+    "leaderboard.areas": "Obszary",
+    "leaderboard.points": "Punkty"
 }

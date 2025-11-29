@@ -36,5 +36,16 @@
     "profile.achievement2_title": "Endurance Machine",
     "profile.achievement2_desc": "Completed route with more than 5 km",
     "profile.achievement3_title": "Christmas Market Fan",
-    "profile.achievement3_desc": "Visited all Christmas markets"
+    "profile.achievement3_desc": "Visited all Christmas markets",
+
+    "leaderboard.title": "Leaderboard",
+    "leaderboard.subtitle": "Who explored Münster best?",
+    "stats.total_km": "Community km",
+    "stats.total_spots": "Discovered spots",
+    "stats.active_users": "Active explorers",
+    "leaderboard.month": "This month",
+    "leaderboard.alltime": "All time",
+    "leaderboard.user": "User",
+    "leaderboard.areas": "areas",
+    "leaderboard.points": "Points"
 }
