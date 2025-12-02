@@ -57,4 +57,7 @@
     "registration.password": "Password",
     "registration.register_button": "Register",
     "registration.email_confirmation_message": "Confirmation email sent. Please check your inbox."
+    ,
+    "registration.already_have_account": "Email already in use. Do you already have an account?",
+    "registration.username_taken": "Username already taken."
 }

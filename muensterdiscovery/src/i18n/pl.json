@@ -57,4 +57,7 @@
     "registration.password": "Hasło",
     "registration.register_button": "Zarejestruj się",
     "registration.email_confirmation_message": "Wiadomość potwierdzająca została wysłana. Sprawdź swoją skrzynkę odbiorczą."
+    ,
+    "registration.already_have_account": "Adres e-mail jest już zajęty. Czy masz już konto?",
+    "registration.username_taken": "Nazwa użytkownika jest już zajęta."
 }

@@ -57,4 +57,7 @@
     "registration.password": "パスワード",
     "registration.register_button": "登録",
     "registration.email_confirmation_message": "確認メールが送信されました。受信トレイを確認してください。"
+    ,
+    "registration.already_have_account": "メールアドレスは既に使用されています。既にアカウントをお持ちですか？",
+    "registration.username_taken": "ユーザー名は既に使用されています。"
 }

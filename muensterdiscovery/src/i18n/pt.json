@@ -57,4 +57,7 @@
     "registration.password": "Senha",
     "registration.register_button": "Registrar",
     "registration.email_confirmation_message": "O e-mail de confirmação foi enviado. Verifique sua caixa de entrada."
+    ,
+    "registration.already_have_account": "O e-mail já está em uso. Já tem uma conta?",
+    "registration.username_taken": "Nome de usuário já existe."
 }

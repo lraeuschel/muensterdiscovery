@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../SupabaseClient";
-import {
-    Input,
-    Button,
-    Text,
-    Flex,
-    Box,
-    Heading,
-    VStack
-} from "@chakra-ui/react";
+import { Input, Button, Text, Flex, Box, Heading, VStack} from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 
 import Header from "../components/Header";
@@ -17,6 +9,7 @@ import { useIntl } from "react-intl";
 export default function Signup() {
     const intl = useIntl();
 
+    // Definiere Platzhalter für Formularfelder
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, setFirstName] = useState("");
@@ -28,36 +21,35 @@ export default function Signup() {
         e.preventDefault();
         setMessage("");
 
+        const { data: existingUser } = await supabase
+            .from("profiles")
+            .select("username")
+            .eq("username", username)
+            .maybeSingle(); // maybeSingle gibt null zurück, wenn nichts gefunden wird
+
+        if (existingUser) {
+            setMessage(intl.formatMessage({ id: "registration.username_taken" })); // "Benutzername bereits vergeben.""
+            return;
+        }
+
         const { data: signupData, error: signupError } = await supabase.auth.signUp({
             email,
             password,
             options: {
-                emailRedirectTo: `${window.location.origin}/auth/callback`  
+                emailRedirectTo: `${window.location.origin}/auth/callback`,
+                data: {
+                    first_name: firstName,
+                    last_name: lastName,
+                    username: username,
+                }
             }
         });
 
         if (signupError) {
             setMessage(signupError.message);
+        } else if (signupData.user?.identities?.length === 0) {
+            setMessage(intl.formatMessage({ id: "registration.already_have_account" }));
             return;
-        }
-
-        const userId = signupData.user?.id;
-
-        if (userId) {
-            const { error: profileError } = await supabase
-                .from("profiles")
-                .insert({
-                    id: userId,
-                    first_name: firstName,
-                    last_name: lastName,
-                    username: username,
-                    email: email,
-                });
-
-            if (profileError) {
-                setMessage(profileError.message);
-                return;
-            }
         }
 
         setMessage(intl.formatMessage({ id: "registration.email_confirmation_message" }));

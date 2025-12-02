@@ -57,4 +57,7 @@
     "registration.password": "Contraseña",
     "registration.register_button": "Registrarse",
     "registration.email_confirmation_message": "Se ha enviado el correo de confirmación. Por favor revisa tu bandeja de entrada."
+    ,
+    "registration.already_have_account": "El correo electrónico ya está en uso. ¿Ya tienes una cuenta?",
+    "registration.username_taken": "Nombre de usuario ya en uso."
 }

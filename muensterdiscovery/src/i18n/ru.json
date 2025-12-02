@@ -56,4 +56,7 @@
     "registration.password": "Пароль",
     "registration.register_button": "Зарегистрироваться",
     "registration.email_confirmation_message": "Письмо с подтверждением отправлено. Пожалуйста, проверьте свой почтовый ящик."
+    ,
+    "registration.already_have_account": "Адрес электронной почты уже используется. У вас уже есть аккаунт?",
+    "registration.username_taken": "Имя пользователя уже занято."
 }
