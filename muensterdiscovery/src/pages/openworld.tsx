@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { DivIcon } from 'leaflet';
 import type { LatLngExpression } from 'leaflet';
@@ -116,72 +116,76 @@ export default function OpenWorld() {
     }
 
     return (
-        <div style={{ width: '100%', height: '100vh' }}>
-            <Header />
-            <MapContainer 
-                center={munsterCenter} 
-                zoom={zoom} 
-                style={{ width: '100%', height: '100%' }}
-            >
-                {/* OpenStreetMap Basemap */}
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
+    <div style={{ width: '100%', height: '100vh' }}>
+        <Header />
+        <MapContainer 
+            center={munsterCenter} 
+            zoom={zoom} 
+            style={{ width: '100%', height: '100%' }}
+            zoomControl={false} // Deaktivieren des Standard-Zoom-Controls, um es später neu zu positionieren
+        >
+            {/* 3. Hier das Control neu positionieren */}
+            <ZoomControl position="bottomright" />
+
+            {/* OpenStreetMap Basemap */}
+            <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            
+            {/* GeoJSON Markers für Weihnachtsmärkte */}
+            {markets.map((market, index) => {
+                const position: LatLngExpression = [
+                    market.geometry.coordinates[1],
+                    market.geometry.coordinates[0]
+                ];
                 
-                {/* GeoJSON Markers für Weihnachtsmärkte */}
-                {markets.map((market, index) => {
-                    const position: LatLngExpression = [
-                        market.geometry.coordinates[1],
-                        market.geometry.coordinates[0]
-                    ];
-                    
-                    return (
-                        <Marker 
-                            key={index} 
-                            position={position}
-                            icon={christmasIcon}
-                        >
-                            <Popup>
-                                <div style={{
-                                    fontFamily: 'Arial, sans-serif',
-                                    minWidth: '200px'
+                return (
+                    <Marker 
+                        key={index} 
+                        position={position}
+                        icon={christmasIcon}
+                    >
+                        <Popup>
+                            <div style={{
+                                fontFamily: 'Arial, sans-serif',
+                                minWidth: '200px'
+                            }}>
+                                <h3 style={{
+                                    color: '#c41e3a',
+                                    marginTop: '0',
+                                    marginBottom: '10px',
+                                    fontSize: '16px',
+                                    fontWeight: 'bold'
                                 }}>
-                                    <h3 style={{
-                                        color: '#c41e3a',
-                                        marginTop: '0',
-                                        marginBottom: '10px',
-                                        fontSize: '16px',
-                                        fontWeight: 'bold'
-                                    }}>
-                                        🎅 {market.properties.NAME}
-                                    </h3>
-                                    <a 
-                                        href={market.properties.LINK1} 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        style={{
-                                            display: 'inline-block',
-                                            backgroundColor: '#c41e3a',
-                                            color: '#fff',
-                                            padding: '8px 16px',
-                                            textDecoration: 'none',
-                                            borderRadius: '6px',
-                                            fontSize: '14px',
-                                            fontWeight: '500',
-                                            transition: 'background-color 0.3s'
-                                        }}
-                                        onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#a01830'}
-                                        onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#c41e3a'}
-                                    >
-                                        {intl.formatMessage({ id: 'openworld.more_info' })} →
-                                    </a>
-                                </div>
-                            </Popup>
-                        </Marker>
-                    );
-                })}
-            </MapContainer>
-        </div>
-    )
+                                    🎅 {market.properties.NAME}
+                                </h3>
+                                <a 
+                                    href={market.properties.LINK1} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    style={{
+                                        display: 'inline-block',
+                                        backgroundColor: '#c41e3a',
+                                        color: '#fff',
+                                        padding: '8px 16px',
+                                        textDecoration: 'none',
+                                        borderRadius: '6px',
+                                        fontSize: '14px',
+                                        fontWeight: '500',
+                                        transition: 'background-color 0.3s'
+                                    }}
+                                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#a01830'}
+                                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#c41e3a'}
+                                >
+                                    {intl.formatMessage({ id: 'openworld.more_info' })} →
+                                </a>
+                            </div>
+                        </Popup>
+                    </Marker>
+                );
+            })}
+        </MapContainer>
+    </div>
+)
 }
