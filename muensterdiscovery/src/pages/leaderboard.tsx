@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import Header from "../components/Header";
 import muensterdiscovery_logo from "../assets/logo.png";
 import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
+import majo from "../assets/ww.jpeg";
 
 // Typdefinition für User-Eintrag
 type LeaderboardEntry = {
@@ -13,6 +14,7 @@ type LeaderboardEntry = {
     distanceKm: number;
     areasDiscovered: number;
     isCurrentUser?: boolean;
+    isMajo?: boolean;
 };
 
 export default function Leaderboard() {
@@ -25,7 +27,7 @@ export default function Leaderboard() {
         { rank: 2, username: "AaseeWalker", points: 380, distanceKm: 28.0, areasDiscovered: 9 },
         { rank: 3, username: "BavariaOne", points: 320, distanceKm: 21.5, areasDiscovered: 8, isCurrentUser: true }, 
         { rank: 4, username: "DomPlatzKing", points: 290, distanceKm: 15.0, areasDiscovered: 6 },
-        { rank: 5, username: "MünsterMaus", points: 150, distanceKm: 10.2, areasDiscovered: 3 },
+        { rank: 5, username: "MünsterMaus", points: 150, distanceKm: 10.2, areasDiscovered: 3},
     ];
 
     // All-time daten
@@ -34,7 +36,7 @@ export default function Leaderboard() {
         { rank: 2, username: "LeezenRider", points: 12300, distanceKm: 980.0, areasDiscovered: 120 },
         { rank: 3, username: "CityExplorer", points: 9800, distanceKm: 750.2, areasDiscovered: 95 },
         { rank: 4, username: "BavariaOne", points: 4500, distanceKm: 340.5, areasDiscovered: 45, isCurrentUser: true },
-        { rank: 5, username: "WestfalenWanderer", points: 4100, distanceKm: 310.0, areasDiscovered: 40 },
+        { rank: 5, username: "WestfalenWanderer", points: 4100, distanceKm: 310.0, areasDiscovered: 40, isMajo: true },
     ];
 
     const currentData = timeframe === 'month' ? monthlyData : allTimeData;
@@ -142,7 +144,12 @@ export default function Leaderboard() {
 
                                 {/* Profilbild */}
                                 <Image
-                                    src={user.isCurrentUser ? profile_image : muensterdiscovery_logo} // Fallback Logik für Demo
+                                    src={user.isMajo 
+                                            ? majo
+                                            : user.isCurrentUser 
+                                                ? profile_image 
+                                                : muensterdiscovery_logo
+                                            }
                                     alt={user.username}
                                     boxSize="40px"
                                     borderRadius="full"
