@@ -47,5 +47,14 @@
     "leaderboard.alltime": "通算",
     "leaderboard.user": "ユーザー",
     "leaderboard.areas": "エリア",
-    "leaderboard.points": "ポイント"
+    "leaderboard.points": "ポイント",
+
+    "registration.title": "アカウント作成",
+    "registration.firstname": "名",
+    "registration.lastname": "姓",
+    "registration.username": "ユーザー名",
+    "registration.email": "メールアドレス",
+    "registration.password": "パスワード",
+    "registration.register_button": "登録",
+    "registration.email_confirmation_message": "確認メールが送信されました。受信トレイを確認してください。"
 }

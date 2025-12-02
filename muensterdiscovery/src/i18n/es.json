@@ -47,5 +47,14 @@
     "leaderboard.alltime": "Clasificación histórica",
     "leaderboard.user": "Usuario",
     "leaderboard.areas": "Áreas",
-    "leaderboard.points": "Puntos"
+    "leaderboard.points": "Puntos",
+
+    "registration.title": "Crear cuenta",
+    "registration.firstname": "Nombre",
+    "registration.lastname": "Apellido",
+    "registration.username": "Nombre de usuario",
+    "registration.email": "Correo electrónico",
+    "registration.password": "Contraseña",
+    "registration.register_button": "Registrarse",
+    "registration.email_confirmation_message": "Se ha enviado el correo de confirmación. Por favor revisa tu bandeja de entrada."
 }

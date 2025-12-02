@@ -47,5 +47,14 @@
     "leaderboard.alltime": "Alle tijden",
     "leaderboard.user": "Gebruiker",
     "leaderboard.areas": "Gebieden",
-    "leaderboard.points": "Punten"
+    "leaderboard.points": "Punten",
+
+    "registration.title": "Account aanmaken",
+    "registration.firstname": "Voornaam",
+    "registration.lastname": "Achternaam",
+    "registration.username": "Gebruikersnaam",
+    "registration.email": "E-mail",
+    "registration.password": "Wachtwoord",
+    "registration.register_button": "Registreren",
+    "registration.email_confirmation_message": "De bevestigingsmail is verzonden. Controleer je inbox."
 }

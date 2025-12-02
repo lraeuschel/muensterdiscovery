@@ -47,5 +47,14 @@
     "leaderboard.alltime": "Ewige Tabelle",
     "leaderboard.user": "Nutzer",
     "leaderboard.areas": "Bereiche",
-    "leaderboard.points": "Punkte"
+    "leaderboard.points": "Punkte",
+
+    "registration.title": "Konto erstellen",
+    "registration.firstname": "Vorname",
+    "registration.lastname": "Nachname",
+    "registration.username": "Benutzername",
+    "registration.email": "Email",
+    "registration.password": "Passwort",
+    "registration.register_button": "Registrieren",
+    "registration.email_confirmation_message": "Die Bestätigungsemail wurde gesendet. Bitte überprüfe deinen Posteingang."
 }
