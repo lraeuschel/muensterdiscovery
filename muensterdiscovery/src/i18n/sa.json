@@ -47,5 +47,14 @@
     "leaderboard.alltime": "طوال الوقت",
     "leaderboard.user": "مستخدم",
     "leaderboard.areas": "المناطق",
-    "leaderboard.points": "النقاط"
+    "leaderboard.points": "النقاط",
+
+    "registration.title": "إنشاء حساب",
+    "registration.firstname": "الاسم الأول",
+    "registration.lastname": "اسم العائلة",
+    "registration.username": "اسم المستخدم",
+    "registration.email": "البريد الإلكتروني",
+    "registration.password": "كلمة المرور",
+    "registration.register_button": "تسجيل",
+    "registration.email_confirmation_message": "تم إرسال رسالة تأكيد عبر البريد الإلكتروني. يرجى التحقق من صندوق الوارد."
 }

@@ -47,5 +47,14 @@
     "leaderboard.alltime": "Tüm zamanlar",
     "leaderboard.user": "Kullanıcı",
     "leaderboard.areas": "Alanlar",
-    "leaderboard.points": "Puanlar"
+    "leaderboard.points": "Puanlar",
+
+    "registration.title": "Hesap oluştur",
+    "registration.firstname": "İsim",
+    "registration.lastname": "Soyisim",
+    "registration.username": "Kullanıcı adı",
+    "registration.email": "E-posta",
+    "registration.password": "Parola",
+    "registration.register_button": "Kayıt Ol",
+    "registration.email_confirmation_message": "Onay e-postası gönderildi. Lütfen gelen kutunuzu kontrol edin."
 }

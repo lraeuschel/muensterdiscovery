@@ -46,5 +46,14 @@
     "leaderboard.alltime": "За всё время",
     "leaderboard.user": "Пользователь",
     "leaderboard.areas": "Области",
-    "leaderboard.points": "Очки"
+    "leaderboard.points": "Очки",
+
+    "registration.title": "Создать аккаунт",
+    "registration.firstname": "Имя",
+    "registration.lastname": "Фамилия",
+    "registration.username": "Имя пользователя",
+    "registration.email": "Электронная почта",
+    "registration.password": "Пароль",
+    "registration.register_button": "Зарегистрироваться",
+    "registration.email_confirmation_message": "Письмо с подтверждением отправлено. Пожалуйста, проверьте свой почтовый ящик."
 }

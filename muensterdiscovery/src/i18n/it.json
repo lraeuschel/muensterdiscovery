@@ -47,5 +47,14 @@
     "leaderboard.alltime": "Classifica di tutti i tempi",
     "leaderboard.user": "Utente",
     "leaderboard.areas": "Aree",
-    "leaderboard.points": "Punti"
+    "leaderboard.points": "Punti",
+
+    "registration.title": "Crea account",
+    "registration.firstname": "Nome",
+    "registration.lastname": "Cognome",
+    "registration.username": "Nome utente",
+    "registration.email": "Email",
+    "registration.password": "Password",
+    "registration.register_button": "Registrati",
+    "registration.email_confirmation_message": "L'email di conferma è stata inviata. Controlla la tua casella di posta."
 }

@@ -47,5 +47,14 @@
     "leaderboard.alltime": "All time",
     "leaderboard.user": "User",
     "leaderboard.areas": "areas",
-    "leaderboard.points": "Points"
+    "leaderboard.points": "Points",
+
+    "registration.title": "Create Account",
+    "registration.firstname": "First Name",
+    "registration.lastname": "Last Name",
+    "registration.username": "Username",
+    "registration.email": "Email",
+    "registration.password": "Password",
+    "registration.register_button": "Register",
+    "registration.email_confirmation_message": "Confirmation email sent. Please check your inbox."
 }
