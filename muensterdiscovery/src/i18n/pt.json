@@ -47,5 +47,14 @@
     "leaderboard.alltime": "De todos os tempos",
     "leaderboard.user": "Usuário",
     "leaderboard.areas": "Áreas",
-    "leaderboard.points": "Pontos"
+    "leaderboard.points": "Pontos",
+
+    "registration.title": "Criar conta",
+    "registration.firstname": "Nome",
+    "registration.lastname": "Sobrenome",
+    "registration.username": "Nome de usuário",
+    "registration.email": "E-mail",
+    "registration.password": "Senha",
+    "registration.register_button": "Registrar",
+    "registration.email_confirmation_message": "O e-mail de confirmação foi enviado. Verifique sua caixa de entrada."
 }

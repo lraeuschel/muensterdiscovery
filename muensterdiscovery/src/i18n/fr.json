@@ -47,5 +47,14 @@
     "leaderboard.alltime": "Classement toutes périodes confondues",
     "leaderboard.user": "Utilisateur",
     "leaderboard.areas": "Zones",
-    "leaderboard.points": "Points"
+    "leaderboard.points": "Points",
+
+    "registration.title": "Créer un compte",
+    "registration.firstname": "Prénom",
+    "registration.lastname": "Nom de famille",
+    "registration.username": "Nom d'utilisateur",
+    "registration.email": "Email",
+    "registration.password": "Mot de passe",
+    "registration.register_button": "S'inscrire",
+    "registration.email_confirmation_message": "Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception."
 }
