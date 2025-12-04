@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IntlProvider } from "react-intl";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRouting from "./components/ProtectedRouting";
 
 import type { LanguageType } from "./components/languageSelector";
 import deMessages from "./i18n/de.json";
@@ -56,12 +57,28 @@ export default function AppWrapper() {
                         <Route path="/" element={<Welcome setLanguage={setLanguage} />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/registration" element={<Registration />} />
-                        <Route path="/openworld" element={<OpenWorld />} />
-                        <Route path="/routeselection" element={<RouteSelection />} />
-                        <Route path="/leaderboard" element={<Leaderboard />} />
-                        <Route path="/imprint" element={<Imprint setLanguage={setLanguage}/>} />
+                        <Route path="/imprint" element={<Imprint setLanguage={setLanguage} />} />
                         <Route path="/help" element={<Help />} />
-                        <Route path="/profile" element={<Profile />} />
+                        <Route path="/openworld" element={
+                            <ProtectedRouting>
+                                <OpenWorld />
+                            </ProtectedRouting>
+                        } />
+                        <Route path="/routeselection" element={
+                            <ProtectedRouting>
+                                <RouteSelection />
+                            </ProtectedRouting>
+                        } />
+                        <Route path="/leaderboard" element={
+                            <ProtectedRouting>
+                                <Leaderboard />
+                            </ProtectedRouting>
+                        } />
+                        <Route path="/profile" element={
+                            <ProtectedRouting>
+                                <Profile />
+                            </ProtectedRouting>
+                        } />
                     </Routes>
                 </BrowserRouter>
             </ChakraProvider>
