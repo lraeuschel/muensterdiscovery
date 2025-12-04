@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../SupabaseClient";
 import {
@@ -15,6 +16,7 @@ import { useIntl } from "react-intl";
 
 export default function Login() {
     const intl = useIntl();
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,8 +37,8 @@ export default function Login() {
         }
 
         setMessage(intl.formatMessage({ id: "login.success" }));
-        // Optional: redirect
-        // window.location.href = "/";
+        // Redirect to profile page after successful login
+        navigate("/profile");
     }
 
     return (
@@ -64,8 +66,7 @@ export default function Login() {
                     </Heading>
 
                     <form onSubmit={handleLogin}>
-                        <VStack spacing={4}>
-
+                        <VStack>
                             <FormControl>
                                 <FormLabel color="orange.700">
                                     {intl.formatMessage({ id: "login.email" })}

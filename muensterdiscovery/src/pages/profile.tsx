@@ -6,9 +6,12 @@ import { useIntl } from 'react-intl';
 import Header from "../components/Header";
 import muensterdiscovery_logo from "../assets/logo.png";
 import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
+import { supabase } from "../SupabaseClient";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
     const intl = useIntl();
+    const navigate = useNavigate();
     // Mock explored areas (beispielhafte Bereiche in Münster)
     const exploredAreas: LatLngBoundsExpression[] = [
         [[51.955, 7.620], [51.965, 7.635]], // Altstadt
@@ -185,6 +188,18 @@ export default function Profile() {
                         </VStack>
                     </Grid>
                 </Box>
+                <Button
+                    colorScheme="red"
+                    variant="outline"
+                    size="lg"
+                    mt={4}
+                    onClick={async () => {
+                        await supabase.auth.signOut();
+                        navigate("/login");
+                    }}
+                >
+                    {intl.formatMessage({ id: "profile.logout_button" })}
+                </Button>
             </VStack>
         </Box>
     );
