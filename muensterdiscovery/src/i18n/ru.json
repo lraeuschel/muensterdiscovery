@@ -58,5 +58,12 @@
     "registration.email_confirmation_message": "Письмо с подтверждением отправлено. Пожалуйста, проверьте свой почтовый ящик."
     ,
     "registration.already_have_account": "Адрес электронной почты уже используется. У вас уже есть аккаунт?",
-    "registration.username_taken": "Имя пользователя уже занято."
+    "registration.username_taken": "Имя пользователя уже занято.",
+
+    "login.title": "Вход",
+    "login.email": "Электронная почта",
+    "login.password": "Пароль",
+    "login.button": "Войти",
+    "login.error": "Ошибка входа. Пожалуйста, проверьте свои данные.",
+    "login.success": "Вход выполнен успешно!"
 }

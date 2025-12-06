@@ -59,5 +59,12 @@
     "registration.email_confirmation_message": "L'email di conferma è stata inviata. Controlla la tua casella di posta."
     ,
     "registration.already_have_account": "Email già utilizzata. Hai già un account?",
-    "registration.username_taken": "Nome utente già preso."
+    "registration.username_taken": "Nome utente già preso.",
+
+    "login.title": "Accedi",
+    "login.email": "Email",
+    "login.password": "Password",
+    "login.button": "Accedi",
+    "login.error": "Accesso fallito. Per favore controlla le tue credenziali.",
+    "login.success": "Accesso effettuato con successo!"
 }

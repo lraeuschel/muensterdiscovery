@@ -59,5 +59,12 @@
     "registration.email_confirmation_message": "De bevestigingsmail is verzonden. Controleer je inbox."
     ,
     "registration.already_have_account": "E-mail al in gebruik. Heb je al een account?",
-    "registration.username_taken": "Gebruikersnaam al in gebruik."
+    "registration.username_taken": "Gebruikersnaam al in gebruik.",
+
+    "login.title": "Inloggen",
+    "login.email": "E-mail",
+    "login.password": "Wachtwoord",
+    "login.button": "Inloggen",
+    "login.error": "Inloggen mislukt. Controleer je gegevens.",
+    "login.success": "Succesvol ingelogd!"
 }

@@ -59,5 +59,12 @@
     "registration.email_confirmation_message": "Un e-mail de confirmation a été envoyé. Veuillez vérifier votre boîte de réception."
     ,
     "registration.already_have_account": "L'email est déjà utilisé. Avez-vous déjà un compte ?",
-    "registration.username_taken": "Nom d'utilisateur déjà pris."
+    "registration.username_taken": "Nom d'utilisateur déjà pris.",
+
+    "login.title": "Connexion",
+    "login.email": "E-mail",
+    "login.password": "Mot de passe",
+    "login.button": "Se connecter",
+    "login.error": "La connexion a échoué. Veuillez vérifier vos identifiants.",
+    "login.success": "Connexion réussie !"
 }

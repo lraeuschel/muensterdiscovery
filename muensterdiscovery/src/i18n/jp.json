@@ -59,5 +59,12 @@
     "registration.email_confirmation_message": "確認メールが送信されました。受信トレイを確認してください。"
     ,
     "registration.already_have_account": "メールアドレスは既に使用されています。既にアカウントをお持ちですか？",
-    "registration.username_taken": "ユーザー名は既に使用されています。"
+    "registration.username_taken": "ユーザー名は既に使用されています。",
+
+    "login.title": "ログイン",
+    "login.email": "メールアドレス",
+    "login.password": "パスワード",
+    "login.button": "ログイン",
+    "login.error": "ログインに失敗しました。認証情報を確認してください。",
+    "login.success": "ログインに成功しました！"
 }

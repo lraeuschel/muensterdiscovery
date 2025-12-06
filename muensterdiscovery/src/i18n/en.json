@@ -59,5 +59,12 @@
     "registration.email_confirmation_message": "Confirmation email sent. Please check your inbox."
     ,
     "registration.already_have_account": "Email already in use. Do you already have an account?",
-    "registration.username_taken": "Username already taken."
+    "registration.username_taken": "Username already taken.",
+
+    "login.title": "Login",
+    "login.email": "Email",
+    "login.password": "Password",
+    "login.button": "Log In",
+    "login.error": "Login failed. Please check your credentials.",
+    "login.success": "Successfully logged in!"
 }
