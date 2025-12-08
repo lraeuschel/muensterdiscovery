@@ -50,7 +50,13 @@ export default function Profile() {
                         <Button colorPalette="orange" size="sm" width="200px" variant="outline">
                             {intl.formatMessage({ id: "profile.change_data" })}
                         </Button>
-                        <Button colorPalette="red" size="sm" width="200px" variant="outline">
+                        <Button
+                            colorPalette="orange" size="sm" width="200px"
+                            onClick={async () => {
+                                await supabase.auth.signOut();
+                                navigate("/login");
+                            }}
+                        >
                             {intl.formatMessage({ id: "profile.logout" })}
                         </Button>
                     </VStack>
@@ -188,18 +194,6 @@ export default function Profile() {
                         </VStack>
                     </Grid>
                 </Box>
-                <Button
-                    colorScheme="red"
-                    variant="outline"
-                    size="lg"
-                    mt={4}
-                    onClick={async () => {
-                        await supabase.auth.signOut();
-                        navigate("/login");
-                    }}
-                >
-                    {intl.formatMessage({ id: "profile.logout_button" })}
-                </Button>
             </VStack>
         </Box>
     );

@@ -59,5 +59,10 @@
     "registration.email_confirmation_message": "تم إرسال رسالة تأكيد عبر البريد الإلكتروني. يرجى التحقق من صندوق الوارد."
     ,
     "registration.already_have_account": "البريد الإلكتروني مستخدم بالفعل. هل لديك بالفعل حساب؟",
-    "registration.username_taken": "اسم المستخدم مستخدم بالفعل."
+    "registration.username_taken": "اسم المستخدم مستخدم بالفعل.",
+
+    "login.title": "مرحباً بعودتك!",
+    "login.email": "البريد الإلكتروني",
+    "login.password": "كلمة المرور",
+    "login.button": "تسجيل الدخول"
 }
