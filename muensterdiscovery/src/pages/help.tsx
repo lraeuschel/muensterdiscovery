@@ -6,7 +6,7 @@ export default function Help() {
         <div>
             <Header />
             <h1>Help Page</h1>
-            <RideyChat />
+            {/* <RideyChat /> */}
         </div>
     );
 }
