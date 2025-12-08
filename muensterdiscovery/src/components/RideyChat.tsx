@@ -14,6 +14,7 @@ interface Message {
   text: string;
   sender: "user" | "bot";
   timestamp: Date;
+  html?: string;
 }
 
 const bounce = keyframes`
@@ -36,6 +37,13 @@ const TypingIndicator = () => (
     ))}
   </HStack>
 );
+
+const sanitizeHtml = (input: string) => {
+  if (!input) return "";
+  let s = input.replace(/<\s*script[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi, "");
+  s = s.replace(/\son\w+\s*=\s*(["'`])[\s\S]*?\1/gi, "");
+  return s;
+};
 
 export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,11 +96,14 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
 
         const data = await response.json();
 
+        const rawHtml = data?.html ?? data?.html_output ?? "";
+
         const botMessage: Message = {
           id: (Date.now() + 1).toString(),
           text: data.response,
           sender: "bot",
           timestamp: new Date(),
+          html: rawHtml ? sanitizeHtml(rawHtml) : undefined,
         };
         
         setMessages((prev) => [...prev, botMessage]);
@@ -176,6 +187,12 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                       boxShadow={msg.sender === "bot" ? "md" : "sm"}
                     >
                       <Text fontSize="sm">{msg.text}</Text>
+                      {/* Render optional sanitized HTML if provided by the agent */}
+                      {msg.html && (
+                        <Box mt={2} color={msg.sender === "bot" ? "white" : "black"}>
+                          <div dangerouslySetInnerHTML={{ __html: msg.html }} />
+                        </Box>
+                      )}
                     </Box>
                   </Box>
                 ))}
