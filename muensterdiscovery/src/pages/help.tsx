@@ -1,5 +1,5 @@
 import Header from "../components/Header";
-import RideyChat from "../components/RideyChat";
+// import RideyChat from "../components/RideyChat";
 
 export default function Help() {
     return (
