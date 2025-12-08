@@ -66,5 +66,7 @@
     "login.password": "Wachtwoord",
     "login.button": "Inloggen",
     "login.error": "Inloggen mislukt. Controleer je gegevens.",
-    "login.success": "Succesvol ingelogd!"
+    "login.success": "Succesvol ingelogd!",
+
+    "leaderboard.you": "JIJ"
 }

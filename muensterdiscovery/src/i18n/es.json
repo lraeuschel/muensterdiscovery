@@ -66,5 +66,7 @@
     "login.password": "Contraseña",
     "login.button": "Entrar",
     "login.error": "Error al iniciar sesión. Por favor, verifica tus credenciales.",
-    "login.success": "¡Sesión iniciada con éxito!"
+    "login.success": "¡Sesión iniciada con éxito!",
+
+    "leaderboard.you": "TÚ"
 }

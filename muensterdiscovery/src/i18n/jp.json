@@ -66,5 +66,7 @@
     "login.password": "パスワード",
     "login.button": "ログイン",
     "login.error": "ログインに失敗しました。認証情報を確認してください。",
-    "login.success": "ログインに成功しました！"
+    "login.success": "ログインに成功しました！",
+
+    "leaderboard.you": "あなた"
 }

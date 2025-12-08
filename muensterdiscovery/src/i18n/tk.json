@@ -63,5 +63,7 @@
     "login.password": "Parola",
     "login.button": "Giriş",
     "login.error": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
-    "login.success": "Başarıyla giriş yaptınız!"
+    "login.success": "Başarıyla giriş yaptınız!",
+
+    "leaderboard.you": "SEN"
 }
