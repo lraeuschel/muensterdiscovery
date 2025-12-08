@@ -66,5 +66,7 @@
     "login.password": "Password",
     "login.button": "Log In",
     "login.error": "Login failed. Please check your credentials.",
-    "login.success": "Successfully logged in!"
+    "login.success": "Successfully logged in!",
+
+    "leaderboard.you": "YOU"
 }

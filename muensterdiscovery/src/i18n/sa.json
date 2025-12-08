@@ -66,5 +66,7 @@
     "login.password": "كلمة المرور",
     "login.button": "دخول",
     "login.error": "فشل تسجيل الدخول. يرجى التحقق من بياناتك.",
-    "login.success": "تم تسجيل الدخول بنجاح!"
+    "login.success": "تم تسجيل الدخول بنجاح!",
+
+    "leaderboard.you": "أنت"
 }

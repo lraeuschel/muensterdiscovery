@@ -65,5 +65,7 @@
     "login.password": "Пароль",
     "login.button": "Войти",
     "login.error": "Ошибка входа. Пожалуйста, проверьте свои данные.",
-    "login.success": "Вход выполнен успешно!"
+    "login.success": "Вход выполнен успешно!",
+
+    "leaderboard.you": "ВЫ"
 }

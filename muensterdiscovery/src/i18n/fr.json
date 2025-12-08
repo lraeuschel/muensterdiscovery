@@ -66,5 +66,7 @@
     "login.password": "Mot de passe",
     "login.button": "Se connecter",
     "login.error": "La connexion a échoué. Veuillez vérifier vos identifiants.",
-    "login.success": "Connexion réussie !"
+    "login.success": "Connexion réussie !",
+
+    "leaderboard.you": "VOUS"
 }

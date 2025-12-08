@@ -66,5 +66,7 @@
     "login.password": "Password",
     "login.button": "Accedi",
     "login.error": "Accesso fallito. Per favore controlla le tue credenziali.",
-    "login.success": "Accesso effettuato con successo!"
+    "login.success": "Accesso effettuato con successo!",
+
+    "leaderboard.you": "TU"
 }

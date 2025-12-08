@@ -66,5 +66,7 @@
     "login.password": "Hasło",
     "login.button": "Zaloguj się",
     "login.error": "Logowanie nie powiodło się. Sprawdź swoje dane.",
-    "login.success": "Pomyślnie zalogowano!"
+    "login.success": "Pomyślnie zalogowano!",
+
+    "leaderboard.you": "TY"
 }
