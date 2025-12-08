@@ -21,6 +21,23 @@ const languages = createListCollection({
   items: languageItems,
 });
 
+export let currentLanguage: LanguageType = languageItems[0].value;
+
+const _languageListeners: Array<(lang: LanguageType) => void> = [];
+
+export function setCurrentLanguage(lang: LanguageType) {
+  currentLanguage = lang;
+  _languageListeners.forEach((cb) => cb(lang));
+}
+
+export function onCurrentLanguageChange(cb: (lang: LanguageType) => void) {
+  _languageListeners.push(cb);
+  return () => {
+    const i = _languageListeners.indexOf(cb);
+    if (i >= 0) _languageListeners.splice(i, 1);
+  };
+}
+
 export default function LanguageSelector({
   setLanguage,
 }: {
@@ -52,7 +69,12 @@ export default function LanguageSelector({
               <Select.Item
                 item={language}
                 key={language.value}
-                onClick={() => setLanguage(language.value)}
+                onClick={() => {
+                  // update the external prop callback
+                  setLanguage(language.value);
+                  // also update/export the module-level currentLanguage so welcome.tsx (or others) can access it
+                  setCurrentLanguage(language.value);
+                }}
               >
                 {language.label}
                 <Select.ItemIndicator />

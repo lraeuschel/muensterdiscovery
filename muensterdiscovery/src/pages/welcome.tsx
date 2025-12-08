@@ -1,23 +1,37 @@
-// import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, VStack, Text, Image } from "@chakra-ui/react";
 import muensterdiscovery_logo from "../assets/logo.png";
 import { useIntl } from "react-intl";
 import Header from "../components/Header";
-import LanguageSelector from "../components/languageSelector";
+import LanguageSelector, { currentLanguage, setCurrentLanguage } from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
+import RideyChat from "../components/RideyChat";
+import { useState, useEffect } from "react";
 
 export default function Welcome({ setLanguage }: { setLanguage: (lang: LanguageType) => void }) {
     const navigate = useNavigate();
     const intl = useIntl();
 
+    const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    useEffect(() => {
+        setLanguage(currentLang);
+    }, []);
+
+    const handleSetLanguage = (lang: LanguageType) => {
+        setCurrentLang(lang);
+        setCurrentLanguage(lang);
+        setLanguage(lang);
+    };
+
     return (
         <Box bg="orange.50" minH="100vh">
             <Header />
             <Box position="absolute" top="10px" right="10px">
-                <LanguageSelector setLanguage={setLanguage} />
+                <LanguageSelector setLanguage={handleSetLanguage} />
             </Box>
-            
+            {<RideyChat currentLanguage={currentLang} />}
+
             <VStack>
                 <Text
                     fontSize={{ base: "2xl", md: "4xl" }}
