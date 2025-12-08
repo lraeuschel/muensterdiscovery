@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import { Box, VStack, HStack, Text, Image, Button, Grid } from "@chakra-ui/react";
 import { MapContainer, TileLayer, Rectangle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -5,13 +6,37 @@ import type { LatLngBoundsExpression } from 'leaflet';
 import { useIntl } from 'react-intl';
 import Header from "../components/Header";
 import muensterdiscovery_logo from "../assets/logo.png";
-import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
+import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 import { supabase } from "../SupabaseClient";
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
     const intl = useIntl();
     const navigate = useNavigate();
+    
+    // State für Profilbild
+    const [profileImage, setProfileImage] = useState<string>(default_profile_image);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    // Handler für Bildauswahl
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            // Validierung: Nur Bilder erlauben
+            if (!file.type.startsWith('image/')) {
+                alert(intl.formatMessage({ id: "profile.invalid_image" }));
+                return;
+            }
+            // Erstelle eine lokale URL für das Bild
+            const imageUrl = URL.createObjectURL(file);
+            setProfileImage(imageUrl);
+        }
+    };
+
+    const handleChangeProfilePicture = () => {
+        fileInputRef.current?.click();
+    };
+
     // Mock explored areas (beispielhafte Bereiche in Münster)
     const exploredAreas: LatLngBoundsExpression[] = [
         [[51.955, 7.620], [51.965, 7.635]], // Altstadt
@@ -35,16 +60,26 @@ export default function Profile() {
                 {/* Profilbild und Buttons */}
                 <HStack gap={6} align="start" flexWrap="wrap" justify="center">
                     <Image
-                        src={profile_image}
+                        src={profileImage}
                         alt="Profilbild"
                         borderRadius="full"
                         boxSize="120px"
                         border="4px solid"
                         borderColor="orange.400"
+                        objectFit="cover"
+                    />
+                    
+                    {/* Hidden file input */}
+                    <input
+                        type="file"
+                        ref={fileInputRef}
+                        onChange={handleImageChange}
+                        accept="image/*"
+                        style={{ display: 'none' }}
                     />
                     
                     <VStack gap={3} align="stretch">
-                        <Button colorPalette="orange" size="sm" width="200px">
+                        <Button colorPalette="orange" size="sm" width="200px" onClick={handleChangeProfilePicture}>
                             {intl.formatMessage({ id: "profile.change_picture" })}
                         </Button>
                         <Button colorPalette="orange" size="sm" width="200px" variant="outline">

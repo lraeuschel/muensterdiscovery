@@ -35,8 +35,9 @@
     "profile.achievement1_desc": "5 verschillende gebieden verkend",
     "profile.achievement2_title": "Uithoudingsmachine",
     "profile.achievement2_desc": "Route van meer dan 5 km voltooid",
-    "profile.achievement3_title": "Kerstmarktfan",
+    "profile.achievement3_title": "Kerstmarkt-fan",
     "profile.achievement3_desc": "Alle kerstmarkten bezocht",
+    "profile.invalid_image": "Selecteer een geldig afbeeldingsbestand.",
 
     "leaderboard.title": "Ranglijst",
     "leaderboard.subtitle": "Wie heeft Münster het beste verkend?",
