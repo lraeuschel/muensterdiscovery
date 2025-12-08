@@ -61,8 +61,12 @@
     "registration.already_have_account": "メールアドレスは既に使用されています。既にアカウントをお持ちですか？",
     "registration.username_taken": "ユーザー名は既に使用されています。",
 
-    "login.title": "おかえりなさい！",
+    "login.title": "ログイン",
     "login.email": "メールアドレス",
     "login.password": "パスワード",
-    "login.button": "ログイン"
+    "login.button": "ログイン",
+    "login.error": "ログインに失敗しました。認証情報を確認してください。",
+    "login.success": "ログインに成功しました！",
+
+    "leaderboard.you": "あなた"
 }

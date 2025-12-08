@@ -60,8 +60,12 @@
     "registration.already_have_account": "Адрес электронной почты уже используется. У вас уже есть аккаунт?",
     "registration.username_taken": "Имя пользователя уже занято.",
 
-    "login.title": "С возвращением!",
+    "login.title": "Вход",
     "login.email": "Электронная почта",
     "login.password": "Пароль",
-    "login.button": "Войти"
+    "login.button": "Войти",
+    "login.error": "Ошибка входа. Пожалуйста, проверьте свои данные.",
+    "login.success": "Вход выполнен успешно!",
+
+    "leaderboard.you": "ВЫ"
 }

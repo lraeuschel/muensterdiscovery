@@ -65,33 +65,23 @@ export default function OpenWorld() {
 
     useEffect(() => {
         const fetchMarkets = async () => {
-            console.log('🔄 Starte Laden der Weihnachtsmärkte vom WFS...');
             try {
                 const url = 'https://www.stadt-muenster.de/ows/mapserv706/poiserv?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=weihnachtsmaerkte&OUTPUTFORMAT=GEOJSON&SRSNAME=EPSG:4326';
-                console.log('📡 WFS-URL:', url);
                 
                 const response = await fetch(url);
-                console.log('📥 Response Status:', response.status, response.statusText);
-                console.log('📋 Content-Type:', response.headers.get('content-type'));
                 
                 if (response.ok) {
                     const text = await response.text();
-                    console.log('📄 Response (erste 200 Zeichen):', text.substring(0, 200));
                     
                     const data: GeoJSONFeatureCollection = JSON.parse(text);
                     if (data.features && data.features.length > 0) {
                         setMarkets(data.features);
-                        console.log('✅ ERFOLG: Dynamische Daten vom WFS geladen!');
-                        console.log('📍 Anzahl Weihnachtsmärkte:', data.features.length);
-                        console.log('🎄 Erster Markt:', data.features[0].properties.NAME);
                     }
                 } else {
                     throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
             } catch (err) {
-                console.error('❌ Fehler beim Laden der Daten:', err);
             } finally {
-                console.log('🏁 Lade-Vorgang abgeschlossen');
                 setLoading(false);
             }
         };

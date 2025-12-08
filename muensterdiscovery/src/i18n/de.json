@@ -60,8 +60,12 @@
     "registration.already_have_account": "Email bereits vergeben. Hast du bereits ein Konto?",
     "registration.username_taken": "Benutzername bereits vergeben.",
 
-    "login.title": "Willkommen zurück!",
-    "login.email": "Email",
+    "login.title": "Anmelden",
+    "login.email": "E-Mail",
     "login.password": "Passwort",
-    "login.button": "Anmelden"
+    "login.button": "Einloggen",
+    "login.error": "Anmeldung fehlgeschlagen. Bitte überprüfe deine Zugangsdaten.",
+    "login.success": "Erfolgreich angemeldet!",
+
+    "leaderboard.you": "DU"
 }

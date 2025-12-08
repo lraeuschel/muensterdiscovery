@@ -61,8 +61,12 @@
     "registration.already_have_account": "L'email est déjà utilisé. Avez-vous déjà un compte ?",
     "registration.username_taken": "Nom d'utilisateur déjà pris.",
 
-    "login.title": "Bon retour !",
-    "login.email": "Email",
+    "login.title": "Connexion",
+    "login.email": "E-mail",
     "login.password": "Mot de passe",
-    "login.button": "Se connecter"
+    "login.button": "Se connecter",
+    "login.error": "La connexion a échoué. Veuillez vérifier vos identifiants.",
+    "login.success": "Connexion réussie !",
+
+    "leaderboard.you": "VOUS"
 }

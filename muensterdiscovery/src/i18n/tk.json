@@ -58,11 +58,12 @@
     "registration.register_button": "Kayıt Ol",
     "registration.email_confirmation_message": "Onay e-postası gönderildi. Lütfen gelen kutunuzu kontrol edin.",
 
-    "registration.already_have_account": "E-posta zaten kullanımda. Zaten bir hesabın var mı?",
-    "registration.username_taken": "Kullanıcı adı zaten alınmış.",
-
-    "login.title": "Tekrar hoş geldiniz!",
+    "login.title": "Giriş Yap",
     "login.email": "E-posta",
     "login.password": "Parola",
-    "login.button": "Giriş Yap"
+    "login.button": "Giriş",
+    "login.error": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+    "login.success": "Başarıyla giriş yaptınız!",
+
+    "leaderboard.you": "SEN"
 }

@@ -61,8 +61,12 @@
     "registration.already_have_account": "O e-mail já está em uso. Já tem uma conta?",
     "registration.username_taken": "Nome de usuário já existe.",
 
-    "login.title": "Bem-vindo de volta!",
+    "login.title": "Entrar",
     "login.email": "E-mail",
     "login.password": "Senha",
-    "login.button": "Entrar"
+    "login.button": "Entrar",
+    "login.error": "Falha no login. Por favor, verifique suas credenciais.",
+    "login.success": "Login realizado com sucesso!",
+
+    "leaderboard.you": "VOCÊ"
 }

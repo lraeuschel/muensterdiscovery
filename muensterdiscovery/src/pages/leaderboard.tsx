@@ -164,7 +164,7 @@ export default function Leaderboard() {
                                             {user.username}
                                         </Text>
                                         {user.isCurrentUser && (
-                                            <Badge colorPalette="orange" size="sm">DU</Badge>
+                                            <Badge colorPalette="orange" size="sm">{intl.formatMessage({ id: "leaderboard.you" })}</Badge>
                                         )}
                                     </HStack>
                                     <Text fontSize="xs" color="gray.500">

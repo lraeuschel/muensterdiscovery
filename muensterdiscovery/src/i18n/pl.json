@@ -61,8 +61,12 @@
     "registration.already_have_account": "Adres e-mail jest już zajęty. Czy masz już konto?",
     "registration.username_taken": "Nazwa użytkownika jest już zajęta.",
 
-    "login.title": "Witamy ponownie!",
-    "login.email": "Email",
+    "login.title": "Logowanie",
+    "login.email": "E-mail",
     "login.password": "Hasło",
-    "login.button": "Zaloguj się"
+    "login.button": "Zaloguj się",
+    "login.error": "Logowanie nie powiodło się. Sprawdź swoje dane.",
+    "login.success": "Pomyślnie zalogowano!",
+
+    "leaderboard.you": "TY"
 }

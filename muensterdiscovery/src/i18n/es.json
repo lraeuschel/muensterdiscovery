@@ -61,8 +61,12 @@
     "registration.already_have_account": "El correo electrónico ya está en uso. ¿Ya tienes una cuenta?",
     "registration.username_taken": "Nombre de usuario ya en uso.",
 
-    "login.title": "¡Bienvenido de nuevo!",
+    "login.title": "Iniciar sesión",
     "login.email": "Correo electrónico",
     "login.password": "Contraseña",
-    "login.button": "Iniciar sesión"
+    "login.button": "Entrar",
+    "login.error": "Error al iniciar sesión. Por favor, verifica tus credenciales.",
+    "login.success": "¡Sesión iniciada con éxito!",
+
+    "leaderboard.you": "TÚ"
 }

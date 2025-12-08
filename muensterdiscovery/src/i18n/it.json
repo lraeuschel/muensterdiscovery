@@ -61,8 +61,12 @@
     "registration.already_have_account": "Email già utilizzata. Hai già un account?",
     "registration.username_taken": "Nome utente già preso.",
 
-    "login.title": "Bentornato!",
+    "login.title": "Accedi",
     "login.email": "Email",
     "login.password": "Password",
-    "login.button": "Accedi"
+    "login.button": "Accedi",
+    "login.error": "Accesso fallito. Per favore controlla le tue credenziali.",
+    "login.success": "Accesso effettuato con successo!",
+
+    "leaderboard.you": "TU"
 }
