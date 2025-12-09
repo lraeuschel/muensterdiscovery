@@ -10,6 +10,18 @@ An interactive web application for exploring the city of Münster, Germany. Disc
 - **Multilingual Support**: Available in 12 languages (German, English, French, Spanish, Italian, Dutch, Polish, Portuguese, Turkish, Russian, Japanese, Arabic)
 - **Responsive Design**: Optimized for desktop and mobile devices using Chakra UI
 
+## ChatBot Implementation
+
+The web application features a chatbot "Chat With Ridey". We leverage the semantic understanding of GPT OSS 120B-LLM in a agentic structure. The agent's persona is Ridey, the friendly bicycle-mascot of the Muenster Discovery-App. It can perform following tasks:
+
+- **POI & route database**: Retrieves information about POIs and routes that are predefined by the Muenster Discovery-Team
+- **Leaderboard & user database**: Retrieves information about the public user database and about the current user
+- **App Support**: Knows about links and content in the app; can direct the user via an HTML element
+
+**IMPORTANT**: Ridey is hosted in a Huggingface-Space which will not run at all times. Access the Chat With Ridey-Application here:
+
+https://huggingface.co/spaces/MIDI11/chatwithridey 
+
 ## Tech Stack
 
 - **Frontend**: React 18 with TypeScript
