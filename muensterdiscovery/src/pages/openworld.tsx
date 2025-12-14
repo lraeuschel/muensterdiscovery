@@ -11,7 +11,7 @@ import stern from '../assets/supermario_stern.webp';
 type POIProperties = {
     id: number;
     name: string;
-    note?: string | null;
+    Info?: string | null;
 };
 
 type POIFeature = {
@@ -35,7 +35,7 @@ type POICollection = {
     name: string;
     crs: CRS;
     features: POIFeature[];
-};
+}
 
 const starIcon = new L.Icon({
     iconUrl: stern,
@@ -64,7 +64,7 @@ export default function OpenWorld() {
                 return {
                     id: feature.properties.id ?? index,
                     name: feature.properties.name,
-                    note: feature.properties.note,
+                    note: feature.properties.Info,
                     position: [lat, lon] as LatLngExpression,
                 };
             }),
