@@ -1,15 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "../SupabaseClient";
-import {
-    Input,
-    Button,
-    Text,
-    Flex,
-    Box,
-    Heading,
-    VStack
-} from "@chakra-ui/react";
+import { Input, Button, Text, Flex, Box, Heading, VStack} from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import Header from "../components/Header";
 import { useIntl } from "react-intl";

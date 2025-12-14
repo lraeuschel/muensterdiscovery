@@ -1,57 +1,49 @@
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { DivIcon } from 'leaflet';
 import type { LatLngExpression } from 'leaflet';
-import { useState, useEffect } from 'react';
+import L from 'leaflet';
+import { useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import Header from '../components/Header';
+import pois from '../../data/POIs_Muenster_Discovery.json';
+import stern from '../assets/supermario_stern.webp';
 
-// Custom Christmas Market Icon
-const christmasIcon = new DivIcon({
-    html: `<div style="
-        background-color: #c41e3a;
-        width: 32px;
-        height: 32px;
-        border-radius: 50% 50% 50% 0;
-        transform: rotate(-45deg);
-        border: 3px solid #fff;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    ">
-        <span style="
-            transform: rotate(45deg);
-            font-size: 18px;
-        ">🎄</span>
-    </div>`,
-    className: 'custom-christmas-marker',
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32]
-});
+type POIProperties = {
+    id: number;
+    name: string;
+    note?: string | null;
+};
 
-interface MarketProperties {
-    NAME: string;
-    LINK1_TXT: string;
-    LINK1: string;
-    RECHTSWERT: number;
-    HOCHWERT: number;
-}
-
-interface MarketFeature {
-    type: string;
-    properties: MarketProperties;
+type POIFeature = {
+    type: 'Feature';
+    properties: POIProperties;
     geometry: {
-        type: string;
-        coordinates: [number, number];
+        type: 'Point';
+        coordinates: [number, number]; // [lon, lat]
+    };
+};
+
+type CRS = {
+    type: 'name';
+    properties: {
+        name: string;
     };
 }
 
-interface GeoJSONFeatureCollection {
-    type: string;
-    features: MarketFeature[];
-}
+type POICollection = {
+    type: 'FeatureCollection';
+    name: string;
+    crs: CRS;
+    features: POIFeature[];
+};
+
+const starIcon = new L.Icon({
+    iconUrl: stern,
+    iconSize: [35, 35],      
+    iconAnchor: [20, 20],    // Mitte des Bildes
+    popupAnchor: [0, -20],   // Popup über dem Icon
+    className: 'star-icon',
+});
 
 export default function OpenWorld() {
     const intl = useIntl();
@@ -60,122 +52,97 @@ export default function OpenWorld() {
     const munsterCenter: LatLngExpression = [51.9607, 7.6261];
     const zoom = 14;
 
-    const [markets, setMarkets] = useState<MarketFeature[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchMarkets = async () => {
-            try {
-                const url = 'https://www.stadt-muenster.de/ows/mapserv706/poiserv?SERVICE=WFS&VERSION=1.1.0&REQUEST=GetFeature&TYPENAME=weihnachtsmaerkte&OUTPUTFORMAT=GEOJSON&SRSNAME=EPSG:4326';
-                
-                const response = await fetch(url);
-                
-                if (response.ok) {
-                    const text = await response.text();
-                    
-                    const data: GeoJSONFeatureCollection = JSON.parse(text);
-                    if (data.features && data.features.length > 0) {
-                        setMarkets(data.features);
-                    }
-                } else {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-            } catch (err) {
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchMarkets();
+    const features = useMemo(() => {
+        const collection = pois as POICollection;
+        return collection.features?.filter((f) => f.geometry?.type === 'Point') ?? [];
     }, []);
 
-    if (loading) {
-        return (
-            <div style={{ 
-                width: '100%', 
-                height: '100vh', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center',
-                fontSize: '18px',
-                color: '#c41e3a'
-            }}>
-                🎄 {intl.formatMessage({ id: 'openworld.loading' })}
-            </div>
-        );
-    }
+    const markers = useMemo(
+        () =>
+            features.map((feature, index) => {
+                const [lon, lat] = feature.geometry.coordinates;
+                return {
+                    id: feature.properties.id ?? index,
+                    name: feature.properties.name,
+                    note: feature.properties.note,
+                    position: [lat, lon] as LatLngExpression,
+                };
+            }),
+        [features]
+    );
+
+    const hasData = markers.length > 0;
 
     return (
-    <div style={{ width: '100%', height: '100vh' }}>
-        <Header />
-        <MapContainer 
-            center={munsterCenter} 
-            zoom={zoom} 
-            style={{ width: '100%', height: '100%' }}
-            zoomControl={false} // Deaktivieren des Standard-Zoom-Controls, um es später neu zu positionieren
-        >
-            {/* 3. Hier das Control neu positionieren */}
-            <ZoomControl position="bottomright" />
+        <div style={{ width: '100%', height: '100vh' }}>
+            <Header />
 
-            {/* OpenStreetMap Basemap */}
-            <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            
-            {/* GeoJSON Markers für Weihnachtsmärkte */}
-            {markets.map((market, index) => {
-                const position: LatLngExpression = [
-                    market.geometry.coordinates[1],
-                    market.geometry.coordinates[0]
-                ];
-                
-                return (
-                    <Marker 
-                        key={index} 
-                        position={position}
-                        icon={christmasIcon}
-                    >
-                        <Popup>
-                            <div style={{
-                                fontFamily: 'Arial, sans-serif',
-                                minWidth: '200px'
-                            }}>
-                                <h3 style={{
-                                    color: '#c41e3a',
-                                    marginTop: '0',
-                                    marginBottom: '10px',
-                                    fontSize: '16px',
-                                    fontWeight: 'bold'
-                                }}>
-                                    🎅 {market.properties.NAME}
-                                </h3>
-                                <a 
-                                    href={market.properties.LINK1} 
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        display: 'inline-block',
-                                        backgroundColor: '#c41e3a',
-                                        color: '#fff',
-                                        padding: '8px 16px',
-                                        textDecoration: 'none',
-                                        borderRadius: '6px',
-                                        fontSize: '14px',
-                                        fontWeight: '500',
-                                        transition: 'background-color 0.3s'
-                                    }}
-                                    onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#a01830'}
-                                    onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#c41e3a'}
-                                >
-                                    {intl.formatMessage({ id: 'openworld.more_info' })} →
-                                </a>
-                            </div>
-                        </Popup>
-                    </Marker>
-                );
-            })}
-        </MapContainer>
-    </div>
-)
+            {!hasData ? (
+                <div
+                    style={{
+                        width: '100%',
+                        height: 'calc(100vh - 80px)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '18px',
+                        color: '#c41e3a',
+                    }}
+                >
+                    {intl.formatMessage({ id: 'openworld.loading' })}
+                </div>
+            ) : (
+                <MapContainer
+                    center={munsterCenter}
+                    zoom={zoom}
+                    style={{ width: '100%', height: '100%' }}
+                    zoomControl={false} // Zoom manuell hinzugefügt
+                >
+                    <ZoomControl position="bottomright" />
+
+                    /* 1. Option Stadtplan */
+                    <LayersControl position="bottomleft">
+                        <LayersControl.BaseLayer checked name="Stadtplan">
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                            />
+                        </LayersControl.BaseLayer>
+
+                        // 2. Option Satellit
+                        <LayersControl.BaseLayer name="Satellit">
+                            <TileLayer
+                                attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                                url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                            />
+                        </LayersControl.BaseLayer>
+
+                        // 3. Option Dark Mode
+                        <LayersControl.BaseLayer name="Dark Mode">
+                            <TileLayer
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                            />
+                        </LayersControl.BaseLayer>
+
+
+
+                    </LayersControl>
+
+                    {markers.map((poi) => (
+                        <Marker key={poi.id} position={poi.position} icon={starIcon}>
+                            <Popup>
+                                <div style={{ minWidth: '180px' }}>
+                                    <h3 style={{ margin: '0 0 6px', fontSize: '16px' }}>{poi.name}</h3>
+                                    {poi.note ? (
+                                        <p style={{ margin: 0, fontSize: '14px' }}>{poi.note}</p>
+                                    ) : null}
+                                </div>
+                            </Popup>
+                        </Marker>
+                    ))}
+                </MapContainer>
+            )}
+        </div>
+    );
 }
