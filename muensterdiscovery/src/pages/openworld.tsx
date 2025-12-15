@@ -100,7 +100,7 @@ export default function OpenWorld() {
                 >
                     <ZoomControl position="bottomright" />
 
-                    /* 1. Option Stadtplan */
+                    {/* 1. Option Stadtplan */}
                     <LayersControl position="bottomleft">
                         <LayersControl.BaseLayer checked name="Stadtplan">
                             <TileLayer
@@ -109,7 +109,7 @@ export default function OpenWorld() {
                             />
                         </LayersControl.BaseLayer>
 
-                        // 2. Option Satellit
+                        {/* 2. Option Satellit */}
                         <LayersControl.BaseLayer name="Satellit">
                             <TileLayer
                                 attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -117,7 +117,7 @@ export default function OpenWorld() {
                             />
                         </LayersControl.BaseLayer>
 
-                        // 3. Option Dark Mode
+                        {/* 3. Option Dark Mode */}
                         <LayersControl.BaseLayer name="Dark Mode">
                             <TileLayer
                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
