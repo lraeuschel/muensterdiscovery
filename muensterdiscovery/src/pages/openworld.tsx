@@ -68,6 +68,19 @@ const eventIcon = new L.DivIcon({
     className: 'event-icon',
 });
 
+// Bike Rental Icon (Emoji-based)
+const bikeIconSVG = `
+<div style="font-size: 28px; line-height: 1; text-align: center;">🚲</div>
+`;
+
+const bikeIcon = new L.DivIcon({
+    html: bikeIconSVG,
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    className: 'bike-icon',
+});
+
 // Custom Hook: Lädt ALLE Datenportal POIs einmalig beim Mount
 function useDatenportalPOIs() {
     const [datenportalPOIs, setDatenportalPOIs] = useState<DatenportalPOI[]>([]);
@@ -145,17 +158,24 @@ export default function OpenWorld() {
         datenportalPOIs.forEach((poi) => {
             // Prüfe ob POI ein Event ist: Nur wenn Datum vorhanden
             const hasEventDates = !!(poi.startDate || poi.endDate || poi.eventTime);
-            
-            // Als Event behandeln nur wenn Datum vorhanden ist
             const isEvent = hasEventDates;
+            
+            // Prüfe ob POI ein Fahrradverleih ist
+            const isBikeRental = poi.types?.some(t => t.toLowerCase().includes('fahrradverleih'));
+            
+            // Bestimme Source-Typ
+            let source: 'event' | 'bike' | 'datenportal' = 'datenportal';
+            if (isEvent) source = 'event';
+            else if (isBikeRental) source = 'bike';
             
             markers.push({
                 id: `datenportal-${poi.id}`,
                 name: poi.name,
                 position: [poi.lat, poi.lng] as LatLngExpression,
-                source: isEvent ? 'event' as const : 'datenportal' as const,
+                source,
                 poi, // Vollständiges POI-Objekt für Details
                 isEvent,
+                isBikeRental,
             });
         });
         
@@ -242,7 +262,10 @@ export default function OpenWorld() {
                     </LayersControl>
 
                     {allMarkers.map((marker) => {
-                        const icon = marker.source === 'event' ? eventIcon : starIcon;
+                        // Icon-Auswahl: Event -> Bike -> Standard
+                        let icon = starIcon;
+                        if (marker.source === 'event') icon = eventIcon;
+                        else if (marker.source === 'bike') icon = bikeIcon;
                         
                         return (
                             <Marker key={marker.id} position={marker.position} icon={icon}>
@@ -334,6 +357,38 @@ export default function OpenWorld() {
                                             </div>
                                         ) : null}
 
+                                        {marker.source === 'bike' && marker.poi ? (
+                                            <div style={{ fontSize: '13px', color: '#555' }}>
+                                                {marker.poi.types && marker.poi.types.length > 0 && (
+                                                    <p style={{ margin: '4px 0', fontWeight: '500' }}>
+                                                        {marker.poi.types.join(', ')}
+                                                    </p>
+                                                )}
+                                                {marker.poi.description && (
+                                                    <p style={{ margin: '8px 0', fontSize: '12px', lineHeight: '1.4', color: '#666' }}>
+                                                        {marker.poi.description}
+                                                    </p>
+                                                )}
+                                                {(marker.poi.street || marker.poi.postalCode) && (
+                                                    <p style={{ margin: '4px 0' }}>
+                                                        📍 {marker.poi.street} {marker.poi.houseNumber}, {marker.poi.postalCode} {marker.poi.city}
+                                                    </p>
+                                                )}
+                                                {marker.poi.website && (
+                                                    <p style={{ margin: '4px 0' }}>
+                                                        🔗 <a href={marker.poi.website} target="_blank" rel="noopener noreferrer" style={{ color: '#0066cc' }}>
+                                                            Website
+                                                        </a>
+                                                    </p>
+                                                )}
+                                                {(marker.poi.licenseType || marker.poi.copyright || marker.poi.source) && (
+                                                    <p style={{ margin: '8px 0 0', fontSize: '11px', color: '#888', borderTop: '1px solid #ddd', paddingTop: '4px' }}>
+                                                        Datenportal Münsterland ({marker.poi.licenseType || 'Unbekannte Lizenz'})
+                                                    </p>
+                                                )}
+                                            </div>
+                                        ) : null}
+
                                         {marker.source === 'datenportal' && marker.poi ? (
                                             <div style={{ fontSize: '13px', color: '#555' }}>
                                                 {marker.poi.types && marker.poi.types.length > 0 && (
@@ -368,6 +423,7 @@ export default function OpenWorld() {
 
                                     <p style={{ margin: '8px 0 0', fontSize: '11px', color: '#999' }}>
                                         {marker.source === 'event' ? 'Veranstaltung (Datenportal)' : 
+                                         marker.source === 'bike' ? 'Fahrradverleih (Datenportal)' :
                                          marker.source === 'datenportal' ? 'Datenportal Münsterland' : 
                                          'Lokale Daten'}
                                     </p>
