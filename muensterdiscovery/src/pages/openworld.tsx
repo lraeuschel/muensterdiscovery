@@ -1,8 +1,8 @@
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { LatLngExpression } from 'leaflet';
 import L from 'leaflet';
-import { useMemo, useState, useCallback, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { Alert } from '@chakra-ui/react';
 import Header from '../components/Header';
@@ -10,7 +10,7 @@ import pois from '../../data/POIs_Muenster_Discovery.json';
 import stern from '../assets/supermario_stern.webp';
 import { fetchDatenportalPois } from '../api/datenportal';
 import type { DatenportalPOI } from '../config/datenportal';
-import { EVENT_TYPES } from '../config/datenportal';
+
 
 type POIProperties = {
     id: number;
@@ -105,22 +105,6 @@ function useDatenportalPOIs() {
     }, []);
 
     return { datenportalPOIs, isLoading, error };
-}
-
-// Map Event Handler Component (deaktiviert - keine dynamischen Loads mehr)
-function MapEventsHandler({ onMapMove }: { onMapMove: (center: L.LatLng, bounds: L.LatLngBounds) => void }) {
-    const map = useMapEvents({
-        moveend: () => {
-            onMapMove(map.getCenter(), map.getBounds());
-        },
-    });
-
-    // Initial Load
-    useEffect(() => {
-        onMapMove(map.getCenter(), map.getBounds());
-    }, [map, onMapMove]);
-
-    return null;
 }
 
 export default function OpenWorld() {
