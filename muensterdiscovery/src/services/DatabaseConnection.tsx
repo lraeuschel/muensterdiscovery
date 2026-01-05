@@ -1,5 +1,5 @@
 import { supabase } from "../SupabaseClient";
-import type { User, Achievement, POI } from "../types";
+import type { User, Achievement, POI, Event } from "../types";
 
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -57,4 +57,35 @@ export async function getVisitedPOIs(userId: string) {
     const pois = data?.map((item: any) => item.POIs) || [];
     console.log("Fetched POIs:", pois);
     return pois as POI[];
+}
+
+// Events aus der Datenbank laden (aktuell + kommende)
+// Falls die Tabelle nicht existiert, wird ein leeres Array zurückgegeben
+export async function getUpcomingEvents(limit = 50) {
+    try {
+        const now = new Date().toISOString();
+        
+        const { data, error } = await supabase
+            .from("events")
+            .select("id, name, description, location, start_date, end_date, category")
+            .gte("start_date", now) // Nur Events in der Zukunft
+            .order("start_date", { ascending: true })
+            .limit(limit);
+
+        if (error) {
+            // Tabelle existiert nicht oder anderer Fehler
+            if (error.code === 'PGRST205') {
+                console.info("Events-Tabelle existiert noch nicht in der Datenbank.");
+            } else {
+                console.error("Error fetching events:", error);
+            }
+            return [];
+        }
+
+        console.log("Fetched events:", data);
+        return (data || []) as Event[];
+    } catch (err) {
+        console.error("Unexpected error loading events:", err);
+        return [];
+    }
 }

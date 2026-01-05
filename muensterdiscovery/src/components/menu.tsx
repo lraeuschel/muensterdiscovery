@@ -35,6 +35,7 @@
                         <Menu.Content>
                             {menuItems.map((item) => (
                                 <Menu.Item
+                                    key={item.value}
                                     value={item.value}
                                     onClick={() => navigate(item.path)}
                                     width={"full"}
