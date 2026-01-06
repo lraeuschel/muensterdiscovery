@@ -163,6 +163,11 @@ export default function OpenWorld() {
             // Prüfe ob POI ein Fahrradverleih ist
             const isBikeRental = poi.types?.some(t => t.toLowerCase().includes('fahrradverleih'));
             
+            // FILTER: Nur Events und Fahrradverleih behalten, normale POIs ausblenden
+            if (!isEvent && !isBikeRental) {
+                return; // Normale POIs überspringen
+            }
+            
             // Bestimme Source-Typ
             let source: 'event' | 'bike' | 'datenportal' = 'datenportal';
             if (isEvent) source = 'event';
