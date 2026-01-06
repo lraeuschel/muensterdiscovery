@@ -212,7 +212,7 @@ export default function OpenWorld() {
             {/* Loading Indicator */}
             {isLoading && (
                 <div style={{ position: 'absolute', top: '80px', right: '20px', zIndex: 1000, background: 'white', padding: '8px 16px', borderRadius: '4px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                    Lade POIs...
+                    Lade Events...
                 </div>
             )}
 
@@ -336,11 +336,6 @@ export default function OpenWorld() {
                                                             </p>
                                                         )}
                                                     </div>
-                                                )}
-                                                {marker.poi.description && (
-                                                    <p style={{ margin: '8px 0', fontSize: '12px', lineHeight: '1.4', color: '#666' }}>
-                                                        {marker.poi.description}
-                                                    </p>
                                                 )}
                                                 {(marker.poi.street || marker.poi.postalCode) && (
                                                     <p style={{ margin: '4px 0' }}>
