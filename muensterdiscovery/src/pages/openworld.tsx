@@ -263,7 +263,7 @@ export default function OpenWorld() {
 
                     {allMarkers.map((marker) => {
                         // Icon-Auswahl: Event -> Bike -> Standard
-                        let icon = starIcon;
+                        let icon: L.Icon | L.DivIcon = starIcon;
                         if (marker.source === 'event') icon = eventIcon;
                         else if (marker.source === 'bike') icon = bikeIcon;
                         
