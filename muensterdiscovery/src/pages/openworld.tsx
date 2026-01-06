@@ -426,12 +426,13 @@ export default function OpenWorld() {
                                             </div>
                                         ) : null}
 
-                                    <p style={{ margin: '8px 0 0', fontSize: '11px', color: '#999' }}>
-                                        {marker.source === 'event' ? 'Veranstaltung (Datenportal)' : 
-                                         marker.source === 'bike' ? 'Fahrradverleih (Datenportal)' :
-                                         marker.source === 'datenportal' ? 'Datenportal Münsterland' : 
-                                         'Lokale Daten'}
-                                    </p>
+                                    {marker.source !== 'static' && (
+                                        <p style={{ margin: '8px 0 0', fontSize: '11px', color: '#999' }}>
+                                            {marker.source === 'event' ? 'Veranstaltung (Datenportal)' : 
+                                             marker.source === 'bike' ? 'Fahrradverleih (Datenportal)' :
+                                             'Datenportal Münsterland'}
+                                        </p>
+                                    )}
                                 </div>
                             </Popup>
                         </Marker>
