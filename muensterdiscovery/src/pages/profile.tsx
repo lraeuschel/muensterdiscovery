@@ -20,30 +20,73 @@ export default function Profile() {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Handler für Bildauswahl
-    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
-        if (file) {
-            // Validierung: Nur Bilder erlauben
-            if (!file.type.startsWith('image/')) {
+        if (!file) return;
+        
+        // 1. Validierung
+        if (!file.type.startsWith('image/')) {
                 alert(intl.formatMessage({ id: "profile.invalid_image" }));
                 return;
             }
-            // Erstelle eine lokale URL für das Bild
-            const imageUrl = URL.createObjectURL(file);
-            setProfileImage(imageUrl);
-        }
+
+        // 2. Erstelle eine lokale URL für das Bild
+        const previewUrl = URL.createObjectURL(file);
+        setProfileImage(previewUrl);
+
+        // 3. Lade das Bild zu Supabase Storage hoch
+        await uploadProfileImage(file);
     };
+
+    const uploadProfileImage = async (file: File) => {
+        // Hole den aktuellen Benutzer
+        const user = await getCurrentUser();
+
+        if (!user) {
+            console.error("Error fetching user:");
+            return;
+        }
+
+        // Erstelle einen eindeutigen Dateinamen
+        const filePath = `${user.id}/profile_image.jpg`;
+
+        // Lade das Bild zu Supabase Storage hoch
+        const { error: uploadError } = await supabase.storage
+            .from('profile_images')
+            .upload(filePath, file, {
+                cacheControl: '3600',
+                upsert: true,
+                contentType: file.type,
+            });
+        
+        if (uploadError) {
+            console.error("Error uploading image:", uploadError);
+            return;
+        }
+
+        // Hole die Signed URL des hochgeladenen Bildes
+        await loadProfileImage(user.id);
+    };
+
+    const loadProfileImage = async (userId: string) => {
+        const { data, error } = await supabase.storage
+            .from('profile_images')
+            .createSignedUrl(`${userId}/profile_image.jpg`, 300);
+
+        if (error) {
+            console.error("Error fetching image URL:", error);
+            setProfileImage(default_profile_image);
+            return;
+        }
+
+        setProfileImage(data.signedUrl);
+    };
+
+
 
     const handleChangeProfilePicture = () => {
         fileInputRef.current?.click();
     };
-
-    // Mock explored areas (beispielhafte Bereiche in Münster)
-    // const exploredAreas: LatLngBoundsExpression[] = [
-    //     [[51.955, 7.620], [51.965, 7.635]], // Altstadt
-    //     [[51.945, 7.610], [51.950, 7.620]], // Hafen
-    //     [[51.960, 7.630], [51.968, 7.645]], // Promenade
-    // ];
 
     const [profile, setProfile] = useState<User | null>(null); // Benutzerprofil
     const [myAchievements, setMyAchievements] = useState<Achievement[]>([]); // Verdiente Auszeichnungen
@@ -67,6 +110,8 @@ export default function Profile() {
                     getUserAchievements(user.id),
                     getVisitedPOIs(user.id),
                 ]);
+
+                loadProfileImage(user.id);
 
                 setProfile(profileData);
                 setMyAchievements(achievements);
@@ -106,7 +151,7 @@ export default function Profile() {
                     {/* Hidden file input */}
                     <input
                         type="file"
-                        ref={fileInputRef}
+                        ref={fileInputRef}  
                         onChange={handleImageChange}
                         accept="image/*"
                         style={{ display: 'none' }}
