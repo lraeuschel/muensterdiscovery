@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Box, IconButton, Portal, Input, VStack, HStack, Text, Image } from "@chakra-ui/react";
-import { Icon } from "@chakra-ui/react";
+import {Box, IconButton, Portal, Input, VStack, HStack, Text, Image, Icon,} from "@chakra-ui/react";
 import { BsChatDots, BsX, BsSend } from "react-icons/bs";
 import { keyframes } from "@emotion/react";
+import { getCurrentUser } from "../services/DatabaseConnection";
+import { useNavigate } from "react-router-dom";
 import rideyHappy from "../assets/ridey_happy.png";
 
 interface FloatingChatWidgetProps {
@@ -23,7 +24,7 @@ const bounce = keyframes`
 `;
 
 const TypingIndicator = () => (
-  <HStack gap={1} p={2}>
+  <HStack gap={1} align="center" justify="center" h="24px">
     {[0, 1, 2].map((dot) => (
       <Box
         key={dot}
@@ -32,7 +33,7 @@ const TypingIndicator = () => (
         bg="gray.500"
         borderRadius="full"
         animation={`${bounce} 1.4s infinite ease-in-out both`}
-        style={{ animationDelay: `${dot * 0.16}s` }}
+        css={{ animationDelay: `${dot * 0.16}s` }}
       />
     ))}
   </HStack>
@@ -45,6 +46,33 @@ const sanitizeHtml = (input: string) => {
   return s;
 };
 
+const HtmlMessage = ({ htmlContent }: { htmlContent: string }) => {
+  const navigate = useNavigate();
+
+  const handleHtmlClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLElement;
+    const anchor = target.closest("a");
+
+    if (anchor) {
+      const href = anchor.getAttribute("href");
+      if (href && href.startsWith("/muensterdiscovery")) {
+        e.preventDefault();
+        const internalPath = href.replace("/muensterdiscovery", "") || "/";
+        navigate(internalPath);
+      }
+    }
+  };
+
+  return (
+    <div
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+      onClick={handleHtmlClick}
+      style={{ width: "100%" }}
+    />
+  );
+};
+
+// --- Main Widget ---
 export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -63,10 +91,7 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
   const handleSend = async () => {
     if (message.trim()) {
       const currentMessage = message;
-      
-      const historyPayload = messages.map(
-        (msg) => `${msg.sender}: ${msg.text}`
-      );
+      const historyPayload = messages.map((msg) => `${msg.sender}: ${msg.text}`);
 
       const userMessage: Message = {
         id: Date.now().toString(),
@@ -74,28 +99,33 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
         sender: "user",
         timestamp: new Date(),
       };
-      
+
       setMessages((prev) => [...prev, userMessage]);
       setMessage("");
       setIsLoading(true);
 
+      const user = await getCurrentUser();
+
       try {
+        const payload: any = {
+          message: currentMessage,
+          history: historyPayload,
+          language: currentLanguage,
+        };
+
+        if (user) {
+          payload.usertoken = user.id;
+        }
+
         const response = await fetch("https://midi11-chatwithridey.hf.space/chat", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ 
-            message: currentMessage,
-            history: historyPayload,
-            language: currentLanguage
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
         });
 
-        if (!response.ok) throw new Error("Server-Fehler");
+        if (!response.ok) throw new Error("Server-Error");
 
         const data = await response.json();
-
         const rawHtml = data?.html ?? data?.html_output ?? "";
 
         const botMessage: Message = {
@@ -105,14 +135,13 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
           timestamp: new Date(),
           html: rawHtml ? sanitizeHtml(rawHtml) : undefined,
         };
-        
-        setMessages((prev) => [...prev, botMessage]);
 
+        setMessages((prev) => [...prev, botMessage]);
       } catch (error) {
         console.error("Fehler:", error);
         const errorMessage: Message = {
           id: (Date.now() + 1).toString(),
-          text: "Ridey ist gerade nicht erreichbar.",
+          text: "To stay within the free tier of HuggingFace, Ridey is not always active and will go into sleep mode within a few days. If so, please wait a few minutes after your first message and try again. The service should awake itself - please contact us if the issue persists.",
           sender: "bot",
           timestamp: new Date(),
         };
@@ -132,101 +161,152 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
 
   return (
     <>
-      <IconButton
-        aria-label="Open chat"
-        position="fixed"
-        bottom="20px"
-        right="20px"
-        zIndex={9999}
-        borderRadius="full"
-        size="lg"
-        colorScheme="blue"
-        onClick={() => setIsOpen(!isOpen)}
-        boxShadow="lg"
-      >
-        <Icon as={BsChatDots} boxSize={6} />
-      </IconButton>
+      <Portal>
+        <Box position="fixed" bottom="20px" right="20px" zIndex={9999}>
+          {}
+          <IconButton
+            aria-label="Toggle Chat"
+            rounded="full"
+            size="lg"
+            colorPalette="blue"
+            onClick={() => setIsOpen(!isOpen)}
+            boxShadow="lg"
+          >
+            <Icon as={isOpen ? BsX : BsChatDots} boxSize={6} />
+          </IconButton>
+        </Box>
+      </Portal>
 
       {isOpen && (
         <Portal>
           <Box
             position="fixed"
-            bottom="100px"
+            bottom="80px"
             right="20px"
-            width="70vw"
-            maxWidth="500px"
-            height="70vh"
-            maxHeight="600px"
+            width={{ base: "300px", md: "350px" }}
+            height="500px"
             bg="white"
-            borderRadius="lg"
             boxShadow="2xl"
-            zIndex={9998}
+            borderRadius="xl"
+            zIndex={9999}
             display="flex"
             flexDirection="column"
+            overflow="hidden"
             border="1px solid"
             borderColor="gray.200"
           >
-            <HStack p={4} borderBottom="1px solid" borderColor="gray.200" justify="space-between">
-              <HStack gap={2}>
-                <Image src={rideyHappy} alt="Ridey" boxSize="32px" borderRadius="full"/>
-                <Box fontWeight="bold">Chat with Ridey</Box>
-              </HStack>
-              <IconButton aria-label="Close" size="sm" variant="ghost" onClick={() => setIsOpen(false)}>
-                <Icon as={BsX} boxSize={6} />
+            <Box bg="blue.500" p={4} display="flex" alignItems="center">
+              <Image
+                src={rideyHappy}
+                boxSize="40px"
+                borderRadius="full"
+                bg="white"
+                mr={3}
+                p={1}
+              />
+              <Text color="white" fontWeight="bold" fontSize="lg">
+                Chat with Ridey
+              </Text>
+              
+              {/* v3 Migration: Passed icon as child */}
+              <IconButton
+                aria-label="Close"
+                size="sm"
+                variant="ghost"
+                color="white"
+                ml="auto"
+                _hover={{ bg: "blue.600" }}
+                onClick={() => setIsOpen(false)}
+              >
+                <BsX />
               </IconButton>
-            </HStack>
+            </Box>
 
-            <Box flex="1" overflowY="auto" p={4}>
-              <VStack gap={3} align="stretch">
+            <Box flex="1" overflowY="auto" p={4} bg="gray.50">
+              {}
+              <VStack gap={4} align="stretch">
                 {messages.map((msg) => (
-                  <Box key={msg.id} alignSelf={msg.sender === "user" ? "flex-end" : "flex-start"} maxWidth="75%">
-                    <Box
-                      bg={msg.sender === "user" ? "gray.100" : "blue.500"}
-                      color={msg.sender === "user" ? "gray.800" : "white"}
-                      px={4} py={2} borderRadius="lg"
-                      boxShadow={msg.sender === "bot" ? "md" : "sm"}
-                    >
-                      <Text fontSize="sm">{msg.text}</Text>
-                      {/* Render optional sanitized HTML if provided by the agent */}
-                      {msg.html && (
-                        <Box mt={2} color={msg.sender === "bot" ? "white" : "black"}>
-                          <div dangerouslySetInnerHTML={{ __html: msg.html }} />
-                        </Box>
-                      )}
-                    </Box>
+                  <Box
+                    key={msg.id}
+                    alignSelf={msg.sender === "user" ? "flex-end" : "flex-start"}
+                    bg={msg.sender === "user" ? "blue.500" : "white"}
+                    color={msg.sender === "user" ? "white" : "black"}
+                    px={4}
+                    py={3}
+                    borderRadius="lg"
+                    maxW="85%"
+                    boxShadow="sm"
+                    borderBottomRightRadius={msg.sender === "user" ? "none" : "lg"}
+                    borderBottomLeftRadius={msg.sender === "bot" ? "none" : "lg"}
+                  >
+                    <Text fontSize="sm" whiteSpace="pre-wrap">
+                      {msg.text}
+                    </Text>
+
+                    {msg.html && (
+                      <Box
+                        mt={3}
+                        p={2}
+                        bg="gray.50"
+                        color="black"
+                        borderRadius="md"
+                        border="1px solid"
+                        borderColor="gray.200"
+                      >
+                        <HtmlMessage htmlContent={msg.html} />
+                      </Box>
+                    )}
                   </Box>
                 ))}
 
                 {isLoading && (
-                  <Box alignSelf="flex-start" maxWidth="75%">
-                    <Box bg="gray.100" px={4} py={2} borderRadius="lg">
-                      <TypingIndicator />
-                    </Box>
+                  <Box
+                    alignSelf="flex-start"
+                    bg="white"
+                    px={4}
+                    py={3}
+                    borderRadius="lg"
+                    borderBottomLeftRadius="none"
+                    boxShadow="sm"
+                  >
+                    <TypingIndicator />
                   </Box>
                 )}
-                
                 <div ref={messagesEndRef} />
               </VStack>
             </Box>
 
-            <HStack p={4} borderTop="1px solid" borderColor="gray.200" gap={2}>
-              <Input
-                placeholder={currentLanguage === "de" ? "Nachricht tippen..." : "Type a message..."}
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyDown={handleKeyDown}
-                flex="1"
-                disabled={isLoading}
-              />
-              <IconButton 
-                aria-label="Send" 
-                colorScheme="blue" 
-                onClick={handleSend}
-                loading={isLoading}
-              >
-                <Icon as={BsSend} />
-              </IconButton>
-            </HStack>
+            <Box p={3} bg="white" borderTop="1px solid" borderColor="gray.200">
+              <HStack>
+                <Input
+                  placeholder={
+                    currentLanguage === "de"
+                      ? "Schreibe eine Nachricht..."
+                      : "Type a message..."
+                  }
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  flex="1"
+                  disabled={isLoading}
+                  borderRadius="full"
+                  bg="gray.50"
+                  _focus={{ bg: "white", borderColor: "blue.500" }}
+                />
+                
+                {}
+                <IconButton
+                  aria-label="Send"
+                  colorPalette="blue"
+                  borderRadius="full"
+                  onClick={handleSend}
+                  disabled={!message.trim() || isLoading}
+                  loading={isLoading}
+                >
+                  <BsSend />
+                </IconButton>
+              </HStack>
+            </Box>
           </Box>
         </Portal>
       )}
