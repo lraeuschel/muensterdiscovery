@@ -15,11 +15,10 @@ export type Achievement = {
 export type POI = {
     id: number;
     name: string;
-    description: string;
-    location: {
-        type: 'Point';
-        coordinates: [number, number]; // [lon, lat]
-    };
+    info: string;
+    lat: number;
+    lon: number;
+    image_path: string;
 }
 
 export type Event = {

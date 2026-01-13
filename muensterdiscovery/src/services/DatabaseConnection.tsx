@@ -46,12 +46,14 @@ export async function getVisitedPOIs(userId: string) {
             POIs (
                 id,
                 name,
-                description,
-                location
+                info,
+                lat,
+                lon,
+                image_path
             )
         `)
         .eq("profile_id", userId);
-
+    
     if (error) throw error;
 
     const pois = data?.map((item: any) => item.POIs) || [];
