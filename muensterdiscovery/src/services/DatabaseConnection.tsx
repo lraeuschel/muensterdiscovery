@@ -38,6 +38,24 @@ export async function getUserAchievements(userId: string) {
     return achievements as Achievement[];
 }
 
+export async function getPOIs() {
+    const { data, error } = await supabase
+        .from("POIs")
+        .select(`
+            id, 
+            name, 
+            info, 
+            lat, 
+            lon, 
+            image_path`
+        );
+
+    if (error) throw error;
+
+    const pois = data?.map((item: any) => item.POIs) || [];
+    console.log("Fetched POIs:", pois);
+    return data as POI[];
+}
 
 export async function getVisitedPOIs(userId: string) {
     const { data, error } = await supabase
