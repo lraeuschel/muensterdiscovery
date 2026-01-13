@@ -75,5 +75,17 @@
     "login.error": "Anmeldung fehlgeschlagen. Bitte überprüfe deine Zugangsdaten.",
     "login.success": "Erfolgreich angemeldet!",
 
+    "start.slide1_title": "Folie 1",
+    "start.slide1_content": "Folie 1 Inhalt",
+    "start.slide2_title": "Folie 2",
+    "start.slide2_content": "Folie 2 Inhalt",
+    "start.slide3_title": "Folie 3",
+    "start.slide3_content": "Folie 3 Inhalt",
+    "start.welcome_message": "Willkommen zurück, {name}!",
+    "start.discover_message": "Entdecke die interessantesten Orte und Erlebnisse in Münster.",
+    "start.tile": "Kachel {number}",
+    "start.add_content": "Füge hier deine Inhalte hinzu",
+    "footer.all_rights_reserved": "Alle Rechte vorbehalten.",
+
     "leaderboard.you": "DU"
 }

@@ -69,5 +69,17 @@
     "login.error": "Error al iniciar sesión. Por favor, verifica tus credenciales.",
     "login.success": "¡Sesión iniciada con éxito!",
 
+    "start.slide1_title": "Diapositiva 1",
+    "start.slide1_content": "Contenido de la diapositiva 1",
+    "start.slide2_title": "Diapositiva 2",
+    "start.slide2_content": "Contenido de la diapositiva 2",
+    "start.slide3_title": "Diapositiva 3",
+    "start.slide3_content": "Contenido de la diapositiva 3",
+    "start.welcome_message": "¡Bienvenido de vuelta, {name}!",
+    "start.discover_message": "Descubre los lugares y experiencias más interesantes de Münster.",
+    "start.tile": "Azulejo {number}",
+    "start.add_content": "Añade tu contenido aquí",
+    "footer.all_rights_reserved": "Todos los derechos reservados.",
+
     "leaderboard.you": "TÚ"
 }
