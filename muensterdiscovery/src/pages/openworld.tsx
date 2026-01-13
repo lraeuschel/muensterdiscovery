@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import type { DatenportalPOI } from '../config/datenportal';
 import { getPOIs } from '../services/DatabaseConnection';
 import type { POI } from "../types";
+import { useMap } from 'react-leaflet';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
@@ -101,11 +102,18 @@ function useDatenportalPOIs() {
     return { datenportalPOIs, isLoading, error };
 }
 
+function FlyToUser({ position }: { position: LatLngExpression }) {
+    const map = useMap();
+    map.flyTo(position, 16); // Zoom-Level 16
+    return null;
+}
+
 export default function OpenWorld() {
     const intl = useIntl();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
     const navigate = useNavigate();
     const [pois, setPois] = useState<POI[]>([]);
+    const [userLocation, setUserLocation] = useState<LatLngExpression | null>(null);
 
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange((lang) => {
@@ -129,6 +137,23 @@ export default function OpenWorld() {
         
         pois();
     }, [navigate]);
+
+    useEffect(() => {
+        if (!navigator.geolocation) {
+            console.warn("Geolocation wird vom Browser nicht unterstützt");
+            return;
+        }
+
+        const watcher = navigator.geolocation.watchPosition(
+            (position) => {
+                setUserLocation([position.coords.latitude, position.coords.longitude]);
+            },
+            (error) => console.error("Fehler beim Abrufen des Standorts:", error),
+            { enableHighAccuracy: true, maximumAge: 10000, timeout: 5000 }
+        );
+        // Aufräumen: Standortüberwachung beenden
+            return () => navigator.geolocation.clearWatch(watcher);
+        }, []);
     
     // Münster Koordinaten
     const munsterCenter: LatLngExpression = [51.9607, 7.6261];
@@ -264,6 +289,24 @@ export default function OpenWorld() {
                             />
                         </LayersControl.BaseLayer>
                     </LayersControl>
+
+                    {userLocation && <FlyToUser position={userLocation} />}
+
+                    {/* Nutzer-Standort Marker */}
+                    {userLocation && (
+                        <Marker
+                            position={userLocation}
+                            icon={L.icon({
+                                iconUrl: 'https://cdn-icons-png.flaticon.com/512/64/64113.png',
+                                iconSize: [25, 25],
+                                iconAnchor: [12, 12], // Mitte des Icons
+                                popupAnchor: [0, -12]
+                            })}
+                        >
+                            <Popup>Du bist hier</Popup>
+                        </Marker>
+                    )}
+
 
                     {allMarkers.map((marker) => {
                         // Icon-Auswahl: Event -> Bike -> Standard
