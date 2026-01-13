@@ -211,7 +211,7 @@ export default function Profile() {
 
                             {/* Explorierte POIs als Marker */}
                             {visitedPOIs.map((poi) => (
-                                <Marker key={poi.id} position={[poi.location.coordinates[1], poi.location.coordinates[0]]}>
+                                <Marker key={poi.id} position={[poi.lat, poi.lon]}>
                                     <Popup>
                                         Besucht: {poi.name}
                                     </Popup>
