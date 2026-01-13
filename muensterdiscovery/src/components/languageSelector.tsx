@@ -1,18 +1,18 @@
 import { Select, Portal, createListCollection } from "@chakra-ui/react"
 
 export const languageItems = [
-  { label: "🇩🇪", value: "de" },
-  { label: "🇬🇧", value: "en" },
-  { label: "🇪🇸", value: "es" },
-  { label: "🇫🇷", value: "fr" },
-  { label: "🇮🇹", value: "it" },
-  { label: "🇳🇱", value: "nl" },
-  { label: "🇵🇱", value: "pl" },
-  { label: "🇵🇹", value: "pt" },
-  { label: "🇹🇷", value: "tk" },
-  { label: "🇷🇺", value: "ru" },
-  { label: "🇯🇵", value: "jp" },
-  { label: "🇸🇦", value: "sa" }
+  { label: "Deutsch", value: "de" },
+  { label: "English", value: "en" },
+  { label: "Español", value: "es" },
+  { label: "Français", value: "fr" },
+  { label: "Italiano", value: "it" },
+  { label: "Nederlands", value: "nl" },
+  { label: "Polski", value: "pl" },
+  { label: "Português", value: "pt" },
+  { label: "Türkçe", value: "tk" },
+  { label: "Русский", value: "ru" },
+  { label: "日本語", value: "jp" },
+  { label: "العربية", value: "sa" }
 ] as const;
 
 export type LanguageType = typeof languageItems[number]["value"];
@@ -55,7 +55,6 @@ export default function LanguageSelector({
     >
       <Select.Control>
         <Select.Trigger>
-          <Select.ValueText placeholder="Choose your language" />
         </Select.Trigger>
         <Select.IndicatorGroup>
           <Select.Indicator />
@@ -70,9 +69,7 @@ export default function LanguageSelector({
                 item={language}
                 key={language.value}
                 onClick={() => {
-                  // update the external prop callback
                   setLanguage(language.value);
-                  // also update/export the module-level currentLanguage so welcome.tsx (or others) can access it
                   setCurrentLanguage(language.value);
                 }}
               >

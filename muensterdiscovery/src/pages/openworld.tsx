@@ -5,7 +5,9 @@ import L from 'leaflet';
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { Alert } from '@chakra-ui/react';
-import Header from '../components/Header';
+import Header from '../components/CompLangHeader';
+import { currentLanguage, onCurrentLanguageChange } from '../components/languageSelector';
+import type { LanguageType } from '../components/languageSelector';
 import pois from '../../data/POIs_Muenster_Discovery.json';
 import stern from '../assets/supermario_stern.webp';
 import { fetchDatenportalPois } from '../api/datenportal';
@@ -122,6 +124,14 @@ function useDatenportalPOIs() {
 
 export default function OpenWorld() {
     const intl = useIntl();
+    const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    useEffect(() => {
+        const unsubscribe = onCurrentLanguageChange((lang) => {
+            setCurrentLang(lang);
+        });
+        return unsubscribe;
+    }, []);
     
     // Münster Koordinaten
     const munsterCenter: LatLngExpression = [51.9607, 7.6261];

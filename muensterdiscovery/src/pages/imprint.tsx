@@ -1,26 +1,30 @@
 import { Box, VStack, Text, Image, Link as ChakraLink, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import Header from "../components/Header";
-import LanguageSelector from "../components/languageSelector";
-import muensterdiscovery_logo from "../assets/logo.png";
+import CompLangHeader from "../components/CompLangHeader";
+import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
 import { useIntl } from "react-intl";
+import { useState, useEffect } from "react";
 
-export default function Imprint({ setLanguage }: { setLanguage: (lang: LanguageType) => void }) {
+export default function Imprint() {
     const intl = useIntl();
     const navigate = useNavigate();
+    const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    useEffect(() => {
+        const unsubscribe = onCurrentLanguageChange((lang) => {
+            setCurrentLang(lang);
+        });
+        return unsubscribe;
+    }, []);
 
     return (
         <Box bg="orange.50" minH="100vh" p={4}>
             {/* Header */}
-            <Header />
-            <Box position="absolute" top="10px" right="10px">
-                <LanguageSelector setLanguage={setLanguage} />
-            </Box>
+            <CompLangHeader />
 
             {/* Logo */}
             <VStack align="center">
-                <Image src={muensterdiscovery_logo} alt="Muenster Discovery Logo" boxSize="200px" />
 
                 {/* Title */}
                 <Text

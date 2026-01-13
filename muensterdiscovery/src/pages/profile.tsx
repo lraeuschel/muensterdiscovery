@@ -3,7 +3,9 @@ import { Box, VStack, HStack, Text, Image, Button, Grid } from "@chakra-ui/react
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useIntl } from 'react-intl';
-import Header from "../components/Header";
+import CompLangHeader from "../components/CompLangHeader";
+import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
+import type { LanguageType } from "../components/languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
 import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +16,14 @@ import { supabase } from "../SupabaseClient";
 export default function Profile() {
     const intl = useIntl();
     const navigate = useNavigate();
+    const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    useEffect(() => {
+        const unsubscribe = onCurrentLanguageChange((lang) => {
+            setCurrentLang(lang);
+        });
+        return unsubscribe;
+    }, []);
 
     // State für Profilbild
     const [profileImage, setProfileImage] = useState<string>(default_profile_image);
@@ -127,7 +137,7 @@ export default function Profile() {
 
     return (
         <Box bg="orange.50" minH="100vh" pb={8}>
-            <Header />
+            <CompLangHeader />
 
             {/* Content Container */}
             <VStack gap={6} mt="80px" px={4}>

@@ -72,7 +72,6 @@ const HtmlMessage = ({ htmlContent }: { htmlContent: string }) => {
   );
 };
 
-// --- Main Widget ---
 export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -168,7 +167,7 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
             aria-label="Toggle Chat"
             rounded="full"
             size="lg"
-            colorPalette="blue"
+            colorPalette="orange"
             onClick={() => setIsOpen(!isOpen)}
             boxShadow="lg"
           >
@@ -195,7 +194,7 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
             border="1px solid"
             borderColor="gray.200"
           >
-            <Box bg="blue.500" p={4} display="flex" alignItems="center">
+            <Box bg="orange.500" p={4} display="flex" alignItems="center">
               <Image
                 src={rideyHappy}
                 boxSize="40px"
@@ -208,14 +207,14 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                 Chat with Ridey
               </Text>
               
-              {/* v3 Migration: Passed icon as child */}
+              {}
               <IconButton
                 aria-label="Close"
                 size="sm"
                 variant="ghost"
                 color="white"
                 ml="auto"
-                _hover={{ bg: "blue.600" }}
+                _hover={{ bg: "orange.600" }}
                 onClick={() => setIsOpen(false)}
               >
                 <BsX />
@@ -229,7 +228,7 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                   <Box
                     key={msg.id}
                     alignSelf={msg.sender === "user" ? "flex-end" : "flex-start"}
-                    bg={msg.sender === "user" ? "blue.500" : "white"}
+                    bg={msg.sender === "user" ? "orange.500" : "white"}
                     color={msg.sender === "user" ? "white" : "black"}
                     px={4}
                     py={3}
@@ -291,13 +290,13 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                   disabled={isLoading}
                   borderRadius="full"
                   bg="gray.50"
-                  _focus={{ bg: "white", borderColor: "blue.500" }}
+                  _focus={{ bg: "white", borderColor: "orange.500" }}
                 />
                 
                 {}
                 <IconButton
                   aria-label="Send"
-                  colorPalette="blue"
+                  colorPalette="orange"
                   borderRadius="full"
                   onClick={handleSend}
                   disabled={!message.trim() || isLoading}

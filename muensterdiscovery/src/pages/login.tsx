@@ -1,14 +1,24 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../SupabaseClient";
 import { Input, Button, Text, Flex, Box, Heading, VStack} from "@chakra-ui/react";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import Header from "../components/Header";
+import CompLangHeader from "../components/CompLangHeader";
+import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
+import type { LanguageType } from "../components/languageSelector";
 import { useIntl } from "react-intl";
 
 export default function Login() {
     const intl = useIntl();
     const navigate = useNavigate();
+    const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    useEffect(() => {
+        const unsubscribe = onCurrentLanguageChange((lang) => {
+            setCurrentLang(lang);
+        });
+        return unsubscribe;
+    }, []);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -35,7 +45,7 @@ export default function Login() {
 
     return (
         <>
-            <Header />
+            <CompLangHeader />
 
             <Flex justify="center" align="center" minH="100vh" bg="orange.50" pt="80px">
                 <Box
