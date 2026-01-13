@@ -66,5 +66,17 @@
     "login.error": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
     "login.success": "Başarıyla giriş yaptınız!",
 
+    "start.slide1_title": "Slayt 1",
+    "start.slide1_content": "Slayt 1 İçeriği",
+    "start.slide2_title": "Slayt 2",
+    "start.slide2_content": "Slayt 2 İçeriği",
+    "start.slide3_title": "Slayt 3",
+    "start.slide3_content": "Slayt 3 İçeriği",
+    "start.welcome_message": "Hoş geldiniz geri, {name}!",
+    "start.discover_message": "Münster'deki en ilginç yerleri ve deneyimleri keşfedin.",
+    "start.tile": "Karo {number}",
+    "start.add_content": "İçeriğinizi buraya ekleyin",
+    "footer.all_rights_reserved": "Tüm hakları saklıdır.",
+
     "leaderboard.you": "SEN"
 }

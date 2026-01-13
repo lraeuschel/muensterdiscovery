@@ -69,5 +69,17 @@
     "login.error": "فشل تسجيل الدخول. يرجى التحقق من بياناتك.",
     "login.success": "تم تسجيل الدخول بنجاح!",
 
+    "start.slide1_title": "شريحة 1",
+    "start.slide1_content": "محتوى الشريحة 1",
+    "start.slide2_title": "شريحة 2",
+    "start.slide2_content": "محتوى الشريحة 2",
+    "start.slide3_title": "شريحة 3",
+    "start.slide3_content": "محتوى الشريحة 3",
+    "start.welcome_message": "أهلا بعودتك، {name}!",
+    "start.discover_message": "اكتشف أكثر الأماكن والتجارب إثارة للاهتمام في مِنستر.",
+    "start.tile": "البلاط {number}",
+    "start.add_content": "أضف محتواك هنا",
+    "footer.all_rights_reserved": "جميع الحقوق محفوظة.",
+
     "leaderboard.you": "أنت"
 }
