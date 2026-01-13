@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, VStack, HStack, Text, Image, Button, Grid, Badge } from "@chakra-ui/react";
 import { useIntl } from 'react-intl';
-import Header from "../components/Header";
+import CompLangHeader from "../components/CompLangHeader";
+import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
+import type { LanguageType } from "../components/languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
 import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 import majo from "../assets/ww.jpeg";
 
-// Typdefinition für User-Eintrag
 type LeaderboardEntry = {
     rank: number;
     username: string;
@@ -20,6 +21,14 @@ type LeaderboardEntry = {
 export default function Leaderboard() {
     const intl = useIntl();
     const [timeframe, setTimeframe] = useState<'month' | 'alltime'>('month');
+    const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    useEffect(() => {
+        const unsubscribe = onCurrentLanguageChange((lang) => {
+            setCurrentLang(lang);
+        });
+        return unsubscribe;
+    }, []);
 
     // Dieser Monat 
     const monthlyData: LeaderboardEntry[] = [
@@ -43,7 +52,7 @@ export default function Leaderboard() {
 
     return (
         <Box bg="orange.50" minH="100vh" pb={8}>
-            <Header />
+            <CompLangHeader />
 
             {/* Content Container */}
             <VStack gap={6} mt="80px" px={4}>

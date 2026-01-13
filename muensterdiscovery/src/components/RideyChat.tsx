@@ -72,7 +72,6 @@ const HtmlMessage = ({ htmlContent }: { htmlContent: string }) => {
   );
 };
 
-// --- Main Widget ---
 export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
@@ -168,7 +167,7 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
             aria-label="Toggle Chat"
             rounded="full"
             size="lg"
-            colorPalette="blue"
+            colorPalette="orange"
             onClick={() => setIsOpen(!isOpen)}
             boxShadow="lg"
           >
@@ -208,7 +207,7 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                 Chat with Ridey
               </Text>
               
-              {/* v3 Migration: Passed icon as child */}
+              {}
               <IconButton
                 aria-label="Close"
                 size="sm"

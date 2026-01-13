@@ -2,34 +2,38 @@ import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, VStack, Text, Image } from "@chakra-ui/react";
 import muensterdiscovery_logo from "../assets/logo.png";
 import { useIntl } from "react-intl";
-import Header from "../components/Header";
-import LanguageSelector, { currentLanguage, setCurrentLanguage } from "../components/languageSelector";
+import CompLangHeader from "../components/CompLangHeader";
+import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
 import RideyChat from "../components/RideyChat";
 import { useState, useEffect } from "react";
+import { supabase } from "../SupabaseClient";
 
-export default function Welcome({ setLanguage }: { setLanguage: (lang: LanguageType) => void }) {
+export default function Welcome() {
     const navigate = useNavigate();
     const intl = useIntl();
-
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
 
     useEffect(() => {
-        setLanguage(currentLang);
+        const unsubscribe = onCurrentLanguageChange((lang) => {
+            setCurrentLang(lang);
+        });
+        return unsubscribe;
     }, []);
 
-    const handleSetLanguage = (lang: LanguageType) => {
-        setCurrentLang(lang);
-        setCurrentLanguage(lang);
-        setLanguage(lang);
-    };
+    useEffect(() => {
+        const checkSession = async () => {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                navigate("/start");
+            }
+        };
+        checkSession();
+    }, [navigate]);
 
     return (
         <Box bg="orange.50" minH="100vh">
-            <Header />
-            <Box position="absolute" top="10px" right="10px">
-                <LanguageSelector setLanguage={handleSetLanguage} />
-            </Box>
+            <CompLangHeader />
             {<RideyChat currentLanguage={currentLang} />}
 
             <VStack>

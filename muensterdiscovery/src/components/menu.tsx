@@ -25,7 +25,7 @@
         return (
             <Menu.Root>
                 <Menu.Trigger asChild>
-                    <Button variant="subtle" size="md">
+                    <Button variant="outline" size="md">
                         <RxHamburgerMenu size={24} />
                     </Button>
                 </Menu.Trigger>
