@@ -1,5 +1,5 @@
 import { supabase } from "../SupabaseClient";
-import type { User, Achievement, POI, Event } from "../types";
+import type { User, Achievement, POI, Event, Route } from "../types";
 
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -59,6 +59,16 @@ export async function getVisitedPOIs(userId: string) {
     return pois as POI[];
 }
 
+export async function getRoutes() {
+    const { data, error } = await supabase
+        .from("routes")
+        .select("id, name, POIs, geoJSON");
+
+    if (error) throw error;
+
+    return data as Route[];
+}
+
 // Events aus der Datenbank laden (aktuell + kommende)
 // Falls die Tabelle nicht existiert, wird ein leeres Array zurückgegeben
 export async function getUpcomingEvents(limit = 50) {
@@ -88,4 +98,30 @@ export async function getUpcomingEvents(limit = 50) {
         console.error("Unexpected error loading events:", err);
         return [];
     }
+}
+
+export async function addUserAchievement(
+    profile_id: string,
+    achievement_id: number,
+) {
+    const { data, error } = await supabase
+        .from("user_achievements")
+        .insert([{ profile_id, achievement_id}])
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
+
+export async function addVisitedPOI(
+    profile_id: string,
+    poi_id: number,
+) {
+    const { data, error } = await supabase
+        .from("user_POIs")
+        .insert([{ profile_id, poi_id }])
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
 }
