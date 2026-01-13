@@ -1,20 +1,18 @@
-import { Menu, Button, Portal, Box, HStack } from "@chakra-ui/react";
-import { IoLanguage } from "react-icons/io5";
-import { createListCollection } from "@chakra-ui/react"
+import { Select, Portal, createListCollection } from "@chakra-ui/react"
 
 export const languageItems = [
-  { label: "🇩🇪", value: "de" },
-  { label: "🇬🇧", value: "en" },
-  { label: "🇪🇸", value: "es" },
-  { label: "🇫🇷", value: "fr" },
-  { label: "🇮🇹", value: "it" },
-  { label: "🇳🇱", value: "nl" },
-  { label: "🇵🇱", value: "pl" },
-  { label: "🇵🇹", value: "pt" },
-  { label: "🇹🇷", value: "tk" },
-  { label: "🇷🇺", value: "ru" },
-  { label: "🇯🇵", value: "jp" },
-  { label: "🇸🇦", value: "sa" }
+  { label: "Deutsch", value: "de" },
+  { label: "English", value: "en" },
+  { label: "Español", value: "es" },
+  { label: "Français", value: "fr" },
+  { label: "Italiano", value: "it" },
+  { label: "Nederlands", value: "nl" },
+  { label: "Polski", value: "pl" },
+  { label: "Português", value: "pt" },
+  { label: "Türkçe", value: "tk" },
+  { label: "Русский", value: "ru" },
+  { label: "日本語", value: "jp" },
+  { label: "العربية", value: "sa" }
 ] as const;
 
 export type LanguageType = typeof languageItems[number]["value"];
@@ -46,35 +44,42 @@ export default function LanguageSelector({
   setLanguage: (lang: LanguageType) => void;
 }) {
   return (
-    <Menu.Root>
-      <Menu.Trigger asChild>
-        <Button variant="subtle" size="md">
-          <IoLanguage size={24} />
-        </Button>
-      </Menu.Trigger>
+    <Select.Root
+      collection={languages}
+      size="sm"
+      width="20%"
+      position="fixed"
+      variant="subtle"
+      top="10px"
+      right="10px"
+    >
+      <Select.Control>
+        <Select.Trigger>
+        </Select.Trigger>
+        <Select.IndicatorGroup>
+          <Select.Indicator />
+        </Select.IndicatorGroup>
+      </Select.Control>
 
       <Portal>
-        <Menu.Positioner>
-          <Menu.Content>
+        <Select.Positioner>
+          <Select.Content>
             {languages.items.map((language) => (
-              <Menu.Item
+              <Select.Item
+                item={language}
                 key={language.value}
-                value={language.value}
                 onClick={() => {
                   setLanguage(language.value);
                   setCurrentLanguage(language.value);
                 }}
               >
-                <Box>
-                  <HStack>
-                    {language.label}
-                  </HStack>
-                </Box>
-              </Menu.Item>
+                {language.label}
+                <Select.ItemIndicator />
+              </Select.Item>
             ))}
-          </Menu.Content>
-        </Menu.Positioner>
+          </Select.Content>
+        </Select.Positioner>
       </Portal>
-    </Menu.Root>
+    </Select.Root>
   );
 }

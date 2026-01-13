@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Box, HStack, Image, Button, Avatar, Menu, Portal } from "@chakra-ui/react";
+import { Box, HStack, Image, Button, Avatar, Menu, Portal, Text } from "@chakra-ui/react";
 import { supabase } from "../SupabaseClient";
 import type { User } from "@supabase/supabase-js";
 import MenuComponent from "./menu";
-import { IoLanguage } from "react-icons/io5";
 import { languageItems, currentLanguage, setCurrentLanguage } from "./languageSelector";
 import type { LanguageType } from "./languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
@@ -60,6 +59,8 @@ export default function CompLangHeader() {
                         cursor="pointer"
                         _hover={{ opacity: 0.8 }}
                         transition="opacity 0.2s"
+                        border = "0px"
+                        bg="white"
                     />
                 </HStack>
             </Box>
@@ -73,8 +74,8 @@ export default function CompLangHeader() {
                     {/* Language Selector */}
                     <Menu.Root>
                         <Menu.Trigger asChild>
-                            <Button variant="subtle" size="md">
-                                <IoLanguage size={24} />
+                            <Button variant="ghost" size="sm" fontSize="xs">
+                                {languageItems.find(l => l.value === currentLanguage)?.label}
                             </Button>
                         </Menu.Trigger>
 
@@ -89,11 +90,7 @@ export default function CompLangHeader() {
                                                 setCurrentLanguage(language.value);
                                             }}
                                         >
-                                            <Box>
-                                                <HStack>
-                                                    {language.label}
-                                                </HStack>
-                                            </Box>
+                                            <Text fontSize="sm">{language.label}</Text>
                                         </Menu.Item>
                                     ))}
                                 </Menu.Content>
@@ -107,7 +104,7 @@ export default function CompLangHeader() {
                             size="sm" 
                             onClick={handleProfileClick}
                             cursor="pointer"
-                            bg="teal.500"
+                            bg="orange.500"
                             _hover={{ opacity: 0.8 }}
                         >
                             <Avatar.Fallback color="white">
@@ -118,7 +115,7 @@ export default function CompLangHeader() {
                     ) : (
                         <Button 
                             size="sm" 
-                            colorScheme="teal" 
+                            colorScheme="orange" 
                             onClick={() => navigate("/login")}
                         >
                             Login

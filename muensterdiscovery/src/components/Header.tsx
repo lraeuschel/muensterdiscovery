@@ -39,7 +39,7 @@ export default function Header() {
     };
 
     const boxStyles = {
-        position: "fixed" as const, // "as const" ist für TypeScript wichtig bei position
+        position: "fixed" as const,
         top: "10px",
         zIndex: 1000,
         bg: "white",
@@ -52,8 +52,8 @@ export default function Header() {
         <>
             {}
             <Box 
-                {...boxStyles} // Styles übernehmen
-                left="10px"    // Links positionieren
+                {...boxStyles}
+                left="10px"
             >
                 <HStack gap={3}>
                     <MenuComponent />
@@ -76,12 +76,11 @@ export default function Header() {
             >
                 {/* Conditional Rendering basierend auf dem User State */}
                 {user ? (
-                    // WENN EINGELOGGT: Zeige Avatar
                     <Avatar.Root 
                         size="sm" 
                         onClick={handleProfileClick}
                         cursor="pointer"
-                        bg="teal.500"
+                        bg="orange.500"
                         _hover={{ opacity: 0.8 }}
                     >
                         <Avatar.Fallback color="white">
@@ -90,10 +89,9 @@ export default function Header() {
                         <Avatar.Image src={user.user_metadata?.avatar_url} />
                     </Avatar.Root>
                 ) : (
-                    // WENN NICHT EINGELOGGT: Zeige Login Button
                     <Button 
                         size="sm" 
-                        colorScheme="teal" 
+                        colorScheme="orange" 
                         onClick={() => navigate("/login")}
                     >
                         Login
