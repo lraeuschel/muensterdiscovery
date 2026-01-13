@@ -14,6 +14,13 @@
     "menu.leaderboard": "Bestenliste",
     "menu.welcome": "Startseite",
 
+    "routeselection.title": "Routen auswählen",
+    "routeselection.subtitle": "Klicke auf eine Route in der Karte, um Details zu sehen",
+    "routeselection.distance": "Entfernung",
+    "routeselection.duration": "Dauer",
+    "routeselection.pois": "POIs",
+    "routeselection.close": "Schließen",
+
     "imprint.title": "Impressum",
     "imprint.content": "Dieses Projekt ist ein Studienprojekt im Rahmen des Masterstudiengangs Geoinformatics and Spatial Data Science der Universität Münster. Quellcode und Dokumentation sind auf GitHub verfügbar:",
     "imprint.github_link_text": "GitHub Repository",

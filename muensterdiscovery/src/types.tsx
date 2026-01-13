@@ -27,6 +27,9 @@ export type Route = {
     name: string;
     POIs: number[]; // Array of POI IDs
     geoJSON: any; // GeoJSON object representing the route
+    description: string;
+    time_length: number; // in minutes
+    distance: number; // in meters
 }
 
 export type Event = {

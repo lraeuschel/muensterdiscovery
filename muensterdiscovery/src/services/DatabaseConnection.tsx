@@ -62,7 +62,7 @@ export async function getVisitedPOIs(userId: string) {
 export async function getRoutes() {
     const { data, error } = await supabase
         .from("routes")
-        .select("id, name, POIs, geoJSON");
+        .select("id, name, POIs, geoJSON, description, time_length, distance");
 
     if (error) throw error;
 

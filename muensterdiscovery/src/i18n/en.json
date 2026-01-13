@@ -13,6 +13,13 @@
     "menu.routeselection": "Route Selection",
     "menu.leaderboard": "Leaderboard",
     "menu.welcome": "Home",
+
+    "routeselection.title": "Select a Route",
+    "routeselection.subtitle": "Click a route on the map to view details",
+    "routeselection.distance": "Distance",
+    "routeselection.duration": "Duration",
+    "routeselection.pois": "POIs",
+    "routeselection.close": "Close",
     
     "imprint.title": "Imprint",
     "imprint.content": "This project is a student project as part of the Master's program in Geoinformatics and Spatial Data Science. Source code and documentation are available on GitHub:",
