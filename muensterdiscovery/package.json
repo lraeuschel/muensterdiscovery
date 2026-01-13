@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@chakra-ui/form-control": "^2.2.0",
+        "@chakra-ui/icons": "^2.2.4",
         "@chakra-ui/react": "^3.29.0",
         "@chakra-ui/system": "^2.6.2",
         "@emotion/react": "^11.14.0",
