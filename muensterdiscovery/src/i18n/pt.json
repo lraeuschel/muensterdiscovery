@@ -69,5 +69,17 @@
     "login.error": "Falha no login. Por favor, verifique suas credenciais.",
     "login.success": "Login realizado com sucesso!",
 
+    "start.slide1_title": "Slide 1",
+    "start.slide1_content": "Conteúdo do slide 1",
+    "start.slide2_title": "Slide 2",
+    "start.slide2_content": "Conteúdo do slide 2",
+    "start.slide3_title": "Slide 3",
+    "start.slide3_content": "Conteúdo do slide 3",
+    "start.welcome_message": "Bem-vindo de volta, {name}!",
+    "start.discover_message": "Descubra os lugares e experiências mais interessantes de Münster.",
+    "start.tile": "Bloco {number}",
+    "start.add_content": "Adicione seu conteúdo aqui",
+    "footer.all_rights_reserved": "Todos os direitos reservados.",
+
     "leaderboard.you": "VOCÊ"
 }

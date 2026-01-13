@@ -69,5 +69,17 @@
     "login.error": "Logowanie nie powiodło się. Sprawdź swoje dane.",
     "login.success": "Pomyślnie zalogowano!",
 
+    "start.slide1_title": "Slajd 1",
+    "start.slide1_content": "Zawartość slajdu 1",
+    "start.slide2_title": "Slajd 2",
+    "start.slide2_content": "Zawartość slajdu 2",
+    "start.slide3_title": "Slajd 3",
+    "start.slide3_content": "Zawartość slajdu 3",
+    "start.welcome_message": "Witaj ponownie, {name}!",
+    "start.discover_message": "Odkryj najciekawsze miejsca i doświadczenia w Münster.",
+    "start.tile": "Kafelek {number}",
+    "start.add_content": "Dodaj swoją zawartość tutaj",
+    "footer.all_rights_reserved": "Wszystkie prawa zastrzeżone.",
+
     "leaderboard.you": "TY"
 }

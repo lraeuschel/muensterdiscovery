@@ -69,5 +69,17 @@
     "login.error": "La connexion a échoué. Veuillez vérifier vos identifiants.",
     "login.success": "Connexion réussie !",
 
+    "start.slide1_title": "Diapositive 1",
+    "start.slide1_content": "Contenu de la diapositive 1",
+    "start.slide2_title": "Diapositive 2",
+    "start.slide2_content": "Contenu de la diapositive 2",
+    "start.slide3_title": "Diapositive 3",
+    "start.slide3_content": "Contenu de la diapositive 3",
+    "start.welcome_message": "Bienvenue de retour, {name}!",
+    "start.discover_message": "Découvrez les endroits et expériences les plus intéressants de Münster.",
+    "start.tile": "Carreau {number}",
+    "start.add_content": "Ajoutez votre contenu ici",
+    "footer.all_rights_reserved": "Tous droits réservés.",
+
     "leaderboard.you": "VOUS"
 }

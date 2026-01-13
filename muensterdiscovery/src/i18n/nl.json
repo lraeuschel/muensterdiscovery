@@ -69,5 +69,17 @@
     "login.error": "Inloggen mislukt. Controleer je gegevens.",
     "login.success": "Succesvol ingelogd!",
 
+    "start.slide1_title": "Dia 1",
+    "start.slide1_content": "Dia 1-inhoud",
+    "start.slide2_title": "Dia 2",
+    "start.slide2_content": "Dia 2-inhoud",
+    "start.slide3_title": "Dia 3",
+    "start.slide3_content": "Dia 3-inhoud",
+    "start.welcome_message": "Welkom terug, {name}!",
+    "start.discover_message": "Ontdek de meest interessante plaatsen en ervaringen in Münster.",
+    "start.tile": "Tegel {number}",
+    "start.add_content": "Voeg hier uw inhoud toe",
+    "footer.all_rights_reserved": "Alle rechten voorbehouden.",
+
     "leaderboard.you": "JIJ"
 }

@@ -69,5 +69,17 @@
     "login.error": "ログインに失敗しました。認証情報を確認してください。",
     "login.success": "ログインに成功しました！",
 
+    "start.slide1_title": "スライド 1",
+    "start.slide1_content": "スライド 1 コンテンツ",
+    "start.slide2_title": "スライド 2",
+    "start.slide2_content": "スライド 2 コンテンツ",
+    "start.slide3_title": "スライド 3",
+    "start.slide3_content": "スライド 3 コンテンツ",
+    "start.welcome_message": "おかえりなさい、{name}！",
+    "start.discover_message": "ミュンスターで最も興味深い場所と経験を発見してください。",
+    "start.tile": "タイル {number}",
+    "start.add_content": "ここにコンテンツを追加してください",
+    "footer.all_rights_reserved": "著作権所有。",
+
     "leaderboard.you": "あなた"
 }
