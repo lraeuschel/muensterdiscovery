@@ -2,46 +2,25 @@ import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl } fr
 import 'leaflet/dist/leaflet.css';
 import type { LatLngExpression } from 'leaflet';
 import L from 'leaflet';
-import { useMemo, useState, useRef, useEffect } from 'react';
+import { useMemo, useState, useRef, useEffect, use } from 'react';
 import { useIntl } from 'react-intl';
 import { Alert } from '@chakra-ui/react';
 import Header from '../components/CompLangHeader';
 import { currentLanguage, onCurrentLanguageChange } from '../components/languageSelector';
 import type { LanguageType } from '../components/languageSelector';
-import pois from '../../data/POIs_Muenster_Discovery.json';
 import stern from '../assets/supermario_stern.webp';
 import { fetchDatenportalPois } from '../api/datenportal';
+import { useNavigate } from "react-router-dom";
 import type { DatenportalPOI } from '../config/datenportal';
+import { getPOIs } from '../services/DatabaseConnection';
+import type { POI } from "../types";
 
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 
-type POIProperties = {
-    id: number;
-    name: string;
-    Info?: string | null;
+const getImageUrl = (imagePath?: string) => {
+    if (!imagePath) return undefined;
+    return `${SUPABASE_URL}/storage/v1/object/public/${imagePath}`;
 };
-
-type POIFeature = {
-    type: 'Feature';
-    properties: POIProperties;
-    geometry: {
-        type: 'Point';
-        coordinates: [number, number]; // [lon, lat]
-    };
-};
-
-type CRS = {
-    type: 'name';
-    properties: {
-        name: string;
-    };
-}
-
-type POICollection = {
-    type: 'FeatureCollection';
-    name: string;
-    crs: CRS;
-    features: POIFeature[];
-}
 
 const starIcon = new L.Icon({
     iconUrl: stern,
@@ -125,6 +104,8 @@ function useDatenportalPOIs() {
 export default function OpenWorld() {
     const intl = useIntl();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+    const navigate = useNavigate();
+    const [pois, setPois] = useState<POI[]>([]);
 
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange((lang) => {
@@ -132,30 +113,38 @@ export default function OpenWorld() {
         });
         return unsubscribe;
     }, []);
+
+    useEffect(() => {
+        const pois = async () => {
+            try {
+                const poiData = await getPOIs();
+
+                setPois(poiData);
+                console.log("Loaded POIs from database:", poiData);
+
+            } catch (error) {
+                console.error("Error fetching POI data:", error);
+            }
+        };
+        
+        pois();
+    }, [navigate]);
     
     // Münster Koordinaten
     const munsterCenter: LatLngExpression = [51.9607, 7.6261];
     const zoom = 14;
 
-    // Statische POIs aus JSON
-    const features = useMemo(() => {
-        const collection = pois as POICollection;
-        return collection.features?.filter((f) => f.geometry?.type === 'Point') ?? [];
-    }, []);
-
     const staticMarkers = useMemo(
         () =>
-            features.map((feature, index) => {
-                const [lon, lat] = feature.geometry.coordinates;
-                return {
-                    id: `static-${feature.properties.id ?? index}`,
-                    name: feature.properties.name,
-                    note: feature.properties.Info,
-                    position: [lat, lon] as LatLngExpression,
-                    source: 'static' as const,
-                };
-            }),
-        [features]
+            pois.map((poi, index) => ({
+                id: `static-${poi.id ?? index}`,
+                name: poi.name,
+                note: poi.info,
+                position: [poi.lat, poi.lon] as LatLngExpression,
+                source: "static" as const,
+                image_path: poi.image_path
+            })),
+        [pois]
     );
 
     // Datenportal POIs (einmalig beim Mount geladen) - enthält auch Events
@@ -290,8 +279,24 @@ export default function OpenWorld() {
                                             {marker.name}
                                         </h3>
                                         
+                                        {marker.source === 'static' && marker.image_path ? (
+                                            <img
+                                                src={getImageUrl(marker.image_path)}
+                                                alt={marker.name}
+                                                style={{
+                                                    width: '100%',
+                                                    maxHeight: '150px',
+                                                    objectFit: 'contain',
+                                                    borderRadius: '6px',
+                                                    marginBottom: '8px'
+                                                }}
+                                            />
+                                        ) : null}
+
                                         {marker.source === 'static' && marker.note ? (
-                                            <p style={{ margin: '0 0 8px', fontSize: '14px' }}>{marker.note}</p>
+                                            <p style={{ margin: '0', fontSize: '14px' }}>
+                                                {marker.note}
+                                            </p>
                                         ) : null}
 
                                         {marker.source === 'event' && marker.poi ? (
