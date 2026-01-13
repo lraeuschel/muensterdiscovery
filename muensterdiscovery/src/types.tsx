@@ -21,6 +21,13 @@ export type POI = {
     image_path: string;
 }
 
+export type Route = {
+    id: number;
+    name: string;
+    POIs: number[]; // Array of POI IDs
+    geoJSON: any; // GeoJSON object representing the route
+}
+
 export type Event = {
     id: number;
     name: string;

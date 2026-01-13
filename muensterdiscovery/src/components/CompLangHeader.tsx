@@ -116,6 +116,7 @@ export default function CompLangHeader() {
                         <Button 
                             size="sm" 
                             colorScheme="orange" 
+                            bg="orange.500"
                             onClick={() => navigate("/login")}
                         >
                             Login
