@@ -8,6 +8,8 @@ import type { LanguageType } from "../components/languageSelector";
 import RideyChat from "../components/RideyChat";
 import { supabase } from "../SupabaseClient";
 import { getUserAchievements } from "../services/DatabaseConnection";
+import { getMood, type Mood } from "../services/rideyScore";
+import rideyHappy from "../assets/ridey_happy.png";
 import type { User } from "@supabase/supabase-js";
 import type { Achievement } from "../types";
 
@@ -20,12 +22,24 @@ export default function Start() {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [achievements, setAchievements] = useState<Achievement[]>([]);
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
+    const [mood, setMood] = useState<Mood | null>(null);
 
     const slides = [
         {
             id: 1,
             title: intl.formatMessage({ id: "start.slide1_title" }),
-            content: <Text fontSize="2xl" fontWeight="bold">{intl.formatMessage({ id: "start.slide1_content" })}</Text>,
+            content: (
+                mood === "happy" ? (
+                    <VStack gap={3} align="center">
+                        <Image src={rideyHappy} alt="Ridey happy" boxSize="120px" objectFit="contain" />
+                        <Text fontSize="md" color="gray.700" textAlign="center">
+                            {intl.formatMessage({ id: "start.slide1_content" }, { mood: "happy" })}
+                        </Text>
+                    </VStack>
+                ) : (
+                    <Text fontSize="2xl" fontWeight="bold">{intl.formatMessage({ id: "start.slide1_content" })}</Text>
+                )
+            ),
             image: undefined,
         },
         {
@@ -86,6 +100,12 @@ export default function Start() {
                 if (userAchievements.length > 0) {
                     const randomIndex = Math.floor(Math.random() * userAchievements.length);
                     setSelectedAchievement(userAchievements[randomIndex]);
+                }
+                try {
+                    const m = await getMood(session.user.id);
+                    setMood(m);
+                } catch (err) {
+                    console.error("Error computing mood:", err);
                 }
             } catch (error) {
                 console.error("Error fetching user achievements:", error);
