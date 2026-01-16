@@ -21,6 +21,7 @@
     "routeselection.pois": "POIs",
     "routeselection.close": "Close",
     "routeselection.overview": "Route Overview",
+    "routeselection.start": "Start Route",
     
     "imprint.title": "Imprint",
     "imprint.content": "This project is a student project as part of the Master's program in Geoinformatics and Spatial Data Science. Source code and documentation are available on GitHub:",

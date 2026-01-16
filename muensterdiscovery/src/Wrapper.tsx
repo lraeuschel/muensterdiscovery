@@ -35,6 +35,7 @@ import Imprint from "./pages/imprint";
 import Help from "./pages/help";
 import Profile from "./pages/profile";
 import Start from "./pages/start";
+import PlayRoute from "./pages/playRoute";
 
 const messages = {
   de: deMessages,
@@ -86,6 +87,7 @@ export default function AppWrapper() {
               <Route path="/routeselection" element={<RouteSelection />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/playroute/:routeId" element={<PlayRoute />} />
             </Route>
           </Routes>
         </BrowserRouter>

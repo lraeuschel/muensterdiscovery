@@ -89,6 +89,31 @@ export async function getRoutes() {
     return data as Route[];
 }
 
+export async function getRouteById(routeId: number) {
+    const { data, error } = await supabase
+        .from("routes")
+        .select("id, name, POIs, geoJSON, description, time_length, distance")
+        .eq("id", routeId)
+        .single();
+    if (error) throw error;
+
+    return data as Route;
+}
+
+export async function getPOIsByRoute(routeId: number) {
+    const route = await getRouteById(routeId);
+    if (!route) return [];
+    const poiIds = route.POIs;
+
+    const { data, error } = await supabase
+        .from("POIs")
+        .select("id, name, info, lat, lon, image_path")
+        .in("id", poiIds);
+    if (error) throw error;
+
+    return data as POI[];
+}
+
 // Events aus der Datenbank laden (aktuell + kommende)
 // Falls die Tabelle nicht existiert, wird ein leeres Array zurückgegeben
 export async function getUpcomingEvents(limit = 50) {
