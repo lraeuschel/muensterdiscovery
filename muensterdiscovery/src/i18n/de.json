@@ -89,5 +89,14 @@
     "start.add_content": "Füge hier deine Inhalte hinzu",
     "footer.all_rights_reserved": "Alle Rechte vorbehalten.",
 
-    "leaderboard.you": "DU"
+    "leaderboard.you": "DU",
+
+    "zoomcontrols.default": "Standard",
+    "zoomcontrols.satellite": "Satellit",
+    "zoomcontrols.darkmode": "Darkmode",
+
+    "playroute.visited": "Bereits besucht",
+    "playroute.get_closer": "Du bist noch zu weit entfernt um diesen POI abzuhaken.",
+    "playroute.approx_distance": "Noch ca. ",
+    "playroute.mark_visited": "POI abhaken"
 }

@@ -90,5 +90,14 @@
     "start.add_content": "Add your content here",
     "footer.all_rights_reserved": "All rights reserved.",
 
-    "leaderboard.you": "YOU"
+    "leaderboard.you": "YOU",
+
+    "zoomcontrols.default": "Default",
+    "zoomcontrols.satellite": "Satellite",
+    "zoomcontrols.darkmode": "Darkmode",
+
+    "playroute.visited": "Already visited",
+    "playroute.get_closer": "You are too far away to mark this POI.",
+    "playroute.approx_distance": "Approx. ",
+    "playroute.mark_visited": "Mark POI as visited"
 }

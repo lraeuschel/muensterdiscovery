@@ -103,6 +103,8 @@ export async function getRouteById(routeId: number) {
 export async function getPOIsByRoute(routeId: number) {
     const route = await getRouteById(routeId);
     if (!route) return [];
+    console.log("Fetched route ID:", routeId);
+    console.log("Route POIs IDs:", route.POIs);
     const poiIds = route.POIs;
 
     const { data, error } = await supabase
@@ -165,6 +167,19 @@ export async function addVisitedPOI(
     const { data, error } = await supabase
         .from("user_POIs")
         .insert([{ profile_id, poi_id }])
+        .select()
+        .single();
+    if (error) throw error;
+    return data;
+}
+
+export async function addRouteCompletion(
+    profile_id: string,
+    route_id: number,
+) {
+    const { data, error } = await supabase
+        .from("user_routes")
+        .insert([{ user_id: profile_id, route_id, explored_at: new Date().toISOString() }])
         .select()
         .single();
     if (error) throw error;
