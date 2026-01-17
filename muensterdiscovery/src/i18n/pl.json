@@ -77,9 +77,23 @@
     "start.slide3_content": "Zawartość slajdu 3",
     "start.welcome_message": "Witaj ponownie, {name}!",
     "start.discover_message": "Odkryj najciekawsze miejsca i doświadczenia w Münster.",
-    "start.tile": "Kafelek {number}",
-    "start.add_content": "Dodaj swoją zawartość tutaj",
+    "start.tile.1": "Zobacz trasy",
+    "start.tile.1.context": "Nasze starannie wyselekcjonowane trasy zabiorą Cię do najbardziej ekscytujących miejsc w Münster!",
+    "start.tile.2": "Tryb OpenWorld",
+    "start.tile.2.context": "Odkrywaj Münster na własną rękę i odkrywaj ukryte skarby w mieście!",
+    "start.tile.3": "Widziałeś to..?",
+    "start.tile.3.context": "Porównaj swoje odkrycia z innymi w rankingu!",
+    "start.tile.4": "Profil",
+    "start.tile.4.context": "Sprawdź swoje osiągnięcia i dostosuj swoje dane!",
     "footer.all_rights_reserved": "Wszystkie prawa zastrzeżone.",
 
-    "leaderboard.you": "TY"
+    "leaderboard.you": "TY",
+
+    "chat.example1": "Które osiągnięcia już ukończyłem?",
+    "chat.example2": "Gdzie znajdę listę najlepszych?",
+    "chat.example3": "Mam 45min czasu. Jaką trasę mogę zrobić?",
+    "chat.quickstart": "Szybki start:",
+
+    "chat.placeholder": "Wpisz wiadomość..."
+
 }

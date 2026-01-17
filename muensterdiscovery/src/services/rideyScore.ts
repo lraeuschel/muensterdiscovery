@@ -1,13 +1,4 @@
 import { supabase } from "../SupabaseClient";
-import type { Route } from "../types";
-
-// Modular RideyScore system
-// Exports:
-// - getLastCompletedRouteDate(userId): Promise<Date | null>
-// - scoreFromDuration(ms): number
-// - getCurrentScore(userId): Promise<number>
-// - getMood(userId): Promise<'happy' | 'sad' | 'neutral'>
-// - registerScoringStrategy(name, fn)
 
 export type Mood = "happy" | "sad" | "neutral";
 
@@ -18,7 +9,7 @@ const DEFAULT_STRATEGY = "timeDecay";
 strategies[DEFAULT_STRATEGY] = (durationMs: number) => {
     const msPerDay = 24 * 60 * 60 * 1000;
     const days = durationMs / msPerDay;
-    const decayDays = 30; // full decay in 30 days
+    const decayDays = 30;
     const raw = Math.max(0, (decayDays - days) / decayDays);
     return Math.round(raw * 100);
 };

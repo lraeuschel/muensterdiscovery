@@ -77,9 +77,23 @@
     "start.slide3_content": "Dia 3-inhoud",
     "start.welcome_message": "Welkom terug, {name}!",
     "start.discover_message": "Ontdek de meest interessante plaatsen en ervaringen in Münster.",
-    "start.tile": "Tegel {number}",
-    "start.add_content": "Voeg hier uw inhoud toe",
+    "start.tile.1": "Bekijk routes",
+    "start.tile.1.context": "Onze zorgvuldig geselecteerde routes brengen je naar de spannendste plekken in Münster!",
+    "start.tile.2": "OpenWorld-modus",
+    "start.tile.2.context": "Verken Münster op eigen houtje en ontdek verborgen pareltjes in de stad!",
+    "start.tile.3": "Al gezien..?",
+    "start.tile.3.context": "Vergelijk je ontdekkingen met die van anderen in het klassement!",
+    "start.tile.4": "Profiel",
+    "start.tile.4.context": "Bekijk je prestaties en pas je gegevens aan!",
     "footer.all_rights_reserved": "Alle rechten voorbehouden.",
 
-    "leaderboard.you": "JIJ"
+    "leaderboard.you": "JIJ",
+
+    "chat.example1": "Welke prestaties heb ik al voltooid?",
+    "chat.example2": "Waar vind ik de ranglijst?",
+    "chat.example3": "Ik heb 45min tijd. Welke route kan ik doen?",
+    "chat.quickstart": "Snelle start:",
+
+    "chat.placeholder": "Typ een bericht..."
+
 }

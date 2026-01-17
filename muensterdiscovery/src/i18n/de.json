@@ -90,8 +90,16 @@
     "start.slide3_content": "Folie 3 Inhalt",
     "start.welcome_message": "Willkommen zurück, {name}!",
     "start.discover_message": "Entdecke die interessantesten Orte und Erlebnisse in Münster.",
-    "start.tile": "Kachel {number}",
-    "start.add_content": "Füge hier deine Inhalte hinzu",
+
+    "start.tile.1": "Routen ansehen",
+    "start.tile.1.context": "Unsere handverlesenen Routen führen dich zu den spannendsten Orten in Münster!",
+    "start.tile.2": "OpenWorld Modus",
+    "start.tile.2.context": "Erkunde Münster auf eigene Faust und entdecke versteckte Schätze in der Stadt!",
+    "start.tile.3": "Schon gesehen..?",
+    "start.tile.3.context": "Vergleiche deine Entdeckungen mit anderen in der Bestenliste!",
+    "start.tile.4": "Profil",
+    "start.tile.4.context": "Schaue dir deine Erfolge an und passe deine Daten an!",
+    
     "footer.all_rights_reserved": "Alle Rechte vorbehalten.",
 
     "leaderboard.you": "DU",
@@ -103,5 +111,12 @@
     "playroute.visited": "Bereits besucht",
     "playroute.get_closer": "Du bist noch zu weit entfernt um diesen POI abzuhaken.",
     "playroute.approx_distance": "Noch ca. ",
-    "playroute.mark_visited": "POI abhaken"
+    "playroute.mark_visited": "POI abhaken",
+
+    "chat.example1": "Welche Erreignisse habe ich bereits abgeschlossen?",
+    "chat.example2": "Wo kann ich die Bestenliste finden?",
+    "chat.example3": "Ich habe 45min zeit. Welche Route könnte ich machen?",
+    "chat.quickstart": "Schnellstart:",
+
+    "chat.placeholder": "Schreibe eine Nachricht..."
 }

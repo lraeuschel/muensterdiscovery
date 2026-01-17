@@ -77,9 +77,23 @@
     "start.slide3_content": "Contenuto diapositiva 3",
     "start.welcome_message": "Bentornato, {name}!",
     "start.discover_message": "Scopri i posti e le esperienze più interessanti di Münster.",
-    "start.tile": "Piastrella {number}",
-    "start.add_content": "Aggiungi il tuo contenuto qui",
+    "start.tile.1": "Visualizza percorsi",
+    "start.tile.1.context": "I nostri percorsi selezionati ti porteranno nei luoghi più emozionanti di Münster!",
+    "start.tile.2": "Modalità OpenWorld",
+    "start.tile.2.context": "Esplora Münster da solo e scopri gemme nascoste in città!",
+    "start.tile.3": "Lo hai visto..?",
+    "start.tile.3.context": "Confronta le tue scoperte con quelle degli altri nella classifica!",
+    "start.tile.4": "Profilo",
+    "start.tile.4.context": "Dai un'occhiata ai tuoi successi e personalizza i tuoi dati!",
     "footer.all_rights_reserved": "Tutti i diritti riservati.",
 
-    "leaderboard.you": "TU"
+    "leaderboard.you": "TU",
+
+    "chat.example1": "Quali successi ho già completato?",
+    "chat.example2": "Dove trovo la classifica?",
+    "chat.example3": "Ho 45min di tempo. Quale percorso potrei fare?",
+    "chat.quickstart": "Avvio rapido:",
+
+    "chat.placeholder": "Scrivi un messaggio..."
+
 }

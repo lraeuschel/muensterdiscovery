@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import {Box, IconButton, Portal, Input, VStack, HStack, Text, Image, Icon,} from "@chakra-ui/react";
+import {Box, IconButton, Portal, Input, VStack, HStack, Text, Image, Icon, Button} from "@chakra-ui/react";
 import { BsChatDots, BsX, BsSend } from "react-icons/bs";
 import { keyframes } from "@emotion/react";
+import type { IntlShape } from 'react-intl'; //
 import { getCurrentUser } from "../services/DatabaseConnection";
 import { useNavigate } from "react-router-dom";
 import rideyHappy from "../assets/ridey_happy.png";
 
 interface FloatingChatWidgetProps {
   currentLanguage: string;
+  intl: IntlShape;
 }
 
 interface Message {
@@ -72,7 +74,7 @@ const HtmlMessage = ({ htmlContent }: { htmlContent: string }) => {
   );
 };
 
-export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidgetProps) {
+export default function FloatingChatWidget({ currentLanguage, intl }: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
@@ -151,6 +153,11 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
     }
   };
 
+  const handleExampleQuestion = (question: string) => {
+    setMessage(question);
+    setTimeout(() => handleSend(), 100);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -158,16 +165,21 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
     }
   };
 
+  const exampleQuestions = [
+    intl.formatMessage({ id: 'chat.example1' }),
+    intl.formatMessage({ id: 'chat.example2' }),
+    intl.formatMessage({ id: 'chat.example3' })
+  ];
+
   return (
     <>
       <Portal>
         <Box position="fixed" bottom="20px" right="20px" zIndex={9999}>
-          {}
           <IconButton
             aria-label="Toggle Chat"
             rounded="full"
             size="lg"
-            colorPalette="orange"
+            colorScheme="orange"
             onClick={() => setIsOpen(!isOpen)}
             boxShadow="lg"
           >
@@ -182,8 +194,8 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
             position="fixed"
             bottom="80px"
             right="20px"
-            width={{ base: "300px", md: "350px" }}
-            height="500px"
+            width={{ base: "380px", md: "420px" }}
+            height="600px"
             bg="white"
             boxShadow="2xl"
             borderRadius="xl"
@@ -207,7 +219,6 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                 Chat with Ridey
               </Text>
               
-              {}
               <IconButton
                 aria-label="Close"
                 size="sm"
@@ -222,7 +233,6 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
             </Box>
 
             <Box flex="1" overflowY="auto" p={4} bg="gray.50">
-              {}
               <VStack gap={4} align="stretch">
                 {messages.map((msg) => (
                   <Box
@@ -274,15 +284,62 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                 <div ref={messagesEndRef} />
               </VStack>
             </Box>
+            <Box p={3} bg="gray.50" borderTop="1px solid" borderColor="gray.200">
+              <Text 
+                fontSize="xs" 
+                fontWeight="bold" 
+                color="orange.600" 
+                mb={2} 
+                textAlign="left"
+                ml={1}
+              >
+                {intl.formatMessage({ id: 'chat.quickstart' })}
+              </Text>
+              
+              <VStack align="stretch" gap={2}>
+                {exampleQuestions.map((question, index) => (
+                  <Button
+                    key={index}
+                    size="sm"
+                    variant="outline"
+                    colorScheme="orange"
+                    justifyContent="flex-start"
+                    h="auto"
+                    py={2}
+                    px={3}
+                    whiteSpace="normal"
+                    textAlign="left"
+                    fontSize="xs"
+                    fontWeight="medium"
+                    borderRadius="md"
+                    borderColor="orange.200"
+                    bg="white"
+                    _hover={{ 
+                      bg: "orange.50", 
+                      borderColor: "orange.400",
+                      transform: "translateY(-1px)",
+                      boxShadow: "sm" 
+                    }}
+                    _active={{ bg: "orange.100" }}
+                    onClick={() => handleExampleQuestion(question)}
+                    disabled={isLoading}
+                    title={question}
+                  >
+                    <HStack width="100%" align="center" gap={2}>
+                      <Icon as={BsChatDots} color="orange.400" boxSize={3} flexShrink={0} />
+                      <Text lineHeight="short" flex="1">
+                        {question}
+                      </Text>
+                    </HStack>
+                  </Button>
+                ))}
+              </VStack>
+            </Box>
 
             <Box p={3} bg="white" borderTop="1px solid" borderColor="gray.200">
               <HStack>
                 <Input
-                  placeholder={
-                    currentLanguage === "de"
-                      ? "Schreibe eine Nachricht..."
-                      : "Type a message..."
-                  }
+                  placeholder={intl.formatMessage({ id: 'chat.placeholder' })}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={handleKeyDown}
@@ -293,10 +350,9 @@ export default function FloatingChatWidget({ currentLanguage }: FloatingChatWidg
                   _focus={{ bg: "white", borderColor: "orange.500" }}
                 />
                 
-                {}
                 <IconButton
                   aria-label="Send"
-                  colorPalette="orange"
+                  colorScheme="orange"
                   borderRadius="full"
                   onClick={handleSend}
                   disabled={!message.trim() || isLoading}

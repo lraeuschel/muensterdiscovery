@@ -77,9 +77,23 @@
     "start.slide3_content": "Conteúdo do slide 3",
     "start.welcome_message": "Bem-vindo de volta, {name}!",
     "start.discover_message": "Descubra os lugares e experiências mais interessantes de Münster.",
-    "start.tile": "Bloco {number}",
-    "start.add_content": "Adicione seu conteúdo aqui",
+    "start.tile.1": "Ver Rotas",
+    "start.tile.1.context": "Nossas rotas selecionadas levarão você aos lugares mais emocionantes de Münster!",
+    "start.tile.2": "Modo Mundo Aberto",
+    "start.tile.2.context": "Explore Münster sozinho e descubra tesouros escondidos na cidade!",
+    "start.tile.3": "Já viu isso..?",
+    "start.tile.3.context": "Compare suas descobertas com outras pessoas no ranking!",
+    "start.tile.4": "Perfil",
+    "start.tile.4.context": "Verifique suas conquistas e personalize seus dados!",
     "footer.all_rights_reserved": "Todos os direitos reservados.",
 
-    "leaderboard.you": "VOCÊ"
+    "leaderboard.you": "VOCÊ",
+
+    "chat.example1": "Quais conquistas já completei?",
+    "chat.example2": "Onde encontro a tabela de líderes?",
+    "chat.example3": "Tenho 45min de tempo. Qual rota posso fazer?",
+    "chat.quickstart": "Início rápido:",
+
+    "chat.placeholder": "Digite uma mensagem..."
+
 }

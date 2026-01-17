@@ -74,9 +74,22 @@
     "start.slide3_content": "Slayt 3 İçeriği",
     "start.welcome_message": "Hoş geldiniz geri, {name}!",
     "start.discover_message": "Münster'deki en ilginç yerleri ve deneyimleri keşfedin.",
-    "start.tile": "Karo {number}",
-    "start.add_content": "İçeriğinizi buraya ekleyin",
+    "start.tile.1": "Rotalara gözat",
+    "start.tile.1.context": "Özenle seçilmiş rotalarımız sizi Münster'in en heyecan verici yerlerine götürecek!",
+    "start.tile.2": "Açık Dünya Modu",
+    "start.tile.2.context": "Münster'i kendi başınıza keşfedin ve şehirdeki gizli hazineyi bulun!",
+    "start.tile.3": "Zaten bunu gördün mü?",
+    "start.tile.3.context": "Keşiflerinizi lider tablosunda başkalarıyla karşılaştırın!",
+    "start.tile.4": "Profil",
+    "start.tile.4.context": "Başarılarınızı kontrol edin ve verilerinizi özelleştirin!",
     "footer.all_rights_reserved": "Tüm hakları saklıdır.",
 
-    "leaderboard.you": "SEN"
+    "leaderboard.you": "SEN",
+
+    "chat.example1": "Hangi başarıları tamamladım?",
+    "chat.example2": "Lider tablosunu nerede bulabilirim?",
+    "chat.example3": "45 dakikam var. Hangi rotayı yapabilirim?",
+    "chat.quickstart": "Hızlı başlangıç:",
+
+    "chat.placeholder": "Mesaj yazın..."
 }

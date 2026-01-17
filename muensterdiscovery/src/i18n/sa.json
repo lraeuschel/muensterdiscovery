@@ -77,9 +77,23 @@
     "start.slide3_content": "محتوى الشريحة 3",
     "start.welcome_message": "أهلا بعودتك، {name}!",
     "start.discover_message": "اكتشف أكثر الأماكن والتجارب إثارة للاهتمام في مِنستر.",
-    "start.tile": "البلاط {number}",
-    "start.add_content": "أضف محتواك هنا",
+    "start.tile.1": "عرض المسارات",
+    "start.tile.1.context": "ستأخذك مساراتنا المختارة بعناية إلى أكثر الأماكن إثارة في مِنستر!",
+    "start.tile.2": "وضع العالم المفتوح",
+    "start.tile.2.context": "استكشف مِنستر بمفرده وابحث عن الخزائن المخفية في المدينة!",
+    "start.tile.3": "هل رأيت هذا بالفعل؟",
+    "start.tile.3.context": "قارن اكتشافاتك مع الآخرين في القائمة!",
+    "start.tile.4": "الملف الشخصي",
+    "start.tile.4.context": "تحقق من إنجازاتك وخصص بياناتك!",
     "footer.all_rights_reserved": "جميع الحقوق محفوظة.",
 
-    "leaderboard.you": "أنت"
+    "leaderboard.you": "أنت",
+
+    "chat.example1": "ما هي الإنجازات التي أكملتها بالفعل؟",
+    "chat.example2": "أين أجد قائمة الأفضل؟",
+    "chat.example3": "لدي 45 دقيقة. أي مسار يمكنني فعله؟",
+    "chat.quickstart": "بدء سريع:",
+
+    "chat.placeholder": "اكتب رسالة..."
+
 }

@@ -90,8 +90,14 @@
     "start.slide3_content": "Slide 3 Content",
     "start.welcome_message": "Welcome back, {name}!",
     "start.discover_message": "Discover the most interesting places and experiences in Münster.",
-    "start.tile": "Tile {number}",
-    "start.add_content": "Add your content here",
+    "start.tile.1": "View Routes",
+    "start.tile.1.context": "Our handpicked routes will take you to the most exciting places in Münster!",
+    "start.tile.2": "OpenWorld Mode",
+    "start.tile.2.context": "Explore Münster on your own and discover hidden gems in the city!",
+    "start.tile.3": "Seen it..?",
+    "start.tile.3.context": "Compare your discoveries with others in the leaderboard!",
+    "start.tile.4": "Profile",
+    "start.tile.4.context": "Check out your achievements and customize your data!",
     "footer.all_rights_reserved": "All rights reserved.",
 
     "leaderboard.you": "YOU",
@@ -103,5 +109,13 @@
     "playroute.visited": "Already visited",
     "playroute.get_closer": "You are too far away to mark this POI.",
     "playroute.approx_distance": "Approx. ",
-    "playroute.mark_visited": "Mark POI as visited"
+    "playroute.mark_visited": "Mark POI as visited",
+
+    "chat.example1": "Which achievements have I already completed?",
+    "chat.example2": "Where can I find the leaderboard?",
+    "chat.example3": "I have 45min time. Which route could I do?",
+    "chat.quickstart": "Quick start:",
+
+    "chat.placeholder": "Type a message..."
+
 }

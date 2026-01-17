@@ -77,9 +77,23 @@
     "start.slide3_content": "Contenu de la diapositive 3",
     "start.welcome_message": "Bienvenue de retour, {name}!",
     "start.discover_message": "Découvrez les endroits et expériences les plus intéressants de Münster.",
-    "start.tile": "Carreau {number}",
-    "start.add_content": "Ajoutez votre contenu ici",
+    "start.tile.1": "Voir les itinéraires",
+    "start.tile.1.context": "Nos itinéraires soigneusement sélectionnés vous emmèneront vers les endroits les plus passionnants de Münster !",
+    "start.tile.2": "Mode Monde Ouvert",
+    "start.tile.2.context": "Explorez Münster par vous-même et découvrez des trésors cachés dans la ville !",
+    "start.tile.3": "Vous l'avez vu..?",
+    "start.tile.3.context": "Comparez vos découvertes avec celles des autres dans le classement !",
+    "start.tile.4": "Profil",
+    "start.tile.4.context": "Découvrez vos réalisations et personnalisez vos données !",
     "footer.all_rights_reserved": "Tous droits réservés.",
 
-    "leaderboard.you": "VOUS"
+    "leaderboard.you": "VOUS",
+
+    "chat.example1": "Quels succès ai-je déjà accomplis ?",
+    "chat.example2": "Où puis-je trouver le classement ?",
+    "chat.example3": "J'ai 45min de temps. Quelle route pourrais-je faire ?",
+    "chat.quickstart": "Démarrage rapide :",
+
+    "chat.placeholder": "Tapez un message..."
+
 }

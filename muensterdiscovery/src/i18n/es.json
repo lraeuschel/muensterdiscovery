@@ -77,9 +77,23 @@
     "start.slide3_content": "Contenido de la diapositiva 3",
     "start.welcome_message": "¡Bienvenido de vuelta, {name}!",
     "start.discover_message": "Descubre los lugares y experiencias más interesantes de Münster.",
-    "start.tile": "Azulejo {number}",
-    "start.add_content": "Añade tu contenido aquí",
+    "start.tile.1": "Ver Rutas",
+    "start.tile.1.context": "¡Nuestras rutas seleccionadas te llevarán a los lugares más emocionantes de Münster!",
+    "start.tile.2": "Modo Mundo Abierto",
+    "start.tile.2.context": "¡Explora Münster por tu cuenta y descubre gemas ocultas en la ciudad!",
+    "start.tile.3": "¿Lo has visto..?",
+    "start.tile.3.context": "¡Compara tus descubrimientos con otros en la clasificación!",
+    "start.tile.4": "Perfil",
+    "start.tile.4.context": "¡Consulta tus logros y personaliza tus datos!",
     "footer.all_rights_reserved": "Todos los derechos reservados.",
 
-    "leaderboard.you": "TÚ"
+    "leaderboard.you": "TÚ",
+
+    "chat.example1": "¿Qué logros he completado ya?",
+    "chat.example2": "¿Dónde encuentro la lista de mejores?",
+    "chat.example3": "Tengo 45min de tiempo. ¿Qué ruta podría hacer?",
+    "chat.quickstart": "Inicio rápido:",
+
+    "chat.placeholder": "Escribe un mensaje..."
+
 }

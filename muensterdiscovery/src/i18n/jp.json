@@ -77,9 +77,23 @@
     "start.slide3_content": "スライド 3 コンテンツ",
     "start.welcome_message": "おかえりなさい、{name}！",
     "start.discover_message": "ミュンスターで最も興味深い場所と経験を発見してください。",
-    "start.tile": "タイル {number}",
-    "start.add_content": "ここにコンテンツを追加してください",
+    "start.tile.1": "ルートを見る",
+    "start.tile.1.context": "私たちの厳選されたルートは、ミュンスターで最もエキサイティングな場所へあなたを連れて行きます！",
+    "start.tile.2": "オープンワールドモード",
+    "start.tile.2.context": "ミュンスターを一人で探索し、街中の隠れた宝石を見つけてください！",
+    "start.tile.3": "あなたが見た..?",
+    "start.tile.3.context": "あなたの発見を他の人の発見と比較して、ランキングで確認してください！",
+    "start.tile.4": "プロフィール",
+    "start.tile.4.context": "あなたの成功を確認し、データをカスタマイズしてください！",
     "footer.all_rights_reserved": "著作権所有。",
 
-    "leaderboard.you": "あなた"
+    "leaderboard.you": "あなた",
+
+    "chat.example1": "どの実績を既に達成しましたか？",
+    "chat.example2": "リーダーボードはどこにありますか？",
+    "chat.example3": "45分の時間があります。どのルートをやれますか？",
+    "chat.quickstart": "クイックスタート：",
+    
+    "chat.placeholder": "メッセージを入力..."
+
 }

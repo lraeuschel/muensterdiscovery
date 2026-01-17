@@ -12,6 +12,10 @@ import { getMood, type Mood } from "../services/rideyScore";
 import rideyHappy from "../assets/ridey_happy.png";
 import type { User } from "@supabase/supabase-js";
 import type { Achievement } from "../types";
+import { CiRoute } from "react-icons/ci";
+import { MdOutlineLeaderboard } from "react-icons/md";
+import { IoEarthOutline } from "react-icons/io5";
+import { CgProfile } from "react-icons/cg";
 
 export default function Start() {
     const intl = useIntl();
@@ -37,7 +41,7 @@ export default function Start() {
                         </Text>
                     </VStack>
                 ) : (
-                    <Text fontSize="2xl" fontWeight="bold">{intl.formatMessage({ id: "start.slide1_content" })}</Text>
+                    <Text fontSize="2xl" fontWeight="bold">test</Text>
                 )
             ),
             image: undefined,
@@ -119,7 +123,7 @@ export default function Start() {
     return (
         <Box bg="orange.50" minH="100vh" pb={8}>
             <CompLangHeader />
-            {<RideyChat currentLanguage={currentLang} />}
+            {<RideyChat currentLanguage={currentLang} intl={intl} />}
 
             {/* Header */}
             <VStack mt="80px" mb={8}>
@@ -132,6 +136,16 @@ export default function Start() {
                 >
                     MUENSTERDISCOVERY
                 </Text>
+
+                {/* <Text
+                    fontSize="s"
+                    fontWeight="extrabold"
+                    color="orange.600"
+                    textAlign="center"
+                    mt="-20px"
+                >
+                    EXPLORING MÜNSTER
+                </Text> */}
             </VStack>
 
             {/* Slideshow Container */}
@@ -200,7 +214,7 @@ export default function Start() {
                 </Text>
             </VStack>
 
-            {/* Tiles Grid 2x2 */}
+            {/* Tiles Grid 2x2 - Distinct & Editable */}
             <VStack gap={6} px={4} py={8} align="center" w="100%">
                 <Grid
                     templateColumns="repeat(2, 1fr)"
@@ -208,33 +222,128 @@ export default function Start() {
                     w="100%"
                     maxW="800px"
                 >
-                    {[...Array(4)].map((_, index) => (
-                        <GridItem
-                            key={index}
-                            bg="white"
-                            borderRadius="lg"
-                            boxShadow="md"
-                            p={6}
-                            minH="200px"
-                            display="flex"
-                            flexDirection="column"
-                            justifyContent="center"
-                            alignItems="center"
-                            cursor="pointer"
-                            transition="all 0.3s"
-                            _hover={{
-                                boxShadow: "lg",
-                                transform: "translateY(-4px)",
-                            }}
-                        >
-                            <Text fontSize="lg" fontWeight="bold" color="orange.400">
-                                {intl.formatMessage({ id: "start.tile" }, { number: index + 1 })}
-                            </Text>
-                            <Text fontSize="sm" color="gray.500" mt={2}>
-                                {intl.formatMessage({ id: "start.add_content" })}
-                            </Text>
-                        </GridItem>
-                    ))}
+                    {/* Tile 1 */}
+                    <GridItem
+                        bg="white"
+                        borderRadius="lg"
+                        boxShadow="md"
+                        p={6}
+                        minH="200px"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        cursor="pointer"
+                        transition="all 0.3s"
+                        _hover={{
+                            boxShadow: "lg",
+                            transform: "translateY(-4px)",
+                        }}
+                        onClick={() => navigate("/routeselection")}
+                    >
+                        <Text 
+                            fontSize="lg" 
+                            fontWeight="bold" 
+                            color="orange.400"
+                            mt= "-10px"
+                            >
+
+                            {intl.formatMessage({ id: "start.tile.1" })}
+                        </Text>
+                        <Text 
+                            fontSize="xs" 
+                            color="gray.400" 
+                            textAlign="center"
+                            
+                            >
+                            {intl.formatMessage({ id: "start.tile.1.context" })}
+                        </Text>
+                        <CiRoute size={60} color="grey"/>
+                    </GridItem>
+
+                    {/* Tile 2 */}
+                    <GridItem
+                        bg="white"
+                        borderRadius="lg"
+                        boxShadow="md"
+                        p={6}
+                        minH="200px"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        cursor="pointer"
+                        transition="all 0.3s"
+                        _hover={{
+                            boxShadow: "lg",
+                            transform: "translateY(-4px)",
+                        }}
+                        onClick={() => navigate("/openworld")}
+                    >
+                        <Text fontSize="lg" fontWeight="bold" color="orange.400">
+                            {intl.formatMessage({ id: "start.tile.2" })}
+                        </Text>
+                        <Text fontSize="xs" color="gray.400" textAlign="center" mt={2}>
+                            {intl.formatMessage({ id: "start.tile.2.context" })}
+                        </Text>
+                        <IoEarthOutline size={60} color="grey"/>
+                    </GridItem>
+
+                    {/* Tile 3 */}
+                    <GridItem
+                        bg="white"
+                        borderRadius="lg"
+                        boxShadow="md"
+                        p={6}
+                        minH="200px"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        cursor="pointer"
+                        transition="all 0.3s"
+                        _hover={{
+                            boxShadow: "lg",
+                            transform: "translateY(-4px)",
+                        }}
+                        onClick={() => navigate("/leaderboard")}
+                    >
+                        <Text fontSize="lg" fontWeight="bold" color="orange.400">
+                            {intl.formatMessage({ id: "start.tile.3" })}
+                        </Text>
+                        <Text fontSize="xs" color="gray.400" textAlign="center" mt={2}>
+                            {intl.formatMessage({ id: "start.tile.3.context" })}
+                        </Text>
+                        <MdOutlineLeaderboard size={60} color="grey"/>
+                    </GridItem>
+
+                    {/* Tile 4 */}
+                    <GridItem
+                        bg="white"
+                        borderRadius="lg"
+                        boxShadow="md"
+                        p={6}
+                        minH="200px"
+                        display="flex"
+                        flexDirection="column"
+                        justifyContent="center"
+                        alignItems="center"
+                        cursor="pointer"
+                        transition="all 0.3s"
+                        _hover={{
+                            boxShadow: "lg",
+                            transform: "translateY(-4px)",
+                        }}
+                        onClick={() => navigate("/profile")}
+                    >
+                        <Text fontSize="lg" fontWeight="bold" color="orange.400">
+                            {intl.formatMessage({ id: "start.tile.4" })}
+                        </Text>
+                        <Text fontSize="xs" color="gray.400" textAlign="center" mt={2}>
+                            {intl.formatMessage({ id: "start.tile.4.context" })}
+                        </Text>
+                        <CgProfile size={60} color="grey"/>
+                    </GridItem>
                 </Grid>
             </VStack>
 
