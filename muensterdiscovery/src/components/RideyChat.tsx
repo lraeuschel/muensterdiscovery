@@ -1,8 +1,19 @@
 import { useState, useEffect, useRef } from "react";
-import {Box, IconButton, Portal, Input, VStack, HStack, Text, Image, Icon, Button} from "@chakra-ui/react";
-import { BsChatDots, BsX, BsSend } from "react-icons/bs";
+import {
+  Box,
+  IconButton,
+  Portal,
+  Input,
+  VStack,
+  HStack,
+  Text,
+  Image,
+  Icon,
+  Button,
+} from "@chakra-ui/react";
+import { BsChatDots, BsX, BsSend, BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { keyframes } from "@emotion/react";
-import type { IntlShape } from 'react-intl'; //
+import type { IntlShape } from "react-intl";
 import { getCurrentUser } from "../services/DatabaseConnection";
 import { useNavigate } from "react-router-dom";
 import rideyHappy from "../assets/ridey_happy.png";
@@ -74,8 +85,12 @@ const HtmlMessage = ({ htmlContent }: { htmlContent: string }) => {
   );
 };
 
-export default function FloatingChatWidget({ currentLanguage, intl }: FloatingChatWidgetProps) {
+export default function FloatingChatWidget({
+  currentLanguage,
+  intl,
+}: FloatingChatWidgetProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isQuickstartOpen, setIsQuickstartOpen] = useState(true);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -92,7 +107,9 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
   const handleSend = async () => {
     if (message.trim()) {
       const currentMessage = message;
-      const historyPayload = messages.map((msg) => `${msg.sender}: ${msg.text}`);
+      const historyPayload = messages.map(
+        (msg) => `${msg.sender}: ${msg.text}`
+      );
 
       const userMessage: Message = {
         id: Date.now().toString(),
@@ -118,11 +135,14 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
           payload.usertoken = user.id;
         }
 
-        const response = await fetch("https://midi11-chatwithridey.hf.space/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+        const response = await fetch(
+          "https://midi11-chatwithridey.hf.space/chat",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }
+        );
 
         if (!response.ok) throw new Error("Server-Error");
 
@@ -166,9 +186,9 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
   };
 
   const exampleQuestions = [
-    intl.formatMessage({ id: 'chat.example1' }),
-    intl.formatMessage({ id: 'chat.example2' }),
-    intl.formatMessage({ id: 'chat.example3' })
+    intl.formatMessage({ id: "chat.example1" }),
+    intl.formatMessage({ id: "chat.example2" }),
+    intl.formatMessage({ id: "chat.example3" }),
   ];
 
   return (
@@ -218,7 +238,7 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
               <Text color="white" fontWeight="bold" fontSize="lg">
                 Chat with Ridey
               </Text>
-              
+
               <IconButton
                 aria-label="Close"
                 size="sm"
@@ -237,7 +257,9 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
                 {messages.map((msg) => (
                   <Box
                     key={msg.id}
-                    alignSelf={msg.sender === "user" ? "flex-end" : "flex-start"}
+                    alignSelf={
+                      msg.sender === "user" ? "flex-end" : "flex-start"
+                    }
                     bg={msg.sender === "user" ? "orange.500" : "white"}
                     color={msg.sender === "user" ? "white" : "black"}
                     px={4}
@@ -245,8 +267,12 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
                     borderRadius="lg"
                     maxW="85%"
                     boxShadow="sm"
-                    borderBottomRightRadius={msg.sender === "user" ? "none" : "lg"}
-                    borderBottomLeftRadius={msg.sender === "bot" ? "none" : "lg"}
+                    borderBottomRightRadius={
+                      msg.sender === "user" ? "none" : "lg"
+                    }
+                    borderBottomLeftRadius={
+                      msg.sender === "bot" ? "none" : "lg"
+                    }
                   >
                     <Text fontSize="sm" whiteSpace="pre-wrap">
                       {msg.text}
@@ -284,62 +310,99 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
                 <div ref={messagesEndRef} />
               </VStack>
             </Box>
-            <Box p={3} bg="gray.50" borderTop="1px solid" borderColor="gray.200">
-              <Text 
-                fontSize="xs" 
-                fontWeight="bold" 
-                color="orange.600" 
-                mb={2} 
-                textAlign="left"
-                ml={1}
+
+            <Box
+              p={3}
+              bg="gray.50"
+              borderTop="1px solid"
+              borderColor="gray.200"
+              transition="all 0.3s ease"
+            >
+              <HStack 
+                justify="space-between" 
+                cursor="pointer" 
+                onClick={() => setIsQuickstartOpen(!isQuickstartOpen)}
+                mb={isQuickstartOpen ? 2 : 0}
               >
-                {intl.formatMessage({ id: 'chat.quickstart' })}
-              </Text>
-              
-              <VStack align="stretch" gap={2}>
-                {exampleQuestions.map((question, index) => (
-                  <Button
-                    key={index}
-                    size="sm"
-                    variant="outline"
-                    colorScheme="orange"
-                    justifyContent="flex-start"
-                    h="auto"
-                    py={2}
-                    px={3}
-                    whiteSpace="normal"
-                    textAlign="left"
-                    fontSize="xs"
-                    fontWeight="medium"
-                    borderRadius="md"
-                    borderColor="orange.200"
-                    bg="white"
-                    _hover={{ 
-                      bg: "orange.50", 
-                      borderColor: "orange.400",
-                      transform: "translateY(-1px)",
-                      boxShadow: "sm" 
-                    }}
-                    _active={{ bg: "orange.100" }}
-                    onClick={() => handleExampleQuestion(question)}
-                    disabled={isLoading}
-                    title={question}
-                  >
-                    <HStack width="100%" align="center" gap={2}>
-                      <Icon as={BsChatDots} color="orange.400" boxSize={3} flexShrink={0} />
-                      <Text lineHeight="short" flex="1">
-                        {question}
-                      </Text>
-                    </HStack>
-                  </Button>
-                ))}
-              </VStack>
+                <Text
+                  fontSize="xs"
+                  fontWeight="bold"
+                  color="orange.600"
+                  textAlign="left"
+                  ml={1}
+                >
+                  {intl.formatMessage({ id: "chat.quickstart" })}
+                </Text>
+                <Icon 
+                  as={isQuickstartOpen ? BsChevronDown : BsChevronUp} 
+                  color="gray.400" 
+                  boxSize={3} 
+                />
+              </HStack>
+
+              {/* 
+                  CSS Grid Animation trick for animating height: auto
+                  0fr -> collapsed
+                  1fr -> expanded
+               */}
+              <Box
+                display="grid"
+                gridTemplateRows={isQuickstartOpen ? "1fr" : "0fr"}
+                transition="grid-template-rows 0.2s ease-out"
+                opacity={isQuickstartOpen ? 1 : 0}
+              >
+                <Box overflow="hidden">
+                  <VStack align="stretch" gap={2} pt={1}>
+                    {exampleQuestions.map((question, index) => (
+                      <Button
+                        key={index}
+                        size="sm"
+                        variant="outline"
+                        colorScheme="orange"
+                        justifyContent="flex-start"
+                        h="auto"
+                        py={2}
+                        px={3}
+                        whiteSpace="normal"
+                        textAlign="left"
+                        fontSize="xs"
+                        fontWeight="medium"
+                        borderRadius="md"
+                        borderColor="orange.200"
+                        bg="white"
+                        _hover={{
+                          bg: "orange.50",
+                          borderColor: "orange.400",
+                          transform: "translateY(-1px)",
+                          boxShadow: "sm",
+                        }}
+                        _active={{ bg: "orange.100" }}
+                        onClick={() => handleExampleQuestion(question)}
+                        disabled={isLoading}
+                        title={question}
+                      >
+                        <HStack width="100%" align="center" gap={2}>
+                          <Icon
+                            as={BsChatDots}
+                            color="orange.400"
+                            boxSize={3}
+                            flexShrink={0}
+                          />
+                          <Text lineHeight="short" flex="1">
+                            {question}
+                          </Text>
+                        </HStack>
+                      </Button>
+                    ))}
+                  </VStack>
+                </Box>
+              </Box>
             </Box>
 
             <Box p={3} bg="white" borderTop="1px solid" borderColor="gray.200">
               <HStack>
                 <Input
-                  placeholder={intl.formatMessage({ id: 'chat.placeholder' })}
+                  placeholder={intl.formatMessage({ id: "chat.placeholder" })}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyDown={handleKeyDown}
@@ -349,7 +412,7 @@ export default function FloatingChatWidget({ currentLanguage, intl }: FloatingCh
                   bg="gray.50"
                   _focus={{ bg: "white", borderColor: "orange.500" }}
                 />
-                
+
                 <IconButton
                   aria-label="Send"
                   colorScheme="orange"
