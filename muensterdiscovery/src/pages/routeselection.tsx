@@ -7,6 +7,7 @@ import {
     Polyline,
     useMap,
     Pane,
+    LayersControl
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { LatLngExpression } from "leaflet";
@@ -108,7 +109,7 @@ export default function RouteSelection() {
                     </Heading>
                 </Box>
 
-                <VStack spacing={0} align="stretch">
+                <VStack align="stretch">
                     {routes.map((route) => {
                         const routeId =
                             route.geoJSON?.properties?.id ||
@@ -130,7 +131,7 @@ export default function RouteSelection() {
                                 transition="all 0.15s ease"
                                 onClick={() => setSelectedRoute(route)}
                             >
-                                <HStack spacing={3}>
+                                <HStack>
                                     {/* Optionaler Punkt */}
                                     <Box
                                         w="10px"
@@ -157,17 +158,32 @@ export default function RouteSelection() {
             <MapContainer
                 center={munsterCenter}
                 zoom={13}
-                style={{ width: "100%", height: "calc(100vh - 80px)" }}
+                style={{ width: "100%", height: "100vh" }}
                 zoomControl={false}
             >
+                <LayersControl position="bottomleft">
+                    <LayersControl.BaseLayer checked name={intl.formatMessage({ id: "zoomcontrols.default" })}>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+                        />
+                    </LayersControl.BaseLayer>
+                    <LayersControl.BaseLayer name={intl.formatMessage({ id: "zoomcontrols.satellite" })}>
+                        <TileLayer
+                            attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+                        />
+                    </LayersControl.BaseLayer>
+                    <LayersControl.BaseLayer name={intl.formatMessage({ id: "zoomcontrols.darkmode" })}>
+                        <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                        />
+                    </LayersControl.BaseLayer>
+                </LayersControl>
                 <Pane name="routesPane" style={{ zIndex: 400 }} />
                 <Pane name="activeRoutePane" style={{ zIndex: 450 }} />
                 <ZoomControl position="bottomright" />
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-
                 <FitRouteBounds route={selectedRoute} />
 
                 {routes.map((route) => {
@@ -218,7 +234,7 @@ export default function RouteSelection() {
                     overflowY="auto"
                     zIndex={1000}
                 >
-                    <VStack align="stretch" spacing={0}>
+                    <VStack align="stretch">
                         <Box
                             bgGradient="linear(to-r, #c41e3a, #8b1528)"
                             color="white"
@@ -231,7 +247,7 @@ export default function RouteSelection() {
                         <Box p={4}>
                             <Text mb={3}>{selectedRoute.description}</Text>
 
-                            <VStack align="start" spacing={2} fontSize="sm">
+                            <VStack align="start" fontSize="sm">
                                 <Text>
                                     <strong>{intl.formatMessage({ id: "routeselection.distance" })}:</strong>{" "}
                                     {Math.round(selectedRoute.distance / 1000)} km
