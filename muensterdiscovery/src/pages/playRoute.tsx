@@ -17,6 +17,7 @@ import {
     Polyline,
     LayersControl,
     ZoomControl,
+    useMap
 } from "react-leaflet";
 import L, { marker } from "leaflet";
 import type { LatLngExpression } from "leaflet";
@@ -67,6 +68,29 @@ const markerUserLocation = new L.Icon({
     iconSize: [30, 30],
     iconAnchor: [15, 30],
 });
+
+function FitRouteBounds({ route }: { route: Route | null }) {
+    const map = useMap();
+
+    useEffect(() => {
+        if (!route) return;
+
+        const coords =
+            route.geoJSON?.geometry?.coordinates ||
+            route.geoJSON?.coordinates;
+
+        if (!Array.isArray(coords) || coords.length === 0) return;
+
+        const latLngs = coords.map(
+            ([lng, lat]: [number, number]) => L.latLng(lat, lng)
+        );
+
+        const bounds = L.latLngBounds(latLngs);
+        map.fitBounds(bounds, { padding: [40, 40] });
+    }, [route, map]);
+
+    return null;
+}
 
 export default function PlayRoute() {
     const intl = useIntl();
@@ -192,6 +216,7 @@ export default function PlayRoute() {
                     
                 >
                     <ZoomControl position="bottomright" />
+                    <FitRouteBounds route={route} />
                     {/* Karten-Layer Auswahl */}
                     <LayersControl position="bottomleft">
                         <LayersControl.BaseLayer checked name={intl.formatMessage({ id: "zoomcontrols.default" })}>
