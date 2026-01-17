@@ -162,11 +162,11 @@ export async function addUserAchievement(
 
 export async function addVisitedPOI(
     profile_id: string,
-    poi_id: number,
+    POI_id: number,
 ) {
     const { data, error } = await supabase
         .from("user_POIs")
-        .insert([{ profile_id, poi_id }])
+        .insert([{ profile_id, POI_id }])
         .select()
         .single();
     if (error) throw error;

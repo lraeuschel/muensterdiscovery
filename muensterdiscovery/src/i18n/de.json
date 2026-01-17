@@ -30,6 +30,11 @@
 
     "openworld.loading": "Lade Daten...",
     "openworld.more_info": "Weitere Informationen",
+    "openworld.user_location": "Dein Standort",
+    "openworld.visited": "Bereits besucht",
+    "openworld.mark_visited": "POI abhaken",
+    "openworld.approx_distance": "Noch ca. ",
+
 
     "profile.greeting": "Hey, {username}!",
     "profile.change_picture": "Profilbild ändern",

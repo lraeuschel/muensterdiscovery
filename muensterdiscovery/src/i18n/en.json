@@ -30,6 +30,10 @@
 
     "openworld.loading": "Loading Christmas Markets...",
     "openworld.more_info": "More Information",
+    "openworld.user_location": "Your Location",
+    "openworld.visited": "Already visited",
+    "openworld.mark_visited": "Mark POI as visited",
+    "openworld.approx_distance": "Approx. ",
 
     "profile.greeting": "Hey, {username}!",
     "profile.change_picture": "Change Picture",
