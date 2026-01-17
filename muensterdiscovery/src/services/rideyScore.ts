@@ -9,7 +9,7 @@ const DEFAULT_STRATEGY = "timeDecay";
 strategies[DEFAULT_STRATEGY] = (durationMs: number) => {
     const msPerDay = 24 * 60 * 60 * 1000;
     const days = durationMs / msPerDay;
-    const decayDays = 30;
+    const decayDays = 1;
     const raw = Math.max(0, (decayDays - days) / decayDays);
     return Math.round(raw * 100);
 };

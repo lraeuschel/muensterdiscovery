@@ -69,8 +69,13 @@
     "login.error": "Falha no login. Por favor, verifique suas credenciais.",
     "login.success": "Login realizado com sucesso!",
 
-    "start.slide1_title": "Slide 1",
-    "start.slide1_content": "Conteúdo do slide 1",
+    "start.slide1_title.happy": "Ridey está feliz!",
+    "start.slide1_content.happy": "Você alcançou todos os seus objetivos hoje. Até amanhã!",
+    "start.slide1_title.sad": "Ridey está triste",
+    "start.slide1_content.sad": "Você não alcançou nenhum objetivo hoje. Tente novamente amanhã!",
+    "start.slide1_title.neutral": "Como você está se sentindo hoje?",
+    "start.slide1_content.neutral": "Vamos explorar Münster juntos!",
+
     "start.slide2_title": "Slide 2",
     "start.slide2_content": "Conteúdo do slide 2",
     "start.slide3_title": "Slide 3",

@@ -82,8 +82,13 @@
     "login.error": "Login failed. Please check your credentials.",
     "login.success": "Successfully logged in!",
 
-    "start.slide1_title": "Slide 1",
-    "start.slide1_content": "Slide 1 Content",
+    "start.slide1_title.happy": "Ridey is happy!",
+    "start.slide1_content.happy": "You've reached all your goals today. See you tomorrow!",
+    "start.slide1_title.sad": "Ridey is sad",
+    "start.slide1_content.sad": "You haven't reached any goals today. Try again tomorrow!",
+    "start.slide1_title.neutral": "How are you today?",
+    "start.slide1_content.neutral": "Let's explore Münster together!",
+
     "start.slide2_title": "Slide 2",
     "start.slide2_content": "Slide 2 Content",
     "start.slide3_title": "Slide 3",

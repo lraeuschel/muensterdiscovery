@@ -69,8 +69,13 @@
     "login.error": "Inloggen mislukt. Controleer je gegevens.",
     "login.success": "Succesvol ingelogd!",
 
-    "start.slide1_title": "Dia 1",
-    "start.slide1_content": "Dia 1-inhoud",
+    "start.slide1_title.happy": "Ridey is blij!",
+    "start.slide1_content.happy": "Je hebt alle doelen vandaag bereikt. Tot morgen!",
+    "start.slide1_title.sad": "Ridey is verdrietig",
+    "start.slide1_content.sad": "Je hebt geen doelen vandaag bereikt. Probeer morgen opnieuw!",
+    "start.slide1_title.neutral": "Hoe gaat het vandaag?",
+    "start.slide1_content.neutral": "Laten we samen Münster verkennen!",
+
     "start.slide2_title": "Dia 2",
     "start.slide2_content": "Dia 2-inhoud",
     "start.slide3_title": "Dia 3",

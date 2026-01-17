@@ -34,7 +34,7 @@ export default function Welcome() {
     return (
         <Box bg="orange.50" minH="100vh">
             <CompLangHeader />
-            {<RideyChat currentLanguage={currentLang} />}
+            {<RideyChat currentLanguage={currentLang} intl={intl} />}
 
             <VStack>
                 <Text

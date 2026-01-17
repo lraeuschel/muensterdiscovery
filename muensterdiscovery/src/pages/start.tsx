@@ -10,6 +10,8 @@ import { supabase } from "../SupabaseClient";
 import { getUserAchievements } from "../services/DatabaseConnection";
 import { getMood, type Mood } from "../services/rideyScore";
 import rideyHappy from "../assets/ridey_happy.png";
+import rideySad from "../assets/ridey_traurig.png"; 
+//import rideyChristmas from "../assets/ridey_weihnachten.png";
 import type { User } from "@supabase/supabase-js";
 import type { Achievement } from "../types";
 import { CiRoute } from "react-icons/ci";
@@ -27,33 +29,42 @@ export default function Start() {
     const [achievements, setAchievements] = useState<Achievement[]>([]);
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
     const [mood, setMood] = useState<Mood | null>(null);
+    
+    const getMascotImage = () => {
+        switch (mood) {
+            case "happy": return rideyHappy;
+            case "sad": return rideySad; // or rideyHappy if you lack assets
+            default: return rideySad; // or rideyHappy
+        }
+    };
 
     const slides = [
-        {
+         {
             id: 1,
-            title: intl.formatMessage({ id: "start.slide1_title" }),
-            content: (
-                mood === "happy" ? (
-                    <VStack gap={3} align="center">
-                        <Image src={rideyHappy} alt="Ridey happy" boxSize="120px" objectFit="contain" />
-                        <Text fontSize="md" color="gray.700" textAlign="center">
-                            {intl.formatMessage({ id: "start.slide1_content" }, { mood: "happy" })}
+            title: (mood === "happy" ? intl.formatMessage({ id: "start.slide1_title.happy" }) : mood === "sad" ? intl.formatMessage({ id: "start.slide1_title.sad" }) : intl.formatMessage({ id: "start.slide1_title.neutral" })),
+            context: (                
+                    <VStack gap={4} textAlign="center">
+                        <Text fontSize="md" color="gray.700">
+                            {mood === "happy" ? intl.formatMessage({ id: "start.slide1_content.happy" }) : mood === "sad" ? intl.formatMessage({ id: "start.slide1_content.sad" }) : intl.formatMessage({ id: "start.slide1_content.neutral" })}
                         </Text>
-                    </VStack>
-                ) : (
-                    <Text fontSize="2xl" fontWeight="bold">test</Text>
-                )
+                    </VStack>),
+            content: (
+            <Text fontSize="md" color="gray.700" mt="-10px">
+                {mood === "happy" 
+                ? intl.formatMessage({ id: "start.slide1_content.happy" },) 
+                : mood === "sad" 
+                    ? intl.formatMessage({ id: "start.slide1_content.sad" }) 
+                    : intl.formatMessage({ id: "start.slide1_content.sad" })
+                }
+            </Text>
             ),
-            image: undefined,
+            image: getMascotImage(),
         },
         {
             id: 2,
             title: selectedAchievement?.achievement || intl.formatMessage({ id: "start.slide2_title" }),
             content: (
                 <VStack gap={4} textAlign="center">
-                    <Text fontSize="2xl" fontWeight="bold" color="orange.600">
-                        {selectedAchievement?.achievement || intl.formatMessage({ id: "start.slide2_title" })}
-                    </Text>
                     <Text fontSize="md" color="gray.700">
                         {selectedAchievement?.description || intl.formatMessage({ id: "start.slide2_content" })}
                     </Text>
@@ -72,7 +83,7 @@ export default function Start() {
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
-        }, 5000);
+        }, 15000);
 
         return () => clearInterval(timer);
     }, [slides.length]);
@@ -106,7 +117,7 @@ export default function Start() {
                     setSelectedAchievement(userAchievements[randomIndex]);
                 }
                 try {
-                    const m = await getMood(session.user.id);
+                    const m = await getMood(session.user.id, { happy: 40, sad: 20 });
                     setMood(m);
                 } catch (err) {
                     console.error("Error computing mood:", err);
@@ -160,14 +171,19 @@ export default function Start() {
                     boxShadow="md"
                     overflow="hidden"
                     minH="400px"
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    alignItems="center"
                 >
                     {slides[currentSlide].image && (
                         <Image
                             src={slides[currentSlide].image}
                             alt={slides[currentSlide].title}
-                            w="100%"
-                            h="100%"
+                            w="350px"
+                            h="350px"
                             objectFit="cover"
+                            mt="60px"
                         />
                     )}
                     <VStack
@@ -178,10 +194,15 @@ export default function Start() {
                         bottom={0}
                         justify="center"
                         align="center"
-                        bg={!slides[currentSlide].image ? "white" : "rgba(0, 0, 0, 0.3)"}
                         p={8}
                     >
-                        {slides[currentSlide].content}
+                        <Text fontSize="2xl" fontWeight="bold" color="orange.600" mb={4} textAlign="center" mt="-280px"
+                        >
+                            {slides[currentSlide].title}
+                        </Text>
+                        <Text fontSize="md" color="gray.600" textAlign="center">
+                            {slides[currentSlide].content}
+                        </Text>
                     </VStack>
                 </Box>
 

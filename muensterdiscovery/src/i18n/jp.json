@@ -69,8 +69,13 @@
     "login.error": "ログインに失敗しました。認証情報を確認してください。",
     "login.success": "ログインに成功しました！",
 
-    "start.slide1_title": "スライド 1",
-    "start.slide1_content": "スライド 1 コンテンツ",
+    "start.slide1_title.happy": "Rideyは嬉しい！",
+    "start.slide1_content.happy": "今日の目標をすべて達成しました。明日また会いましょう！",
+    "start.slide1_title.sad": "Rideyは悲しい",
+    "start.slide1_content.sad": "今日の目標を達成できませんでした。明日また挑戦してください！",
+    "start.slide1_title.neutral": "今日はどうですか？",
+    "start.slide1_content.neutral": "一緒にミュンスターを探索しましょう！",
+
     "start.slide2_title": "スライド 2",
     "start.slide2_content": "スライド 2 コンテンツ",
     "start.slide3_title": "スライド 3",

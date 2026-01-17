@@ -69,8 +69,13 @@
     "login.error": "Accesso fallito. Per favore controlla le tue credenziali.",
     "login.success": "Accesso effettuato con successo!",
 
-    "start.slide1_title": "Diapositiva 1",
-    "start.slide1_content": "Contenuto diapositiva 1",
+    "start.slide1_title.happy": "Ridey è felice!",
+    "start.slide1_content.happy": "Hai raggiunto tutti i tuoi obiettivi oggi. Ci vediamo domani!",
+    "start.slide1_title.sad": "Ridey è triste",
+    "start.slide1_content.sad": "Non hai raggiunto alcun obiettivo oggi. Riprova domani!",
+    "start.slide1_title.neutral": "Come stai oggi?",
+    "start.slide1_content.neutral": "Esploriamo Münster insieme!",
+
     "start.slide2_title": "Diapositiva 2",
     "start.slide2_content": "Contenuto diapositiva 2",
     "start.slide3_title": "Diapositiva 3",

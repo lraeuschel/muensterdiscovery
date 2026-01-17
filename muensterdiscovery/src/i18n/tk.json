@@ -66,8 +66,13 @@
     "login.error": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
     "login.success": "Başarıyla giriş yaptınız!",
 
-    "start.slide1_title": "Slayt 1",
-    "start.slide1_content": "Slayt 1 İçeriği",
+    "start.slide1_title.happy": "Ridey mutlu!",
+    "start.slide1_content.happy": "Slayt 1 İçeriği",
+    "start.slide1_title.sad": "Ridey üzgün",
+    "start.slide1_content.sad": "Slayt 1 İçeriği",
+    "start.slide1_title.neutral": "Bugün nasıl hissediyorsun?",
+    "start.slide1_content.neutral": "Slayt 1 İçeriği",
+
     "start.slide2_title": "Slayt 2",
     "start.slide2_content": "Slayt 2 İçeriği",
     "start.slide3_title": "Slayt 3",

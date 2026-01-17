@@ -82,14 +82,22 @@
     "login.error": "Anmeldung fehlgeschlagen. Bitte überprüfe deine Zugangsdaten.",
     "login.success": "Erfolgreich angemeldet!",
 
-    "start.slide1_title": "Folie 1",
-    "start.slide1_content": "Folie 1 Inhalt",
+    "start.slide1_title.happy": "Ridey freut sich!",
+    "start.slide1_content.happy": "Du hast heute alle Ziele erreicht. Wir sehen uns morgen wieder!",
+    "start.slide1_title.sad": "Ridey ist traurig",
+    "start.slide1_content.sad": "Du hast heute noch keine Ziele erreicht. Versuche es morgen nochmal!",
+    "start.slide1_title.neutral": "Wie geht's dir heute?",
+    "start.slide1_content.neutral": "Du hast heute einige Ziele erreicht. Gut gemacht!",
+
     "start.slide2_title": "Folie 2",
     "start.slide2_content": "Folie 2 Inhalt",
+
     "start.slide3_title": "Folie 3",
     "start.slide3_content": "Folie 3 Inhalt",
     "start.welcome_message": "Willkommen zurück, {name}!",
     "start.discover_message": "Entdecke die interessantesten Orte und Erlebnisse in Münster.",
+
+
 
     "start.tile.1": "Routen ansehen",
     "start.tile.1.context": "Unsere handverlesenen Routen führen dich zu den spannendsten Orten in Münster!",
@@ -99,7 +107,7 @@
     "start.tile.3.context": "Vergleiche deine Entdeckungen mit anderen in der Bestenliste!",
     "start.tile.4": "Profil",
     "start.tile.4.context": "Schaue dir deine Erfolge an und passe deine Daten an!",
-    
+
     "footer.all_rights_reserved": "Alle Rechte vorbehalten.",
 
     "leaderboard.you": "DU",

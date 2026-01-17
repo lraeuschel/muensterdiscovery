@@ -68,8 +68,13 @@
     "login.error": "Ошибка входа. Пожалуйста, проверьте свои данные.",
     "login.success": "Вход выполнен успешно!",
 
-    "start.slide1_title": "Слайд 1",
-    "start.slide1_content": "Содержание слайда 1",
+    "start.slide1_title.happy": "Ridey рад!",
+    "start.slide1_content.happy": "Вы достигли всех своих целей сегодня. До завтра!",
+    "start.slide1_title.sad": "Ridey грустный",
+    "start.slide1_content.sad": "Вы не достигли ни одной цели сегодня. Попробуйте снова завтра!",
+    "start.slide1_title.neutral": "Как вы себя чувствуете сегодня?",
+    "start.slide1_content.neutral": "Давайте вместе исследовать Мюнстер!",
+
     "start.slide2_title": "Слайд 2",
     "start.slide2_content": "Содержание слайда 2",
     "start.slide3_title": "Слайд 3",

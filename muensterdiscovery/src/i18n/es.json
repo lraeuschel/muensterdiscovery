@@ -69,8 +69,13 @@
     "login.error": "Error al iniciar sesión. Por favor, verifica tus credenciales.",
     "login.success": "¡Sesión iniciada con éxito!",
 
-    "start.slide1_title": "Diapositiva 1",
-    "start.slide1_content": "Contenido de la diapositiva 1",
+    "start.slide1_title.happy": "Ridey está feliz!",
+    "start.slide1_content.happy": "Has alcanzado todos tus objetivos hoy. ¡Hasta mañana!",
+    "start.slide1_title.sad": "Ridey está triste",
+    "start.slide1_content.sad": "No has alcanzado ningún objetivo hoy. ¡Inténtalo de nuevo mañana!",
+    "start.slide1_title.neutral": "¿Cómo estás hoy?",
+    "start.slide1_content.neutral": "¡Exploramos Münster juntos!",
+
     "start.slide2_title": "Diapositiva 2",
     "start.slide2_content": "Contenido de la diapositiva 2",
     "start.slide3_title": "Diapositiva 3",
