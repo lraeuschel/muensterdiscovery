@@ -23,13 +23,14 @@ export default function Start() {
     const intl = useIntl();
     const navigate = useNavigate();
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [_, setIsLoading] = useState(true);
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [achievements, setAchievements] = useState<Achievement[]>([]);
+    const [__, setAchievements] = useState<Achievement[]>([]);
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
     const [mood, setMood] = useState<Mood | null>(null);
-    
+
+
     const getMascotImage = () => {
         switch (mood) {
             case "happy": return rideyHappy;

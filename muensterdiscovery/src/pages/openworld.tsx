@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl, useMap } from "react-leaflet";
+//import { useNavigate } from "react-router-dom";
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl} from "react-leaflet";
 import L from "leaflet";
 import type { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -47,13 +47,13 @@ const eventIcon = new L.DivIcon({
 });
 
 // Bike Icon
-const bikeIcon = new L.DivIcon({
-    html: `<div style="font-size:28px;text-align:center;">🚲</div>`,
-    iconSize: [32, 32],
-    iconAnchor: [16, 32],
-    popupAnchor: [0, -32],
-    className: "bike-icon",
-});
+// const bikeIcon = new L.DivIcon({
+//     html: `<div style="font-size:28px;text-align:center;">🚲</div>`,
+//     iconSize: [32, 32],
+//     iconAnchor: [16, 32],
+//     popupAnchor: [0, -32],
+//     className: "bike-icon",
+// });
 
 // --------------------------- HOOK: Datenportal POIs ---------------------------
 function useDatenportalPOIs() {
@@ -84,17 +84,18 @@ function useDatenportalPOIs() {
 }
 
 // --------------------------- FLY TO USER ---------------------------
-function FlyToUser({ position }: { position: LatLngExpression }) {
-    const map = useMap();
-    map.flyTo(position, 16);
-    return null;
-}
+// function FlyToUser({ position }: { position: LatLngExpression }) {
+//     const map = useMap();
+//     map.flyTo(position, 16);
+//     return null;
+// }
 
 // --------------------------- MAIN COMPONENT ---------------------------
 export default function OpenWorld() {
     const intl = useIntl();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+    <Box data-lang={currentLang}></Box>
     const [pois, setPois] = useState<POI[]>([]);
     const [visitedPOIs, setVisitedPOIs] = useState<number[]>([]);
     const [userLocation, setUserLocation] = useState<LatLngExpression | null>(null);
@@ -216,7 +217,7 @@ export default function OpenWorld() {
                     {markers.map(marker => (
                         <Marker key={marker.id} position={marker.position} icon={marker.icon}>
                             <Popup offset={[0,-20]}>
-                                <VStack align="start" spacing={2} minW="200px" maxW="300px">
+                                <VStack align="start" gap={2} minW="200px" maxW="300px">
                                     <Heading size="sm">{marker.name}</Heading>
 
                                     {marker.type === "poi" && marker.image && (
@@ -244,10 +245,15 @@ export default function OpenWorld() {
                                     )}
 
                                     {marker.type === "event" && marker.poi && (
-                                        <VStack align="start" spacing={1}>
+                                        <VStack align="start" gap={1}>
                                             <Text fontSize="sm" color="red.500" fontWeight="bold">Veranstaltung</Text>
-                                            {marker.poi.startDate && <Text fontSize="xs">Start: {new Date(marker.poi.startDate).toLocaleString()}</Text>}
-                                            {marker.poi.endDate && <Text fontSize="xs">Ende: {new Date(marker.poi.endDate).toLocaleString()}</Text>}
+                                                {"startDate" in marker.poi && marker.poi.startDate && (
+                                                <Text fontSize="xs">Start: {new Date(marker.poi.startDate).toLocaleString()}</Text>
+                                                )}
+
+                                                {"endDate" in marker.poi && marker.poi.endDate && (
+                                                <Text fontSize="xs">Ende: {new Date(marker.poi.endDate).toLocaleString()}</Text>
+                                                )}                                       
                                         </VStack>
                                     )}
 

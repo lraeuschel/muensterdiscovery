@@ -23,6 +23,8 @@ export default function Leaderboard() {
     const [timeframe, setTimeframe] = useState<'month' | 'alltime'>('month');
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
 
+    <Box data-lang={currentLang}></Box>
+
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange((lang) => {
             setCurrentLang(lang);
@@ -30,7 +32,6 @@ export default function Leaderboard() {
         return unsubscribe;
     }, []);
 
-    // Dieser Monat 
     const monthlyData: LeaderboardEntry[] = [
         { rank: 1, username: "LeezenRider", points: 450, distanceKm: 42.5, areasDiscovered: 12 },
         { rank: 2, username: "AaseeWalker", points: 380, distanceKm: 28.0, areasDiscovered: 9 },
@@ -39,7 +40,6 @@ export default function Leaderboard() {
         { rank: 5, username: "MünsterMaus", points: 150, distanceKm: 10.2, areasDiscovered: 3},
     ];
 
-    // All-time daten
     const allTimeData: LeaderboardEntry[] = [
         { rank: 1, username: "MünsterLegend", points: 15400, distanceKm: 1205.5, areasDiscovered: 150 },
         { rank: 2, username: "LeezenRider", points: 12300, distanceKm: 980.0, areasDiscovered: 120 },
@@ -54,10 +54,8 @@ export default function Leaderboard() {
         <Box bg="orange.50" minH="100vh" pb={8}>
             <CompLangHeader />
 
-            {/* Content Container */}
             <VStack gap={6} mt="80px" px={4}>
                 
-                {/* Überschrift */}
                 <VStack>
                     <Text fontSize="3xl" fontWeight="bold" color="orange.600">
                         {intl.formatMessage({ id: "leaderboard.title", defaultMessage: "Rangliste" })} 🏆
@@ -67,7 +65,6 @@ export default function Leaderboard() {
                     </Text>
                 </VStack>
 
-                {/* Globale Community Stats */}
                 <Grid 
                     templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} 
                     gap={4} 
@@ -91,7 +88,6 @@ export default function Leaderboard() {
                     />
                 </Grid>
 
-                {/* Switcher: Monat vs All-Time */}
                 <Box bg="white" p={1} borderRadius="full" boxShadow="sm" border="1px solid" borderColor="orange.200">
                     <HStack gap={0}>
                         <Button 

@@ -13,13 +13,12 @@ import {
     TileLayer,
     Marker,
     Popup,
-    Circle,
     Polyline,
     LayersControl,
     ZoomControl,
     useMap
 } from "react-leaflet";
-import L, { marker } from "leaflet";
+import L from "leaflet";
 import type { LatLngExpression } from "leaflet";
 
 import {

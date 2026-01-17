@@ -11,6 +11,8 @@ import { useIntl } from "react-intl";
 export default function Signup() {
     const intl = useIntl();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+    
+    <Box data-lang={currentLang}></Box>
 
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange((lang) => {

@@ -18,6 +18,8 @@ export default function Profile() {
     const navigate = useNavigate();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
 
+    <Box data-lang={currentLang}></Box>
+
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange((lang) => {
             setCurrentLang(lang);

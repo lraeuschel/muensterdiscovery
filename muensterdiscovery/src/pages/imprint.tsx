@@ -1,4 +1,4 @@
-import { Box, VStack, Text, Image, Link as ChakraLink, Button } from "@chakra-ui/react";
+import { Box, VStack, Text,Link as ChakraLink, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import CompLangHeader from "../components/CompLangHeader";
 import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
@@ -10,6 +10,9 @@ export default function Imprint() {
     const intl = useIntl();
     const navigate = useNavigate();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+
+    <Box data-lang={currentLang}></Box>
+
 
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange((lang) => {
