@@ -1,4 +1,4 @@
-import { createListCollection, Box } from "@chakra-ui/react";
+import { Select, Portal, createListCollection } from "@chakra-ui/react"
 
 export const languageItems = [
   { label: "Deutsch", value: "de" },
@@ -39,28 +39,47 @@ export function onCurrentLanguageChange(cb: (lang: LanguageType) => void) {
 }
 
 export default function LanguageSelector({
-  currentLang,
   setLanguage,
 }: {
-  currentLang?: LanguageType;
   setLanguage: (lang: LanguageType) => void;
 }) {
   return (
-    <>
-      {languages.items.map((language) => (
-        <Box
-          key={language.value}
-          onClick={() => {
-            setLanguage(language.value);
-            setCurrentLanguage(language.value);
-          }}
-          cursor="pointer"
-          fontWeight={currentLang === language.value ? "bold" : "normal"}
-          _hover={{ opacity: 0.8 }}
-        >
-          {language.label}
-        </Box>
-      ))}
-    </>
+    <Select.Root
+      collection={languages}
+      size="sm"
+      width="20%"
+      position="fixed"
+      variant="subtle"
+      top="10px"
+      right="10px"
+    >
+      <Select.Control>
+        <Select.Trigger>
+        </Select.Trigger>
+        <Select.IndicatorGroup>
+          <Select.Indicator />
+        </Select.IndicatorGroup>
+      </Select.Control>
+
+      <Portal>
+        <Select.Positioner>
+          <Select.Content>
+            {languages.items.map((language) => (
+              <Select.Item
+                item={language}
+                key={language.value}
+                onClick={() => {
+                  setLanguage(language.value);
+                  setCurrentLanguage(language.value);
+                }}
+              >
+                {language.label}
+                <Select.ItemIndicator />
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select.Positioner>
+      </Portal>
+    </Select.Root>
   );
 }

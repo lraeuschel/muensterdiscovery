@@ -29,8 +29,7 @@ export default function Start() {
     const [__, setAchievements] = useState<Achievement[]>([]);
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
     const [mood, setMood] = useState<Mood | null>(null);
-
-
+    
     const getMascotImage = () => {
         switch (mood) {
             case "happy": return rideyHappy;
