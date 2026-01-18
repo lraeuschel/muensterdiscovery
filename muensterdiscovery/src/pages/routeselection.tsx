@@ -210,7 +210,7 @@ export default function RouteSelection() {
                             pathOptions={{
                                 color: routeColors[routeId] || "#888",
                                 weight: isActive ? 6 : 4,
-                                opacity: isActive ? 1 : 0.6,
+                                opacity: isActive ? 1 : 0.3,
                             }}
                             eventHandlers={{
                                 click: () => setSelectedRoute(route),
