@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, VStack, HStack, Text, Button, Image, Grid, GridItem, Link } from "@chakra-ui/react";
+import { Box, VStack, HStack, Text, Button, Image, Grid, GridItem, Link, IconButton } from "@chakra-ui/react";
 import { useIntl } from 'react-intl';
 import { useNavigate } from "react-router-dom";
 import CompLangHeader from "../components/CompLangHeader";
@@ -18,6 +18,13 @@ import { CiRoute } from "react-icons/ci";
 import { MdOutlineLeaderboard } from "react-icons/md";
 import { IoEarthOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
+import { getRandomPOI } from "../services/poiService";
+import type { POI } from "../types";
+import { MdMilitaryTech } from "react-icons/md";
+import { useRef } from "react"; // Add useRef to existing import
+import { BsQuestionCircle } from "react-icons/bs";
+import type { RideyChatRef } from "../components/RideyChat";
+
 
 export default function Start() {
     const intl = useIntl();
@@ -29,54 +36,167 @@ export default function Start() {
     const [__, setAchievements] = useState<Achievement[]>([]);
     const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
     const [mood, setMood] = useState<Mood | null>(null);
+    const [randomPOI, setRandomPOI] = useState<POI | null>(null);
+    const rideyChatRef = useRef<RideyChatRef>(null);
+
     
     const getMascotImage = () => {
         switch (mood) {
             case "happy": return rideyHappy;
-            case "sad": return rideySad; // or rideyHappy if you lack assets
-            default: return rideySad; // or rideyHappy
+            case "sad": return rideySad;
+            default: return rideySad;
         }
     };
 
+      useEffect(() => {
+        const loadRandomPOI = async () => {
+        const poi = await getRandomPOI();
+        setRandomPOI(poi);
+        };
+
+        loadRandomPOI();
+
+        const interval = setInterval(() => {
+        loadRandomPOI();
+        }, 10000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+
+    const getImageUrl = (imagePath?: string) => {
+        if (!imagePath) return undefined;
+        return `${SUPABASE_URL}/storage/v1/object/public/${imagePath}`;
+    };
+
+
     const slides = [
-         {
-            id: 1,
-            title: (mood === "happy" ? intl.formatMessage({ id: "start.slide1_title.happy" }) : mood === "sad" ? intl.formatMessage({ id: "start.slide1_title.sad" }) : intl.formatMessage({ id: "start.slide1_title.neutral" })),
-            context: (                
-                    <VStack gap={4} textAlign="center">
-                        <Text fontSize="md" color="gray.700">
-                            {mood === "happy" ? intl.formatMessage({ id: "start.slide1_content.happy" }) : mood === "sad" ? intl.formatMessage({ id: "start.slide1_content.sad" }) : intl.formatMessage({ id: "start.slide1_content.neutral" })}
-                        </Text>
-                    </VStack>),
-            content: (
-            <Text fontSize="md" color="gray.700" mt="-10px">
-                {mood === "happy" 
-                ? intl.formatMessage({ id: "start.slide1_content.happy" },) 
-                : mood === "sad" 
-                    ? intl.formatMessage({ id: "start.slide1_content.sad" }) 
-                    : intl.formatMessage({ id: "start.slide1_content.sad" })
-                }
-            </Text>
-            ),
-            image: getMascotImage(),
-        },
         {
-            id: 2,
-            title: selectedAchievement?.achievement || intl.formatMessage({ id: "start.slide2_title" }),
-            content: (
-                <VStack gap={4} textAlign="center">
-                    <Text fontSize="md" color="gray.700">
-                        {selectedAchievement?.description || intl.formatMessage({ id: "start.slide2_content" })}
+            id: 1,
+            title: randomPOI?.name,
+            context: (
+                <VStack gap={2} textAlign="center" maxW="600px">
+                    <Text fontSize="md" color="gray.700" lineClamp={3}>
+                        {randomPOI?.info}
                     </Text>
                 </VStack>
             ),
-            image: undefined,
+            content: (
+                <VStack gap={2} textAlign="center" maxW="600px">
+                    <Text fontSize="md" color="gray.700" lineClamp={3}>
+                        {randomPOI?.info}
+                    </Text>
+                </VStack>
+            ),
+            image: getImageUrl(randomPOI?.image_path),
         },
         {
-            id: 3,
-            title: intl.formatMessage({ id: "start.slide3_title" }),
-            content: <Text fontSize="2xl" fontWeight="bold">{intl.formatMessage({ id: "start.slide3_content" })}</Text>,
-            image: undefined,
+            id: 2,
+            title: (mood === "happy" ? intl.formatMessage({ id: "start.slide1_title.happy" }) : mood === "sad" ? intl.formatMessage({ id: "start.slide1_title.sad" }) : intl.formatMessage({ id: "start.slide1_title.neutral" })),
+            context: (
+                <VStack gap={4} textAlign="center" maxW="600px">
+                    <Text fontSize="md" color="gray.700">
+                        {mood === "happy" ? intl.formatMessage({ id: "start.slide1_content.happy" }) : mood === "sad" ? intl.formatMessage({ id: "start.slide1_content.sad" }) : intl.formatMessage({ id: "start.slide1_content.neutral" })}
+                    </Text>
+                </VStack>
+            ),
+            content: (
+                <VStack gap={4} textAlign="center" maxW="600px">
+                    <Text fontSize="md" color="gray.700">
+                        {mood === "happy"
+                            ? intl.formatMessage({ id: "start.slide1_content.happy" })
+                            : mood === "sad"
+                                ? intl.formatMessage({ id: "start.slide1_content.sad" })
+                                : intl.formatMessage({ id: "start.slide1_content.sad" })
+                        }
+                    </Text>
+                        <Button
+                            aria-label="Ask about this POI"
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="orange"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                rideyChatRef.current?.openChatWithQuestion(
+                                    `What can I do to make Ridey happy?`
+                                );
+                            }}
+                            _hover={{ bg: "orange.100" }}
+                            p={0}
+                            minW="auto"
+                        >
+                            <BsQuestionCircle size={20} />
+                        </Button>
+                </VStack>
+                
+            ),
+            image: getMascotImage(),
+        },
+        // Slide 3: Achievement - Medal Design
+        {
+        id: 3,
+        title: selectedAchievement?.achievement || intl.formatMessage({ id: "start.slide2_title" }),
+        content: (
+            <VStack gap={6} align="center">
+            {/* Medal Container with ribbon effect */}
+            <VStack gap={0} align="center">
+                {/* Ribbon top */}
+                <HStack gap={3} h="30px" align="flex-end">
+                <Box w="3" h="12" bg="yellow.400" borderRadius="sm" />
+                <Box w="3" h="12" bg="yellow.400" borderRadius="sm" />
+                </HStack>
+
+                {/* Medal Circle */}
+                <Box
+                position="relative"
+                w="120px"
+                h="120px"
+                borderRadius="full"
+                boxShadow="0 8px 16px rgba(0, 0, 0, 0.2), inset -4px -4px 8px rgba(0, 0, 0, 0.1), inset 4px 4px 8px rgba(255, 255, 255, 0.3)"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                style={{
+                    background: "linear-gradient(135deg, #FFD700 0%, #FFA500 50%, #FF8C00 100%)",
+                }}
+                >
+                {/* Inner circle for depth */}
+                <Box
+                    w="110px"
+                    h="110px"
+                    borderRadius="full"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    style={{
+                    background: "linear-gradient(135deg, #FFED4E 0%, #FFD700 100%)",
+                    }}
+                >
+                    <MdMilitaryTech size={60} color="#FF6B00" />
+                </Box>
+                </Box>
+
+                {/* Ribbon bottom */}
+                <HStack gap={3} h="30px" align="flex-start">
+                <Box w="3" h="12" bg="yellow.400" borderRadius="sm" />
+                <Box w="3" h="12" bg="yellow.400" borderRadius="sm" />
+                </HStack>
+            </VStack>
+
+            {/* Achievement Description */}
+            <Text
+                fontSize="md"
+                color="gray.700"
+                textAlign="center"
+                maxW="400px"
+                fontStyle="italic"
+            >
+                {selectedAchievement?.description || intl.formatMessage({ id: "start.slide2_content" })}
+            </Text>
+            </VStack>
+        ),
+        image: undefined,
         },
     ];
 
@@ -134,7 +254,8 @@ export default function Start() {
     return (
         <Box bg="orange.50" minH="100vh" pb={8}>
             <CompLangHeader />
-            {<RideyChat currentLanguage={currentLang} intl={intl} />}
+            {<RideyChat ref={rideyChatRef} currentLanguage={currentLang} intl={intl} />}
+
 
             {/* Header */}
             <VStack mt="80px" mb={8}>
@@ -161,58 +282,153 @@ export default function Start() {
 
             {/* Slideshow Container */}
             <VStack gap={4} px={4} align="center" justify="center" flex={1} minH="500px">
-                {/* Slide Display */}
+            {/* Slide 1: POI with Background Image */}
+            {currentSlide === 0 ? (
                 <Box
-                    position="relative"
-                    w="100%"
-                    maxW="800px"
-                    bg="white"
-                    borderRadius="lg"
-                    boxShadow="md"
-                    overflow="hidden"
-                    minH="400px"
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="center"
-                    alignItems="center"
+                position="relative"
+                w="100%"
+                maxW="800px"
+                h="450px"
+                borderRadius="2xl"
+                boxShadow="xl"
+                overflow="hidden"
+                bg="gray.200"
                 >
-                    {slides[currentSlide].image && (
-                        <Image
-                            src={slides[currentSlide].image}
-                            alt={slides[currentSlide].title}
-                            w="350px"
-                            h="350px"
-                            objectFit="cover"
-                            mt="60px"
-                        />
-                    )}
-                    <VStack
-                        position="absolute"
-                        top={0}
-                        left={0}
-                        right={0}
-                        bottom={0}
-                        justify="center"
-                        align="center"
-                        p={8}
-                    >
-                        <Text fontSize="2xl" fontWeight="bold" color="orange.600" mb={4} textAlign="center" mt="-280px"
+                {/* Background Image */}
+                {slides[currentSlide].image && (
+                    <Image
+                    src={slides[currentSlide].image}
+                    alt="POI Background"
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    objectPosition="center"
+                    />
+                )}
+
+                {/* Dark Overlay */}
+                {slides[currentSlide].image && (
+                    <Box
+                    position="absolute"
+                    top={0}
+                    left={0}
+                    w="100%"
+                    h="100%"
+                    bg="blackAlpha.300"
+                    />
+                )}
+
+                {/* Content Card at Bottom */}
+                <VStack
+                    position="absolute"
+                    bottom={6}
+                    left={0}
+                    right={0}
+                    mx="auto"
+                    w="calc(100% - 48px)"
+                    maxW="700px"
+                    bg="white"
+                    borderRadius="xl"
+                    p={6}
+                    boxShadow="lg"
+                    gap={3}
+                    zIndex={10}
+                >
+                    {/* Title with Question Mark Button */}
+                    <HStack w="full" justify="space-between" align="center">
+                        <Text
+                            fontSize="xl"
+                            fontWeight="800"
+                            color="orange.600"
+                            textAlign="center"
+                            lineClamp={2}
+                            flex={1}
                         >
                             {slides[currentSlide].title}
                         </Text>
-                        <Text fontSize="md" color="gray.600" textAlign="center">
-                            {slides[currentSlide].content}
-                        </Text>
-                    </VStack>
+                        <Button
+                            aria-label="Ask about this POI"
+                            size="sm"
+                            variant="ghost"
+                            colorScheme="orange"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (randomPOI?.name) {
+                                    rideyChatRef.current?.openChatWithQuestion(
+                                        `What can I do at ${randomPOI.name}?`
+                                    );
+                                }
+                            }}
+                            _hover={{ bg: "orange.100" }}
+                            p={0}
+                            minW="auto"
+                        >
+                            <BsQuestionCircle size={20} />
+                        </Button>
+
+                    </HStack>
+                    
+                    <Text
+                        fontSize="sm"
+                        color="gray.700"
+                        textAlign="center"
+                        lineClamp={2}
+                    >
+                        {slides[currentSlide].content}
+                    </Text>
+                </VStack>
                 </Box>
+            ) : (
+                /* Slides 2, 3, etc: Regular Card Style */
+                <Box
+                bg="white"
+                borderRadius="lg"
+                boxShadow="lg"
+                overflow="hidden"
+                p={6}
+                textAlign="center"
+                w="100%"
+                maxW="800px"
+                minH="400px"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+                >
+                {/* Image if exists */}
+                {slides[currentSlide].image && (
+                    <Image
+                    src={slides[currentSlide].image}
+                    alt={slides[currentSlide].title}
+                    maxH="250px"
+                    mx="auto"
+                    mb={4}
+                    borderRadius="lg"
+                    />
+                )}
+
+                {/* Title */}
+                <Text fontSize="2xl" fontWeight="bold" mb={4} color="orange.600">
+                    {slides[currentSlide].title}
+                </Text>
+
+                {/* Content */}
+                <Box maxW="600px">
+                    {slides[currentSlide].content}
+                </Box>
+                </Box>
+            )}
 
                 {/* Slide Indicators */}
-                <HStack gap={2} justify="center">
+                <HStack gap={3} justify="center" mt={4}>
                     {slides.map((_, index) => (
                         <Button
                             key={index}
                             size="sm"
-                            w={currentSlide === index ? "8" : "3"}
+                            w={currentSlide === index ? "12" : "3"}
                             h="3"
                             borderRadius="full"
                             bg={currentSlide === index ? "orange.500" : "gray.300"}
@@ -220,6 +436,8 @@ export default function Start() {
                             _hover={{
                                 bg: currentSlide === index ? "orange.600" : "gray.400",
                             }}
+                            transition="all 0.3s"
+                            aria-label={`Go to slide ${index + 1}`}
                         />
                     ))}
                 </HStack>

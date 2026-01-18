@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, forwardRef, useImperativeHandle } from "react";
 import {
   Box,
   IconButton,
@@ -17,6 +17,10 @@ import type { IntlShape } from "react-intl";
 import { getCurrentUser } from "../services/DatabaseConnection";
 import { useNavigate } from "react-router-dom";
 import rideyHappy from "../assets/ridey_happy.png";
+
+export type RideyChatRef = {
+  openChatWithQuestion: (question: string) => void;
+};
 
 interface FloatingChatWidgetProps {
   currentLanguage: string;
@@ -85,10 +89,8 @@ const HtmlMessage = ({ htmlContent }: { htmlContent: string }) => {
   );
 };
 
-export default function FloatingChatWidget({
-  currentLanguage,
-  intl,
-}: FloatingChatWidgetProps) {
+const FloatingChatWidget = forwardRef<RideyChatRef, FloatingChatWidgetProps>(
+  ({ currentLanguage, intl }, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isQuickstartOpen, setIsQuickstartOpen] = useState(true);
   const [message, setMessage] = useState("");
@@ -177,6 +179,14 @@ export default function FloatingChatWidget({
     setMessage(question);
     setTimeout(() => handleSend(), 100);
   };
+
+  useImperativeHandle(ref, () => ({
+    openChatWithQuestion: (question: string) => {
+      setIsOpen(true);
+      handleExampleQuestion(question);
+    },
+  }));
+
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -430,4 +440,8 @@ export default function FloatingChatWidget({
       )}
     </>
   );
-}
+});
+
+FloatingChatWidget.displayName = "RideyChat";
+
+export default FloatingChatWidget;
