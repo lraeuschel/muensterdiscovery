@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Box, VStack, HStack, Text, Button, Image, Grid, GridItem, Link, IconButton } from "@chakra-ui/react";
+import { Box, VStack, HStack, Text, Button, Image, Grid, GridItem, Link } from "@chakra-ui/react";
 import { useIntl } from 'react-intl';
 import { useNavigate } from "react-router-dom";
 import CompLangHeader from "../components/CompLangHeader";
