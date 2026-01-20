@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { Box, VStack, HStack, Text, Image, Button, Grid, Badge } from "@chakra-ui/react";
 import { useIntl } from 'react-intl';
 import CompLangHeader from "../components/CompLangHeader";
@@ -6,7 +6,6 @@ import { currentLanguage, onCurrentLanguageChange } from "../components/language
 import type { LanguageType } from "../components/languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
 import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
-import majo from "../assets/ww.jpeg";
 import { getAllDiscoveredPOIs, getNumberOfUser, getWalkedKilometers, getCurrentUser, getLeaderboard } from "../services/DatabaseConnection";
 import type { LeaderboardEntry } from "../types";
 
@@ -17,7 +16,6 @@ export default function Leaderboard() {
     const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
     const [totalDiscoveredPOIs, setTotalDiscoveredPOIs] = useState<number>(0);
     const [totalWalkedKm, setTotalWalkedKm] = useState<number>(0);
-    const [user, setUser] = useState<any>(null);
     const [monthlyLeaderboard, setMonthlyLeaderboard] = useState<LeaderboardEntry[]>([]);
     const [alltimeLeaderboard, setAllTimeLeaderboard] = useState<LeaderboardEntry[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -43,8 +41,6 @@ export default function Leaderboard() {
                 }, 0);
                 setTotalWalkedKm(totalKm);
                 
-                setUser(currentUser);
-
                 // Leaderboards laden
                 const [monthly, allTime] = await Promise.all([
                     getLeaderboard('month', currentUser?.id),
