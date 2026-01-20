@@ -13,7 +13,15 @@
     "menu.routeselection": "Routekeuze",
     "menu.leaderboard": "Ranglijst",
     "menu.welcome": "Startpagina",
-    
+
+    "routeselection.title": "Route selecteren",
+    "routeselection.subtitle": "Klik op een route op de kaart om details te bekijken",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Routeoverzicht",
+    "routeselection.start": "Start route",
+    "routeselection.about": "Over deze route",
+    "routeselection.selected": "Geselecteerd",
+
     "imprint.title": "Colofon",
     "imprint.content": "Dit project is een studieproject in het kader van de masteropleiding Geoinformatics and Spatial Data Science. Broncode en documentatie zijn beschikbaar op GitHub:",
     "imprint.github_link_text": "GitHub-repository",

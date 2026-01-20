@@ -13,6 +13,14 @@
     "menu.routeselection": "Wybór trasy",
     "menu.leaderboard": "Ranking",
     "menu.welcome": "Strona główna",
+
+    "routeselection.title": "Wybierz trasę",
+    "routeselection.subtitle": "Kliknij trasę na mapie, aby zobaczyć szczegóły",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Przegląd trasy",
+    "routeselection.start": "Rozpocznij trasę",
+    "routeselection.about": "O tej trasie",
+    "routeselection.selected": "Wybrana",
     
     "imprint.title": "Nota prawna",
     "imprint.content": "Ten projekt to projekt studencki w ramach studiów magisterskich z Geoinformatics and Spatial Data Science. Kod źródłowy i dokumentacja są dostępne na GitHub:",

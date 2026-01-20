@@ -13,6 +13,14 @@
     "menu.routeselection": "Rota seçimi",
     "menu.leaderboard": "Liderler Sıralaması",
     "menu.welcome": "Ana Sayfa",
+
+    "routeselection.title": "Rota seçimi",
+    "routeselection.subtitle": "Haritadaki bir rotaya tıklayarak detayları görüntüleyin",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Rota genel bakışı",
+    "routeselection.start": "Rota başlat",
+    "routeselection.about": "Bu rota hakkında",
+    "routeselection.selected": "Seçildi",
     
     "imprint.title": "Yasal Uyarı",
     "imprint.content": "Bu proje, Coğrafi Bilişim ve Mekansal Veri Bilimi Yüksek Lisans programı kapsamında bir öğrenci projesidir. Kaynak kodu ve dokümantasyon GitHub'da mevcuttur:",

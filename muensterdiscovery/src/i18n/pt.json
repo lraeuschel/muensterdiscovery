@@ -13,7 +13,15 @@
     "menu.routeselection": "Seleção de rota",
     "menu.leaderboard": "Ranking",
     "menu.welcome": "Início",
-    
+
+    "routeselection.title": "Selecionar uma rota",
+    "routeselection.subtitle": "Klik op een route op de kaart om details te bekijken",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Routeoverzicht",
+    "routeselection.start": "Start route",
+    "routeselection.about": "Over deze route",
+    "routeselection.selected": "Geselecteerd",
+
     "imprint.title": "Aviso legal",
     "imprint.content": "Este projeto é um projeto de estudo como parte do mestrado em Geoinformática e Ciência de Dados Espaciais. Código-fonte e documentação estão disponíveis no GitHub:",
     "imprint.github_link_text": "Repositório GitHub",

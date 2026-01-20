@@ -13,7 +13,15 @@
     "menu.routeselection": "Sélection du parcours",
     "menu.leaderboard": "Classement",
     "menu.welcome": "Accueil",
-    
+
+    "routeselection.title": "Sélectionner un parcours",
+    "routeselection.subtitle": "Cliquez sur un parcours sur la carte pour voir les détails",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Aperçu du parcours",
+    "routeselection.start": "Démarrer le parcours",
+    "routeselection.about": "À propos de ce parcours",
+    "routeselection.selected": "Sélectionné",
+
     "imprint.title": "Mentions légales",
     "imprint.content": "Ce projet est un projet d'études dans le cadre du master en Géoinformatique et Science des Données Spatiales. Le code source et la documentation sont disponibles sur GitHub :",
     "imprint.github_link_text": "Dépôt GitHub",

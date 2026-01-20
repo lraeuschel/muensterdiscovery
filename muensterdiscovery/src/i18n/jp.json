@@ -13,7 +13,15 @@
     "menu.routeselection": "ルート選択",
     "menu.leaderboard": "ランキング",
     "menu.welcome": "ホーム",
-    
+
+    "routeselection.title": "ルートを選択",
+    "routeselection.subtitle": "マップ上のルートをクリックして詳細を表示",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "ルート概要",
+    "routeselection.start": "ルート開始",
+    "routeselection.about": "このルートについて",
+    "routeselection.selected": "選択済み",
+
     "imprint.title": "法的情報",
     "imprint.content": "本プロジェクトは、地理情報学および空間データサイエンス修士課程の学習プロジェクトです。ソースコードとドキュメントはGitHubで公開されています：",
     "imprint.github_link_text": "GitHub リポジトリ",

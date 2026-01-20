@@ -13,6 +13,14 @@
     "menu.routeselection": "اختيار المسار",
     "menu.leaderboard": "قائمة المتصدرين",
     "menu.welcome": "الصفحة الرئيسية",
+
+    "routeselection.title": "اختر مسارًا",
+    "routeselection.subtitle": "انقر على مسار على الخريطة لعرض التفاصيل",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Routenübersicht",
+    "routeselection.start": "Route starten",
+    "routeselection.about": "Über diese Route",
+    "routeselection.selected": "Ausgewählt",
     
     "imprint.title": "العلامات القانونية",
     "imprint.content": "هذا المشروع هو مشروع دراسي كجزء من برنامج الماجستير في الجغرافيا المعلوماتية وعلوم بيانات الفضاء. الشيفرة المصدرية والوثائق متاحة على GitHub:",

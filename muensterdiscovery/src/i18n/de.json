@@ -16,12 +16,11 @@
 
     "routeselection.title": "Routen auswählen",
     "routeselection.subtitle": "Klicke auf eine Route in der Karte, um Details zu sehen",
-    "routeselection.distance": "Entfernung",
-    "routeselection.duration": "Dauer",
     "routeselection.pois": "POIs",
-    "routeselection.close": "Schließen",
     "routeselection.overview": "Routenübersicht",
     "routeselection.start": "Route starten",
+    "routeselection.about": "Über diese Route",
+    "routeselection.selected": "Ausgewählt",
 
     "imprint.title": "Impressum",
     "imprint.content": "Dieses Projekt ist ein Studienprojekt im Rahmen des Masterstudiengangs Geoinformatics and Spatial Data Science der Universität Münster. Quellcode und Dokumentation sind auf GitHub verfügbar:",

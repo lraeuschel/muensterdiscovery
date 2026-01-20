@@ -13,6 +13,15 @@
     "menu.routeselection": "Выбор маршрута",
     "menu.leaderboard": "Таблица лидеров",
     "menu.welcome": "Главная",
+
+    "routeselection.title": "Выберите маршрут",
+    "routeselection.subtitle": "Нажмите на маршрут на карте, чтобы просмотреть детали",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Обзор маршрута",
+    "routeselection.start": "Начать маршрут",
+    "routeselection.about": "О маршруте",
+    "routeselection.selected": "Выбрано",
+
     "imprint.title": "Выходные данные",
     "imprint.content": "Этот проект является учебным проектом в рамках магистерской программы «Геоинформатика и наука о пространственных данных». Исходный код и документация доступны на GitHub:",
     "imprint.github_link_text": "Репозиторий GitHub",

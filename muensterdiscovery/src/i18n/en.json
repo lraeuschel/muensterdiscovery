@@ -16,13 +16,12 @@
 
     "routeselection.title": "Select a Route",
     "routeselection.subtitle": "Click a route on the map to view details",
-    "routeselection.distance": "Distance",
-    "routeselection.duration": "Duration",
     "routeselection.pois": "POIs",
-    "routeselection.close": "Close",
     "routeselection.overview": "Route Overview",
     "routeselection.start": "Start Route",
-    
+    "routeselection.about": "About this route",
+    "routeselection.selected": "Selected",
+
     "imprint.title": "Imprint",
     "imprint.content": "This project is a student project as part of the Master's program in Geoinformatics and Spatial Data Science. Source code and documentation are available on GitHub:",
     "imprint.github_link_text": "GitHub Repository",

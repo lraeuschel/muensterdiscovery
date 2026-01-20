@@ -13,7 +13,15 @@
     "menu.routeselection": "Selección de ruta",
     "menu.leaderboard": "Clasificación",
     "menu.welcome": "Inicio",
-    
+
+    "routeselection.title": "Seleccionar una ruta",
+    "routeselection.subtitle": "Haz clic en una ruta en el mapa para ver los detalles",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Resumen de la ruta",
+    "routeselection.start": "Iniciar ruta",
+    "routeselection.about": "Acerca de esta ruta",
+    "routeselection.selected": "Seleccionado",
+
     "imprint.title": "Aviso legal",
     "imprint.content": "Este proyecto es un proyecto de estudio como parte del programa de Máster en Geoinformática y Ciencia de Datos Espaciales. El código fuente y la documentación están disponibles en GitHub:",
     "imprint.github_link_text": "Repositorio de GitHub",
