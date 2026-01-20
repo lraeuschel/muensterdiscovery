@@ -61,8 +61,10 @@
     "leaderboard.month": "Dieser Monat",
     "leaderboard.alltime": "Ewige Tabelle",
     "leaderboard.user": "Nutzer",
-    "leaderboard.areas": "Bereiche",
+    "leaderboard.areas": "Orte besucht",
     "leaderboard.points": "Punkte",
+    "leaderboard.loading": "Lade Daten",
+    "leaderboard.no_data": "Noch keine Daten verfügbar",
 
     "registration.title": "Konto erstellen",
     "registration.firstname": "Vorname",

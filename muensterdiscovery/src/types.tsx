@@ -43,3 +43,13 @@ export type Event = {
     end_date?: string; // Optional end date
     category?: string; // z.B. "Konzert", "Festival", "Theater"
 }
+
+export type LeaderboardEntry = {
+    rank: number;
+    username: string;
+    points: number;
+    distanceKm: number;
+    areasDiscovered: number;
+    isCurrentUser?: boolean;
+    isMajo?: boolean;
+};
