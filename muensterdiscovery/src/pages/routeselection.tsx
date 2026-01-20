@@ -330,7 +330,7 @@ export default function RouteSelection() {
               </Heading>
             </Flex>
             <Text color="gray.500" fontSize="sm">
-              {intl.formatMessage({ id: "routeselection.description" }) ||
+              {intl.formatMessage({ id: "routeselection.subtitle" }) ||
                 "Select a route to explore Münster"}
             </Text>
             {isMobile && (
@@ -379,7 +379,7 @@ export default function RouteSelection() {
               fontSize="xs"
               mb={2}
             >
-              Selected
+              {intl.formatMessage({ id: "routeselection.selected" })}
             </Badge>
             <Heading as="h2" fontSize="2xl" fontWeight="800" mb={1}>
               {selectedRoute.name}
@@ -527,7 +527,7 @@ export default function RouteSelection() {
                   color={activeColor}
                   mb={3}
                 >
-                  {intl.formatMessage({ id: "routeselection.highlights" }) ||
+                  {intl.formatMessage({ id: "routeselection.pois" }) ||
                     "Highlights"}
                 </Heading>
 
