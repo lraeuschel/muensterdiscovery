@@ -151,7 +151,7 @@
     "playroute.nav.action.continue": "Geradeaus",
     "playroute.nav.action.turn_left": "Links abbiegen",
     "playroute.nav.action.turn_right": "Rechts abbiegen",
-    "playroute.nav.action.arrive": "Ziel erreicht"
+    "playroute.nav.action.arrive": "Ziel erreicht",
 
 
     "chat.example1": "Welche Erreignisse habe ich bereits abgeschlossen?",
