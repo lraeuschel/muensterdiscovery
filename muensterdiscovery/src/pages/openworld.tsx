@@ -229,19 +229,19 @@ export default function OpenWorld() {
                     <ZoomControl position="bottomright" />
 
                     <LayersControl position="bottomleft">
-                        <LayersControl.BaseLayer checked name="Stadtplan">
+                        <LayersControl.BaseLayer checked name={intl.formatMessage({ id: "zoomcontrols.default" })}>
                             <TileLayer
                                 attribution='&copy; OpenStreetMap'
                                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                             />
                         </LayersControl.BaseLayer>
-                        <LayersControl.BaseLayer name="Satellit">
+                        <LayersControl.BaseLayer name={intl.formatMessage({ id: "zoomcontrols.satellite" })}>
                             <TileLayer
                                 attribution='&copy; Esri'
                                 url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                             />
                         </LayersControl.BaseLayer>
-                        <LayersControl.BaseLayer name="Dark Mode">
+                        <LayersControl.BaseLayer name={intl.formatMessage({ id: "zoomcontrols.darkmode" })}>
                             <TileLayer
                                 attribution='&copy; OpenStreetMap'
                                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
