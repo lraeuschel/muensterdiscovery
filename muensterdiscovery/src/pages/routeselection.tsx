@@ -195,6 +195,17 @@ export default function RouteSelection() {
 
   const munsterCenter: LatLngExpression = [51.9607, 7.6261];
 
+  // Helper to get color for current selected route
+  const getSelectedRouteColor = () => {
+    if (!selectedRoute) return "orange.500";
+    const routeId =
+      selectedRoute.geoJSON?.properties?.id ||
+      selectedRoute.name.toLowerCase().replace(/\s+/g, "_");
+    return routeColors[routeId] || "orange.500";
+  };
+
+  const activeColor = getSelectedRouteColor();
+
   return (
     <Flex
       direction={{ base: "column", lg: "row" }}
@@ -319,7 +330,8 @@ export default function RouteSelection() {
               </Heading>
             </Flex>
             <Text color="gray.500" fontSize="sm">
-              {intl.formatMessage({ id: "routeselection.subtitle" })}
+              {intl.formatMessage({ id: "routeselection.description" }) ||
+                "Select a route to explore Münster"}
             </Text>
             {isMobile && (
               <Button
@@ -337,10 +349,11 @@ export default function RouteSelection() {
         ) : (
           <Box
             p={6}
-            bg="orange.500"
+            bg={activeColor}
             color="white"
             position="relative"
             borderTopRadius={{ lg: "2xl" }}
+            transition="background-color 0.3s"
           >
             <IconButton
               aria-label="Back to list"
@@ -358,7 +371,7 @@ export default function RouteSelection() {
             </IconButton>
 
             <Badge
-              bg="orange.700"
+              bg="blackAlpha.300"
               color="white"
               px={2}
               py={0.5}
@@ -366,7 +379,7 @@ export default function RouteSelection() {
               fontSize="xs"
               mb={2}
             >
-              {intl.formatMessage({ id: "routeselection.selected" })}
+              Selected
             </Badge>
             <Heading as="h2" fontSize="2xl" fontWeight="800" mb={1}>
               {selectedRoute.name}
@@ -393,6 +406,7 @@ export default function RouteSelection() {
                 const routeId =
                   route.geoJSON?.properties?.id ||
                   route.name.toLowerCase().replace(/\s+/g, "_");
+                const routeColor = routeColors[routeId] || "orange.500";
                 
                 // Get image for this route
                 const routeImage = getRouteImage(route);
@@ -412,7 +426,7 @@ export default function RouteSelection() {
                     _hover={{
                       transform: "translateY(-2px)",
                       boxShadow: "md",
-                      borderColor: "orange.200",
+                      borderColor: routeColor,
                     }}
                   >
                     {/* START PICTURE: First POI image or generic fallback */}
@@ -429,13 +443,13 @@ export default function RouteSelection() {
                         <Flex
                           h="100%"
                           w="100%"
-                          bg={`${routeColors[routeId] || "orange.400"}20`}
+                          bg={`${routeColor}20`}
                           align="center"
                           justify="center"
                         >
                           <FaMapMarkedAlt
                             size={40}
-                            color={routeColors[routeId] || "orange.500"}
+                            color={routeColor}
                             opacity={0.5}
                           />
                         </Flex>
@@ -494,10 +508,11 @@ export default function RouteSelection() {
                   as="h4"
                   fontSize="md"
                   fontWeight="700"
-                  color="orange.600"
+                  color={activeColor}
                   mb={2}
                 >
-                  {intl.formatMessage({ id: "routeselection.about" })}
+                  {intl.formatMessage({ id: "routeselection.about" }) ||
+                    "About this route"}
                 </Heading>
                 <Text fontSize="sm" color="gray.600" lineHeight="tall">
                   {selectedRoute.description}
@@ -509,10 +524,10 @@ export default function RouteSelection() {
                   as="h4"
                   fontSize="md"
                   fontWeight="700"
-                  color="orange.600"
+                  color={activeColor}
                   mb={3}
                 >
-                  {intl.formatMessage({ id: "routeselection.pois" }) ||
+                  {intl.formatMessage({ id: "routeselection.highlights" }) ||
                     "Highlights"}
                 </Heading>
 
@@ -522,7 +537,10 @@ export default function RouteSelection() {
                   </Text>
                 ) : (
                   <VStack gap={4}>
-                    {routePOIs.map((poi) => (
+                    {routePOIs
+                      // Filter: Show only every 3rd POI (index 2, 5, 8...)
+                      .filter((_, index) => (index + 1) % 3 === 0)
+                      .map((poi) => (
                       <Box
                         key={poi.id}
                         w="100%"
@@ -553,15 +571,13 @@ export default function RouteSelection() {
                               {poi.name}
                             </Text>
                           </HStack>
-                          <Text fontSize="xs" color="gray.500" lineClamp={3}>
-                            {poi.info}
-                          </Text>
+                          {/* Description text removed */}
                         </Box>
                       </Box>
                     ))}
-                    {routePOIs.length === 0 && (
+                    {routePOIs.filter((_, index) => (index + 1) % 3 === 0).length === 0 && (
                       <Text fontSize="sm" color="gray.400" textAlign="center">
-                        No highlights info available.
+                         See map for details.
                       </Text>
                     )}
                   </VStack>
@@ -576,11 +592,13 @@ export default function RouteSelection() {
           <Box p={4} bg="white" borderTop="1px solid" borderColor="gray.100">
             <Button
               w="100%"
-              colorScheme="orange"
+              bg={activeColor}
+              color="white"
               size="lg"
               fontWeight="bold"
               onClick={() => navigate(`/playroute/${selectedRoute.id}`)}
-              _hover={{ bg: "orange.600" }}
+              _hover={{ opacity: 0.9 }}
+              _active={{ opacity: 0.8 }}
               boxShadow="lg"
             >
               {intl.formatMessage({ id: "routeselection.start" })}
