@@ -185,3 +185,11 @@ export async function addRouteCompletion(
     if (error) throw error;
     return data;
 }
+
+export async function getNumberOfUser() {
+    const { count, error } = await supabase
+        .from("profiles")
+        .select("*", { count: "exact", head: true });
+    if (error) throw error;
+    return count || 0;
+}
