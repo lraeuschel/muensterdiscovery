@@ -107,6 +107,44 @@
     "chat.example3": "У меня 45мин времени. Какой маршрут могу пройти?",
     "chat.quickstart": "Быстрый старт:",
 
-    "chat.placeholder": "Введите сообщение..."
+    "chat.placeholder": "Введите сообщение...",
+    
+    "playroute.visited": "Посещено",
+    "playroute.get_closer": "Вы слишком далеко, чтобы отметить эту точку.",
+    "playroute.approx_distance": "Ещё прибл. ",
+    "playroute.mark_visited": "Отметить точку",
+    "playroute.route_completed_header": "Поздравляем! Вы завершили маршрут!",
+    "playroute.route_completed_description": "Вы посетили все точки на этом маршруте. Так держать!",
+    "playroute.back_to_routes": "К выбору маршрута",
+    "playroute.abort": "Прервать миссию",
+    "playroute.found_progress": "НАЙДЕНО {visited} / {total}",
+    "playroute.gps_error": "Ошибка GPS",
+    "playroute.gps_signal_lost": "Сигнал GPS потерян",
+    "playroute.gps_signal_lost_desc": "Мы не можем определить ваше местоположение. Функции близости отключены. Вы можете просматривать маркеры вручную.",
+    "playroute.nearest_signal": "БЛИЖАЙШЕЕ МЕСТО",
+    "playroute.distance_away": "{distance}м от вас",
+    "playroute.signal_acquired": "Рядом",
+    "playroute.signal_acquired_desc": "Вы достигли места. Расшифруйте информацию, чтобы добавить её в журнал.",
+    "playroute.collect_intel": "Сбор данных...",
+    "playroute.signal_locked": "Слишком далеко",
+    "playroute.signal_locked_desc": "Контент зашифрован. Подойдите ближе чем на 50м, чтобы разблокировать.",
+    "playroute.navigate_signal": "НАВИГАЦИЯ",
+    "playroute.mission_log": "Журнал ({count})",
+    "playroute.mission_complete": "Миссия выполнена!",
+    "playroute.mission_complete_desc": "Вы успешно исследовали все места в {route}.",
+    "playroute.return_base": "Назад",
+    "playroute.loading_mission": "Загрузка миссии...",
+    "playroute.nav.title": "Навигация",
+    "playroute.nav.loading": "Расчет маршрута...",
+    "playroute.nav.stop": "Остановить навигацию",
+    "playroute.nav.error": "Навигация не удалась: {message}",
+    "playroute.nav.instruction": "{action} через {distance} м на {street}",
+    "playroute.nav.unnamed_road": "безымянная дорога",
+    "playroute.nav.action.continue": "Прямо",
+    "playroute.nav.action.turn_left": "Поворот налево",
+    "playroute.nav.action.turn_right": "Поворот направо",
+    "playroute.nav.action.arrive": "Пункт назначения"
+
+
 
 }
