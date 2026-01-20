@@ -120,6 +120,9 @@
     "playroute.get_closer": "Du bist noch zu weit entfernt um diesen POI abzuhaken.",
     "playroute.approx_distance": "Noch ca. ",
     "playroute.mark_visited": "POI abhaken",
+    "playroute.route_completed_header": "Herzlichen Glückwunsch! Du hast die Route abgeschlossen!",
+    "playroute.route_completed_description": "Du hast alle POIs auf dieser Route besucht. Weiter so!",
+    "playroute.back_to_routes": "Zurück zur Routenauswahl",
 
     "chat.example1": "Welche Erreignisse habe ich bereits abgeschlossen?",
     "chat.example2": "Wo kann ich die Bestenliste finden?",
