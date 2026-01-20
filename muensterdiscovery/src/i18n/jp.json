@@ -13,7 +13,15 @@
     "menu.routeselection": "ルート選択",
     "menu.leaderboard": "ランキング",
     "menu.welcome": "ホーム",
-    
+
+    "routeselection.title": "ルートを選択",
+    "routeselection.subtitle": "マップ上のルートをクリックして詳細を表示",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "ルート概要",
+    "routeselection.start": "ルート開始",
+    "routeselection.about": "このルートについて",
+    "routeselection.selected": "選択済み",
+
     "imprint.title": "法的情報",
     "imprint.content": "本プロジェクトは、地理情報学および空間データサイエンス修士課程の学習プロジェクトです。ソースコードとドキュメントはGitHubで公開されています：",
     "imprint.github_link_text": "GitHub リポジトリ",
@@ -99,6 +107,43 @@
     "chat.example3": "45分の時間があります。どのルートをやれますか？",
     "chat.quickstart": "クイックスタート：",
     
-    "chat.placeholder": "メッセージを入力..."
+    "chat.placeholder": "メッセージを入力...",
+
+        "playroute.visited": "訪問済み",
+    "playroute.get_closer": "この場所をチェックするには遠すぎます。",
+    "playroute.approx_distance": "あと約 ",
+    "playroute.mark_visited": "チェックする",
+    "playroute.route_completed_header": "おめでとうございます！ルートを完了しました！",
+    "playroute.route_completed_description": "このルート上のすべての場所を訪問しました。その調子！",
+    "playroute.back_to_routes": "ルート選択に戻る",
+    "playroute.abort": "ミッション中止",
+    "playroute.found_progress": "{visited} / {total} 発見",
+    "playroute.gps_error": "GPSエラー",
+    "playroute.gps_signal_lost": "GPS信号喪失",
+    "playroute.gps_signal_lost_desc": "位置情報を特定できません。近接機能は無効になっています。マーカーを手動で探索できます。",
+    "playroute.nearest_signal": "最寄りのスポット",
+    "playroute.distance_away": "{distance}m 先",
+    "playroute.signal_acquired": "接近中",
+    "playroute.signal_acquired_desc": "場所に到着しました。情報を解読してログに追加してください。",
+    "playroute.collect_intel": "データ収集中...",
+    "playroute.signal_locked": "遠すぎます",
+    "playroute.signal_locked_desc": "コンテンツは暗号化されています。50m以内に近づいて解除してください。",
+    "playroute.navigate_signal": "ナビ開始",
+    "playroute.mission_log": "日誌 ({count})",
+    "playroute.mission_complete": "ミッション完了！",
+    "playroute.mission_complete_desc": "{route} のすべての場所を探索しました。",
+    "playroute.return_base": "戻る",
+    "playroute.loading_mission": "ミッションをロード中...",
+    "playroute.nav.title": "ナビゲーション",
+    "playroute.nav.loading": "ルート計算中...",
+    "playroute.nav.stop": "ナビ終了",
+    "playroute.nav.error": "ナビゲーション失敗: {message}",
+    "playroute.nav.instruction": "{street} を {distance}m 進んで {action}",
+    "playroute.nav.unnamed_road": "名称のない道路",
+    "playroute.nav.action.continue": "直進",
+    "playroute.nav.action.turn_left": "左折",
+    "playroute.nav.action.turn_right": "右折",
+    "playroute.nav.action.arrive": "目的地到着"
+
 
 }
