@@ -43,3 +43,16 @@ export type Event = {
     end_date?: string; // Optional end date
     category?: string; // z.B. "Konzert", "Festival", "Theater"
 }
+
+export type Voronoi = {
+    id: number;
+    geoJSON: any; // GeoJSON object representing the Voronoi polygon
+}
+
+export type VisitedPOI = {
+    id: number;
+    name: string;
+    lat: number;
+    lon: number;
+    visited: string; // ISO 8601 datetime
+}

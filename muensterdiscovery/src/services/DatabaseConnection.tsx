@@ -1,5 +1,5 @@
 import { supabase } from "../SupabaseClient";
-import type { User, Achievement, POI, Event, Route } from "../types";
+import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI } from "../types";
 
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -64,19 +64,24 @@ export async function getVisitedPOIs(userId: string) {
             POIs (
                 id,
                 name,
-                info,
                 lat,
-                lon,
-                image_path
+                lon
             )
         `)
         .eq("profile_id", userId);
     
     if (error) throw error;
 
-    const pois = data?.map((item: any) => item.POIs) || [];
-    console.log("Fetched POIs:", pois);
-    return pois as POI[];
+    const { data: visitedData, error: visitedError } = await supabase
+        .from("user_POIs")
+        .select("visited")
+        .eq("profile_id", userId);
+    if (visitedError) throw visitedError;
+
+    const pois = data?.map((item: any, index: number) => ({ ...item.POIs, visited: visitedData?.[index]?.visited })) || [];
+
+    console.log("Fetched visited POIs:", pois);
+    return pois as VisitedPOI[];
 }
 
 export async function getRoutes() {
@@ -184,4 +189,12 @@ export async function addRouteCompletion(
         .single();
     if (error) throw error;
     return data;
+}
+
+export async function getVoronoiPolygons() {
+    const { data, error } = await supabase
+        .from("voronoi_polygons")
+        .select("id, geoJSON");
+    if (error) throw error;
+    return data as Voronoi[];
 }
