@@ -56,3 +56,12 @@ export type VisitedPOI = {
     lon: number;
     visited: string; // ISO 8601 datetime
 }
+export type LeaderboardEntry = {
+    rank: number;
+    username: string;
+    points: number;
+    distanceKm: number;
+    areasDiscovered: number;
+    isCurrentUser?: boolean;
+    isMajo?: boolean;
+};

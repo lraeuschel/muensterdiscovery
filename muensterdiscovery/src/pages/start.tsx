@@ -621,6 +621,16 @@ export default function Start() {
                         >
                             GitHub
                         </Link>
+                        <Text color="gray.400">•</Text>
+                        <Link
+                            href="https://huggingface.co/spaces/MIDI11/chatwithridey"
+                            target="_blank"
+                            color="orange.600"
+                            fontWeight="500"
+                            _hover={{ textDecoration: "underline" }}
+                        >
+                            HuggingFace (ChatWithRidey)
+                        </Link>
                     </HStack>
 
                     {/* Copyright */}

@@ -13,7 +13,15 @@
     "menu.routeselection": "Seleção de rota",
     "menu.leaderboard": "Ranking",
     "menu.welcome": "Início",
-    
+
+    "routeselection.title": "Selecionar uma rota",
+    "routeselection.subtitle": "Klik op een route op de kaart om details te bekijken",
+    "routeselection.pois": "POIs",
+    "routeselection.overview": "Routeoverzicht",
+    "routeselection.start": "Start route",
+    "routeselection.about": "Over deze route",
+    "routeselection.selected": "Geselecteerd",
+
     "imprint.title": "Aviso legal",
     "imprint.content": "Este projeto é um projeto de estudo como parte do mestrado em Geoinformática e Ciência de Dados Espaciais. Código-fonte e documentação estão disponíveis no GitHub:",
     "imprint.github_link_text": "Repositório GitHub",
@@ -99,6 +107,43 @@
     "chat.example3": "Tenho 45min de tempo. Qual rota posso fazer?",
     "chat.quickstart": "Início rápido:",
 
-    "chat.placeholder": "Digite uma mensagem..."
+    "chat.placeholder": "Digite uma mensagem...",
+
+        "playroute.visited": "Já visitado",
+    "playroute.get_closer": "Ainda estás demasiado longe para marcar este ponto.",
+    "playroute.approx_distance": "Faltam aprox. ",
+    "playroute.mark_visited": "Marcar Ponto",
+    "playroute.route_completed_header": "Parabéns! Completaste a rota!",
+    "playroute.route_completed_description": "Visitaste todos os pontos desta rota. Continua assim!",
+    "playroute.back_to_routes": "Voltar à seleção",
+    "playroute.abort": "Abortar missão",
+    "playroute.found_progress": "{visited} / {total} ENCONTRADOS",
+    "playroute.gps_error": "Erro de GPS",
+    "playroute.gps_signal_lost": "Sinal GPS perdido",
+    "playroute.gps_signal_lost_desc": "Não conseguimos determinar a tua localização. As funcionalidades de proximidade estão desativadas. Podes explorar os marcadores manualmente.",
+    "playroute.nearest_signal": "LOCAL MAIS PRÓXIMO",
+    "playroute.distance_away": "a {distance}m",
+    "playroute.signal_acquired": "Nas proximidades",
+    "playroute.signal_acquired_desc": "Chegaste ao local. Desencripta a informação para a adicionar ao teu diário.",
+    "playroute.collect_intel": "Recolher dados...",
+    "playroute.signal_locked": "Demasiado longe",
+    "playroute.signal_locked_desc": "Conteúdo encriptado. Aproxima-te a 50m para desbloquear.",
+    "playroute.navigate_signal": "NAVEGAR",
+    "playroute.mission_log": "Diário ({count})",
+    "playroute.mission_complete": "Missão Cumprida!",
+    "playroute.mission_complete_desc": "Exploraste com sucesso todos os locais em {route}.",
+    "playroute.return_base": "Voltar",
+    "playroute.loading_mission": "A carregar missão...",
+    "playroute.nav.title": "Navegação",
+    "playroute.nav.loading": "A calcular rota...",
+    "playroute.nav.stop": "Parar navegação",
+    "playroute.nav.error": "Falha na navegação: {message}",
+    "playroute.nav.instruction": "{action} em {distance} m na {street}",
+    "playroute.nav.unnamed_road": "estrada sem nome",
+    "playroute.nav.action.continue": "Seguir em frente",
+    "playroute.nav.action.turn_left": "Virar à esquerda",
+    "playroute.nav.action.turn_right": "Virar à direita",
+    "playroute.nav.action.arrive": "Destino alcançado"
+
 
 }

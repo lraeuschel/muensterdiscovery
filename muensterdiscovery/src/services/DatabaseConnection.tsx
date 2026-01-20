@@ -1,5 +1,5 @@
 import { supabase } from "../SupabaseClient";
-import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI } from "../types";
+import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI, LeaderboardEntry } from "../types";
 
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -175,6 +175,7 @@ export async function addVisitedPOI(
         .select()
         .single();
     if (error) throw error;
+    await updateUserPoints(profile_id, 10); // Beispiel: 10 Punkte pro POI
     return data;
 }
 
@@ -184,10 +185,11 @@ export async function addRouteCompletion(
 ) {
     const { data, error } = await supabase
         .from("user_routes")
-        .insert([{ user_id: profile_id, route_id, explored_at: new Date().toISOString() }])
+        .insert([{ profile_id: profile_id, route_id, explored_at: new Date().toISOString() }])
         .select()
         .single();
     if (error) throw error;
+    await updateUserPoints(profile_id, 50); // Beispiel: 50 Punkte pro Route
     return data;
 }
 
@@ -197,4 +199,122 @@ export async function getVoronoiPolygons() {
         .select("id, geoJSON");
     if (error) throw error;
     return data as Voronoi[];
+}
+export async function getNumberOfUser() {
+    const { count, error } = await supabase
+        .from("profiles")
+        .select("*", { count: "exact", head: true });
+    if (error) throw error;
+    return count || 0;
+}
+
+export async function getAllDiscoveredPOIs() {
+    const { count, error } = await supabase
+        .from("user_POIs")
+        .select("*", { count: "exact", head: true });
+    if (error) throw error;
+    return count || 0;
+}
+
+// Neue Funktion: Punkte aktualisieren
+export async function updateUserPoints(userId: string, pointsToAdd: number) {
+    const { data: currentData, error: fetchError } = await supabase
+        .from("profiles")
+        .select("monthly_points, alltime_points")
+        .eq("id", userId)
+        .single();
+
+    if (fetchError) throw fetchError;
+
+    const newMonthlyPoints = (currentData.monthly_points || 0) + pointsToAdd;
+    const newAlltimePoints = (currentData.alltime_points || 0) + pointsToAdd;
+
+    const { error: updateError } = await supabase
+        .from("profiles")
+        .update({
+            monthly_points: newMonthlyPoints,
+            alltime_points: newAlltimePoints
+        })
+        .eq("id", userId);
+
+    if (updateError) throw updateError;
+}
+
+export async function getWalkedKilometers() {
+    const { data, error } = await supabase
+        .from("user_routes")
+        .select(`
+            routes (
+                distance
+            )
+        `);
+    if (error) throw error;
+    return data ?? [];
+}
+
+export async function getRoutesCompletedByUser(userId: string) {
+    const { data, error } = await supabase
+        .from("user_routes")
+        .select(`route_id, explored_at, routes(
+            distance
+        )`)
+        .eq("profile_id", userId);
+    if (error) throw error;
+    return data ?? [];
+}
+
+// Neue Funktion: Leaderboard abrufen
+export async function getLeaderboard(
+    timeframe: 'month' | 'alltime',
+    currentUserId?: string,
+    limit: number = 100
+): Promise<LeaderboardEntry[]> {
+    const pointsColumn = timeframe === 'month' ? 'monthly_points' : 'alltime_points';
+    
+    // Leaderboard-Daten abrufen
+    const { data, error } = await supabase
+        .from("profiles")
+        .select(`
+            id,
+            username,
+            monthly_points,
+            alltime_points
+        `)
+        .order(pointsColumn, { ascending: false })
+        .limit(limit);
+
+    if (error) throw error;
+
+    // Für jeden User: POI-Count und Distanz berechnen
+    const leaderboardPromises = data.map(async (profile, index) => {
+        // Anzahl besuchter POIs
+        const { count: poiCount } = await supabase
+            .from("user_POIs")
+            .select("*", { count: "exact", head: true })
+            .eq("profile_id", profile.id);
+
+        // Distanz aus abgeschlossenen Routen
+        const { data: routeData } = await supabase
+            .from("user_routes")
+            .select(`routes(distance)`)
+            .eq("profile_id", profile.id);
+
+        const totalDistance = routeData?.reduce((sum, item) => {
+            return sum + (item.routes?.[0].distance || 0);
+        }, 0) || 0;
+
+        return {
+            rank: index + 1,
+            username: profile.username || "Unbekannt",
+            points: profile[pointsColumn] || 0,
+            distanceKm: totalDistance / 1000, // Meter zu km
+            areasDiscovered: poiCount || 0,
+            isCurrentUser: currentUserId ? profile.id === currentUserId : false
+        } as LeaderboardEntry;
+    });
+
+    const leaderboard = await Promise.all(leaderboardPromises);
+    
+    console.log(`${timeframe} leaderboard:`, leaderboard);
+    return leaderboard;
 }
