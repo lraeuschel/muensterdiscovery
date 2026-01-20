@@ -7,7 +7,7 @@ import type { LanguageType } from "../components/languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
 import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 import majo from "../assets/ww.jpeg";
-import { getNumberOfUser } from "../services/DatabaseConnection";
+import { getAllDiscoveredPOIs, getNumberOfUser } from "../services/DatabaseConnection";
 
 type LeaderboardEntry = {
     rank: number;
@@ -24,6 +24,7 @@ export default function Leaderboard() {
     const [timeframe, setTimeframe] = useState<'month' | 'alltime'>('month');
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
     const [numberOfUsers, setNumberOfUsers] = useState<number>(0);
+    const [totalDiscoveredPOIs, setTotalDiscoveredPOIs] = useState<number>(0);
 
     useEffect(() => {
         async function fetchNumberOfUsers() {
@@ -31,6 +32,12 @@ export default function Leaderboard() {
             setNumberOfUsers(count);
         }
         fetchNumberOfUsers();
+
+        async function fetchTotalDiscoveredPOIs() {
+            const count = await getAllDiscoveredPOIs();
+            setTotalDiscoveredPOIs(count);
+        }
+        fetchTotalDiscoveredPOIs();
     }, []);
 
     <Box data-lang={currentLang}></Box>
@@ -88,7 +95,7 @@ export default function Leaderboard() {
                     />
                     <StatCard 
                         label={intl.formatMessage({ id: "stats.total_spots", defaultMessage: "Entdeckte Orte" })}
-                        value="8.234"
+                        value={totalDiscoveredPOIs === 0 ? "…" : String(totalDiscoveredPOIs)}
                         icon="📍"
                     />
                     <StatCard 
