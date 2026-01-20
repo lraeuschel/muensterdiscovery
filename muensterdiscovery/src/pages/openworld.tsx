@@ -139,7 +139,7 @@ export default function OpenWorld() {
     const [userLocation, setUserLocation] = useState<LatLngExpression | null>(null);
     const [user, setUser] = useState<any>(null);
 
-    const { datenportalPOIs, isLoading, error } = useDatenportalPOIs();
+    const { datenportalPOIs, isLoading } = useDatenportalPOIs();
 
     useEffect(() => onCurrentLanguageChange((lang) => setCurrentLang(lang)), []);
     useEffect(() => { getPOIs().then(setPois).catch(console.error); }, []);
@@ -217,7 +217,6 @@ export default function OpenWorld() {
         <Box w="100%" h="100vh" position="relative">
             <Header />
 
-            {error && <Box position="absolute" top="80px" left="50%" transform="translateX(-50%)" zIndex={1000}><Text color="red.500">{error}</Text></Box>}
             {isLoading && <Box position="absolute" top="80px" right="20px" zIndex={1000} bg="white" p={2} borderRadius="md" shadow="sm"><Spinner size="sm" mr={2} /> Lade Events...</Box>}
 
             {!markers.length ? (
