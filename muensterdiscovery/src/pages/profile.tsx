@@ -6,7 +6,8 @@ import {
     Text,
     Image,
     Button,
-    Grid
+    Grid,
+    Separator
 } from "@chakra-ui/react";
 import {
     MapContainer,
@@ -18,6 +19,7 @@ import {
 import "leaflet/dist/leaflet.css";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
+import L from "leaflet";
 
 import CompLangHeader from "../components/CompLangHeader";
 import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
@@ -25,8 +27,9 @@ import type { LanguageType } from "../components/languageSelector";
 
 import muensterdiscovery_logo from "../assets/logo.png";
 import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
+import marker_rot from "../icons/marker_rot.svg";
 
-import type { User, Achievement, POI, VisitedPOI } from "../types";
+import type { User, Achievement, VisitedPOI, Voronoi } from "../types";
 import {
     getCurrentUser,
     getCurrentUserProfile,
@@ -34,55 +37,32 @@ import {
     getVisitedPOIs,
     getVoronoiPolygons
 } from "../services/DatabaseConnection";
-
 import { supabase } from "../SupabaseClient";
-import type { Voronoi } from "../types";
-import marker_rot from "../icons/marker_rot.svg"
-
-import L from "leaflet";
-
-// --------------------------------------------------
-// Component
-// --------------------------------------------------
 
 export default function Profile() {
     const intl = useIntl();
     const navigate = useNavigate();
 
-    // --------------------------------------------------
-    // Language handling
-    // --------------------------------------------------
-
+    // ---------------- Language ----------------
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
-
     useEffect(() => {
         const unsubscribe = onCurrentLanguageChange(setCurrentLang);
         return unsubscribe;
     }, []);
 
-    // --------------------------------------------------
-    // Profile image handling
-    // --------------------------------------------------
-
-    const [profileImage, setProfileImage] = useState<string>(default_profile_image);
+    // ---------------- Profile Image ----------------
+    const [profileImage, setProfileImage] = useState(default_profile_image);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleChangeProfilePicture = () => {
         fileInputRef.current?.click();
     };
 
-    const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
+    const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || !file.type.startsWith("image/")) return;
 
-        if (!file.type.startsWith("image/")) {
-            alert(intl.formatMessage({ id: "profile.invalid_image" }));
-            return;
-        }
-
-        const previewUrl = URL.createObjectURL(file);
-        setProfileImage(previewUrl);
-
+        setProfileImage(URL.createObjectURL(file));
         await uploadProfileImage(file);
     };
 
@@ -90,247 +70,260 @@ export default function Profile() {
         const user = await getCurrentUser();
         if (!user) return;
 
-        const filePath = `${user.id}/profile_image.jpg`;
-
         const { error } = await supabase.storage
             .from("profile_images")
-            .upload(filePath, file, {
+            .upload(`${user.id}/profile_image.jpg`, file, {
                 upsert: true,
                 contentType: file.type
             });
 
-        if (!error) {
-            loadProfileImage(user.id);
-        }
+        if (!error) loadProfileImage(user.id);
     };
 
     const loadProfileImage = async (userId: string) => {
-        const { data, error } = await supabase.storage
+        const { data } = await supabase.storage
             .from("profile_images")
             .createSignedUrl(`${userId}/profile_image.jpg`, 300);
 
-        if (!error && data?.signedUrl) {
-            setProfileImage(data.signedUrl);
-        } else {
-            setProfileImage(default_profile_image);
-        }
+        setProfileImage(data?.signedUrl ?? default_profile_image);
     };
 
-    // --------------------------------------------------
-    // Data state
-    // --------------------------------------------------
-
+    // ---------------- Data ----------------
     const [profile, setProfile] = useState<User | null>(null);
     const [myAchievements, setMyAchievements] = useState<Achievement[]>([]);
     const [visitedPOIs, setVisitedPOIs] = useState<VisitedPOI[]>([]);
     const [voronois, setVoronois] = useState<Voronoi[]>([]);
 
-    // --------------------------------------------------
-    // Fetch user + map data
-    // --------------------------------------------------
-
     useEffect(() => {
         const fetchData = async () => {
             const user = await getCurrentUser();
-            if (!user) {
-                navigate("/login");
-                return;
-            }
+            if (!user) return navigate("/login");
 
-            const [
-                profileData,
-                achievements,
-                visitedpois,
-                voronoiData
-            ] = await Promise.all([
-                getCurrentUserProfile(user.id),
-                getUserAchievements(user.id),
-                getVisitedPOIs(user.id),
-                getVoronoiPolygons()
-            ]);
+            const [profileData, achievements, pois, voronoiData] =
+                await Promise.all([
+                    getCurrentUserProfile(user.id),
+                    getUserAchievements(user.id),
+                    getVisitedPOIs(user.id),
+                    getVoronoiPolygons()
+                ]);
 
             loadProfileImage(user.id);
-
             setProfile(profileData);
             setMyAchievements(achievements);
-
-            setVisitedPOIs(visitedpois);
+            setVisitedPOIs(pois);
             setVoronois(voronoiData);
         };
 
         fetchData();
     }, [navigate]);
 
-    // --------------------------------------------------
-    // Helpers
-    // --------------------------------------------------
-
+    // ---------------- Helpers ----------------
     const visitedPoiIds = useMemo(
         () => new Set(visitedPOIs.map(p => p.id)),
         [visitedPOIs]
     );
 
-    console.log("Visited POI IDs:", visitedPoiIds);
-
     const geoJsonToLatLngs = (geojson: any): [number, number][][][] => {
-        const geometry = geojson.type === "Feature"
-            ? geojson.geometry
-            : geojson;
-
-        if (geometry.type === "MultiPolygon") {
-            return geometry.coordinates.map(
-                (polygon: number[][][]) =>
-                    polygon.map(
-                        (ring: number[][]) =>
-                            ring.map(
-                                (coord: number[]) => [coord[1], coord[0]]
-                            )
-                    )
+        const g = geojson.type === "Feature" ? geojson.geometry : geojson;
+        if (g.type === "MultiPolygon")
+            return g.coordinates.map((p: number[][][]) =>
+                p.map((r: number[][]) => r.map(([lon, lat]) => [lat, lon]))
             );
-        }
-
-        if (geometry.type === "Polygon") {
+        if (g.type === "Polygon")
             return [
-                geometry.coordinates.map(
-                    (ring: number[][]) =>
-                        ring.map(
-                            (coord: number[]) => [coord[1], coord[0]]
-                        )
+                g.coordinates.map((r: number[][]) =>
+                    r.map(([lon, lat]) => [lat, lon])
                 )
             ];
-        }
-
         return [];
     };
 
-
-
-    const munsterCenter: [number, number] = [51.9607, 7.6261];
-
-    // --------------------------------------------------
-    // Render
-    // --------------------------------------------------
-
+    // ---------------- Render ----------------
     return (
-        <Box bg="orange.50" minH="100vh" pb={8} data-lang={currentLang}>
+        <Box minH="100vh" bg="orange.50" data-lang={currentLang}>
             <CompLangHeader />
 
-            <VStack gap={6} mt="80px" px={4}>
-                {/* Greeting */}
-                <Text fontSize="2xl" fontWeight="bold" color="orange.600">
-                    {intl.formatMessage(
-                        { id: "profile.greeting" },
-                        { username: profile?.username ?? "BavariaOne" }
-                    )}
-                </Text>
+            <VStack
+                gap={{ base: 6, md: 8 }}
+                pt={{ base: "80px", md: "90px" }}
+                pb={{ base: 6, md: 10 }}
+                px={{ base: 3, md: 8 }}
+                maxW="1200px"
+                mx="auto"
+            >
+                {/* HERO CARD */}
+                <Box
+                    w="full"
+                    bg="white"
+                    borderRadius="3xl"
+                    boxShadow="xl"
+                    p={{ base: 6, md: 8 }}
+                    border="1px solid"
+                    borderColor="orange.200"
+                >
+                    <HStack
+                        gap={{ base: 4, md: 6 }}
+                        align={{ base: "center", md: "flex-start" }}
+                        flexDirection={{ base: "column", md: "row" }}
+                        textAlign={{ base: "center", md: "left" }}
+                    >
+                        <Image
+                            src={profileImage}
+                            boxSize={{ base: "100px", md: "120px" }}
+                            borderRadius="full"
+                            border="4px solid"
+                            borderColor="orange.400"
+                            objectFit="cover"
+                        />
 
-                {/* Profile image + buttons */}
-                <HStack gap={6} align="start" flexWrap="wrap" justify="center">
-                    <Image
-                        src={profileImage}
-                        alt="Profilbild"
-                        borderRadius="full"
-                        boxSize="120px"
-                        border="4px solid"
-                        borderColor="orange.400"
-                        objectFit="cover"
-                    />
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleImageChange}
+                            accept="image/*"
+                            hidden
+                        />
 
-                    <input
-                        type="file"
-                        ref={fileInputRef}
-                        onChange={handleImageChange}
-                        accept="image/*"
-                        style={{ display: "none" }}
-                    />
-
-                    <VStack gap={3}>
-                        <Button colorPalette="orange" size="sm" width="200px" onClick={handleChangeProfilePicture}>
-                            {intl.formatMessage({ id: "profile.change_picture" })}
-                        </Button>
-                        <Button colorPalette="orange" size="sm" width="200px" variant="outline">
-                            {intl.formatMessage({ id: "profile.change_data" })}
-                        </Button>
-                        <Button
-                            colorPalette="orange"
-                            size="sm"
-                            width="200px"
-                            onClick={async () => {
-                                await supabase.auth.signOut();
-                                navigate("/login");
-                            }}
+                        <VStack
+                            align={{ base: "center", md: "flex-start" }}
+                            gap={3}
+                            flex="1"
                         >
-                            {intl.formatMessage({ id: "profile.logout" })}
-                        </Button>
-                    </VStack>
-                </HStack>
+                            <Text fontSize="2xl" fontWeight="800" color="orange.600">
+                                {intl.formatMessage(
+                                    { id: "profile.greeting" },
+                                    { username: profile?.username ?? "Explorer" }
+                                )}
+                            </Text>
 
-                {/* Map */}
-                <Box width="100%" maxW="600px">
-                    <Text fontSize="lg" fontWeight="semibold" color="orange.600" mb={2}>
-                        {intl.formatMessage({ id: "profile.explored_areas" })}
-                    </Text>
+                            <Separator borderColor="orange.200" />
 
-                    <Box height="300px" borderRadius="lg" overflow="hidden" border="2px solid" borderColor="orange.300">
-                        <MapContainer
-                            center={munsterCenter}
-                            zoom={12}
-                            style={{ width: "100%", height: "100%" }}
-                            scrollWheelZoom={false}
-                        >
+                            <HStack
+                                gap={2}
+                                flexWrap="wrap"
+                                justify={{ base: "center", md: "flex-start" }}
+                            >
+                                <Button
+                                    size="sm"
+                                    colorScheme="orange"
+                                    onClick={handleChangeProfilePicture}
+                                >
+                                    {intl.formatMessage({ id: "profile.change_picture" })}
+                                </Button>
+                                {/* <Button size="sm" variant="outline" colorScheme="orange">
+                                    {intl.formatMessage({ id: "profile.change_data" })}
+                                </Button> */}
+                                <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    colorScheme="red"
+                                    onClick={async () => {
+                                        await supabase.auth.signOut();
+                                        navigate("/login");
+                                    }}
+                                >
+                                    {intl.formatMessage({ id: "profile.logout" })}
+                                </Button>
+                            </HStack>
+                        </VStack>
+                    </HStack>
+                </Box>
+
+                {/* MAP CARD */}
+                <Box
+                    w="full"
+                    bg="white"
+                    borderRadius="3xl"
+                    boxShadow="xl"
+                    overflow="hidden"
+                    border="1px solid"
+                    borderColor="orange.200"
+                >
+                    <Box h={{ base: "260px", sm: "300px", md: "380px" }}>
+                        <MapContainer center={[51.9607, 7.6261]} zoom={12} style={{ height: "100%" }}>
                             <TileLayer
-                                attribution="&copy; OpenStreetMap contributors"
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                                url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                             />
 
-                            {/* Voronoi Polygons */}
-                            {voronois.map(v => {
-                                const isVisited = visitedPoiIds.has(v.id);
+                            {voronois.map(v => (
+                                <Polygon
+                                    key={v.id}
+                                    positions={geoJsonToLatLngs(v.geoJSON)}
+                                    pathOptions={{
+                                        color: visitedPoiIds.has(v.id) ? "#9b2c2c" : "#718096",
+                                        fillColor: visitedPoiIds.has(v.id) ? "#feb2b2" : "#e2e8f0",
+                                        fillOpacity: 0.2,
+                                        weight: visitedPoiIds.has(v.id) ? 3 : 1
+                                    }}
+                                />
+                            ))}
 
-                                return (
-                                    <Polygon
-                                        key={v.id}
-                                        positions={geoJsonToLatLngs(v.geoJSON)}
-                                        pathOptions={{
-                                            color: isVisited ? "#c53030" : "#718096",
-                                            fillColor: isVisited ? "#fc8181" : "#a0aec0",
-                                            fillOpacity: isVisited ? 0.5 : 0.3,
-                                            weight: 1
-                                        }}
-                                    />
-                                );
-                            })}
-
-                            {/* Visited POI markers */}
                             {visitedPOIs.map(poi => (
-                                <Marker key={poi.id} position={[poi.lat, poi.lon]} icon={L.icon({ iconUrl: marker_rot, iconSize: [30, 30], iconAnchor: [15, 30] })}>
-                                    <Popup offset={[0, -20]}>{poi.name}, {intl.formatMessage({ id: "profile.visited_at" })} {intl.formatDate(new Date(poi.visited))}, {intl.formatTime(new Date(poi.visited))}</Popup>
+                                <Marker
+                                    key={poi.id}
+                                    position={[poi.lat, poi.lon]}
+                                    icon={L.icon({
+                                        iconUrl: marker_rot,
+                                        iconSize: [30, 30],
+                                        iconAnchor: [15, 30]
+                                    })}
+                                >
+                                    <Popup offset={[0, -20]}>
+                                        <strong>{poi.name}</strong>
+                                        <br />
+                                        {intl.formatMessage({ id: "profile.visited_at" })}{" "}
+                                        {intl.formatDate(new Date(poi.visited), {
+                                            dateStyle: "medium",
+                                            timeStyle: "short"
+                                        })}
+                                    </Popup>
                                 </Marker>
                             ))}
                         </MapContainer>
                     </Box>
                 </Box>
 
-                {/* Achievements */}
-                <Box width="100%" maxW="600px">
-                    <Text fontSize="lg" fontWeight="semibold" color="orange.600" mb={4}>
-                        {intl.formatMessage({ id: "profile.achievements" })}
-                    </Text>
-
-                    <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={6}>
-                        {myAchievements.length === 0 ? (
-                            <Text color="orange.500">Noch keine Auszeichnungen verdient.</Text>
-                        ) : (
-                            myAchievements.map(a => (
-                                <VStack key={a.id} gap={2}>
-                                    <Box p={2} borderRadius="full" border="4px solid" borderColor="gold" bg="white">
-                                        <Image src={muensterdiscovery_logo} boxSize="80px" borderRadius="full" />
-                                    </Box>
-                                    <Text fontWeight="bold" textAlign="center">{a.achievement}</Text>
-                                    <Text fontSize="sm" color="gray.600" textAlign="center">{a.description}</Text>
-                                </VStack>
-                            ))
-                        )}
+                {/* ACHIEVEMENTS */}
+                <Box w="full">
+                    <Grid
+                        templateColumns={{
+                            base: "1fr",
+                            sm: "repeat(2, 1fr)",
+                            md: "repeat(3, 1fr)"
+                        }}
+                        gap={{ base: 4, md: 6 }}
+                    >
+                        {myAchievements.map(a => (
+                            <Box
+                                key={a.id}
+                                bg="white"
+                                borderRadius="2xl"
+                                p={5}
+                                boxShadow="md"
+                                textAlign="center"
+                                border="1px solid"
+                                borderColor="orange.200"
+                                _hover={{
+                                    transform: "translateY(-4px)",
+                                    boxShadow: "xl",
+                                    borderColor: "orange.400"
+                                }}
+                            >
+                                <Image
+                                    src={muensterdiscovery_logo}
+                                    boxSize="70px"
+                                    mx="auto"
+                                    mb={3}
+                                />
+                                <Text fontWeight="700" color="orange.700">
+                                    {a.achievement}
+                                </Text>
+                                <Text fontSize="sm" color="gray.600">
+                                    {a.description}
+                                </Text>
+                            </Box>
+                        ))}
                     </Grid>
                 </Box>
             </VStack>
