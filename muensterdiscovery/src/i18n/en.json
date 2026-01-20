@@ -115,6 +115,9 @@
     "playroute.get_closer": "You are too far away to mark this POI.",
     "playroute.approx_distance": "Approx. ",
     "playroute.mark_visited": "Mark POI as visited",
+    "playroute.route_completed_header": "Congratulations! You have completed the route!",
+    "playroute.route_completed_description": "You have visited all POIs on this route. Keep it up!",
+    "playroute.back_to_routes": "Back to Route Selection",
 
     "chat.example1": "Which achievements have I already completed?",
     "chat.example2": "Where can I find the leaderboard?",

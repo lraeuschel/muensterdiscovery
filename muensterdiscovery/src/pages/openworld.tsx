@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useIntl } from "react-intl";
 //import { useNavigate } from "react-router-dom";
-import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl} from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, ZoomControl, LayersControl } from "react-leaflet";
 import L from "leaflet";
 import type { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -19,6 +19,10 @@ import marker_grau from "../icons/marker_grau.svg";
 import marker_rot from "../icons/marker_rot.svg";
 import marker_orange from "../icons/marker_orange.svg";
 
+import MarkerClusterGroup from "react-leaflet-cluster";
+import "leaflet.markercluster/dist/MarkerCluster.css";
+import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
 // --------------------------- ICONS ---------------------------
 const markerVisitedPOI = L.icon({ iconUrl: marker_grau, iconSize: [30, 30], iconAnchor: [15, 30] });
 const markerUnvisitedPOI = L.icon({ iconUrl: marker_rot, iconSize: [30, 30], iconAnchor: [15, 30] });
@@ -30,6 +34,40 @@ const getImageUrl = (imagePath?: string) => {
     if (!imagePath) return undefined;
     return `${SUPABASE_URL}/storage/v1/object/public/${imagePath}`;
 };
+
+const redClusterIcon = (cluster: any) => {
+  const count = cluster.getChildCount();
+
+  // Dark → brighter red
+  let bgColor = "rgb(220, 40, 40)";       // small clusters
+  if (count >= 10) bgColor = "rgb(245, 85, 85)"; // medium clusters
+  if (count >= 30) bgColor = "rgb(255, 150, 150)"; // large clusters
+
+  return L.divIcon({
+    html: `
+      <div style="
+        background:${bgColor};
+        color:white;
+        width:42px;
+        height:42px;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:700;
+        font-size:14px;
+      ">
+        ${count}
+      </div>
+    `,
+    className: "red-cluster",
+    iconSize: L.point(42, 42),
+    iconAnchor: [21, 21],
+  });
+};
+
+
+
 
 // Event Icon (SVG)
 const eventIcon = new L.DivIcon({
@@ -106,8 +144,8 @@ export default function OpenWorld() {
     useEffect(() => onCurrentLanguageChange((lang) => setCurrentLang(lang)), []);
     useEffect(() => { getPOIs().then(setPois).catch(console.error); }, []);
     useEffect(() => { getCurrentUser().then(u => setUser(u)); }, []);
-    useEffect(() => { 
-        if (user) getVisitedPOIs(user.id).then(v => setVisitedPOIs(v.map(p => p.id))); 
+    useEffect(() => {
+        if (user) getVisitedPOIs(user.id).then(v => setVisitedPOIs(v.map(p => p.id)));
     }, [user]);
 
     useEffect(() => {
@@ -144,7 +182,6 @@ export default function OpenWorld() {
         const dist = getDistanceToPOI(poi);
         return dist !== null && dist <= 50;
     };
-
     const markers = useMemo(() => {
         const standardMarkers = pois.map(poi => ({
             id: `poi-${poi.id}`,
@@ -192,19 +229,19 @@ export default function OpenWorld() {
                     <ZoomControl position="bottomright" />
 
                     <LayersControl position="bottomleft">
-                        <LayersControl.BaseLayer checked name="Stadtplan">
+                        <LayersControl.BaseLayer checked name={intl.formatMessage({ id: "zoomcontrols.default" })}>
                             <TileLayer
                                 attribution='&copy; OpenStreetMap'
                                 url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                             />
                         </LayersControl.BaseLayer>
-                        <LayersControl.BaseLayer name="Satellit">
+                        <LayersControl.BaseLayer name={intl.formatMessage({ id: "zoomcontrols.satellite" })}>
                             <TileLayer
                                 attribution='&copy; Esri'
                                 url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
                             />
                         </LayersControl.BaseLayer>
-                        <LayersControl.BaseLayer name="Dark Mode">
+                        <LayersControl.BaseLayer name={intl.formatMessage({ id: "zoomcontrols.darkmode" })}>
                             <TileLayer
                                 attribution='&copy; OpenStreetMap'
                                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
@@ -212,59 +249,68 @@ export default function OpenWorld() {
                         </LayersControl.BaseLayer>
                     </LayersControl>
 
-                    {userLocation && <Marker position={userLocation} icon={markerUserLocation}><Popup offset={[0,-20]}>{intl.formatMessage({ id: "openworld.user_location" })}</Popup></Marker>}
+                    {userLocation && <Marker position={userLocation} icon={markerUserLocation}><Popup offset={[0, -20]}>{intl.formatMessage({ id: "openworld.user_location" })}</Popup></Marker>}
 
-                    {markers.map(marker => (
-                        <Marker key={marker.id} position={marker.position} icon={marker.icon}>
-                            <Popup offset={[0,-20]}>
-                                <VStack align="start" gap={2} minW="200px" maxW="300px">
-                                    <Heading size="sm">{marker.name}</Heading>
+                    <MarkerClusterGroup
+                        iconCreateFunction={redClusterIcon}
+                        chunkedLoading
+                        spiderfyOnMaxZoom
+                        showCoverageOnHover={false}
+                        zoomToBoundsOnClick
+                        maxClusterRadius={50}
+                    >
+                        {markers.map(marker => (
+                            <Marker key={marker.id} position={marker.position} icon={marker.icon}>
+                                <Popup offset={[0, -20]}>
+                                    <VStack align="start" gap={2} minW="200px" maxW="300px">
+                                        <Heading size="sm">{marker.name}</Heading>
 
-                                    {marker.type === "poi" && marker.image && (
-                                        <Box w="100%" h="150px">
-                                            <img src={getImageUrl(marker.image)} alt={marker.name} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 6 }} />
-                                        </Box>
-                                    )}
+                                        {marker.type === "poi" && marker.image && (
+                                            <Box w="100%" h="150px">
+                                                <img src={getImageUrl(marker.image)} alt={marker.name} style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 6 }} />
+                                            </Box>
+                                        )}
 
-                                    {marker.type === "poi" && marker.info && <Text fontSize="sm">{marker.info}</Text>}
+                                        {marker.type === "poi" && marker.info && <Text fontSize="sm">{marker.info}</Text>}
 
-                                    {marker.type === "poi" && marker.poi && (
-                                        <>
-                                            {visitedPOIs.includes(marker.poi.id) ? (
-                                                <Text fontSize="sm" color="green.600">{intl.formatMessage({ id: "openworld.visited" })}</Text>
-                                            ) : isNearPOI(marker.poi) ? (
-                                                <Button mt={2} colorScheme="green" w="100%" size="sm" onClick={() => markPOIAsVisited(marker.poi.id)}>
-                                                    {intl.formatMessage({ id: "openworld.mark_visited" })}
-                                                </Button>
-                                            ) : (
-                                                getDistanceToPOI(marker.poi) !== null && <Text fontSize="xs" color="gray.500">
-                                                    {intl.formatMessage({ id: "openworld.approx_distance" })}{Math.round(getDistanceToPOI(marker.poi)!)} m
-                                                </Text>
-                                            )}
-                                        </>
-                                    )}
+                                        {marker.type === "poi" && marker.poi && (
+                                            <>
+                                                {visitedPOIs.includes(marker.poi.id) ? (
+                                                    <Text fontSize="sm" color="green.600">{intl.formatMessage({ id: "openworld.visited" })}</Text>
+                                                ) : isNearPOI(marker.poi) ? (
+                                                    <Button mt={2} colorScheme="green" w="100%" size="sm" onClick={() => markPOIAsVisited(marker.poi.id)}>
+                                                        {intl.formatMessage({ id: "openworld.mark_visited" })}
+                                                    </Button>
+                                                ) : (
+                                                    getDistanceToPOI(marker.poi) !== null && <Text fontSize="xs" color="gray.500">
+                                                        {intl.formatMessage({ id: "openworld.approx_distance" })}{Math.round(getDistanceToPOI(marker.poi)!)} m
+                                                    </Text>
+                                                )}
+                                            </>
+                                        )}
 
-                                    {marker.type === "event" && marker.poi && (
-                                        <VStack align="start" gap={1}>
-                                            <Text fontSize="sm" color="red.500" fontWeight="bold">Veranstaltung</Text>
+                                        {marker.type === "event" && marker.poi && (
+                                            <VStack align="start" gap={1}>
+                                                <Text fontSize="sm" color="red.500" fontWeight="bold">Veranstaltung</Text>
                                                 {"startDate" in marker.poi && marker.poi.startDate && (
-                                                <Text fontSize="xs">Start: {new Date(marker.poi.startDate).toLocaleString()}</Text>
+                                                    <Text fontSize="xs">Start: {new Date(marker.poi.startDate).toLocaleString()}</Text>
                                                 )}
 
                                                 {"endDate" in marker.poi && marker.poi.endDate && (
-                                                <Text fontSize="xs">Ende: {new Date(marker.poi.endDate).toLocaleString()}</Text>
-                                                )}                                       
-                                        </VStack>
-                                    )}
+                                                    <Text fontSize="xs">Ende: {new Date(marker.poi.endDate).toLocaleString()}</Text>
+                                                )}
+                                            </VStack>
+                                        )}
 
-                                    {marker.type === "bike" && marker.poi && (
-                                        <Text fontSize="sm">Fahrradverleih</Text>
-                                    )}
+                                        {marker.type === "bike" && marker.poi && (
+                                            <Text fontSize="sm">Fahrradverleih</Text>
+                                        )}
 
-                                </VStack>
-                            </Popup>
-                        </Marker>
-                    ))}
+                                    </VStack>
+                                </Popup>
+                            </Marker>
+                        ))}
+                    </MarkerClusterGroup>
                 </MapContainer>
             )}
         </Box>

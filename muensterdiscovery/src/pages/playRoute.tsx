@@ -363,18 +363,18 @@ export default function PlayRoute() {
                         w="full"
                         textAlign="center"
                     >
-                        <Heading mb={3}>🎉 Route abgeschlossen!</Heading>
+                        <Heading mb={3}>{intl.formatMessage({ id: "playroute.route_completed_header" })}</Heading>
 
                         <Text mb={5}>
-                            Super! Du hast alle POIs dieser Route entdeckt.
+                            {intl.formatMessage({ id: "playroute.route_completed_description" })}
                         </Text>
 
                         <Button
-                            colorScheme="green"
+                            bg={"green"}
                             w="full"
-                            onClick={() => navigate("/routes")}
+                            onClick={() => navigate("/routeselection")}
                         >
-                            Zurück zur Routenauswahl
+                            {intl.formatMessage({ id: "playroute.back_to_routes" })}
                         </Button>
                     </Box>
                 </Box>
