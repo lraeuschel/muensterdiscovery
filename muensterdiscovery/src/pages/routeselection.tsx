@@ -483,7 +483,7 @@ export default function RouteSelection() {
                         lineClamp={2}
                         mb={3}
                       >
-                        {route.description}
+                        {intl.formatMessage({ id: `route.${route.id}` })}
                       </Text>
                       <HStack gap={3} fontSize="xs" color="gray.400">
                         <Flex align="center" gap={1}>
