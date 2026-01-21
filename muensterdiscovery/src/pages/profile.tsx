@@ -336,6 +336,18 @@ export default function Profile() {
                     </Box>
                 </Box>
 
+                {/* ACHIEVEMENTS TITLE */}
+                <Box w="100%">
+                    <Text
+                        fontSize="xl"
+                        fontWeight="bold"
+                        color="orange.600"
+                        textAlign="left"
+                    >
+                        {intl.formatMessage({ id: "profile.achievements" })}
+                    </Text>
+                </Box>
+
                 {/* ACHIEVEMENTS */}
                 <Box w="full">
                     <Grid
