@@ -1,4 +1,5 @@
 import { supabase } from "../SupabaseClient";
+import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI, LeaderboardEntry } from "../types";
 
 export async function getCurrentUser() {
@@ -285,7 +286,7 @@ export async function getLeaderboard(
 
     if (error) throw error;
 
-    // Für jeden User: POI-Count und Distanz berechnen
+    // Für jeden User: POI-Count, Distanz und Profilbild berechnen
     const leaderboardPromises = data.map(async (profile, index) => {
         // Anzahl besuchter POIs
         const { count: poiCount } = await supabase
@@ -303,13 +304,19 @@ export async function getLeaderboard(
             return sum + (item.routes?.[0].distance || 0);
         }, 0) || 0;
 
+        const { data: profileImage } = supabase.storage
+            .from('profile_images')
+            .getPublicUrl(`${profile.id}/profile_image.jpg`);
+            console.log("Fetched profile image URL:", profileImage);
+
         return {
             rank: index + 1,
             username: profile.username || "Unbekannt",
             points: profile[pointsColumn] || 0,
             distanceKm: totalDistance / 1000, // Meter zu km
             areasDiscovered: poiCount || 0,
-            isCurrentUser: currentUserId ? profile.id === currentUserId : false
+            isCurrentUser: currentUserId ? profile.id === currentUserId : false,
+            profileImageUrl: profileImage?.publicUrl || default_profile_image,
         } as LeaderboardEntry;
     });
 

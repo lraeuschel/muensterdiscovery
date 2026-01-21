@@ -63,5 +63,5 @@ export type LeaderboardEntry = {
     distanceKm: number;
     areasDiscovered: number;
     isCurrentUser?: boolean;
-    isMajo?: boolean;
+    profileImageUrl?: string;
 };

@@ -4,10 +4,9 @@ import { useIntl } from 'react-intl';
 import CompLangHeader from "../components/CompLangHeader";
 import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
-import muensterdiscovery_logo from "../assets/logo.png";
-import profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 import { getAllDiscoveredPOIs, getNumberOfUser, getWalkedKilometers, getCurrentUser, getLeaderboard } from "../services/DatabaseConnection";
 import type { LeaderboardEntry } from "../types";
+import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
 
 export default function Leaderboard() {
     const intl = useIntl();
@@ -20,7 +19,7 @@ export default function Leaderboard() {
     const [alltimeLeaderboard, setAllTimeLeaderboard] = useState<LeaderboardEntry[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
-        useEffect(() => {
+    useEffect(() => {
         async function fetchData() {
             try {
                 setIsLoading(true);
@@ -175,12 +174,13 @@ export default function Leaderboard() {
                                 </Box>
 
                                 <Image
-                                    src={entry.isCurrentUser ? profile_image : muensterdiscovery_logo}
+                                    src={entry.profileImageUrl}
                                     alt={entry.username}
                                     boxSize="40px"
                                     borderRadius="full"
                                     border="2px solid"
                                     borderColor={entry.rank === 1 ? "gold" : "gray.200"}
+                                    onError={(e) => {(e.currentTarget as HTMLImageElement).src = default_profile_image;}}
                                 />
 
                                 <VStack align="start" gap={0} flex={1}>
@@ -195,7 +195,7 @@ export default function Leaderboard() {
                                         )}
                                     </HStack>
                                     <Text fontSize="xs" color="gray.500">
-                                        {entry.areasDiscovered} {intl.formatMessage({ id: "leaderboard.areas", defaultMessage: "Bereiche" })}
+                                        {entry.areasDiscovered} {intl.formatMessage({ id: entry.areasDiscovered === 1 ? "leaderboard.areas_one" : "leaderboard.areas", defaultMessage: entry.areasDiscovered === 1 ? "Bereich" : "Bereiche" })}
                                     </Text>
                                 </VStack>
 
