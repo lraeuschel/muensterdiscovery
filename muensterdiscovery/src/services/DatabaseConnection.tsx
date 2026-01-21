@@ -177,6 +177,8 @@ export async function addVisitedPOI(
         .single();
     if (error) throw error;
     await updateUserPoints(profile_id, 10); // Beispiel: 10 Punkte pro POI
+
+    checkAndUnlockPoiAchievements(profile_id).catch((e) => console.error("Fehler beim Prüfen der Achievements:", e));
     return data;
 }
 
@@ -324,4 +326,87 @@ export async function getLeaderboard(
     
     console.log(`${timeframe} leaderboard:`, leaderboard);
     return leaderboard;
+}
+
+// Alle Achievements abrufen
+export async function getAllAchievementDefinitions() {
+    const { data, error } = await supabase
+        .from("achievements")
+        .select("id, achievement, description");
+    if (error) throw error;
+    return data as Achievement[];
+}
+
+export async function checkAndUnlockPoiAchievements(userId: string) {
+    // 1. Daten abrufen: Anzahl besuchter POIs und Gesamtanzahl POIs
+    const { count: visitedCount, error: visitedError } = await supabase
+        .from("user_POIs")
+        .select("*", { count: "exact", head: true })
+        .eq("profile_id", userId);
+    
+    if (visitedError) throw visitedError;
+
+    const { count: totalPoiCount, error: totalError } = await supabase
+        .from("POIs")
+        .select("*", { count: "exact", head: true });
+
+    if (totalError) throw totalError;
+
+    // 2. Bereits erhaltene Achievements des Users laden (nur IDs)
+    const { data: userAchievementsData, error: uaError } = await supabase
+        .from("user_achievements")
+        .select("achievement_id")
+        .eq("profile_id", userId);
+
+    if (uaError) throw uaError;
+    const ownedAchievementIds = new Set(userAchievementsData?.map((ua: any) => ua.achievement_id));
+
+    // 3. Alle Achievement-Definitionen laden, um die IDs zu den Namen zu finden
+    const allDefinitions = await getAllAchievementDefinitions();
+
+    // 4. Logik-Definition: Welches Limit gehört zu welchem Achievement-Namen?
+    const rules = [
+        { threshold: 20, achievementName: "20 POIs discovered" },
+        { threshold: 40, achievementName: "40 POIs discovered" },
+        { threshold: 60, achievementName: "60 POIs discovered" },
+        { threshold: 80, achievementName: "80 POIs discovered" },
+        { threshold: 100, achievementName: "100 POIs discovered" },
+        // Spezialfall: Alle POIs (wenn visited >= total und total > 0)
+        { threshold: totalPoiCount || 9999, achievementName: "All POIs discovered" } 
+    ];
+
+    const newAchievements = [];
+
+    // 5. Prüfen und Einfügen
+    for (const rule of rules) {
+        // Haben wir genug POIs besucht?
+        if ((visitedCount || 0) >= rule.threshold) {
+            // Finde die ID zu diesem Achievement-Namen
+            const definition = allDefinitions.find(d => d.achievement === rule.achievementName);
+            
+            if (definition) {
+                // Hat der User das Achievement schon?
+                if (!ownedAchievementIds.has(definition.id)) {
+                    // Nein -> Hinzufügen zur Liste der neu zu erstellenden
+                    newAchievements.push({
+                        profile_id: userId,
+                        achievement_id: definition.id,
+                        time_achieved: new Date().toISOString()
+                    });
+                }
+            } else {
+                console.warn(`Achievement mit Name '${rule.achievementName}' nicht in der DB gefunden.`);
+            }
+        }
+    }
+
+    // Wenn es neue Achievements gibt, ab in die DB damit
+    if (newAchievements.length > 0) {
+        const { error: insertError } = await supabase
+            .from("user_achievements")
+            .insert(newAchievements);
+        
+        if (insertError) throw insertError;
+        console.log("Neue Achievements freigeschaltet:", newAchievements.length);
+    }
 }
