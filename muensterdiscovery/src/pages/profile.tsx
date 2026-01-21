@@ -32,7 +32,8 @@ import {
     getCurrentUserProfile,
     getUserAchievements,
     getVisitedPOIs,
-    getVoronoiPolygons
+    getVoronoiPolygons,
+    checkAndUnlockPoiAchievements
 } from "../services/DatabaseConnection";
 import { supabase } from "../SupabaseClient";
 
@@ -112,6 +113,12 @@ export default function Profile() {
             if (!user) {
                 navigate("/login");
                 return;
+            }
+
+            try {
+                await checkAndUnlockPoiAchievements(user.id);
+            } catch (e) {
+                console.error("Fehler beim Prüfen der Achievements:", e);
             }
 
             const [profileData, achievements, pois, voronoiData] =
