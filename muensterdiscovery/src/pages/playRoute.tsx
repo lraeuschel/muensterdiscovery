@@ -952,7 +952,7 @@ export default function PlayRoute() {
                         lineClamp={3}
                         as="div"
                       >
-                        {poi.info}
+                        {intl.formatMessage({ id: `poi.${poi.id}` })}
                       </Text>
                     </Box>
                   ))}

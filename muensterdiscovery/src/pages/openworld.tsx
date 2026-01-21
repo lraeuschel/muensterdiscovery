@@ -187,12 +187,15 @@ export default function OpenWorld() {
             id: `poi-${poi.id}`,
             poi,
             name: poi.name,
-            info: poi.info,
+            info: intl.formatMessage({ id: `poi.${poi.id}` }),
             position: [poi.lat, poi.lon] as LatLngExpression,
             icon: visitedPOIs.includes(poi.id) ? markerVisitedPOI : markerUnvisitedPOI,
             type: "poi",
             image: poi.image_path
         }));
+
+        console.log(intl.messages["poi.94"]);
+
 
         const datenportalMarkers = datenportalPOIs.map(poi => {
             let icon = eventIcon;
@@ -211,7 +214,7 @@ export default function OpenWorld() {
         });
 
         return [...standardMarkers, ...datenportalMarkers];
-    }, [pois, visitedPOIs, datenportalPOIs]);
+    }, [pois, visitedPOIs, datenportalPOIs, intl]);
 
     return (
         <Box w="100%" h="100vh" position="relative">
