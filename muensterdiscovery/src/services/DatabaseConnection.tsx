@@ -16,7 +16,7 @@ export async function getCurrentUserProfile(userId: string) {
         .single();
     if (error) throw error;
 
-    console.log("Fetched user profile:", data);
+    // console.log("Fetched user profile:", data);
     return data as User;
 }
 

@@ -30,7 +30,7 @@
     "openworld.loading": "Lade Daten...",
     "openworld.more_info": "Weitere Informationen",
     "openworld.user_location": "Dein Standort",
-    "openworld.visited": "Bereits besucht",
+    "openworld.visited_at": "Bereits besucht am: ",
     "openworld.mark_visited": "POI abhaken",
     "openworld.approx_distance": "Noch ca. ",
 
