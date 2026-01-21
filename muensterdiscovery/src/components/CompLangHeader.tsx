@@ -7,6 +7,8 @@ import MenuComponent from "./menu";
 import { languageItems, currentLanguage, setCurrentLanguage } from "./languageSelector";
 //import type { LanguageType } from "./languageSelector";
 import muensterdiscovery_logo from "../assets/logo.png";
+import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
+
 
 export default function CompLangHeader() {
     const navigate = useNavigate();
@@ -19,19 +21,25 @@ export default function CompLangHeader() {
             setUser(session?.user ?? null);
         });
 
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            setUser(session?.user ?? null);
-        });
+        const { data: { subscription } } =
+            supabase.auth.onAuthStateChange((_event, session) => {
+                setUser(session?.user ?? null);
+            });
 
         return () => subscription.unsubscribe();
     }, []);
 
-    const handleProfileClick = () => {
-        navigate("/profile");
+    const getProfileImage = (userId: string) => {
+        const { data } = supabase.storage
+            .from('profile_images')
+            .getPublicUrl(`${userId}/profile_image.jpg`);
+            
+        return data.publicUrl; // Das ist die direkte URL zum Bild
     };
 
-    const getInitials = (email: string) => {
-        return email ? email.charAt(0).toUpperCase() : "U";
+
+    const handleProfileClick = () => {
+        navigate("/profile");
     };
 
     const boxStyles = {
@@ -109,10 +117,10 @@ export default function CompLangHeader() {
                             bg="orange.500"
                             _hover={{ opacity: 0.8 }}
                         >
+                            <Avatar.Image src={getProfileImage(user?.id ?? "")} loading="eager"/>
                             <Avatar.Fallback color="white">
-                                {getInitials(user.email || "U")}
+                                {default_profile_image}
                             </Avatar.Fallback>
-                            <Avatar.Image src={user.user_metadata?.avatar_url} />
                         </Avatar.Root>
                     ) : (
                         <Button 

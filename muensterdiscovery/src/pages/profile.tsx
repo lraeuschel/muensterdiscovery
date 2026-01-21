@@ -17,6 +17,8 @@ export default function Profile() {
     const intl = useIntl();
     const navigate = useNavigate();
     const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [profileImage, setProfileImage] = useState<string>(default_profile_image);
 
     <Box data-lang={currentLang}></Box>
 
@@ -28,8 +30,6 @@ export default function Profile() {
     }, []);
 
     // State für Profilbild
-    const [profileImage, setProfileImage] = useState<string>(default_profile_image);
-    const fileInputRef = useRef<HTMLInputElement>(null);
 
     // Handler für Bildauswahl
     const handleImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,11 +42,7 @@ export default function Profile() {
                 return;
             }
 
-        // 2. Erstelle eine lokale URL für das Bild
-        const previewUrl = URL.createObjectURL(file);
-        setProfileImage(previewUrl);
-
-        // 3. Lade das Bild zu Supabase Storage hoch
+        // 2. Lade das Bild zu Supabase Storage hoch
         await uploadProfileImage(file);
     };
 
@@ -81,17 +77,15 @@ export default function Profile() {
     };
 
     const loadProfileImage = async (userId: string) => {
-        const { data, error } = await supabase.storage
+        const { data } = supabase.storage
             .from('profile_images')
-            .createSignedUrl(`${userId}/profile_image.jpg`, 300);
+            .getPublicUrl(`${userId}/profile_image.jpg`);
 
-        if (error) {
-            console.error("Error fetching image URL:", error);
+        if (data.publicUrl) {
+            setProfileImage(data.publicUrl);
+        } else {
             setProfileImage(default_profile_image);
-            return;
         }
-
-        setProfileImage(data.signedUrl);
     };
 
 
@@ -116,13 +110,13 @@ export default function Profile() {
                     return;
                 }
 
-                // Lade alle Daten parallel
                 const [profileData, achievements, pois] = await Promise.all([
                     getCurrentUserProfile(user.id),
                     getUserAchievements(user.id),
                     getVisitedPOIs(user.id),
                 ]);
 
+                // Public URL statt Signed URL
                 loadProfileImage(user.id);
 
                 setProfile(profileData);
@@ -136,6 +130,7 @@ export default function Profile() {
 
         fetchUserData();
     }, [navigate]);
+
 
     return (
         <Box bg="orange.50" minH="100vh" pb={8}>
@@ -158,6 +153,9 @@ export default function Profile() {
                         border="4px solid"
                         borderColor="orange.400"
                         objectFit="cover"
+                        onError={(e) => {
+                            (e.currentTarget as HTMLImageElement).src = default_profile_image;
+                        }}
                     />
 
                     {/* Hidden file input */}
