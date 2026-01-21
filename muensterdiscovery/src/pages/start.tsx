@@ -85,7 +85,7 @@ export default function Start() {
             content: (
                 <VStack gap={2} textAlign="center" maxW="600px">
                     <Text fontSize="md" color="gray.700" lineClamp={3}>
-                        {randomPOI?.info}
+                        {intl.formatMessage({ id: `poi.${randomPOI?.id}` })}
                     </Text>
                 </VStack>
             ),
