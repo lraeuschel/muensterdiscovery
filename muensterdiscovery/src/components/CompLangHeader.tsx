@@ -33,7 +33,7 @@ export default function CompLangHeader() {
         const { data } = supabase.storage
             .from('profile_images')
             .getPublicUrl(`${userId}/profile_image.jpg`);
-            
+
         return data.publicUrl; // Das ist die direkte URL zum Bild
     };
 
@@ -55,7 +55,7 @@ export default function CompLangHeader() {
     return (
         <>
             {/* --- LINKE SEITE (Menü + Logo) --- */}
-            <Box 
+            <Box
                 {...boxStyles}
                 left="10px"
             >
@@ -69,14 +69,14 @@ export default function CompLangHeader() {
                         cursor="pointer"
                         _hover={{ opacity: 0.8 }}
                         transition="opacity 0.2s"
-                        border = "0px"
+                        border="0px"
                         bg="white"
                     />
                 </HStack>
             </Box>
 
             {/* --- RECHTE SEITE (Sprache + Profil / Login) --- */}
-            <Box 
+            <Box
                 {...boxStyles}
                 right="10px"
             >
@@ -84,23 +84,57 @@ export default function CompLangHeader() {
                     {/* Language Selector */}
                     <Menu.Root>
                         <Menu.Trigger asChild>
-                            <Button variant="ghost" size="sm" fontSize="xs">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                fontWeight="600"
+                                _hover={{ bg: "orange.100" }}
+                                px={3}
+                            >
                                 {languageItems.find(l => l.value === currentLanguage)?.label}
                             </Button>
                         </Menu.Trigger>
 
                         <Portal>
                             <Menu.Positioner>
-                                <Menu.Content>
-                                    {languageItems.map((language) => (
+                                <Menu.Content
+                                    bg="white"
+                                    borderRadius="2xl"
+                                    boxShadow="xl"
+                                    border="1px solid"
+                                    borderColor="orange.200"
+                                    p={2}
+                                    minW="140px"
+                                >
+                                    {languageItems.map(language => (
                                         <Menu.Item
                                             key={language.value}
                                             value={language.value}
-                                            onClick={() => {
-                                                setCurrentLanguage(language.value);
-                                            }}
+                                            onClick={() => setCurrentLanguage(language.value)}
+                                            borderRadius="xl"
+                                            px={3}
+                                            py={2.5}
+                                            _hover={{ bg: "orange.50" }}
+                                            _focus={{ bg: "orange.100" }}
                                         >
-                                            <Text fontSize="sm">{language.label}</Text>
+                                            <HStack justify="space-between" w="full">
+                                                <Text
+                                                    fontWeight="600"
+                                                    color="gray.700"
+                                                    fontSize="sm"
+                                                >
+                                                    {language.label}
+                                                </Text>
+
+                                                {language.value === currentLanguage && (
+                                                    <Box
+                                                        w="6px"
+                                                        h="6px"
+                                                        borderRadius="full"
+                                                        bg="orange.400"
+                                                    />
+                                                )}
+                                            </HStack>
                                         </Menu.Item>
                                     ))}
                                 </Menu.Content>
@@ -108,24 +142,25 @@ export default function CompLangHeader() {
                         </Portal>
                     </Menu.Root>
 
+
                     {/* Login / Avatar */}
                     {user ? (
-                        <Avatar.Root 
-                            size="sm" 
+                        <Avatar.Root
+                            size="sm"
                             onClick={handleProfileClick}
                             cursor="pointer"
                             bg="orange.500"
                             _hover={{ opacity: 0.8 }}
                         >
-                            <Avatar.Image src={getProfileImage(user?.id ?? "")} loading="eager"/>
+                            <Avatar.Image src={getProfileImage(user?.id ?? "")} loading="eager" />
                             <Avatar.Fallback color="white">
                                 {default_profile_image}
                             </Avatar.Fallback>
                         </Avatar.Root>
                     ) : (
-                        <Button 
-                            size="sm" 
-                            colorScheme="orange" 
+                        <Button
+                            size="sm"
+                            colorScheme="orange"
                             bg="orange.500"
                             onClick={() => navigate("/login")}
                         >

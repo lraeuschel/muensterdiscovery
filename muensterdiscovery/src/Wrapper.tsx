@@ -66,7 +66,7 @@ export default function AppWrapper() {
     <IntlProvider 
       locale={language} 
       messages={messages[language]} 
-      defaultLocale="de"
+      defaultLocale="en"
     >
       <ChakraProvider value={defaultSystem}>
         {/* ADDED BASENAME HERE */}
