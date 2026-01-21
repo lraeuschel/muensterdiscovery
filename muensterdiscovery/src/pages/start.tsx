@@ -258,7 +258,8 @@ export default function Start() {
 
 
             {/* Header */}
-            <VStack mt="80px" mb={8}>
+
+            <VStack mt="140px" mb={8}>
                 <Text
                     fontSize="3xl"
                     fontWeight="extrabold"

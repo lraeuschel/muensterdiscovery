@@ -12,14 +12,12 @@ import {
 import {
     MapContainer,
     TileLayer,
-    Marker,
-    Popup,
-    Polygon
+    Polygon,
+    Popup
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useIntl } from "react-intl";
 import { useNavigate } from "react-router-dom";
-import L from "leaflet";
 
 import CompLangHeader from "../components/CompLangHeader";
 import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
@@ -27,7 +25,6 @@ import type { LanguageType } from "../components/languageSelector";
 
 import muensterdiscovery_logo from "../assets/logo.png";
 import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
-import marker_rot from "../icons/marker_rot.svg";
 
 import type { User, Achievement, VisitedPOI, Voronoi } from "../types";
 import {
@@ -181,6 +178,7 @@ export default function Profile() {
             <CompLangHeader />
 
             <VStack
+                align="stretch"  // wichtig, damit Text linksbündig wird
                 gap={{ base: 6, md: 8 }}
                 pt={{ base: "80px", md: "90px" }}
                 pb={{ base: 6, md: 10 }}
@@ -268,6 +266,18 @@ export default function Profile() {
                     </HStack>
                 </Box>
 
+                {/* EXPLORED AREAS TITLE */}
+                <Box w="100%">
+                    <Text
+                        fontSize="xl"
+                        fontWeight="bold"
+                        color="orange.600"
+                        textAlign="left"
+                    >
+                        {intl.formatMessage({ id: "profile.explored_areas" })}
+                    </Text>
+                </Box>
+
                 {/* MAP CARD */}
                 <Box
                     w="full"
@@ -292,41 +302,36 @@ export default function Profile() {
                             {voronois.map(v => {
                                 const visited = visitedPoiIds.has(v.id);
 
+                                // POI, der zur Voronoi passt
+                                const poi = visitedPOIs.find(p => p.id === v.id);
+
                                 return (
                                     <Polygon
                                         key={v.id}
                                         positions={geoJsonToLatLngs(v.geoJSON)}
                                         pathOptions={{
-                                            color: visited ? "#9b2c2c" : "#718096",
+                                            color: visited ? "#9b2c2c" : "#cacacaff",
                                             fillColor: visited ? "#feb2b2" : "#e2e8f0",
                                             fillOpacity: 0.2,
                                             weight: visited ? 3 : 1
                                         }}
-                                    />
+                                    >
+                                        {poi && (
+                                            <Popup>
+                                                <Box>
+                                                    <strong>{poi.name}</strong>
+                                                    <br />
+                                                    {intl.formatMessage({ id: "profile.visited_at" })}{" "}
+                                                    {intl.formatDate(new Date(poi.visited), {
+                                                        dateStyle: "medium",
+                                                        timeStyle: "short"
+                                                    })}
+                                                </Box>
+                                            </Popup>
+                                        )}
+                                    </Polygon>
                                 );
                             })}
-
-                            {visitedPOIs.map(poi => (
-                                <Marker
-                                    key={poi.id}
-                                    position={[poi.lat, poi.lon]}
-                                    icon={L.icon({
-                                        iconUrl: marker_rot,
-                                        iconSize: [30, 30],
-                                        iconAnchor: [15, 30]
-                                    })}
-                                >
-                                    <Popup offset={[0, -20]}>
-                                        <strong>{poi.name}</strong>
-                                        <br />
-                                        {intl.formatMessage({ id: "profile.visited_at" })}{" "}
-                                        {intl.formatDate(new Date(poi.visited), {
-                                            dateStyle: "medium",
-                                            timeStyle: "short"
-                                        })}
-                                    </Popup>
-                                </Marker>
-                            ))}
                         </MapContainer>
                     </Box>
                 </Box>
