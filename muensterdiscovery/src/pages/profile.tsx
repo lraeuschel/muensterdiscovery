@@ -36,7 +36,8 @@ import {
     getUserAchievements,
     getVisitedPOIs,
     getVoronoiPolygons,
-    checkAndUnlockPoiAchievements
+    checkAndUnlockPoiAchievements,
+    checkAndUnlockRouteAchievements
 } from "../services/DatabaseConnection";
 import { supabase } from "../SupabaseClient";
 
@@ -119,7 +120,10 @@ export default function Profile() {
             }
 
             try {
-                await checkAndUnlockPoiAchievements(user.id);
+                await Promise.all([
+                    checkAndUnlockPoiAchievements(user.id),
+                    checkAndUnlockRouteAchievements(user.id)
+                ]);
             } catch (e) {
                 console.error("Fehler beim Prüfen der Achievements:", e);
             }

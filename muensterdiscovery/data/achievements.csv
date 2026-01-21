@@ -1,7 +1,15 @@
 id;achievement;description
-1;20 POIs disovered;20 POIs disovered
-2;40 POIs disovered;40 POIs disovered
-3;60 POIs disovered;60 POIs disovered
-4;80 POIs disovered;80 POIs disovered
-5;100 POIs disovered;100 POIs disovered
-6;All POIs disovered;All POIs disovered
+1;5 POIs discovered;5 POIs discovered
+2;10 POIs discovered;10 POIs discovered
+3;25 POIs discovered;25 POIs discovered
+4;60 POIs discovered;60 POIs discovered
+5;100 POIs discovered;100 POIs discovered
+6;All POIs discovered;All POIs discovered
+7;Route muenster_history completed;You have completed the historic route!
+8;Route muenster_fair completed;You have completed the route focused on sustainable Münster.
+9;Route muenster_kreuzviertel completed;You have fully explored the Kreuzviertel district.
+10;Route muenster_hiddengems completed;You have discovered Münster’s hidden corners.
+11;Route muenster_media completed;Everything about media and Tatort – check!
+12;Route muenster_art completed;Everything about media and Tatort – check!
+13;Route muenster_architecture completed;Architectural masterpieces – seen.
+14;True GI;You discovered the GEO1 building. You are part of the GI community now!

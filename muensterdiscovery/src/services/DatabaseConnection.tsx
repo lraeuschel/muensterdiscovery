@@ -1,6 +1,6 @@
 import { supabase } from "../SupabaseClient";
 import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
-import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI, LeaderboardEntry } from "../types";
+import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI, LeaderboardEntry, UserRouteWithDistance } from "../types";
 
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -193,6 +193,8 @@ export async function addRouteCompletion(
         .single();
     if (error) throw error;
     await updateUserPoints(profile_id, 50); // Beispiel: 50 Punkte pro Route
+    
+    checkAndUnlockRouteAchievements(profile_id).catch(err => console.error(err));
     return data;
 }
 
@@ -268,64 +270,65 @@ export async function getRoutesCompletedByUser(userId: string) {
 
 // Neue Funktion: Leaderboard abrufen
 export async function getLeaderboard(
-    timeframe: 'month' | 'alltime',
-    currentUserId?: string,
-    limit: number = 100
+  timeframe: 'month' | 'alltime',
+  currentUserId?: string,
+  limit: number = 100
 ): Promise<LeaderboardEntry[]> {
-    const pointsColumn = timeframe === 'month' ? 'monthly_points' : 'alltime_points';
-    
-    // Leaderboard-Daten abrufen
-    const { data, error } = await supabase
-        .from("profiles")
-        .select(`
-            id,
-            username,
-            monthly_points,
-            alltime_points
-        `)
-        .order(pointsColumn, { ascending: false })
-        .limit(limit);
+  const pointsColumn =
+    timeframe === 'month' ? 'monthly_points' : 'alltime_points';
 
-    if (error) throw error;
+  // Basis-Leaderboard laden
+  const { data: profiles, error } = await supabase
+    .from("profiles")
+    .select(`
+      id,
+      username,
+      monthly_points,
+      alltime_points
+    `)
+    .order(pointsColumn, { ascending: false })
+    .limit(limit);
 
-    // Für jeden User: POI-Count, Distanz und Profilbild berechnen
-    const leaderboardPromises = data.map(async (profile, index) => {
-        // Anzahl besuchter POIs
-        const { count: poiCount } = await supabase
-            .from("user_POIs")
-            .select("*", { count: "exact", head: true })
-            .eq("profile_id", profile.id);
+  if (error) throw error;
+  if (!profiles) return [];
 
-        // Distanz aus abgeschlossenen Routen
-        const { data: routeData } = await supabase
-            .from("user_routes")
-            .select(`routes(distance)`)
-            .eq("profile_id", profile.id);
+  const leaderboardPromises = profiles.map(async (profile, index) => {
+    // POI-Anzahl
+    const { count: poiCount } = await supabase
+      .from("user_POIs")
+      .select("*", { count: "exact", head: true })
+      .eq("profile_id", profile.id);
 
-        const totalDistance = routeData?.reduce((sum, item) => {
-            return sum + (item.routes?.[0].distance || 0);
-        }, 0) || 0;
+    // Routen + Distanz (many-to-one → Objekt!)
+    const { data: routeData } = await supabase
+      .from("user_routes")
+      .select("routes(distance)")
+      .eq("profile_id", profile.id)
+      .returns<UserRouteWithDistance[]>();
 
-        const { data: profileImage } = supabase.storage
-            .from('profile_images')
-            .getPublicUrl(`${profile.id}/profile_image.jpg`);
-            console.log("Fetched profile image URL:", profileImage);
+    const totalDistance =
+      routeData?.reduce((sum, item) => {
+        return sum + (item.routes?.distance ?? 0);
+      }, 0) ?? 0;
 
-        return {
-            rank: index + 1,
-            username: profile.username || "Unbekannt",
-            points: profile[pointsColumn] || 0,
-            distanceKm: totalDistance / 1000, // Meter zu km
-            areasDiscovered: poiCount || 0,
-            isCurrentUser: currentUserId ? profile.id === currentUserId : false,
-            profileImageUrl: profileImage?.publicUrl || default_profile_image,
-        } as LeaderboardEntry;
-    });
+    // Profilbild
+    const { data: profileImage } = supabase.storage
+      .from("profile_images")
+      .getPublicUrl(`${profile.id}/profile_image.jpg`);
 
-    const leaderboard = await Promise.all(leaderboardPromises);
-    
-    console.log(`${timeframe} leaderboard:`, leaderboard);
-    return leaderboard;
+    return {
+      rank: index + 1,
+      username: profile.username || "Unbekannt",
+      points: profile[pointsColumn] ?? 0,
+      distanceKm: totalDistance / 1000,
+      areasDiscovered: poiCount ?? 0,
+      isCurrentUser: currentUserId ? profile.id === currentUserId : false,
+      profileImageUrl:
+        profileImage?.publicUrl || default_profile_image,
+    } as LeaderboardEntry;
+  });
+
+  return await Promise.all(leaderboardPromises);
 }
 
 // Alle Achievements abrufen
@@ -338,21 +341,27 @@ export async function getAllAchievementDefinitions() {
 }
 
 export async function checkAndUnlockPoiAchievements(userId: string) {
-    // 1. Daten abrufen: Anzahl besuchter POIs und Gesamtanzahl POIs
-    const { count: visitedCount, error: visitedError } = await supabase
+    // 1. Daten abrufen: Welche POI_ids hat der User besucht?
+    // WICHTIG: Wir entfernen "head: true", weil wir jetzt die IDs brauchen!
+    const { data: visitedData, error: visitedError } = await supabase
         .from("user_POIs")
-        .select("*", { count: "exact", head: true })
+        .select("POI_id") 
         .eq("profile_id", userId);
     
     if (visitedError) throw visitedError;
 
+    // Erstelle ein Set der IDs für schnellen Zugriff (z.B. visitedIds.has(94))
+    const visitedIds = new Set(visitedData?.map((v: any) => v.POI_id));
+    const visitedCount = visitedIds.size;
+
+    // Gesamtanzahl POIs holen (für das "Alle POIs" Achievement)
     const { count: totalPoiCount, error: totalError } = await supabase
         .from("POIs")
         .select("*", { count: "exact", head: true });
 
     if (totalError) throw totalError;
 
-    // 2. Bereits erhaltene Achievements des Users laden (nur IDs)
+    // 2. Bereits erhaltene Achievements des Users laden
     const { data: userAchievementsData, error: uaError } = await supabase
         .from("user_achievements")
         .select("achievement_id")
@@ -361,52 +370,144 @@ export async function checkAndUnlockPoiAchievements(userId: string) {
     if (uaError) throw uaError;
     const ownedAchievementIds = new Set(userAchievementsData?.map((ua: any) => ua.achievement_id));
 
-    // 3. Alle Achievement-Definitionen laden, um die IDs zu den Namen zu finden
+    // 3. Alle Achievement-Definitionen laden
     const allDefinitions = await getAllAchievementDefinitions();
+
+    const newAchievements = [];
 
     // 4. Logik-Definition: Welches Limit gehört zu welchem Achievement-Namen?
     const rules = [
-        { threshold: 20, achievementName: "20 POIs discovered" },
-        { threshold: 40, achievementName: "40 POIs discovered" },
+        { threshold: 5, achievementName: "5 POIs discovered" },
+        { threshold: 10, achievementName: "10 POIs discovered" },
+        { threshold: 25, achievementName: "25 POIs discovered" },
         { threshold: 60, achievementName: "60 POIs discovered" },
-        { threshold: 80, achievementName: "80 POIs discovered" },
         { threshold: 100, achievementName: "100 POIs discovered" },
         // Spezialfall: Alle POIs (wenn visited >= total und total > 0)
         { threshold: totalPoiCount || 9999, achievementName: "All POIs discovered" } 
     ];
 
-    const newAchievements = [];
-
-    // 5. Prüfen und Einfügen
     for (const rule of rules) {
-        // Haben wir genug POIs besucht?
-        if ((visitedCount || 0) >= rule.threshold) {
-            // Finde die ID zu diesem Achievement-Namen
+        if (visitedCount >= rule.threshold) {
             const definition = allDefinitions.find(d => d.achievement === rule.achievementName);
-            
-            if (definition) {
-                // Hat der User das Achievement schon?
-                if (!ownedAchievementIds.has(definition.id)) {
-                    // Nein -> Hinzufügen zur Liste der neu zu erstellenden
-                    newAchievements.push({
-                        profile_id: userId,
-                        achievement_id: definition.id,
-                        time_achieved: new Date().toISOString()
-                    });
-                }
-            } else {
-                console.warn(`Achievement mit Name '${rule.achievementName}' nicht in der DB gefunden.`);
+            if (definition && !ownedAchievementIds.has(definition.id)) {
+                newAchievements.push({
+                    profile_id: userId,
+                    achievement_id: definition.id,
+                    time_achieved: new Date().toISOString()
+                });
             }
         }
     }
 
-    // Wenn es neue Achievements gibt, ab in die DB damit
+    // --- TEIL B: Spezifische POI Achievements (Geo 1 / True GI) ---
+    
+    // Prüfen auf Geo 1 (ID: 94) für Achievement "True GI"
+    if (visitedIds.has(94)) {
+        const trueGiDef = allDefinitions.find(d => d.achievement === "True GI");
+        
+        if (trueGiDef) {
+            if (!ownedAchievementIds.has(trueGiDef.id)) {
+                newAchievements.push({
+                    profile_id: userId,
+                    achievement_id: trueGiDef.id,
+                    time_achieved: new Date().toISOString()
+                });
+            }
+        } else {
+            console.warn("Achievement 'True GI' nicht in der DB gefunden.");
+        }
+    }
+
+    // 4. Speichern, falls es neue Achievements gibt
     if (newAchievements.length > 0) {
         const { error: insertError } = await supabase
             .from("user_achievements")
             .insert(newAchievements);
         
         if (insertError) throw insertError;
-        console.log("Neue Achievements freigeschaltet:", newAchievements.length);
+        console.log("Neue POI-Achievements freigeschaltet:", newAchievements.length);
+    }
+}
+
+export async function checkAndUnlockRouteAchievements(userId: string) {
+    // 1. Definition: Welcher Routen-NAME (in Tabelle routes) gehört zu welchem Achievement-NAME
+    const routeMapping = [
+        { routeName: "muenster_history", achievementName: "Route muenster_history completed" },
+        { routeName: "muenster_art", achievementName: "Route muenster_art completed" },
+        { routeName: "muenster_hiddengems", achievementName: "Route muenster_hiddengems completed" },
+        { routeName: "muenster_media", achievementName: "Route muenster_media completed" },
+        { routeName: "muenster_kreuzviertel", achievementName: "Route muenster_kreuzviertel completed" },
+        { routeName: "muenster_architecture", achievementName: "Route muenster_architecture completed" },
+        { routeName: "muenster_fair", achievementName: "Route muenster_fair completed" }
+    ];
+
+    // 2. Daten laden
+    // a) Alle Routen laden, um Namen zu IDs aufzulösen
+    const { data: allRoutes, error: routesError } = await supabase
+        .from("routes")
+        .select("id, name");
+    if (routesError) throw routesError;
+
+    // b) Vom User absolvierte Routen-IDs laden
+    const { data: userRouteData, error: userRouteError } = await supabase
+        .from("user_routes")
+        .select("route_id")
+        .eq("profile_id", userId);
+    if (userRouteError) throw userRouteError;
+    
+    // Set mit IDs der erledigten Routen erstellen für schnellen Zugriff
+    const completedRouteIds = new Set(userRouteData?.map((ur: any) => ur.route_id));
+
+    // c) Bereits erhaltene Achievements laden
+    const { data: userAchievements, error: uaError } = await supabase
+        .from("user_achievements")
+        .select("achievement_id")
+        .eq("profile_id", userId);
+    if (uaError) throw uaError;
+    const ownedAchievementIds = new Set(userAchievements?.map((ua: any) => ua.achievement_id));
+
+    // d) Achievement Definitionen laden (für die IDs)
+    const allAchievementDefs = await getAllAchievementDefinitions();
+
+    const newAchievements = [];
+
+    // 3. Prüfung durchführen
+    for (const mapping of routeMapping) {
+        // Finde die Route-ID in der DB passend zum Namen (z.B. 'muenster_history')
+        const routeObj = allRoutes.find((r: any) => r.name === mapping.routeName);
+        
+        if (!routeObj) {
+            console.warn(`Route '${mapping.routeName}' nicht in Tabelle 'routes' gefunden.`);
+            continue;
+        }
+
+        // Hat der User diese Route absolviert?
+        if (completedRouteIds.has(routeObj.id)) {
+            // Finde das zugehörige Achievement
+            const achDef = allAchievementDefs.find(a => a.achievement === mapping.achievementName);
+            
+            if (achDef) {
+                // Wenn User das Achievement noch nicht hat -> hinzufügen
+                if (!ownedAchievementIds.has(achDef.id)) {
+                    newAchievements.push({
+                        profile_id: userId,
+                        achievement_id: achDef.id,
+                        time_achieved: new Date().toISOString()
+                    });
+                }
+            } else {
+                console.warn(`Achievement '${mapping.achievementName}' nicht in Tabelle 'achievements' gefunden.`);
+            }
+        }
+    }
+
+    // 4. Speichern
+    if (newAchievements.length > 0) {
+        const { error: insertError } = await supabase
+            .from("user_achievements")
+            .insert(newAchievements);
+        
+        if (insertError) throw insertError;
+        console.log("Neue Routen-Achievements freigeschaltet:", newAchievements.length);
     }
 }

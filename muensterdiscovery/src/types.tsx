@@ -65,3 +65,9 @@ export type LeaderboardEntry = {
     isCurrentUser?: boolean;
     profileImageUrl?: string;
 };
+
+export type UserRouteWithDistance = {
+  routes: {
+    distance: number;
+  } | null;
+};
