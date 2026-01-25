@@ -208,6 +208,9 @@ export default function PlayRoute() {
   const [routeCompleted, setRouteCompleted] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // New State: Cooldown to prevent double clicking multiple POIs
+  const [collectingCooldown, setCollectingCooldown] = useState(false);
+
   // Error State
   const [geoError, setGeoError] = useState<string | null>(null);
 
@@ -438,6 +441,10 @@ export default function PlayRoute() {
 
   async function markPOIAsVisited(poiId: number) {
     if (visitedPOIs.includes(poiId)) return;
+    if (collectingCooldown) return; // Prevent double clicks
+
+    setCollectingCooldown(true); // Start cooldown
+
     setVisitedPOIs((prev) => [...prev, poiId]);
 
     // Stop navigation if we just visited the target
@@ -453,17 +460,21 @@ export default function PlayRoute() {
       
         // Check for POI Achievements
         const unlockedList = await checkAndUnlockPoiAchievements(currentUser.id);
-        console.log("Checked POI achievements, unlocked:", unlockedList);
-
+        
         // Wenn die Liste Einträge hat -> Modal öffnen!
         if (unlockedList && unlockedList.length > 0) {
             // Wir nehmen das erste oder wichtigste Achievement für die Anzeige
             setNewAchievement(unlockedList[0]);
-            onOpen(); // Modal öffnen
+            onOpen();
         }
       }
     } catch (error) {
       console.error("Error marking POI:", error);
+    } finally {
+      // Cooldown: Warte 2 Sekunden, bevor der nächste POI erscheinen darf
+      setTimeout(() => {
+        setCollectingCooldown(false);
+      }, 2000);
     }
   }
 
@@ -671,7 +682,6 @@ export default function PlayRoute() {
             const isVisited = visitedPOIs.includes(poi.id);
 
             // ⚠️ ÄNDERUNG: Wenn bereits ein POI besucht wurde, kein "Nearest" Highlight mehr auf der Karte
-            // (Damit der Marker nicht fett rot blinkt, sondern normal rot bleibt)
             const targetIndex =
               visitedPOIs.length > 0
                 ? -1
@@ -1008,8 +1018,8 @@ export default function PlayRoute() {
           )}
 
           {/* 3. NEAREST POI CARD (Only if not navigating or navigating to something else) */}
-          {/* ⚠️ WICHTIGE ÄNDERUNG: Zeige Card nur an, wenn noch nix besucht wurde ODER man <50m dran ist */}
-          {!showSuccess && closestTarget && !geoError && !navTarget && (visitedPOIs.length === 0 || isNearPOI(closestTarget.poi)) && (
+          {/* ⚠️ Card nur anzeigen, wenn NICHT im Cooldown, UND (noch nix besucht ODER nah dran) */}
+          {!showSuccess && closestTarget && !geoError && !navTarget && !collectingCooldown && (visitedPOIs.length === 0 || isNearPOI(closestTarget.poi)) && (
             <Box>
               <HStack
                 mb={2}
@@ -1274,12 +1284,12 @@ export default function PlayRoute() {
         </Box>
       )}
 
-      {/* Die Modal Achievement Komponente  */}
-           <AchievementUnlockModal
-               isOpen={open} 
-               onClose={onClose}  // Schließen der Modal
-               achievement={newAchievement} 
-           />
+      {/* Die Modal Achievement Komponente */}
+      <AchievementUnlockModal
+        isOpen={open}
+        onClose={onClose}
+        achievement={newAchievement}
+      />
 
       {/* AI Chat Buddy */}
       <RideyChat
