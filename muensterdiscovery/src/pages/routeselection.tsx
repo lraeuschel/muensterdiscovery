@@ -342,7 +342,7 @@ export default function RouteSelection() {
                 mt={2}
               >
                 <IoMdArrowBack style={{ marginRight: "8px" }} />
-                {intl.formatMessage({ id: "common.back" }) || "Back"}
+                {intl.formatMessage({ id: "routeselection.back_to_start" }) || "Back"}
               </Button>
             )}
           </VStack>

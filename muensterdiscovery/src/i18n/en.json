@@ -21,6 +21,7 @@
     "routeselection.start": "Start Route",
     "routeselection.about": "About this route",
     "routeselection.selected": "Selected",
+    "routeselection.back_to_start": "Back to Start",
 
     "imprint.title": "Imprint",
     "imprint.content": "This project is a student project as part of the Master's program in Geoinformatics and Spatial Data Science. Source code and documentation are available on GitHub:",
@@ -317,7 +318,9 @@
 "help.faq.q4": "How do I earn achievements?",
 "help.faq.a4": "You earn achievements when you visit certain places, finish routes, or complete special tasks in the app. Check your profile to see your progress.",
 "help.still_questions": "Do you have any more questions?",
-"help.contact_support": "Contact our support",
+"help.contact_support": "Contact our support team via email. We are happy to help you!",
+"help.send_email": "Send Email",
+
 "imprint.legal_note": "Information pursuant to § 5 TMG",
 "imprint.contact_label": "Contact",
 "imprint.represented_by": "Represented by",

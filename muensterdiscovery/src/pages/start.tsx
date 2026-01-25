@@ -259,13 +259,13 @@ export default function Start() {
 
             {/* Header */}
 
-            <VStack mt="140px" mb={8}>
+            <VStack mt={["140px", "100px", "80px"]} mb={8}>
                 <Text
                     fontSize="3xl"
                     fontWeight="extrabold"
                     color="orange.400"
                     textAlign="center"
-                    mt="-60px"
+                    mt={["-40px", "-50px", "-60px"]}
                 >
                     MUENSTERDISCOVERY
                 </Text>
@@ -595,23 +595,25 @@ export default function Start() {
                 <VStack gap={4} align="center" maxW="1000px">
                     {/* Footer Links */}
                     <HStack gap={6} justify="center" wrap="wrap" fontSize="sm">
-                        <Link
-                            href="/muensterdiscovery/imprint"
+                        <Text
                             color="orange.600"
                             fontWeight="500"
                             _hover={{ textDecoration: "underline" }}
+                            cursor="pointer"
+                            onClick={() => navigate("/imprint")}
                         >
                             {intl.formatMessage({ id: "welcome.imprint" })}
-                        </Link>
+                        </Text>
                         <Text color="gray.400">•</Text>
-                        <Link
-                            href="/muensterdiscovery/help"
+                        <Text
                             color="orange.600"
                             fontWeight="500"
                             _hover={{ textDecoration: "underline" }}
+                            cursor="pointer"
+                            onClick={() => navigate("/help")}
                         >
                             {intl.formatMessage({ id: "menu.help" })}
-                        </Link>
+                        </Text>
                         <Text color="gray.400">•</Text>
                         <Link
                             href="https://github.com/lraeuschel/muensterdiscovery"

@@ -11,6 +11,7 @@ import CompLangHeader from "../components/CompLangHeader";
 import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
 import { useIntl } from "react-intl";
+import { useNavigate } from "react-router-dom";
 import wthrdLogo from "../assets/wthrdlogo.svg";
 import { Image } from "@chakra-ui/react";
 
@@ -18,6 +19,7 @@ import { Image } from "@chakra-ui/react";
 
 export default function Imprint() {
   const intl = useIntl();
+  const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [, setCurrentLang] = useState<LanguageType>(currentLanguage);
 
@@ -131,23 +133,25 @@ export default function Imprint() {
                 <VStack gap={4} align="center" maxW="1000px">
                     {/* Footer Links */}
                     <HStack gap={6} justify="center" wrap="wrap" fontSize="sm">
-                        <Link
-                            href="/muensterdiscovery/imprint"
+                        <Text
                             color="orange.600"
                             fontWeight="500"
                             _hover={{ textDecoration: "underline" }}
+                            cursor="pointer"
+                            onClick={() => navigate("/imprint")}
                         >
                             {intl.formatMessage({ id: "welcome.imprint" })}
-                        </Link>
+                        </Text>
                         <Text color="gray.400">•</Text>
-                        <Link
-                            href="/muensterdiscovery/help"
+                        <Text
                             color="orange.600"
                             fontWeight="500"
                             _hover={{ textDecoration: "underline" }}
+                            cursor="pointer"
+                            onClick={() => navigate("/help")}
                         >
                             {intl.formatMessage({ id: "menu.help" })}
-                        </Link>
+                        </Text>
                         <Text color="gray.400">•</Text>
                         <Link
                             href="https://github.com/lraeuschel/muensterdiscovery"
