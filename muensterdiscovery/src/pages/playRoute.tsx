@@ -458,7 +458,7 @@ export default function PlayRoute() {
         if (unlockedList && unlockedList.length > 0) {
             // Wir nehmen das erste (oder wichtigste) Achievement für die Anzeige
             setNewAchievement(unlockedList[0]);
-            onOpen();
+            onOpen(); // Modal öffnen
         }
     }
     } catch (error) {
@@ -1274,7 +1274,7 @@ export default function PlayRoute() {
       {/* Die Modal Achievement Komponente  */}
            <AchievementUnlockModal
                isOpen={open} 
-               onClose={onClose} 
+               onClose={onClose}  // Schließen der Modal
                achievement={newAchievement} 
            />
 
