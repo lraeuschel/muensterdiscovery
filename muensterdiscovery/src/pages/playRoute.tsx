@@ -15,7 +15,7 @@ import {
   Progress,
   Alert,
   Skeleton,
-  useDisclosure
+  useDisclosure,
   // SkeletonText removed to avoid type errors
 } from "@chakra-ui/react";
 import {
@@ -38,7 +38,7 @@ import {
   getCurrentUserProfile,
   addRouteCompletion,
   checkAndUnlockPoiAchievements,
-  checkAndUnlockRouteAchievements
+  checkAndUnlockRouteAchievements,
 } from "../services/DatabaseConnection";
 import CompLangHeader from "../components/CompLangHeader";
 import AchievementUnlockModal from "../components/AchievementUnlock";
@@ -193,7 +193,7 @@ export default function PlayRoute() {
   const navigate = useNavigate();
   const { routeId } = useParams();
 
-  //Achievement Unlocking
+  // Achievement Unlocking
   const [newAchievement, setNewAchievement] = useState<any>(null);
   const { open, onOpen, onClose } = useDisclosure();
 
@@ -450,17 +450,18 @@ export default function PlayRoute() {
     try {
       if (currentUser) {
         await addVisitedPOI(currentUser.id, poiId);
+      
         // Check for POI Achievements
         const unlockedList = await checkAndUnlockPoiAchievements(currentUser.id);
         console.log("Checked POI achievements, unlocked:", unlockedList);
 
         // Wenn die Liste Einträge hat -> Modal öffnen!
         if (unlockedList && unlockedList.length > 0) {
-            // Wir nehmen das erste (oder wichtigste) Achievement für die Anzeige
+            // Wir nehmen das erste oder wichtigste Achievement für die Anzeige
             setNewAchievement(unlockedList[0]);
             onOpen();
         }
-    }
+      }
     } catch (error) {
       console.error("Error marking POI:", error);
     }
@@ -478,14 +479,15 @@ export default function PlayRoute() {
         try {
           await addRouteCompletion(currentUser.id, route.id);
           setRouteCompleted(true);
+
           // Check for Route Achievements
           const unlockedList = await checkAndUnlockRouteAchievements(currentUser.id);
-
           if (unlockedList && unlockedList.length > 0) {
-                  // Wir zeigen das erste gefundene an 
-                  setNewAchievement(unlockedList[0]);
-                  onOpen();
-              }
+            // Wir zeigen das erste gefundene an
+            setNewAchievement(unlockedList[0]);
+            onOpen();
+          }
+
         } catch (err) {
           console.error("Error completing route:", err);
         }
@@ -668,7 +670,8 @@ export default function PlayRoute() {
 
             const isVisited = visitedPOIs.includes(poi.id);
 
-            // ⚠️ ÄNDERUNG: Wenn bereits ein POI besucht wurde, kein "Nearest" Highlight mehr
+            // ⚠️ ÄNDERUNG: Wenn bereits ein POI besucht wurde, kein "Nearest" Highlight mehr auf der Karte
+            // (Damit der Marker nicht fett rot blinkt, sondern normal rot bleibt)
             const targetIndex =
               visitedPOIs.length > 0
                 ? -1
@@ -1005,8 +1008,8 @@ export default function PlayRoute() {
           )}
 
           {/* 3. NEAREST POI CARD (Only if not navigating or navigating to something else) */}
-          {/* ⚠️ ÄNDERUNG: visitedPOIs.length === 0 hinzugefügt, damit nach dem ersten POI Ruhe ist */}
-          {!showSuccess && closestTarget && !geoError && !navTarget && visitedPOIs.length === 0 && (
+          {/* ⚠️ WICHTIGE ÄNDERUNG: Zeige Card nur an, wenn noch nix besucht wurde ODER man <50m dran ist */}
+          {!showSuccess && closestTarget && !geoError && !navTarget && (visitedPOIs.length === 0 || isNearPOI(closestTarget.poi)) && (
             <Box>
               <HStack
                 mb={2}
@@ -1271,12 +1274,12 @@ export default function PlayRoute() {
         </Box>
       )}
 
-      {/* Die Modal Achievement Komponente  */}
-           <AchievementUnlockModal
-               isOpen={open} 
-               onClose={onClose} 
-               achievement={newAchievement} 
-           />
+      {/* Die Modal Achievement Komponente */}
+      <AchievementUnlockModal
+        isOpen={open}
+        onClose={onClose}
+        achievement={newAchievement}
+      />
 
       {/* AI Chat Buddy */}
       <RideyChat
