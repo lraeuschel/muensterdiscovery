@@ -83,6 +83,8 @@
     "registration.email_confirmation_message": "Die Bestätigungsemail wurde gesendet. Bitte überprüfe deinen Posteingang.",
     "registration.already_have_account": "Email bereits vergeben. Hast du bereits ein Konto?",
     "registration.username_taken": "Benutzername bereits vergeben.",
+    "registration.password_length_error": "Das Passwort muss mindestens 6 Zeichen lang sein.",
+    "registration.invalid_email_format": "Bitte gib eine gültige E-Mail-Adresse ein.",
 
     "login.title": "Anmelden",
     "login.email": "E-Mail",

@@ -44,6 +44,13 @@ export default function Signup() {
             return;
         }
 
+        // Validate email format
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setMessage(intl.formatMessage({ id: "registration.invalid_email_format" }));
+            return;
+        }
+
         const { data: signupData, error: signupError } = await supabase.auth.signUp({
             email,
             password,
@@ -56,20 +63,28 @@ export default function Signup() {
                 }
             }
         });
+        console.log(signupData, signupError);
+        console.log(password)
 
-        if (signupError) {
-            setMessage(signupError.message);
-        } else if (signupData.user?.identities?.length === 0) {
+        if(signupData.user?.identities?.length === 0) {
             setMessage(intl.formatMessage({ id: "registration.already_have_account" }));
             return;
+        } else if(password.length < 6) {
+            setMessage(intl.formatMessage({ id: "registration.password_length_error" }));
+            return;
+        } else if(signupError) {
+            setMessage(signupError.message);
+        } else {
+            console.log("Signup successful!");
+            setEmail("");
+            setPassword("");
+            setFirstName("");
+            setLastName("");
+            setUsername("");
+            setMessage(intl.formatMessage({ id: "registration.email_confirmation_message" }));
         }
 
-        setEmail("");
-        setPassword("");
-        setFirstName("");
-        setLastName("");
-        setUsername("");
-        setMessage(intl.formatMessage({ id: "registration.email_confirmation_message" }));
+
     }
 
     return (
