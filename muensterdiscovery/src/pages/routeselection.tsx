@@ -515,7 +515,7 @@ export default function RouteSelection() {
                     "About this route"}
                 </Heading>
                 <Text fontSize="sm" color="gray.600" lineHeight="tall">
-                  {selectedRoute.description}
+                  {intl.formatMessage({id: `route.${selectedRoute.id}`})}
                 </Text>
               </Box>
 
