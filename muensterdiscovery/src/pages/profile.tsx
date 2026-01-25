@@ -7,8 +7,9 @@ import {
     Image,
     Button,
     Grid,
-    Separator
+    Separator,
 } from "@chakra-ui/react";
+import { StatCard } from "../components/StatCard";
 import {
     MapContainer,
     TileLayer,
@@ -34,9 +35,11 @@ import {
     getVisitedPOIs,
     getVoronoiPolygons,
     checkAndUnlockPoiAchievements,
-    checkAndUnlockRouteAchievements
+    checkAndUnlockRouteAchievements,
+    getRoutesCompletedByUser
 } from "../services/DatabaseConnection";
 import { supabase } from "../SupabaseClient";
+import { FaHiking, FaMapMarkerAlt, FaRoute } from "react-icons/fa";
 
 export default function Profile() {
     const intl = useIntl();
@@ -107,6 +110,8 @@ export default function Profile() {
     const [myAchievements, setMyAchievements] = useState<Achievement[]>([]);
     const [visitedPOIs, setVisitedPOIs] = useState<VisitedPOI[]>([]);
     const [voronois, setVoronois] = useState<Voronoi[]>([]);
+    const [completedRoutes, setCompletedRoutes] = useState<number>(0);
+    const [totalKilometers, setTotalKilometers] = useState<number>(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -125,20 +130,38 @@ export default function Profile() {
                 console.error("Fehler beim Prüfen der Achievements:", e);
             }
 
-            const [profileData, achievements, pois, voronoiData] =
+            const [profileData, achievements, pois, voronoiData, completedRoutesCount] =
                 await Promise.all([
                     getCurrentUserProfile(user.id),
                     getUserAchievements(user.id),
                     getVisitedPOIs(user.id),
-                    getVoronoiPolygons()
+                    getVoronoiPolygons(),
+                    getRoutesCompletedByUser(user.id)
                 ]);
 
-            loadProfileImage(user.id);
 
+            const totalDist = completedRoutesCount.reduce((sum, item) => {                
+                const routeData = item.routes; 
+                
+                let dist = 0;
+                
+                if (Array.isArray(routeData)) {
+                    dist = routeData[0]?.distance ?? 0;
+                } else if (routeData && typeof routeData === 'object') {
+                    // @ts-ignore 
+                    dist = routeData.distance ?? 0;
+                }
+
+                return sum + dist;
+            }, 0);
+
+            loadProfileImage(user.id);
             setProfile(profileData);
             setMyAchievements(achievements);
             setVisitedPOIs(pois);
             setVoronois(voronoiData);
+            setCompletedRoutes(completedRoutesCount.length);
+            setTotalKilometers(Math.round(totalDist) / 1000);
         };
 
         fetchData();
@@ -274,9 +297,40 @@ export default function Profile() {
                         color="orange.600"
                         textAlign="left"
                     >
-                        {intl.formatMessage({ id: "profile.explored_areas" })}
+                        {intl.formatMessage({ id: "profile.statistics" })}
                     </Text>
                 </Box>
+
+                {/* STATISTICS GRID */}
+                <Grid
+                    templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
+                    gap={{ base: 4, md: 6 }}
+                    w="full"
+                >
+                    {/* Card 1: Besuchte POIs */}
+                    <StatCard
+                        icon={FaMapMarkerAlt} 
+                        label={intl.formatMessage({ id: "profile.stats_pois" })} // "Besuchte Orte"
+                        value={visitedPOIs.length}
+                        suffix=""
+                    />
+
+                    {/* Card 2: Abgeschlossene Routen */}
+                    <StatCard
+                        icon={FaRoute}
+                        label={intl.formatMessage({ id: completedRoutes === 1 ? "profile.stats_routes_1" : "profile.stats_routes", defaultMessage: "Routes completed" })} // "Routen beendet"
+                        value={completedRoutes}
+                        suffix=""
+                    />
+
+                    {/* Card 3: Zurückgelegte Kilometer */}
+                    <StatCard
+                        icon={FaHiking}
+                        label={intl.formatMessage({ id: "profile.stats_km" })} // "Distanz"
+                        value={totalKilometers}
+                        suffix=" km"
+                    />
+                </Grid>
 
                 {/* EXPLORED AREAS TITLE */}
                 <Box w="100%">

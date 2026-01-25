@@ -68,6 +68,11 @@ export default function Leaderboard() {
     }, []);
 
     const currentData = timeframe === 'month' ? monthlyLeaderboard : alltimeLeaderboard;
+    const top5 = currentData.slice(0, 5);
+    const currentUserEntry = currentData.find(entry => entry.isCurrentUser);
+
+    // zeige user separat an, wenn er nicht in top 5 ist
+    const showUserSeparately = currentUserEntry && currentUserEntry.rank > 5;
 
     return (
     <Box bg="orange.50" minH="100vh" pb={8}>
@@ -132,8 +137,10 @@ export default function Leaderboard() {
                 </HStack>
             </Box>
 
-            {/* Rangliste */}
+            {/* Rangliste Container */}
             <VStack width="100%" maxW="600px" gap={3} align="stretch">
+                
+                {/* Header Zeile */}
                 <HStack px={4} py={2} color="gray.500" fontSize="xs" fontWeight="bold">
                     <Text width="10%">#</Text>
                     <Text flex={1}>{intl.formatMessage({ id: "leaderboard.user", defaultMessage: "Nutzer" })}</Text>
@@ -150,65 +157,26 @@ export default function Leaderboard() {
                         {intl.formatMessage({ id: "leaderboard.no_data", defaultMessage: "Noch keine Daten verfügbar" })}
                     </Text>
                 ) : (
-                    currentData.map((entry) => (
-                        <Box
-                            key={entry.rank}
-                            bg={entry.isCurrentUser ? "orange.100" : "white"}
-                            p={3}
-                            borderRadius="xl"
-                            shadow="sm"
-                            border="2px solid"
-                            borderColor={entry.isCurrentUser ? "orange.400" : "transparent"}
-                            transition="all 0.2s"
-                            _hover={{ transform: "scale(1.01)", shadow: "md" }}
-                        >
-                            <HStack gap={4}>
-                                <Box 
-                                    width="30px" 
-                                    textAlign="center" 
-                                    fontWeight="bold" 
-                                    fontSize="lg"
-                                    color={entry.rank <= 3 ? "orange.500" : "gray.600"}
-                                >
-                                    {getRankIcon(entry.rank)}
-                                </Box>
+                    <>
+                        {/* 1. Die Top 5 rendern */}
+                        {top5.map((entry, index) => (
+                            <LeaderboardRow key={`${entry.username}-${index}`} entry={entry} />
+                        ))}
 
-                                <Image
-                                    src={entry.profileImageUrl}
-                                    alt={entry.username}
-                                    boxSize="40px"
-                                    borderRadius="full"
-                                    border="2px solid"
-                                    borderColor={entry.rank === 1 ? "gold" : "gray.200"}
-                                    onError={(e) => {(e.currentTarget as HTMLImageElement).src = default_profile_image;}}
-                                />
-
-                                <VStack align="start" gap={0} flex={1}>
-                                    <HStack>
-                                        <Text fontWeight="bold" color="gray.800">
-                                            {entry.username}
-                                        </Text>
-                                        {entry.isCurrentUser && (
-                                            <Badge colorPalette="orange" size="sm">
-                                                {intl.formatMessage({ id: "leaderboard.you", defaultMessage: "Du" })}
-                                            </Badge>
-                                        )}
-                                    </HStack>
-                                    <Text fontSize="xs" color="gray.500">
-                                        {entry.areasDiscovered} {intl.formatMessage({ id: entry.areasDiscovered === 1 ? "leaderboard.areas_one" : "leaderboard.areas", defaultMessage: entry.areasDiscovered === 1 ? "Bereich" : "Bereiche" })}
-                                    </Text>
-                                </VStack>
-
-                                <Text fontWeight="medium" fontSize="sm" color="gray.600" width="20%" textAlign="right">
-                                    {entry.distanceKm.toFixed(1)}
+                        {/* 2. Trennzeichen anzeigen, falls User schlechter als Platz 5 */}
+                        {showUserSeparately && currentUserEntry.rank > 5 && (
+                            <Box py={2} textAlign="center">
+                                <Text fontSize="2xl" color="gray.400" lineHeight={0.5} fontWeight="bold">
+                                    ...
                                 </Text>
+                            </Box>
+                        )}
 
-                                <Text fontWeight="bold" fontSize="lg" color="orange.600" width="20%" textAlign="right">
-                                    {entry.points}
-                                </Text>
-                            </HStack>
-                        </Box>
-                    ))
+                        {/* 3. Den User rendern, falls er nicht oben dabei war */}
+                        {showUserSeparately && currentUserEntry.rank > 5 && (
+                            <LeaderboardRow key={`${currentUserEntry.username}-current`} entry={currentUserEntry} />
+                        )}
+                    </>
                 )}
             </VStack>
 
@@ -249,3 +217,68 @@ function getRankIcon(rank: number) {
         default: return rank + ".";
     }
 }
+
+
+// Hilfskomponente für eine Zeile in der Rangliste
+const LeaderboardRow = ({ entry }: { entry: LeaderboardEntry }) => {
+
+    const intl = useIntl(); 
+    return (
+        <Box
+            bg={entry.isCurrentUser ? "orange.100" : "white"}
+            p={3}
+            borderRadius="xl"
+            shadow="sm"
+            border="2px solid"
+            borderColor={entry.isCurrentUser ? "orange.400" : "transparent"}
+            transition="all 0.2s"
+            _hover={{ transform: "scale(1.01)", shadow: "md" }}
+        >
+            <HStack gap={4}>
+                <Box
+                    width="30px"
+                    textAlign="center"
+                    fontWeight="bold"
+                    fontSize="lg"
+                    color={entry.rank <= 3 ? "orange.500" : "gray.600"}
+                >
+                    {getRankIcon(entry.rank)}
+                </Box>
+
+                <Image
+                    src={entry.profileImageUrl}
+                    alt={entry.username}
+                    boxSize="40px"
+                    borderRadius="full"
+                    border="2px solid"
+                    borderColor={entry.rank === 1 ? "gold" : "gray.200"}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).src = default_profile_image; }}
+                />
+
+                <VStack align="start" gap={0} flex={1}>
+                    <HStack>
+                        <Text fontWeight="bold" color="gray.800">
+                            {entry.username}
+                        </Text>
+                        {entry.isCurrentUser && (
+                            <Badge colorPalette="orange" size="sm">
+                                {intl.formatMessage({ id: "leaderboard.you", defaultMessage: "Du" })}
+                            </Badge>
+                        )}
+                    </HStack>
+                    <Text fontSize="xs" color="gray.500">
+                        {entry.areasDiscovered} {intl.formatMessage({ id: entry.areasDiscovered === 1 ? "leaderboard.areas_one" : "leaderboard.areas", defaultMessage: entry.areasDiscovered === 1 ? "Bereich" : "Bereiche" })}
+                    </Text>
+                </VStack>
+
+                <Text fontWeight="medium" fontSize="sm" color="gray.600" width="20%" textAlign="right">
+                    {entry.distanceKm.toFixed(1)}
+                </Text>
+
+                <Text fontWeight="bold" fontSize="lg" color="orange.600" width="20%" textAlign="right">
+                    {entry.points}
+                </Text>
+            </HStack>
+        </Box>
+    );
+};

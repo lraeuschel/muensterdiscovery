@@ -52,6 +52,11 @@
     "profile.achievement3_desc": "Alle Weihnachtsmärkte besucht",
     "profile.invalid_image": "Bitte wähle eine gültige Bilddatei aus.",
     "profile.visited_at": "Besucht am:",
+    "profile.statistics": "Statistiken",
+    "profile.stats_pois": "Entdeckte Orte",
+    "profile.stats_routes": "Routen beendet",
+    "profile.stats_routes_1": "Route beendet",
+    "profile.stats_km": "Routenstrecke zurückgelegt",
 
     "leaderboard.title": "Rangliste",
     "leaderboard.subtitle": "Wer hat Münster am besten erkundet?",
