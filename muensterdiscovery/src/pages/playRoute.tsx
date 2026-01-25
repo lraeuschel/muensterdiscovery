@@ -488,14 +488,17 @@ export default function PlayRoute() {
         route
       ) {
         try {
-          await addRouteCompletion(currentUser.id, route.id);
+          await addRouteCompletion(currentUser.id, route.id).catch(e => console.warn("Route completion warn:", e.message));
           setRouteCompleted(true);
+          setShowSuccess(true);
 
           // Check for Route Achievements
           const unlockedList = await checkAndUnlockRouteAchievements(currentUser.id);
+          console.log("Unlocked Route Achievements:", unlockedList);
           if (unlockedList && unlockedList.length > 0) {
             // Wir zeigen das erste gefundene an
             setNewAchievement(unlockedList[0]);
+            console.log("Opening Achievement Modal for route achievement");
           }
 
         } catch (err) {

@@ -148,7 +148,7 @@
     "playroute.mission_log": "Logbuch ({count})",
     "playroute.mission_complete": "Mission Komplett!",
     "playroute.mission_complete_desc": "Du hast erfolgreich alle Orte in {route} erkundet.",
-    "playroute.return_base": "Zurück",
+    "playroute.return_base": "Okay",
     "playroute.loading_mission": "Lade Mission...",
     "playroute.nav.title": "Navigation",
     "playroute.nav.loading": "Route wird berechnet…",
