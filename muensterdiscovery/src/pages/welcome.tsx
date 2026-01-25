@@ -44,7 +44,7 @@ export default function Welcome() {
                     letterSpacing="wide"
                     textAlign="center"
                     textTransform="uppercase"
-                    mt={12}
+                    mt={["140px", "100px", "80px"]}
                 >
                     {intl.formatMessage({ id: "welcome.title" })}
                 </Text>
