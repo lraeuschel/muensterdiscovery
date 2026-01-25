@@ -302,6 +302,29 @@
     "route.4": "Vous vous intéressez à l'architecture ? Cet itinéraire combine bâtiments historiques et architecture moderne et vous montre comment différentes époques ont façonné le paysage urbain de Münster.",
     "route.5": "Populaire et animé : le quartier Kreuzviertel combine culture résidentielle, histoire et architecture. Cet itinéraire vous montre des rues et lieux spéciaux qui définissent le caractère du quartier.",
     "route.6": "Qu'il s'agisse d'un décor de scène de crime ou d'un mème Internet, cet itinéraire vous emmène vers les lieux qui ont mis Münster sous les projecteurs des médias ou vers les lieux cachés derrière les photos et vidéos des médias.",
-    "route.7": "Vous connaissez déjà Münster comme votre poche ? Cet itinéraire vous montre des lieux spéciaux que même de nombreux experts de Münster ignorent. Curieux ?"
+    "route.7": "Vous connaissez déjà Münster comme votre poche ? Cet itinéraire vous montre des lieux spéciaux que même de nombreux experts de Münster ignorent. Curieux ?",
+
+"help.title": "Aide & FAQ",
+"help.subtitle": "Vous trouverez ici des réponses à vos questions.",
+"help.intro_text": "Bienvenue dans la section d’aide de Münster Discovery. Nous avons rassemblé les informations les plus importantes afin que vous puissiez vous repérer dans l’application et explorer Münster de la meilleure façon.",
+"help.faq_title": "Questions fréquentes",
+"help.faq.q1": "Qu’est-ce que Münster Discovery ?",
+"help.faq.a1": "Münster Discovery est une application interactive qui vous permet d’explorer la ville de Münster d’une nouvelle manière. Découvrez des lieux cachés, apprenez des faits historiques et gagnez des succès.",
+"help.faq.q2": "Comment démarrer un itinéraire ?",
+"help.faq.a2": "Dans le menu principal, allez dans « Sélection d’itinéraires ». Vous y verrez différentes routes thématiques (par ex. Münster History). Choisissez-en une pour voir les détails et démarrer la navigation.",
+"help.faq.q3": "Qui est Ridey ?",
+"help.faq.a3": "Ridey est notre mascotte et votre compagnon personnel ! Il réagit à votre humeur et vous donne des conseils sur les lieux à voir. Vous pouvez aussi discuter avec lui.",
+"help.faq.q4": "Comment obtenir des succès ?",
+"help.faq.a4": "Vous obtenez des succès lorsque vous visitez certains lieux, terminez des itinéraires ou accomplissez des tâches spéciales dans l’application. Consultez votre profil pour voir votre progression.",
+"help.still_questions": "Vous avez d’autres questions ?",
+"help.contact_support": "Contacter notre support",
+"imprint.legal_note": "Informations conformément au § 5 TMG",
+"imprint.contact_label": "Contact",
+"imprint.represented_by": "Représenté par",
+"imprint.disclaimer_title": "Clause de non-responsabilité",
+"imprint.disclaimer_text": "Nous avons créé le contenu de nos pages avec le plus grand soin. Cependant, nous ne pouvons garantir l’exactitude, l’exhaustivité et l’actualité du contenu. En tant que fournisseur de services, nous sommes responsables de notre propre contenu sur ces pages conformément au § 7(1) TMG et aux lois générales.",
+"imprint.copyright_title": "Droit d’auteur",
+"imprint.copyright_text": "Les contenus et œuvres créés par les exploitants du site sur ces pages sont soumis au droit d’auteur allemand. Toute reproduction, modification, distribution ou utilisation au-delà des limites du droit d’auteur nécessite l’accord écrit de l’auteur ou du créateur concerné."
+
 
 }

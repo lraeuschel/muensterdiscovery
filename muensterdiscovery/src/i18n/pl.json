@@ -290,6 +290,29 @@
     "route.4": "Interesujesz sie architektura? Ta trasa laczy historyczne budynki z nowoczesna architektura i pokazuje, jak rozne epoki uksztaltowaly krajobraz miasta Muenster.",
     "route.5": "Popularna i pelna zycia: dzielnica Kreuzviertel laczy kulture mieszkaniowa, historie oraz architekture. Ta trasa pokazuje wyjatkowe ulice i miejsca, ktore definiuja charakter dzielnicy.",
     "route.6": "Czy to tlo sceny kryminalnej, czy internetowy mem - ta trasa prowadzi cie do miejsc, ktore umiescily Muenster w centrum uwagi mediow, a takze do ukrytych lokalizacji za zdjeciami i filmami medialnymi.",
-    "route.7": "Czy znasz juz Muenster od podszewki? Ta trasa pokazuje wyjatkowe miejsca, o ktorych nawet wielu znawcow Muenster nie wie. Ciekawy?"
+    "route.7": "Czy znasz juz Muenster od podszewki? Ta trasa pokazuje wyjatkowe miejsca, o ktorych nawet wielu znawcow Muenster nie wie. Ciekawy?",
+
+"help.title": "Pomoc i FAQ",
+"help.subtitle": "Tutaj znajdziesz odpowiedzi na swoje pytania.",
+"help.intro_text": "Witamy w sekcji pomocy Münster Discovery. Zebraliśmy najważniejsze informacje, aby ułatwić Ci korzystanie z aplikacji i jak najlepiej odkrywać Münster.",
+"help.faq_title": "Najczęściej zadawane pytania",
+"help.faq.q1": "Czym jest Münster Discovery?",
+"help.faq.a1": "Münster Discovery to interaktywna aplikacja, dzięki której możesz odkrywać miasto Münster w nowy sposób. Odkrywaj ukryte miejsca, poznawaj fakty historyczne i zdobywaj osiągnięcia.",
+"help.faq.q2": "Jak rozpocząć trasę?",
+"help.faq.a2": "W menu głównym wybierz 'Wybór trasy'. Zobaczysz tam różne trasy tematyczne (np. Münster History). Wybierz jedną, aby zobaczyć szczegóły i rozpocząć nawigację.",
+"help.faq.q3": "Kim jest Ridey?",
+"help.faq.a3": "Ridey to nasza maskotka i Twój osobisty towarzysz! Reaguje na Twój nastrój i podpowiada, co warto zobaczyć. Możesz też z nim czatować.",
+"help.faq.q4": "Jak zdobywać osiągnięcia?",
+"help.faq.a4": "Osiągnięcia zdobywasz, gdy odwiedzasz określone miejsca, kończysz trasy lub wykonujesz specjalne zadania w aplikacji. Sprawdź swój profil, aby zobaczyć postępy.",
+"help.still_questions": "Masz jeszcze pytania?",
+"help.contact_support": "Skontaktuj się z naszym wsparciem",
+"imprint.legal_note": "Informacje zgodnie z § 5 TMG",
+"imprint.contact_label": "Kontakt",
+"imprint.represented_by": "Reprezentowany przez",
+"imprint.disclaimer_title": "Wyłączenie odpowiedzialności",
+"imprint.disclaimer_text": "Treści naszych stron zostały przygotowane z najwyższą starannością. Nie możemy jednak zagwarantować ich poprawności, kompletności ani aktualności. Jako usługodawca odpowiadamy za własne treści na tych stronach zgodnie z § 7(1) TMG oraz przepisami ogólnymi.",
+"imprint.copyright_title": "Prawa autorskie",
+"imprint.copyright_text": "Treści i utwory stworzone przez operatorów strony na tych stronach podlegają niemieckiemu prawu autorskiemu. Jakiekolwiek powielanie, opracowywanie, rozpowszechnianie lub inne wykorzystanie poza granicami prawa autorskiego wymaga pisemnej zgody odpowiedniego autora lub twórcy."
+
 
 }
