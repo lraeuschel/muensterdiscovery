@@ -496,7 +496,6 @@ export default function PlayRoute() {
           if (unlockedList && unlockedList.length > 0) {
             // Wir zeigen das erste gefundene an
             setNewAchievement(unlockedList[0]);
-            onOpen();
           }
 
         } catch (err) {
@@ -505,7 +504,7 @@ export default function PlayRoute() {
       }
     }
     finalizeRoute();
-  }, [visitedPOIs, pois, currentUser, route, routeCompleted, onOpen]);
+  }, [visitedPOIs, pois, currentUser, route, routeCompleted]);
 
   if (!route)
     return (
@@ -566,6 +565,26 @@ export default function PlayRoute() {
       background: white;
     }
   `;
+
+  const handleSuccessConfirm = () => {
+    // 1. Success Overlay schließen
+    setShowSuccess(false);
+
+    // 2. Prüfen: Haben wir ein Achievement in der Warteschlange?
+    if (newAchievement) {
+        // Ja -> Achievement Modal öffnen
+        onOpen();
+    } else {
+        // Nein -> Direkt zur Auswahl zurück
+        navigate("/routeselection");
+    }
+  };
+
+  const handleAchievementClose = () => {
+      // Wenn das Achievement Modal geschlossen wird -> Zurück zur Auswahl
+      onClose();
+      navigate("/routeselection");
+  };
 
   return (
     <Flex

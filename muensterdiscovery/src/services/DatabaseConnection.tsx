@@ -501,6 +501,7 @@ export async function checkAndUnlockRouteAchievements(userId: string): Promise<A
         { routeName: "muenster_architecture", achievementName: "Route muenster_architecture completed" },
         { routeName: "muenster_fair", achievementName: "Route muenster_fair completed" },
         { routeName: "muenster_bunteHäuser", achievementName: "test_route" },
+        { routeName: "muenster_test", achievementName: "muenster_test" },
     ];
 
     // 2. Daten laden
