@@ -329,7 +329,29 @@
     "route.4": "Interessierst Du dich für Architektur? Diese Route verbindet historische Gebäude mit moderner Architektur und zeigt Dir, wie verschiedene Epochen das Stadtbild Münsters geprägt haben.",
     "route.5": "Beliebt und lebendig: Das Kreuzviertel vereint Wohnkultur und Geschichte sowie Architektur. Diese Route zeigt Dir besondere Straßen und Orte, die den Charakter des Viertels prägen.",
     "route.6": "Ob Tatort-Kulisse oder Internet-Meme – diese Route führt Dich zu den Orten, die Münster ins mediale Rampenlicht gerückt haben, oder zu den versteckten Schauplätzen hinter Medienfotos und -videos.",
-    "route.7": "Kennst Du Münster schon in- und auswendig? Diese Route zeigt Dir besondere Orte, von denen selbst viele Münster-Kenner nichts wissen. Neugierig?"
+    "route.7": "Kennst Du Münster schon in- und auswendig? Diese Route zeigt Dir besondere Orte, von denen selbst viele Münster-Kenner nichts wissen. Neugierig?",
 
+    "help.title": "Hilfe & FAQ",
+    "help.subtitle": "Hier findest du Antworten auf deine Fragen.",
+    "help.intro_text": "Willkommen im Hilfebereich von Münster Discovery. Wir haben hier die wichtigsten Informationen zusammengestellt, damit du dich in der App zurechtfindest und Münster optimal erkunden kannst.",
+    "help.faq_title": "Häufig gestellte Fragen",
+    "help.faq.q1": "Was ist Münster Discovery?",
+    "help.faq.a1": "Münster Discovery ist eine interaktive App, mit der du die Stadt Münster auf neuen Wegen erkunden kannst. Entdecke versteckte Orte, lerne historische Fakten und sammle Erfolge.",
+    "help.faq.q2": "Wie starte ich eine Route?",
+    "help.faq.a2": "Gehe im Hauptmenü auf 'Routenauswahl'. Dort siehst du verschiedene Themenrouten (z.B. Münster History). Wähle eine aus, um Details zu sehen und die Navigation zu starten.",
+    "help.faq.q3": "Wer ist Ridey?",
+    "help.faq.a3": "Ridey ist unser Maskottchen und dein persönlicher Begleiter! Er reagiert auf deine Stimmung und gibt dir Tipps zu den Sehenswürdigkeiten. Du kannst auch mit ihm chatten.",
+    "help.faq.q4": "Wie sammle ich Achievements?",
+    "help.faq.a4": "Achievements (Erfolge) erhältst du, wenn du bestimmte Orte besuchst, Routen abschließt oder spezielle Aufgaben in der App löst. Schau auf dein Profil, um deinen Fortschritt zu sehen.",
+    "help.still_questions": "Hast du noch weitere Fragen?",
+    "help.contact_support": "Kontaktiere unseren Support",
+
+    "imprint.legal_note": "Angaben gemäß § 5 TMG",
+    "imprint.contact_label": "Kontakt",
+    "imprint.represented_by": "Vertreten durch",
+    "imprint.disclaimer_title": "Haftungsausschluss",
+    "imprint.disclaimer_text": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.",
+    "imprint.copyright_title": "Urheberrecht",
+    "imprint.copyright_text": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers."
 
 }

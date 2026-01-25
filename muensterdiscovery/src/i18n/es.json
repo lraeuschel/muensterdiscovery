@@ -303,7 +303,30 @@
     "route.4": "¿Te interesa la arquitectura? Esta ruta combina edificios históricos con arquitectura moderna y te muestra cómo diferentes épocas han moldeado el paisaje urbano de Münster.",
     "route.5": "Popular y animado: el distrito Kreuzviertel combina cultura residencial, historia y arquitectura. Esta ruta te muestra calles y lugares especiales que definen el carácter del distrito.",
     "route.6": "Ya sea un escenario de crimen o un meme de internet, esta ruta te lleva a los lugares que han puesto a Münster en el foco mediático o a los lugares ocultos detrás de fotos y videos de los medios.",
-    "route.7": "¿Ya conoces Münster de cabo a rabo? Esta ruta te muestra lugares especiales que incluso muchos expertos de Münster desconocen. ¿Curioso?"
+    "route.7": "¿Ya conoces Münster de cabo a rabo? Esta ruta te muestra lugares especiales que incluso muchos expertos de Münster desconocen. ¿Curioso?",
+
+    "help.title": "Ayuda y preguntas frecuentes",
+"help.subtitle": "Aquí encontrarás respuestas a tus preguntas.",
+"help.intro_text": "Bienvenido a la sección de ayuda de Münster Discovery. Hemos reunido la información más importante para que puedas orientarte en la app y explorar Münster de la mejor manera.",
+"help.faq_title": "Preguntas frecuentes",
+"help.faq.q1": "¿Qué es Münster Discovery?",
+"help.faq.a1": "Münster Discovery es una app interactiva con la que puedes explorar la ciudad de Münster de nuevas maneras. Descubre lugares ocultos, aprende datos históricos y consigue logros.",
+"help.faq.q2": "¿Cómo inicio una ruta?",
+"help.faq.a2": "En el menú principal, ve a 'Selección de rutas'. Allí verás diferentes rutas temáticas (p. ej., Münster History). Elige una para ver detalles y comenzar la navegación.",
+"help.faq.q3": "¿Quién es Ridey?",
+"help.faq.a3": "Ridey es nuestra mascota y tu compañero personal. Reacciona a tu estado de ánimo y te da consejos sobre los lugares de interés. También puedes chatear con él.",
+"help.faq.q4": "¿Cómo consigo logros?",
+"help.faq.a4": "Consigues logros cuando visitas determinados lugares, completas rutas o realizas tareas especiales en la app. Mira tu perfil para ver tu progreso.",
+"help.still_questions": "¿Tienes más preguntas?",
+"help.contact_support": "Contacta con nuestro soporte",
+"imprint.legal_note": "Información conforme al § 5 TMG",
+"imprint.contact_label": "Contacto",
+"imprint.represented_by": "Representado por",
+"imprint.disclaimer_title": "Exención de responsabilidad",
+"imprint.disclaimer_text": "Hemos creado los contenidos de nuestras páginas con el máximo cuidado. No obstante, no podemos garantizar la exactitud, integridad y actualidad de los contenidos. Como proveedor de servicios, somos responsables de nuestros propios contenidos en estas páginas de acuerdo con el § 7(1) TMG y la legislación general.",
+"imprint.copyright_title": "Derechos de autor",
+"imprint.copyright_text": "Los contenidos y obras creados por los operadores del sitio en estas páginas están sujetos a la legislación alemana de derechos de autor. Cualquier reproducción, modificación, distribución o uso fuera de los límites de la ley requiere el consentimiento por escrito del autor o creador correspondiente."
+
 
 
 }
