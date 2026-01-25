@@ -7,7 +7,6 @@ import {
   Heading,
   Link,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 import CompLangHeader from "../components/CompLangHeader";
 import { currentLanguage, onCurrentLanguageChange } from "../components/languageSelector";
 import type { LanguageType } from "../components/languageSelector";
@@ -19,9 +18,8 @@ import { Image } from "@chakra-ui/react";
 
 export default function Imprint() {
   const intl = useIntl();
-  const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentLang, setCurrentLang] = useState<LanguageType>(currentLanguage);
+  const [, setCurrentLang] = useState<LanguageType>(currentLanguage);
 
   useEffect(() => {
     const unsubscribe = onCurrentLanguageChange((lang) => {

@@ -12,7 +12,6 @@ import {
   Link
 } from "@chakra-ui/react";
 import { useIntl } from "react-intl";
-import { useNavigate } from "react-router-dom";
 import { BsQuestionCircleFill, BsInfoCircleFill, BsChatQuoteFill } from "react-icons/bs";
 import { FaPaperPlane } from "react-icons/fa";
 import CompLangHeader from "../components/CompLangHeader";
@@ -24,9 +23,8 @@ import { useState, useEffect } from "react";
 
 export default function Help() {
   const intl = useIntl();
-  const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currentLang, setCurrentLang] = useState(currentLanguage);
+  const [, setCurrentLang] = useState(currentLanguage);
 
   useEffect(() => {
     const unsubscribe = onCurrentLanguageChange((lang) => {
