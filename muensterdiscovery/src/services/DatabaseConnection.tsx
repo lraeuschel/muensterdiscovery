@@ -53,8 +53,8 @@ export async function getPOIs() {
 
     if (error) throw error;
 
-    const pois = data?.map((item: any) => item.POIs) || [];
-    console.log("Fetched POIs:", pois);
+    console.log("POIs raw:", data);
+
     return data as POI[];
 }
 
@@ -162,7 +162,13 @@ export async function addUserAchievement(
         .insert([{ profile_id, achievement_id}])
         .select()
         .single();
-    if (error) throw error;
+    if (error) {
+            if (error.code === '23505') {
+            console.log("Achievement war bereits gespeichert (Race Condition ignoriert).");
+        } else {
+            throw error;
+        };
+    }
     return data;
 }
 
@@ -175,7 +181,13 @@ export async function addVisitedPOI(
         .insert([{ profile_id, POI_id }])
         .select()
         .single();
-    if (error) throw error;
+    if (error){
+            if (error.code === '23505') {
+            console.log("Achievement war bereits gespeichert (Race Condition ignoriert).");
+        } else {
+            throw error;
+        }
+    }
     await updateUserPoints(profile_id, 10); // Beispiel: 10 Punkte pro POI
 
     checkAndUnlockPoiAchievements(profile_id).catch((e) => console.error("Fehler beim Prüfen der Achievements:", e));
@@ -191,7 +203,13 @@ export async function addRouteCompletion(
         .insert([{ profile_id: profile_id, route_id, explored_at: new Date().toISOString() }])
         .select()
         .single();
-    if (error) throw error;
+    if (error){
+            if (error.code === '23505') {
+            console.log("Achievement war bereits gespeichert (Race Condition ignoriert).");
+        } else {
+            throw error;
+        }
+    }
     await updateUserPoints(profile_id, 50); // Beispiel: 50 Punkte pro Route
     
     checkAndUnlockRouteAchievements(profile_id).catch(err => console.error(err));
@@ -481,9 +499,15 @@ export async function checkAndUnlockPoiAchievements(userId: string): Promise<Ach
     if (newAchievements.length > 0) {
         const { error: insertError } = await supabase
             .from("user_achievements")
-            .insert(newAchievements);
+            .insert(newAchievements)
+            .select();
         
-        if (insertError) throw insertError;
+        if (insertError) 
+            if (insertError.code === '23505') {
+            console.log("Achievement war bereits gespeichert (Race Condition ignoriert).");
+        } else {
+            throw insertError;
+        }
         console.log("Neue POI-Achievements freigeschaltet:", newAchievements.length);
         return unlockedDefinitions;
     }
@@ -491,6 +515,9 @@ export async function checkAndUnlockPoiAchievements(userId: string): Promise<Ach
 }
 
 export async function checkAndUnlockRouteAchievements(userId: string): Promise<Achievement[]> {
+
+    const runId = crypto.randomUUID();
+    console.log("[checkAndUnlockRouteAchievements] run", runId);
     // 1. Definition: Welcher Routen-NAME (in Tabelle routes) gehört zu welchem Achievement-NAME
     const routeMapping = [
         { routeName: "muenster_history", achievementName: "Route muenster_history completed" },
@@ -503,6 +530,8 @@ export async function checkAndUnlockRouteAchievements(userId: string): Promise<A
         { routeName: "muenster_bunteHäuser", achievementName: "test_route" },
         { routeName: "muenster_test", achievementName: "muenster_test" },
     ];
+
+    console.log("Route mapping:", routeMapping);
 
     // 2. Daten laden
     // a) Alle Routen laden, um Namen zu IDs aufzulösen
@@ -531,6 +560,8 @@ export async function checkAndUnlockRouteAchievements(userId: string): Promise<A
 
     // d) Achievement Definitionen laden (für die IDs)
     const allAchievementDefs = await getAllAchievementDefinitions();
+    console.log("All achievement defs:", allAchievementDefs);
+
 
     const newAchievements = [];
     const unlockedDefinitions: Achievement[] = [];
@@ -549,6 +580,16 @@ export async function checkAndUnlockRouteAchievements(userId: string): Promise<A
         if (completedRouteIds.has(routeObj.id)) {
             // Finde das zugehörige Achievement
             const achDef = allAchievementDefs.find(a => a.achievement === mapping.achievementName);
+
+            if (!achDef) {
+                console.warn(`Achievement '${mapping.achievementName}' nicht in Tabelle 'achievements' gefunden.`);
+                continue;
+            }
+
+            if (ownedAchievementIds.has(achDef.id)) {
+                // User hat das Achievement schon -> kein Log nötig oder nur Debug
+                continue;
+            }
             
             if (achDef && !ownedAchievementIds.has(achDef.id)) {
                 // Wenn User das Achievement noch nicht hat -> hinzufügen
@@ -560,8 +601,14 @@ export async function checkAndUnlockRouteAchievements(userId: string): Promise<A
                     });
                 }
 
+                console.log("Mapping Achievement to unlock:", mapping.achievementName);
+                console.log("Achievement Definition:", achDef);
+                console.log("ALL Achievement Defs:", allAchievementDefs);
+
                 unlockedDefinitions.push(achDef);
                 ownedAchievementIds.add(achDef.id); 
+                console.log("Unlocked definitions:", unlockedDefinitions);
+
 
             } else {
                 console.warn(`Achievement '${mapping.achievementName}' nicht in Tabelle 'achievements' gefunden.`);
@@ -573,10 +620,17 @@ export async function checkAndUnlockRouteAchievements(userId: string): Promise<A
     if (newAchievements.length > 0) {
         const { error: insertError } = await supabase
             .from("user_achievements")
-            .insert(newAchievements);
+            .insert(newAchievements)
+            .select();
         
-        if (insertError) throw insertError;
-        console.log("Neue Routen-Achievements freigeschaltet:", newAchievements.length);
+        if (insertError) 
+            if (insertError.code === '23505') {
+            console.log("Achievement war bereits gespeichert (Race Condition ignoriert).");
+        } else {
+            throw insertError;
+        }
+
+        console.log("Neue Routen-Achievements freigeschaltet:", newAchievements);
 
     return unlockedDefinitions;
     }
