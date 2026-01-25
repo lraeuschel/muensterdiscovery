@@ -30,9 +30,9 @@ export default function CompLangHeader() {
     const menuItems = [
         { value: "welcome", icon: RiHome2Line, path: "/" },
         { value: "profile", icon: CgProfile, path: "/profile" },
-        { value: "open-world", icon: IoEarthOutline, path: "/openworld" },
-        { value: "leaderboard", icon: MdOutlineLeaderboard, path: "/leaderboard" },
+        { value: "open-world", icon: IoEarthOutline, path: "/openworld" },        
         { value: "routeselection", icon: CiRoute, path: "/routeselection" },
+        { value: "leaderboard", icon: MdOutlineLeaderboard, path: "/leaderboard" },
         { value: "help", icon: IoIosHelpCircleOutline, path: "/help" }
     ];
 
