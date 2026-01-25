@@ -78,10 +78,11 @@ export default function CompLangHeader() {
                 borderRadius="2xl"        // feste abgerundete Ecken
                 overflow="hidden"
                 transition="height 0.25s ease"
+                zIndex={"overlay"}
             >
                 <VStack align="start" gap={0}>
                     {/* Obere Zeile: Hamburger + Logo */}
-                    <HStack gap={2} align="center" p={2}>
+                    <HStack gap={2} align="center" p={2} h="61px">
                         <Button
                             variant="ghost"
                             size="md"
@@ -137,7 +138,7 @@ export default function CompLangHeader() {
 
 
             {/* --- RECHTER BEREICH (Sprache + Avatar) --- */}
-            <Box {...boxStyles} left="10px" borderRadius="2xl" overflow="hidden" transition="height 0.25s ease">
+            <Box {...boxStyles} left="10px" borderRadius="2xl" overflow="hidden" transition="height 0.25s ease" zIndex={"overlay"}>
                 <VStack align="start" gap={0}>
                     {/* Linke obere Zeile: Hamburger + Logo */}
                     <HStack gap={2} align="center" p={2}>
@@ -193,11 +194,11 @@ export default function CompLangHeader() {
                 </VStack>
             </Box>
 
-            {/* --- Rechte Seite: Sprache + Avatar --- */}
+            {/* --- RECHTE SEITE: Sprache + Avatar --- */}
             <Box {...boxStyles} right="10px" borderRadius="2xl" overflow="hidden" transition="height 0.25s ease">
                 <VStack align="start" gap={0}>
                     {/* Obere Zeile: Sprache + Avatar */}
-                    <HStack gap={2} align="center" p={2}>
+                    <HStack gap={2} align="center" p={2} h="61px">
                         <Button
                             variant="ghost"
                             size="md"

@@ -21,6 +21,7 @@
     "routeselection.start": "Route starten",
     "routeselection.about": "Über diese Route",
     "routeselection.selected": "Ausgewählt",
+    "routeselection.back_to_start": "Zurück zur Startseite",
 
     "imprint.title": "Impressum",
     "imprint.content": "Dieses Projekt ist ein Studienprojekt im Rahmen des Masterstudiengangs Geoinformatics and Spatial Data Science der Universität Münster. Quellcode und Dokumentation sind auf GitHub verfügbar:",
@@ -346,7 +347,8 @@
     "help.faq.q4": "Wie sammle ich Achievements?",
     "help.faq.a4": "Achievements (Erfolge) erhältst du, wenn du bestimmte Orte besuchst, Routen abschließt oder spezielle Aufgaben in der App löst. Schau auf dein Profil, um deinen Fortschritt zu sehen.",
     "help.still_questions": "Hast du noch weitere Fragen?",
-    "help.contact_support": "Kontaktiere unseren Support",
+    "help.contact_support": "Unser Team steht dir gerne zur Verfügung. Schreib uns einfach eine Mail.",
+    "help.send_email": "E-Mail senden",
 
     "imprint.legal_note": "Angaben gemäß § 5 TMG",
     "imprint.contact_label": "Kontakt",
