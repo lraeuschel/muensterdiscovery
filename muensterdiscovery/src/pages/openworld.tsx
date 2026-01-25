@@ -175,7 +175,7 @@ export default function OpenWorld() {
         useState<LanguageType>(currentLanguage);
 
     const [pois, setPois] = useState<POI[]>([]);
-    const [visitedPOIsIDs, setVisitedPOIsIDs] = useState<{id: number, visited: Date}[]>([]);
+    const [visitedPOIsIDs, setVisitedPOIsIDs] = useState<{ id: number, visited: Date }[]>([]);
     const [userLocation, setUserLocation] =
         useState<LatLngExpression | null>(null);
     const [user, setUser] = useState<any>(null);
@@ -192,7 +192,7 @@ export default function OpenWorld() {
     useEffect(() => {
         if (user)
             getVisitedPOIs(user.id).then(v =>
-                setVisitedPOIsIDs(v.map(p => ({id: p.id, visited: new Date(p.visited)})))
+                setVisitedPOIsIDs(v.map(p => ({ id: p.id, visited: new Date(p.visited) })))
             );
     }, [user]);
 
@@ -209,7 +209,7 @@ export default function OpenWorld() {
     async function markPOIAsVisited(poiId: number) {
         if (!user || visitedPOIsIDs.some(v => v.id === poiId)) return;
         await addVisitedPOI(user.id, poiId);
-        setVisitedPOIsIDs(prev => [...prev, {id: poiId, visited: new Date()}]);
+        setVisitedPOIsIDs(prev => [...prev, { id: poiId, visited: new Date() }]);
     }
 
     const getDistanceToPOI = (poi: POI) =>
@@ -339,7 +339,7 @@ export default function OpenWorld() {
                 )}
 
                 {/* VISITED */}
-                <MarkerClusterGroup iconCreateFunction={createClusterIcon("gray")}>
+                <MarkerClusterGroup iconCreateFunction={createClusterIcon("gray")} showCoverageOnHover={false}>
                     {visitedMarkers.map(m => (
                         <Marker key={m.id} position={m.position} icon={m.icon}>
                             <Popup>
@@ -372,6 +372,7 @@ export default function OpenWorld() {
                 {/* UNVISITED */}
                 <MarkerClusterGroup
                     iconCreateFunction={createClusterIcon("red")}
+                    showCoverageOnHover={false}
                 >
                     {unvisitedMarkers.map(m => (
                         <Marker
@@ -420,7 +421,9 @@ export default function OpenWorld() {
                 </MarkerClusterGroup>
 
                 {/* EVENTS */}
-                <MarkerClusterGroup>
+                <MarkerClusterGroup
+                    showCoverageOnHover={false}
+                >
                     {datenportalMarkers.map(m => (
                         <Marker
                             key={m.id}
