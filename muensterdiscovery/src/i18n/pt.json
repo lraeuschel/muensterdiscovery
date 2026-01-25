@@ -290,7 +290,30 @@
     "route.4": "Interessado em arquitetura? Esta rota combina edifícios históricos com arquitetura moderna e mostra como diferentes épocas moldaram a paisagem urbana de Münster.",
     "route.5": "Popular e animado: o bairro Kreuzviertel combina cultura residencial, história e arquitetura. Esta rota mostra ruas e lugares especiais que definem o caráter do bairro.",
     "route.6": "Seja como cenário de crime ou meme da internet – esta rota leva-te aos lugares que colocaram Münster em destaque nos meios de comunicação ou aos bastidores das fotos e vídeos.",
-    "route.7": "Já conheces Münster de trás para a frente? Esta rota mostra lugares especiais que até muitos especialistas de Münster desconhecem. Curioso?"
+    "route.7": "Já conheces Münster de trás para a frente? Esta rota mostra lugares especiais que até muitos especialistas de Münster desconhecem. Curioso?",
+
+"help.title": "Ajuda e FAQ",
+"help.subtitle": "Aqui você encontra respostas para suas perguntas.",
+"help.intro_text": "Bem-vindo à seção de ajuda do Münster Discovery. Reunimos as informações mais importantes para que você possa se orientar no app e explorar Münster da melhor forma possível.",
+"help.faq_title": "Perguntas frequentes",
+"help.faq.q1": "O que é Münster Discovery?",
+"help.faq.a1": "Münster Discovery é um app interativo que permite explorar a cidade de Münster de novas maneiras. Descubra lugares escondidos, aprenda fatos históricos e conquiste conquistas.",
+"help.faq.q2": "Como começo uma rota?",
+"help.faq.a2": "No menu principal, vá em 'Seleção de rotas'. Lá você verá diferentes rotas temáticas (por exemplo, Münster History). Escolha uma para ver os detalhes e iniciar a navegação.",
+"help.faq.q3": "Quem é Ridey?",
+"help.faq.a3": "Ridey é a nossa mascote e seu companheiro pessoal! Ele reage ao seu humor e dá dicas sobre pontos turísticos. Você também pode conversar com ele.",
+"help.faq.q4": "Como ganho conquistas?",
+"help.faq.a4": "Você ganha conquistas quando visita certos lugares, conclui rotas ou completa tarefas especiais no app. Confira seu perfil para ver seu progresso.",
+"help.still_questions": "Ainda tem dúvidas?",
+"help.contact_support": "Fale com o suporte",
+"imprint.legal_note": "Informações conforme § 5 TMG",
+"imprint.contact_label": "Contato",
+"imprint.represented_by": "Representado por",
+"imprint.disclaimer_title": "Isenção de responsabilidade",
+"imprint.disclaimer_text": "Criamos o conteúdo de nossas páginas com o máximo cuidado. No entanto, não podemos garantir a exatidão, integridade e atualidade do conteúdo. Como prestadores de serviços, somos responsáveis pelo nosso próprio conteúdo nestas páginas de acordo com o § 7(1) TMG e as leis gerais.",
+"imprint.copyright_title": "Direitos autorais",
+"imprint.copyright_text": "Os conteúdos e obras criados pelos operadores do site nestas páginas estão sujeitos à lei alemã de direitos autorais. Qualquer reprodução, edição, distribuição ou uso além dos limites da lei exige o consentimento por escrito do respectivo autor ou criador."
+
 
 
 

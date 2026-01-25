@@ -287,5 +287,28 @@
     "route.4": "Mimariye ilgi duyuyor musunuz? Bu rota, tarihi yapıları modern mimariyle birleştirir ve farklı dönemlerin Münster şehir siluetini nasıl şekillendirdiğini gösterir.",
     "route.5": "Popüler ve canlı: Kreuzviertel semti, konut kültürü, tarih ve mimariyi bir araya getirir. Bu rota, semtin karakterini belirleyen özel sokakları ve yerleri gösterir.",
     "route.6": "Bir suç dizisi sahnesi ya da bir internet memi olsun – bu rota, Münster’i medyada öne çıkaran yerlerin yanı sıra fotoğraf ve videoların arkasındaki gizli mekânlara götürür.",
-    "route.7": "Münster’i artık avucunuzun içi gibi mi biliyorsunuz? Bu rota, birçok Münster uzmanının bile bilmediği özel yerleri gösterir. Merak ettiniz mi?"
+    "route.7": "Münster’i artık avucunuzun içi gibi mi biliyorsunuz? Bu rota, birçok Münster uzmanının bile bilmediği özel yerleri gösterir. Merak ettiniz mi?",
+
+"help.title": "Yardım ve SSS",
+"help.subtitle": "Sorularınızın yanıtlarını burada bulabilirsiniz.",
+"help.intro_text": "Münster Discovery yardım bölümüne hoş geldiniz. Uygulamada kolayca yolunuzu bulmanız ve Münster’i en iyi şekilde keşfetmeniz için en önemli bilgileri burada derledik.",
+"help.faq_title": "Sıkça sorulan sorular",
+"help.faq.q1": "Münster Discovery nedir?",
+"help.faq.a1": "Münster Discovery, Münster şehrini yeni yollarla keşfetmenizi sağlayan etkileşimli bir uygulamadır. Gizli yerleri keşfedin, tarihi bilgiler öğrenin ve başarılar kazanın.",
+"help.faq.q2": "Bir rotayı nasıl başlatırım?",
+"help.faq.a2": "Ana menüden 'Rota seçimi'ne gidin. Burada farklı temalı rotaları (örn. Münster History) göreceksiniz. Ayrıntıları görmek ve navigasyonu başlatmak için birini seçin.",
+"help.faq.q3": "Ridey kim?",
+"help.faq.a3": "Ridey, maskotumuz ve kişisel arkadaşınız! Ruh halinize tepki verir ve gezilecek yerler hakkında ipuçları sunar. Onunla sohbet de edebilirsiniz.",
+"help.faq.q4": "Başarıları nasıl kazanırım?",
+"help.faq.a4": "Belirli yerleri ziyaret ettiğinizde, rotaları tamamladığınızda veya uygulamadaki özel görevleri yaptığınızda başarılar kazanırsınız. İlerlemenizi görmek için profilinize bakın.",
+"help.still_questions": "Başka sorularınız var mı?",
+"help.contact_support": "Destek ekibimizle iletişime geçin",
+"imprint.legal_note": "§ 5 TMG uyarınca bilgiler",
+"imprint.contact_label": "İletişim",
+"imprint.represented_by": "Temsil eden",
+"imprint.disclaimer_title": "Sorumluluk reddi",
+"imprint.disclaimer_text": "Sayfalarımızın içeriğini büyük bir özenle hazırladık. Ancak içeriğin doğruluğu, eksiksizliği ve güncelliği konusunda garanti veremeyiz. Hizmet sağlayıcı olarak, § 7(1) TMG ve genel yasalara göre bu sayfalardaki kendi içeriklerimizden sorumluyuz.",
+"imprint.copyright_title": "Telif hakkı",
+"imprint.copyright_text": "Bu sayfalardaki içerikler ve site işletmecileri tarafından oluşturulan eserler Alman telif hakkı yasasına tabidir. Telif hakkı sınırları dışında çoğaltma, işleme, dağıtım veya herhangi bir kullanım ilgili yazarın/yaratıcının yazılı iznini gerektirir."
+
 }

@@ -302,5 +302,28 @@
     "route.4": "Are you interested in architecture? This route combines historic buildings with modern architecture and shows you how different eras have shaped Münster's cityscape.",
     "route.5": "Popular and lively: the Kreuzviertel district combines residential culture and history as well as architecture. This route shows you special streets and places that define the character of the district.",
     "route.6": "Whether it's a crime scene backdrop or an internet meme - this route takes you to the places that have put Münster in the media spotlight or the hidden locations behind media photos and videos.",
-    "route.7": "Do you already know Münster inside out? This route shows you special places that even many Münster experts are unaware of. Curious?"
+    "route.7": "Do you already know Münster inside out? This route shows you special places that even many Münster experts are unaware of. Curious?",
+
+"help.title": "Help & FAQ",
+"help.subtitle": "Here you can find answers to your questions.",
+"help.intro_text": "Welcome to the help section of Münster Discovery. We have put together the most important information so you can find your way around the app and explore Münster in the best possible way.",
+"help.faq_title": "Frequently asked questions",
+"help.faq.q1": "What is Münster Discovery?",
+"help.faq.a1": "Münster Discovery is an interactive app that lets you explore the city of Münster in new ways. Discover hidden places, learn historical facts, and earn achievements.",
+"help.faq.q2": "How do I start a route?",
+"help.faq.a2": "In the main menu, go to 'Route selection'. There you will see different themed routes (e.g., Münster History). Choose one to view details and start navigation.",
+"help.faq.q3": "Who is Ridey?",
+"help.faq.a3": "Ridey is our mascot and your personal companion! He reacts to your mood and gives you tips about sights. You can also chat with him.",
+"help.faq.q4": "How do I earn achievements?",
+"help.faq.a4": "You earn achievements when you visit certain places, finish routes, or complete special tasks in the app. Check your profile to see your progress.",
+"help.still_questions": "Do you have any more questions?",
+"help.contact_support": "Contact our support",
+"imprint.legal_note": "Information pursuant to § 5 TMG",
+"imprint.contact_label": "Contact",
+"imprint.represented_by": "Represented by",
+"imprint.disclaimer_title": "Disclaimer",
+"imprint.disclaimer_text": "We created the content of our pages with great care. However, we cannot guarantee the accuracy, completeness, or timeliness of the content. As a service provider, we are responsible for our own content on these pages in accordance with § 7(1) TMG and the general laws.",
+"imprint.copyright_title": "Copyright",
+"imprint.copyright_text": "The content and works created by the site operators on these pages are subject to German copyright law. Any reproduction, editing, distribution, or use beyond the limits of copyright law requires the written consent of the respective author or creator."
+
 }
