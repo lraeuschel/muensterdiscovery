@@ -1295,9 +1295,13 @@ export default function PlayRoute() {
               colorScheme="orange"
               size="lg"
               w="full"
-              onClick={() => navigate("/routeselection")}
+              onClick={() => handleSuccessConfirm()}
             >
-              {intl.formatMessage({ id: "playroute.return_base" })}
+              {/* Text dynamisch machen: Wenn Achievement wartet, steht da "Belohnung abholen" */}
+                {newAchievement 
+                    ? "Belohnung ansehen 🎁" 
+                    : intl.formatMessage({ id: "playroute.return_base" })
+                }
             </Button>
           </VStack>
         </Box>
@@ -1306,7 +1310,7 @@ export default function PlayRoute() {
       {/* Die Modal Achievement Komponente */}
       <AchievementUnlockModal
         isOpen={open}
-        onClose={onClose}
+        onClose={handleAchievementClose}
         achievement={newAchievement}
       />
 
