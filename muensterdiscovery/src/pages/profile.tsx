@@ -266,6 +266,18 @@ export default function Profile() {
                     </HStack>
                 </Box>
 
+                {/* STATISTICS TITLE */}
+                <Box w="100%">
+                    <Text
+                        fontSize="xl"
+                        fontWeight="bold"
+                        color="orange.600"
+                        textAlign="left"
+                    >
+                        {intl.formatMessage({ id: "profile.explored_areas" })}
+                    </Text>
+                </Box>
+
                 {/* EXPLORED AREAS TITLE */}
                 <Box w="100%">
                     <Text

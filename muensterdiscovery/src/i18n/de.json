@@ -66,6 +66,7 @@
     "leaderboard.points": "Punkte",
     "leaderboard.loading": "Lade Daten",
     "leaderboard.no_data": "Noch keine Daten verfügbar",
+    "leaderboard.km": "Routenkilometer",
 
     "registration.title": "Konto erstellen",
     "registration.firstname": "Vorname",

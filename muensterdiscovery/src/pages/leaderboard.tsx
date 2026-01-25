@@ -137,7 +137,7 @@ export default function Leaderboard() {
                 <HStack px={4} py={2} color="gray.500" fontSize="xs" fontWeight="bold">
                     <Text width="10%">#</Text>
                     <Text flex={1}>{intl.formatMessage({ id: "leaderboard.user", defaultMessage: "Nutzer" })}</Text>
-                    <Text width="20%" textAlign="right">km</Text>
+                    <Text width="20%" textAlign="right">{intl.formatMessage({ id: "leaderboard.km", defaultMessage: "Routing km" })}</Text>
                     <Text width="20%" textAlign="right">{intl.formatMessage({ id: "leaderboard.points", defaultMessage: "Punkte" })}</Text>
                 </HStack>
 

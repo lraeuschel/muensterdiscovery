@@ -62,6 +62,8 @@
     "leaderboard.user": "User",
     "leaderboard.areas": "areas",
     "leaderboard.points": "Points",
+    "leaderboard.km": "Route kilometers",
+
 
     "registration.title": "Create Account",
     "registration.firstname": "First Name",
