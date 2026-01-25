@@ -24,8 +24,8 @@ export default function MenuComponent() {
         { value: "welcome", icon: RiHome2Line, path: "/" },
         { value: "profile", icon: CgProfile, path: "/profile" },
         { value: "open-world", icon: IoEarthOutline, path: "/openworld" },
-        { value: "leaderboard", icon: MdOutlineLeaderboard, path: "/leaderboard" },
         { value: "routeselection", icon: CiRoute, path: "/routeselection" },
+        { value: "leaderboard", icon: MdOutlineLeaderboard, path: "/leaderboard" },
         { value: "help", icon: IoIosHelpCircleOutline, path: "/help" }
     ];
 
