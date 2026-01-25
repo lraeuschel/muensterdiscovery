@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { IntlProvider } from "react-intl";
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 
 import ProtectedRouting from "./components/ProtectedRouting";
-import { 
-  currentLanguage, 
-  onCurrentLanguageChange, 
-  type LanguageType 
+import {
+    currentLanguage,
+    onCurrentLanguageChange,
+    type LanguageType
 } from "./components/languageSelector";
 
 // Translation Imports
@@ -38,60 +38,60 @@ import Start from "./pages/start";
 import PlayRoute from "./pages/playRoute";
 
 const messages = {
-  de: deMessages,
-  en: enMessages,
-  es: esMessages,
-  fr: frMessages,
-  it: itMessages,
-  nl: nlMessages,
-  pl: plMessages,
-  pt: ptMessages,
-  tk: tkMessages,
-  ru: ruMessages,
-  jp: jpMessages,
-  sa: saMessages,
+    de: deMessages,
+    en: enMessages,
+    es: esMessages,
+    fr: frMessages,
+    it: itMessages,
+    nl: nlMessages,
+    pl: plMessages,
+    pt: ptMessages,
+    tk: tkMessages,
+    ru: ruMessages,
+    jp: jpMessages,
+    sa: saMessages,
 };
 
 export default function AppWrapper() {
-  const [language, setLanguage] = useState<LanguageType>(currentLanguage);
+    const [language, setLanguage] = useState<LanguageType>(currentLanguage);
 
-  useEffect(() => {
-    const unsubscribe = onCurrentLanguageChange((newLang) => {
-      setLanguage(newLang);
-    });
-    return unsubscribe;
-  }, []);
+    useEffect(() => {
+        const unsubscribe = onCurrentLanguageChange((newLang) => {
+            setLanguage(newLang);
+        });
+        return unsubscribe;
+    }, []);
 
-  return (
-    <IntlProvider 
-      locale={language} 
-      messages={messages[language]} 
-      defaultLocale="en"
-    >
-      <ChakraProvider value={defaultSystem}>
-        {/* ADDED BASENAME HERE */}
-        <BrowserRouter basename="/muensterdiscovery">
-          <Routes>
-            {/* Public Routes */}
-            <Route path="/welcome" element={<Welcome />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/registration" element={<Registration />} />
-            <Route path="/imprint" element={<Imprint />} />
-            <Route path="/help" element={<Help />} />
+    return (
+        <IntlProvider
+            locale={language}
+            messages={messages[language]}
+            defaultLocale="en"
+        >
+            <ChakraProvider value={defaultSystem}>
+                {/* ADDED BASENAME HERE */}
+                <HashRouter>
+                    <Routes>
+                        {/* Public Routes */}
+                        <Route path="/welcome" element={<Welcome />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/registration" element={<Registration />} />
+                        <Route path="/imprint" element={<Imprint />} />
+                        <Route path="/help" element={<Help />} />
 
-            {/* Protected Routes */}
-            <Route element={<ProtectedRouting />}>
-              <Route path="/" element={<Start />} />
-              <Route path="/start" element={<Start />} />
-              <Route path="/openworld" element={<OpenWorld />} />
-              <Route path="/routeselection" element={<RouteSelection />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/playroute/:routeId" element={<PlayRoute />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ChakraProvider>
-    </IntlProvider>
-  );
+                        {/* Protected Routes */}
+                        <Route element={<ProtectedRouting />}>
+                            <Route path="/" element={<Start />} />
+                            <Route path="/start" element={<Start />} />
+                            <Route path="/openworld" element={<OpenWorld />} />
+                            <Route path="/routeselection" element={<RouteSelection />} />
+                            <Route path="/leaderboard" element={<Leaderboard />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/playroute/:routeId" element={<PlayRoute />} />
+                        </Route>
+                    </Routes>
+                </HashRouter>
+            </ChakraProvider>
+        </IntlProvider>
+    );
 }
