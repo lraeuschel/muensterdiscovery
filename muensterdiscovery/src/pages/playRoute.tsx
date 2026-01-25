@@ -28,7 +28,7 @@ import {
     Popup,
 } from "react-leaflet";
 import L from "leaflet";
-import type { LatLngExpression, LatLngBoundsExpression } from "leaflet";
+import type { LatLngExpression} from "leaflet";
 
 import {
     getRouteById,
