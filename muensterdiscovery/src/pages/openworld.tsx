@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useIntl } from "react-intl";
 import {
     MapContainer,
@@ -9,7 +9,10 @@ import {
     LayersControl
 } from "react-leaflet";
 import L from "leaflet";
-import type { LatLngExpression } from "leaflet";
+import type { LatLngExpression, LatLngBoundsExpression } from "leaflet";
+import { BsPersonStanding } from "react-icons/bs";
+import { FaMap } from "react-icons/fa";
+
 import "leaflet/dist/leaflet.css";
 import {
     Box,
@@ -174,6 +177,8 @@ export default function OpenWorld() {
     const [currentLang, setCurrentLang] =
         useState<LanguageType>(currentLanguage);
 
+    const mapRef = useRef<L.Map | null>(null);
+
     const [pois, setPois] = useState<POI[]>([]);
     const [visitedPOIsIDs, setVisitedPOIsIDs] = useState<{ id: number, visited: Date }[]>([]);
     const [userLocation, setUserLocation] =
@@ -204,7 +209,25 @@ export default function OpenWorld() {
         return () => navigator.geolocation.clearWatch(watcher);
     }, []);
 
-    const munsterCenter: LatLngExpression = [51.9607, 7.6261];
+    const muensterCenter: LatLngExpression = [51.9607, 7.6261];
+    const muensterBounds: LatLngBoundsExpression = [
+        [51.94, 7.57],
+        [51.98, 7.68]
+    ];
+
+    const zoomToUserLocation = () => {
+        if (!mapRef.current) return;
+        if (userLocation) {
+            mapRef.current.flyTo(userLocation, 16);
+        } else if (navigator.geolocation) {
+            mapRef.current.locate({ setView: true, maxZoom: 16 });
+        }
+    };
+
+    const zoomToMuensterBounds = () => {
+        if (!mapRef.current) return;
+        mapRef.current.fitBounds(muensterBounds);
+    };
 
     async function markPOIAsVisited(poiId: number) {
         if (!user || visitedPOIsIDs.some(v => v.id === poiId)) return;
@@ -291,12 +314,54 @@ export default function OpenWorld() {
             )}
 
             <MapContainer
-                center={munsterCenter}
+                center={muensterCenter}
                 zoom={14}
                 style={{ width: "100%", height: "100%" }}
                 zoomControl={false}
+                ref={mapRef}
             >
                 <ZoomControl position="bottomright" />
+
+                <Box
+                    position="absolute"
+                    bottom="110px"
+                    right="12px"
+                    display="flex"
+                    flexDirection="column"
+                    gap={2}
+                    zIndex={1000}
+                >
+                    {userLocation && (
+                    <Button
+                        size="sm"
+                        variant="solid"
+                        bg={"orange.500"}
+                        borderRadius="full"
+                        minW="42px"
+                        h="42px"
+                        p={0}
+                        aria-label={intl.formatMessage({ id: "openworld.zoom_user", defaultMessage: "My location" })}
+                        title={intl.formatMessage({ id: "openworld.zoom_user", defaultMessage: "My location" })}
+                        onClick={zoomToUserLocation}
+                    >
+                        <BsPersonStanding size={20} />
+                    </Button>
+                    )}
+                    <Button
+                        size="sm"
+                        bg={"orange.500"}
+                        variant="solid"
+                        borderRadius="full"
+                        minW="42px"
+                        h="42px"
+                        p={0}
+                        aria-label={intl.formatMessage({ id: "openworld.zoom_munster", defaultMessage: "City boundary" })}
+                        title={intl.formatMessage({ id: "openworld.zoom_munster", defaultMessage: "City boundary" })}
+                        onClick={zoomToMuensterBounds}
+                    >
+                        <FaMap size={18} />
+                    </Button>
+                </Box>
 
                 <LayersControl position="bottomleft" key={currentLang}>
                     <LayersControl.BaseLayer
