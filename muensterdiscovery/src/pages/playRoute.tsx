@@ -15,6 +15,7 @@ import {
   Progress,
   Alert,
   Skeleton,
+  useDisclosure
   // SkeletonText removed to avoid type errors
 } from "@chakra-ui/react";
 import {
@@ -36,8 +37,11 @@ import {
   getCurrentUser,
   getCurrentUserProfile,
   addRouteCompletion,
+  checkAndUnlockPoiAchievements,
+  checkAndUnlockRouteAchievements
 } from "../services/DatabaseConnection";
 import CompLangHeader from "../components/CompLangHeader";
+import AchievementUnlockModal from "../components/AchievementUnlock";
 import {
   onCurrentLanguageChange,
   currentLanguage,
@@ -188,6 +192,10 @@ export default function PlayRoute() {
   const intl = useIntl();
   const navigate = useNavigate();
   const { routeId } = useParams();
+
+  //Achievement Unlocking
+  const [newAchievement, setNewAchievement] = useState<any>(null);
+  const { open, onOpen, onClose } = useDisclosure();
 
   // Data State
   const [route, setRoute] = useState<Route | null>(null);
@@ -442,7 +450,17 @@ export default function PlayRoute() {
     try {
       if (currentUser) {
         await addVisitedPOI(currentUser.id, poiId);
-      }
+        // Check for POI Achievements
+        const unlockedList = await checkAndUnlockPoiAchievements(currentUser.id);
+        console.log("Checked POI achievements, unlocked:", unlockedList);
+
+        // Wenn die Liste Einträge hat -> Modal öffnen!
+        if (unlockedList && unlockedList.length > 0) {
+            // Wir nehmen das erste (oder wichtigste) Achievement für die Anzeige
+            setNewAchievement(unlockedList[0]);
+            onOpen();
+        }
+    }
     } catch (error) {
       console.error("Error marking POI:", error);
     }
@@ -460,13 +478,21 @@ export default function PlayRoute() {
         try {
           await addRouteCompletion(currentUser.id, route.id);
           setRouteCompleted(true);
+          // Check for Route Achievements
+          const unlockedList = await checkAndUnlockRouteAchievements(currentUser.id);
+
+          if (unlockedList && unlockedList.length > 0) {
+                  // Wir zeigen das erste gefundene an 
+                  setNewAchievement(unlockedList[0]);
+                  onOpen();
+              }
         } catch (err) {
           console.error("Error completing route:", err);
         }
       }
     }
     finalizeRoute();
-  }, [visitedPOIs, pois, currentUser, route, routeCompleted]);
+  }, [visitedPOIs, pois, currentUser, route, routeCompleted, onOpen]);
 
   if (!route)
     return (
@@ -1244,6 +1270,13 @@ export default function PlayRoute() {
           </VStack>
         </Box>
       )}
+
+      {/* Die Modal Achievement Komponente  */}
+           <AchievementUnlockModal
+               isOpen={open} 
+               onClose={onClose} 
+               achievement={newAchievement} 
+           />
 
       {/* AI Chat Buddy */}
       <RideyChat

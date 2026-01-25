@@ -386,7 +386,7 @@ export async function getLeaderboard(
 }
 
 // Alle Achievements abrufen
-export async function getAllAchievementDefinitions() {
+export async function getAllAchievementDefinitions(): Promise<Achievement[]> {
     const { data, error } = await supabase
         .from("achievements")
         .select("id, achievement, description");
@@ -394,7 +394,7 @@ export async function getAllAchievementDefinitions() {
     return data as Achievement[];
 }
 
-export async function checkAndUnlockPoiAchievements(userId: string) {
+export async function checkAndUnlockPoiAchievements(userId: string): Promise<Achievement[]> {
     // 1. Daten abrufen: Welche POI_ids hat der User besucht?
     // WICHTIG: Wir entfernen "head: true", weil wir jetzt die IDs brauchen!
     const { data: visitedData, error: visitedError } = await supabase
@@ -428,6 +428,7 @@ export async function checkAndUnlockPoiAchievements(userId: string) {
     const allDefinitions = await getAllAchievementDefinitions();
 
     const newAchievements = [];
+    const unlockedDefinitions: Achievement[] = []; 
 
     // 4. Logik-Definition: Welches Limit gehört zu welchem Achievement-Namen?
     const rules = [
@@ -443,12 +444,14 @@ export async function checkAndUnlockPoiAchievements(userId: string) {
     for (const rule of rules) {
         if (visitedCount >= rule.threshold) {
             const definition = allDefinitions.find(d => d.achievement === rule.achievementName);
-            if (definition && !ownedAchievementIds.has(definition.id)) {
+            const alreadyInBatch = unlockedDefinitions.some(d => d.id === definition?.id);
+            if (definition && !ownedAchievementIds.has(definition.id) && !alreadyInBatch) {
                 newAchievements.push({
                     profile_id: userId,
                     achievement_id: definition.id,
                     time_achieved: new Date().toISOString()
                 });
+                unlockedDefinitions.push(definition);
             }
         }
     }
@@ -458,14 +461,16 @@ export async function checkAndUnlockPoiAchievements(userId: string) {
     // Prüfen auf Geo 1 (ID: 94) für Achievement "True GI"
     if (visitedIds.has(94)) {
         const trueGiDef = allDefinitions.find(d => d.achievement === "True GI");
+        const alreadyInBatch = unlockedDefinitions.some(d => d.id === trueGiDef?.id);
         
         if (trueGiDef) {
-            if (!ownedAchievementIds.has(trueGiDef.id)) {
+            if (!ownedAchievementIds.has(trueGiDef.id) && !alreadyInBatch) {
                 newAchievements.push({
                     profile_id: userId,
                     achievement_id: trueGiDef.id,
                     time_achieved: new Date().toISOString()
                 });
+                unlockedDefinitions.push(trueGiDef);
             }
         } else {
             console.warn("Achievement 'True GI' nicht in der DB gefunden.");
@@ -480,10 +485,12 @@ export async function checkAndUnlockPoiAchievements(userId: string) {
         
         if (insertError) throw insertError;
         console.log("Neue POI-Achievements freigeschaltet:", newAchievements.length);
+        return unlockedDefinitions;
     }
+    return [];
 }
 
-export async function checkAndUnlockRouteAchievements(userId: string) {
+export async function checkAndUnlockRouteAchievements(userId: string): Promise<Achievement[]> {
     // 1. Definition: Welcher Routen-NAME (in Tabelle routes) gehört zu welchem Achievement-NAME
     const routeMapping = [
         { routeName: "muenster_history", achievementName: "Route muenster_history completed" },
@@ -492,7 +499,8 @@ export async function checkAndUnlockRouteAchievements(userId: string) {
         { routeName: "muenster_media", achievementName: "Route muenster_media completed" },
         { routeName: "muenster_kreuzviertel", achievementName: "Route muenster_kreuzviertel completed" },
         { routeName: "muenster_architecture", achievementName: "Route muenster_architecture completed" },
-        { routeName: "muenster_fair", achievementName: "Route muenster_fair completed" }
+        { routeName: "muenster_fair", achievementName: "Route muenster_fair completed" },
+        { routeName: "muenster_bunteHäuser", achievementName: "test_route" },
     ];
 
     // 2. Daten laden
@@ -524,6 +532,7 @@ export async function checkAndUnlockRouteAchievements(userId: string) {
     const allAchievementDefs = await getAllAchievementDefinitions();
 
     const newAchievements = [];
+    const unlockedDefinitions: Achievement[] = [];
 
     // 3. Prüfung durchführen
     for (const mapping of routeMapping) {
@@ -540,7 +549,7 @@ export async function checkAndUnlockRouteAchievements(userId: string) {
             // Finde das zugehörige Achievement
             const achDef = allAchievementDefs.find(a => a.achievement === mapping.achievementName);
             
-            if (achDef) {
+            if (achDef && !ownedAchievementIds.has(achDef.id)) {
                 // Wenn User das Achievement noch nicht hat -> hinzufügen
                 if (!ownedAchievementIds.has(achDef.id)) {
                     newAchievements.push({
@@ -549,6 +558,10 @@ export async function checkAndUnlockRouteAchievements(userId: string) {
                         time_achieved: new Date().toISOString()
                     });
                 }
+
+                unlockedDefinitions.push(achDef);
+                ownedAchievementIds.add(achDef.id); 
+
             } else {
                 console.warn(`Achievement '${mapping.achievementName}' nicht in Tabelle 'achievements' gefunden.`);
             }
@@ -563,5 +576,9 @@ export async function checkAndUnlockRouteAchievements(userId: string) {
         
         if (insertError) throw insertError;
         console.log("Neue Routen-Achievements freigeschaltet:", newAchievements.length);
+
+    return unlockedDefinitions;
     }
+
+    return [];
 }
