@@ -272,27 +272,79 @@ export async function getRoutesCompletedByUser(userId: string) {
 export async function getLeaderboard(
   timeframe: 'month' | 'alltime',
   currentUserId?: string,
-  limit: number = 100
 ): Promise<LeaderboardEntry[]> {
   const pointsColumn =
     timeframe === 'month' ? 'monthly_points' : 'alltime_points';
+    const TOP_LIMIT = 5; // Nur die Top 5
 
-  // Basis-Leaderboard laden
-  const { data: profiles, error } = await supabase
+
+  // Top 5 Leaderboard-Einträge abrufen
+  const { data: top_profiles, error } = await supabase
     .from("profiles")
     .select(`
-      id,
-      username,
-      monthly_points,
-      alltime_points
+    id,
+    username,
+    monthly_points,
+    alltime_points
     `)
     .order(pointsColumn, { ascending: false })
-    .limit(limit);
+    .order("username", { ascending: true }) // Sekundärsortierung nach Username
+    .limit(TOP_LIMIT);
 
-  if (error) throw error;
-  if (!profiles) return [];
+    console.log("Fetched top profiles for leaderboard:", top_profiles);
 
-  const leaderboardPromises = profiles.map(async (profile, index) => {
+    if (error) throw error;
+    if (!top_profiles) return [];
+
+    let allProfilesToProcess = [...top_profiles];
+
+    // 2. Prüfen: Ist der aktuelle User in den Top 5?
+    const userInTop5 = currentUserId && top_profiles.some(p => p.id === currentUserId);
+
+    // 3. Wenn User NICHT in Top 5 ist -> User separat holen & Rang berechnen
+    if (currentUserId && !userInTop5) {
+        // User Profil laden
+        const { data: userProfile } = await supabase
+            .from("profiles")
+            .select(`id, username, monthly_points, alltime_points`)
+            .eq("id", currentUserId)
+            .single();
+
+        if (userProfile) {
+            // Rang berechnen: Zähle wie viele Leute MEHR Punkte haben
+            const userPoints = userProfile[pointsColumn] ?? 0;
+            const userUsername = userProfile.username;
+            
+            // Wie viele Leute mehr Punkte
+            const { count: countMore } = await supabase
+                .from("profiles")
+                .select('*', { count: 'exact', head: true })
+                .gt(pointsColumn, userPoints);
+
+            // Wie viele Leute gleiche Punkte aber username mit "kleinerem" Wert (alphabetisch davor)
+            const { count: countSameButBetter } = await supabase
+                .from("profiles")
+                .select('*', { count: 'exact', head: true })
+                .eq(pointsColumn, userPoints)
+                .lt('username', userUsername);
+
+            // Der exakte Rang = (Bessere Punkte) + (Gleiche Punkte aber vor mir) + 1
+            const calculatedRank = (countMore ?? 0) + (countSameButBetter ?? 0) + 1;
+
+            (userProfile as any).calculatedRank = calculatedRank;
+            
+            allProfilesToProcess.push(userProfile);
+        }
+    }
+
+    console.log("All profiles to process for leaderboard:", allProfilesToProcess);
+
+
+  const leaderboardPromises = allProfilesToProcess.map(async (profile, index) => {
+
+    // Wenn drer User nicht in den Top 5 ist, nutzen wir den berechneten Rang, für die anderen den Index + 1
+    const rank = (profile as any).calculatedRank ?? (index + 1);
+    console.log(`Processing profile ID: ${profile.id}, calculated rank: ${rank}`);
     // POI-Anzahl
     const { count: poiCount } = await supabase
       .from("user_POIs")
@@ -317,7 +369,7 @@ export async function getLeaderboard(
       .getPublicUrl(`${profile.id}/profile_image.jpg`);
 
     return {
-      rank: index + 1,
+      rank: rank,
       username: profile.username || "Unbekannt",
       points: profile[pointsColumn] ?? 0,
       distanceKm: totalDistance / 1000,
@@ -328,7 +380,9 @@ export async function getLeaderboard(
     } as LeaderboardEntry;
   });
 
-  return await Promise.all(leaderboardPromises);
+  const result = await Promise.all(leaderboardPromises);
+  console.log("Final leaderboard data:", result.sort((a, b) => a.rank - b.rank));
+  return result.sort((a, b) => a.rank - b.rank);
 }
 
 // Alle Achievements abrufen
