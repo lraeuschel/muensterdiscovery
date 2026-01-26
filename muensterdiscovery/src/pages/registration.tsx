@@ -55,7 +55,7 @@ export default function Signup() {
             email,
             password,
             options: {
-                // emailRedirectTo: `${window.location.origin}/auth/callback`,
+                emailRedirectTo: "https://lraeuschel.github.io/muensterdiscovery/#/welcome",
                 data: {
                     first_name: firstName,
                     last_name: lastName,
