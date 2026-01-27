@@ -606,7 +606,10 @@ export default function PlayRoute() {
     const handleAchievementClose = () => {
         // Wenn das Achievement Modal geschlossen wird -> Zurück zur Auswahl
         onClose();
-        navigate("/routeselection");
+
+        if(routeCompleted){
+            navigate("/routeselection");
+        }
     };
 
     return (
