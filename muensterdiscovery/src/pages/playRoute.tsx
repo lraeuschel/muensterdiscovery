@@ -28,7 +28,7 @@ import {
     Popup,
 } from "react-leaflet";
 import L from "leaflet";
-import type { LatLngExpression} from "leaflet";
+import type { LatLngExpression } from "leaflet";
 
 import {
     getRouteById,
@@ -131,6 +131,13 @@ const markerUserLocation = new L.Icon({
 });
 
 // --- Helper Components ---
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+
+const getImageUrl = (imagePath?: string) => {
+    if (!imagePath) return undefined;
+    return `${SUPABASE_URL}/storage/v1/object/public/${imagePath}`;
+};
 
 function FitRouteBounds({ route }: { route: Route | null }) {
     const map = useMap();
@@ -582,7 +589,7 @@ export default function PlayRoute() {
     }
     .custom-popup .leaflet-popup-content {
       margin: 0;
-      width: 200px !important;
+      width: 300px !important;
     }
     .custom-popup .leaflet-popup-tip {
       background: white;
@@ -607,7 +614,7 @@ export default function PlayRoute() {
         // Wenn das Achievement Modal geschlossen wird -> Zurück zur Auswahl
         onClose();
 
-        if(routeCompleted){
+        if (routeCompleted) {
             navigate("/routeselection");
         }
     };
@@ -800,10 +807,10 @@ export default function PlayRoute() {
                                 <Popup
                                     className="custom-popup"
                                     closeButton={false}
-                                    minWidth={200}
-                                    maxWidth={200}
+                                    minWidth={300}
+                                    maxWidth={300}
                                 >
-                                    <Box bg="white" w="200px">
+                                    <Box bg="white" w="300px">
                                         {/* Header color bar */}
                                         <Box
                                             h="6px"
@@ -828,13 +835,25 @@ export default function PlayRoute() {
                                             </Text>
 
                                             {isVisited ? (
-                                                <Badge
-                                                    colorScheme="green"
-                                                    variant="subtle"
-                                                    fontSize="0.7rem"
-                                                >
-                                                    {intl.formatMessage({ id: "playroute.visited" })}
-                                                </Badge>
+                                                <VStack gap={1} mt={1}>
+                                                    <Box w="100%" h="150px">
+                                                        <img
+                                                            src={getImageUrl(poi.image_path)}
+                                                            alt={poi.name}
+                                                            style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: 6 }}
+                                                        />
+                                                    </Box>
+                                                    <Text textAlign={"left"}>
+                                                        {intl.formatMessage({ id: `poi.${poi.id}` })}
+                                                    </Text>
+                                                    <Badge
+                                                        colorScheme="green"
+                                                        variant="subtle"
+                                                        fontSize="0.7rem"
+                                                    >
+                                                        {intl.formatMessage({ id: "playroute.visited" })}
+                                                    </Badge>
+                                                </VStack>
                                             ) : (
                                                 <VStack gap={1} mt={1}>
                                                     {(isNearest || isSecondNearest) ? (
