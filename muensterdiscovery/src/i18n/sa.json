@@ -46,6 +46,12 @@
     "profile.achievement3_title": "محب سوق عيد الميلاد",
     "profile.achievement3_desc": "زار جميع أسواق عيد الميلاد",
     "profile.invalid_image": "يرجى اختيار ملف صورة صالح.",
+    "profile.visited_at": "تمت الزيارة في:",
+    "profile.statistics": "الإحصائيات",
+    "profile.stats_pois": "الأماكن المكتشفة",
+    "profile.stats_routes": "المسارات المكتملة",
+    "profile.stats_routes_1": "المسار المكتمل",
+    "profile.stats_km": "مسافة المسار المقطوعة",
 
     "leaderboard.title": "قائمة المتصدرين",
     "leaderboard.subtitle": "من اكتشف مِنستر بشكل أفضل؟",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "طوال الوقت",
     "leaderboard.user": "مستخدم",
     "leaderboard.areas": "المناطق",
+    "leaderboard.areas_one": "منطقة",
     "leaderboard.points": "النقاط",
+    "leaderboard.loading": "جاري تحميل البيانات",
+    "leaderboard.no_data": "لا توجد بيانات متاحة بعد",
+    "leaderboard.km": "كيلومترات المسار",
 
     "registration.title": "إنشاء حساب",
     "registration.firstname": "الاسم الأول",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "البريد الإلكتروني مستخدم بالفعل. هل لديك بالفعل حساب؟",
     "registration.username_taken": "اسم المستخدم مستخدم بالفعل.",
+    "registration.password_length_error": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.",
+    "registration.invalid_email_format": "يرجى إدخال عنوان بريد إلكتروني صالح.",
 
     "login.title": "تسجيل الدخول",
     "login.email": "البريد الإلكتروني",

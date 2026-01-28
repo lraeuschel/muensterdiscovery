@@ -46,6 +46,12 @@
     "profile.achievement3_title": "Fan dei mercatini di Natale",
     "profile.achievement3_desc": "Tutti i mercatini di Natale visitati",
     "profile.invalid_image": "Seleziona un file immagine valido.",
+    "profile.visited_at": "Visitato il:",
+    "profile.statistics": "Statistiche",
+    "profile.stats_pois": "Luoghi Scoperti",
+    "profile.stats_routes": "Percorsi Completati",
+    "profile.stats_routes_1": "Percorso Completato",
+    "profile.stats_km": "Distanza del Percorso Percorsa",
 
     "leaderboard.title": "Classifica",
     "leaderboard.subtitle": "Chi ha esplorato meglio Münster?",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "Classifica di tutti i tempi",
     "leaderboard.user": "Utente",
     "leaderboard.areas": "Aree",
+    "leaderboard.areas_one": "area",
     "leaderboard.points": "Punti",
+    "leaderboard.loading": "Caricamento Dati",
+    "leaderboard.no_data": "Nessun dato ancora disponibile",
+    "leaderboard.km": "Chilometri di percorso",
 
     "registration.title": "Crea account",
     "registration.firstname": "Nome",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "Email già utilizzata. Hai già un account?",
     "registration.username_taken": "Nome utente già preso.",
+    "registration.password_length_error": "La password deve contenere almeno 6 caratteri.",
+    "registration.invalid_email_format": "Si prega di inserire un indirizzo email valido.",
 
     "login.title": "Accedi",
     "login.email": "Email",

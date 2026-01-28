@@ -46,6 +46,12 @@
     "profile.achievement3_title": "Fan de marché de Noël",
     "profile.achievement3_desc": "Tous les marchés de Noël visités",
     "profile.invalid_image": "Veuillez sélectionner un fichier image valide.",
+    "profile.visited_at": "Visité le :",
+    "profile.statistics": "Statistiques",
+    "profile.stats_pois": "Lieux Découverts",
+    "profile.stats_routes": "Parcours Terminés",
+    "profile.stats_routes_1": "Parcours Terminé",
+    "profile.stats_km": "Distance de Parcours Parcourue",
 
     "leaderboard.title": "Classement",
     "leaderboard.subtitle": "Qui a le mieux exploré Münster ?",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "Classement toutes périodes confondues",
     "leaderboard.user": "Utilisateur",
     "leaderboard.areas": "Zones",
+    "leaderboard.areas_one": "zone",
     "leaderboard.points": "Points",
+    "leaderboard.loading": "Chargement des Données",
+    "leaderboard.no_data": "Aucune donnée disponible pour le moment",
+    "leaderboard.km": "Kilomètres de parcours",
 
     "registration.title": "Créer un compte",
     "registration.firstname": "Prénom",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "L'email est déjà utilisé. Avez-vous déjà un compte ?",
     "registration.username_taken": "Nom d'utilisateur déjà pris.",
+    "registration.password_length_error": "Le mot de passe doit comporter au moins 6 caractères.",
+    "registration.invalid_email_format": "Veuillez saisir une adresse e-mail valide.",
 
     "login.title": "Connexion",
     "login.email": "E-mail",

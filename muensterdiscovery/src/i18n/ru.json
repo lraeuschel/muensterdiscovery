@@ -46,6 +46,12 @@
     "profile.achievement3_title": "Фанат рождественских рынков",
     "profile.achievement3_desc": "Посещены все рождественские рынки",
     "profile.invalid_image": "Пожалуйста, выберите корректный файл изображения.",
+    "profile.visited_at": "Посещено:",
+    "profile.statistics": "Статистика",
+    "profile.stats_pois": "Обнаруженные Места",
+    "profile.stats_routes": "Завершенные Маршруты",
+    "profile.stats_routes_1": "Завершенный Маршрут",
+    "profile.stats_km": "Пройденное Расстояние Маршрута",
 
     "leaderboard.title": "Таблица лидеров",
     "leaderboard.subtitle": "Кто лучше всего исследовал Мюнстер?",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "За всё время",
     "leaderboard.user": "Пользователь",
     "leaderboard.areas": "Области",
+    "leaderboard.areas_one": "область",
     "leaderboard.points": "Очки",
+    "leaderboard.loading": "Загрузка Данных",
+    "leaderboard.no_data": "Данные пока недоступны",
+    "leaderboard.km": "Километры маршрута",
 
     "registration.title": "Создать аккаунт",
     "registration.firstname": "Имя",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "Адрес электронной почты уже используется. У вас уже есть аккаунт?",
     "registration.username_taken": "Имя пользователя уже занято.",
+    "registration.password_length_error": "Пароль должен содержать не менее 6 символов.",
+    "registration.invalid_email_format": "Пожалуйста, введите действительный адрес электронной почты.",
 
     "login.title": "Вход",
     "login.email": "Электронная почта",

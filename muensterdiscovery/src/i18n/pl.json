@@ -46,6 +46,12 @@
     "profile.achievement3_title": "Fan jarmarków bożonarodzeniowych",
     "profile.achievement3_desc": "Odwiedzono wszystkie jarmarki bożonarodzeniowe",
     "profile.invalid_image": "Proszę wybrać prawidłowy plik obrazu.",
+    "profile.visited_at": "Odwiedzono:",
+    "profile.statistics": "Statystyki",
+    "profile.stats_pois": "Odkryte Miejsca",
+    "profile.stats_routes": "Ukończone Trasy",
+    "profile.stats_routes_1": "Ukończona Trasa",
+    "profile.stats_km": "Przebyta Odległość Trasy",
 
     "leaderboard.title": "Ranking",
     "leaderboard.subtitle": "Kto najlepiej odkrył Münster?",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "Wszystkie czasy",
     "leaderboard.user": "Użytkownik",
     "leaderboard.areas": "Obszary",
+    "leaderboard.areas_one": "obszar",
     "leaderboard.points": "Punkty",
+    "leaderboard.loading": "Ładowanie Danych",
+    "leaderboard.no_data": "Nie ma jeszcze dostępnych danych",
+    "leaderboard.km": "Kilometry trasy",
 
     "registration.title": "Utwórz konto",
     "registration.firstname": "Imię",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "Adres e-mail jest już zajęty. Czy masz już konto?",
     "registration.username_taken": "Nazwa użytkownika jest już zajęta.",
+    "registration.password_length_error": "Hasło musi mieć co najmniej 6 znaków.",
+    "registration.invalid_email_format": "Proszę podać prawidłowy adres e-mail.",
 
     "login.title": "Logowanie",
     "login.email": "E-mail",

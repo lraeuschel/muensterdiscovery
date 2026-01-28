@@ -46,6 +46,12 @@
     "profile.achievement3_title": "Kerstmarkt-fan",
     "profile.achievement3_desc": "Alle kerstmarkten bezocht",
     "profile.invalid_image": "Selecteer een geldig afbeeldingsbestand.",
+    "profile.visited_at": "Bezocht op:",
+    "profile.statistics": "Statistieken",
+    "profile.stats_pois": "Ontdekte Plaatsen",
+    "profile.stats_routes": "Voltooide Routes",
+    "profile.stats_routes_1": "Voltooide Route",
+    "profile.stats_km": "Afgelegde Routeafstand",
 
     "leaderboard.title": "Ranglijst",
     "leaderboard.subtitle": "Wie heeft Münster het beste verkend?",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "Alle tijden",
     "leaderboard.user": "Gebruiker",
     "leaderboard.areas": "Gebieden",
+    "leaderboard.areas_one": "gebied",
     "leaderboard.points": "Punten",
+    "leaderboard.loading": "Gegevens Laden",
+    "leaderboard.no_data": "Nog geen gegevens beschikbaar",
+    "leaderboard.km": "Route kilometers",
 
     "registration.title": "Account aanmaken",
     "registration.firstname": "Voornaam",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "E-mail al in gebruik. Heb je al een account?",
     "registration.username_taken": "Gebruikersnaam al in gebruik.",
+    "registration.password_length_error": "Het wachtwoord moet minimaal 6 tekens lang zijn.",
+    "registration.invalid_email_format": "Voer een geldig e-mailadres in.",
 
     "login.title": "Inloggen",
     "login.email": "E-mail",

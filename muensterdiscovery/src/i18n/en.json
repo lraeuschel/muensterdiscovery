@@ -52,6 +52,11 @@
     "profile.achievement3_desc": "Visited all Christmas markets",
     "profile.invalid_image": "Please select a valid image file.",
     "profile.visited_at": "Visited at:",
+    "profile.statistics": "Statistics",
+    "profile.stats_pois": "Discovered Places",
+    "profile.stats_routes": "Routes Completed",
+    "profile.stats_routes_1": "Route Completed",
+    "profile.stats_km": "Route Distance Traveled",
 
     "leaderboard.title": "Leaderboard",
     "leaderboard.subtitle": "Who explored Münster best?",
@@ -62,7 +67,10 @@
     "leaderboard.alltime": "All time",
     "leaderboard.user": "User",
     "leaderboard.areas": "areas",
+    "leaderboard.areas_one": "area",
     "leaderboard.points": "Points",
+    "leaderboard.loading": "Loading Data",
+    "leaderboard.no_data": "No data available yet",
     "leaderboard.km": "Route kilometers",
 
 
@@ -73,10 +81,11 @@
     "registration.email": "Email",
     "registration.password": "Password",
     "registration.register_button": "Register",
-    "registration.email_confirmation_message": "Confirmation email sent. Please check your inbox."
-    ,
+    "registration.email_confirmation_message": "Confirmation email sent. Please check your inbox.",
     "registration.already_have_account": "Email already in use. Do you already have an account?",
     "registration.username_taken": "Username already taken.",
+    "registration.password_length_error": "The password must be at least 6 characters long.",
+    "registration.invalid_email_format": "Please enter a valid email address.",
 
     "login.title": "Login",
     "login.email": "Email",

@@ -46,6 +46,12 @@
     "profile.achievement3_title": "クリスマスマーケットファン",
     "profile.achievement3_desc": "すべてのクリスマスマーケットを訪問",
     "profile.invalid_image": "有効な画像ファイルを選択してください。",
+    "profile.visited_at": "訪問日:",
+    "profile.statistics": "統計",
+    "profile.stats_pois": "発見した場所",
+    "profile.stats_routes": "完了したルート",
+    "profile.stats_routes_1": "完了したルート",
+    "profile.stats_km": "走行したルート距離",
 
     "leaderboard.title": "ランキング",
     "leaderboard.subtitle": "誰がミュンスターを最もよく探検しましたか？",
@@ -56,7 +62,11 @@
     "leaderboard.alltime": "通算",
     "leaderboard.user": "ユーザー",
     "leaderboard.areas": "エリア",
+    "leaderboard.areas_one": "エリア",
     "leaderboard.points": "ポイント",
+    "leaderboard.loading": "データ読み込み中",
+    "leaderboard.no_data": "まだデータがありません",
+    "leaderboard.km": "ルートキロメートル",
 
     "registration.title": "アカウント作成",
     "registration.firstname": "名",
@@ -69,6 +79,8 @@
     ,
     "registration.already_have_account": "メールアドレスは既に使用されています。既にアカウントをお持ちですか？",
     "registration.username_taken": "ユーザー名は既に使用されています。",
+    "registration.password_length_error": "パスワードは6文字以上である必要があります。",
+    "registration.invalid_email_format": "有効なメールアドレスを入力してください。",
 
     "login.title": "ログイン",
     "login.email": "メールアドレス",
