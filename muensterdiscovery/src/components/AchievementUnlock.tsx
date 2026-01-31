@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import Confetti from 'react-confetti';
 import { useWindowSize } from 'react-use';
+import { useIntl } from "react-intl";
 
 // Falls du kein Platzhalterbild hast, nimm einen leeren String oder importiere es
 // import achievement_placeholder from '../assets/achievement_trophy.png';
@@ -26,6 +27,7 @@ interface AchievementUnlockModalProps {
 
 export default function AchievementUnlockModal({ isOpen, onClose, achievement }: AchievementUnlockModalProps) {
   const { width, height } = useWindowSize();
+  const intl = useIntl();
 
   if (!achievement) return null;
 
@@ -96,7 +98,7 @@ export default function AchievementUnlockModal({ isOpen, onClose, achievement }:
                             letterSpacing="wider"
                             fontSize="sm"
                         >
-                            Achievement Unlocked!
+                            {intl.formatMessage({ id: "achievement.unlocked" })}
                         </Text>
                         
                         <Heading size="lg" color="gray.800">
@@ -118,7 +120,7 @@ export default function AchievementUnlockModal({ isOpen, onClose, achievement }:
                         boxShadow="lg"
                         _hover={{ transform: 'translateY(-2px)', boxShadow: 'xl' }}
                     >
-                        Klasse! 🎉
+                        {intl.formatMessage({ id: "achievement.button" })} 
                     </Button>
                 </VStack>
           </Dialog.Body>

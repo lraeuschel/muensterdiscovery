@@ -26,6 +26,9 @@
     "imprint.content": "Этот проект является учебным проектом в рамках магистерской программы «Геоинформатика и наука о пространственных данных». Исходный код и документация доступны на GitHub:",
     "imprint.github_link_text": "Репозиторий GitHub",
     "imprint.home_button": "Вернуться на главную",
+    "achievement.unlocked": "Достижение разблокировано!",
+    "achievement.button": "Отлично!",
+    "playroute.collect_reward": "Посмотреть награду",
 
     "openworld.loading": "Загрузка рождественских рынков...",
     "openworld.more_info": "Подробнее",

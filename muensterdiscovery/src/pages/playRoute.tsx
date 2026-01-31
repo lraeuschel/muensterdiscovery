@@ -1388,7 +1388,7 @@ export default function PlayRoute() {
                         >
                             {/* Text dynamisch machen: Wenn Achievement wartet, steht da "Belohnung abholen" */}
                             {newAchievement
-                                ? "Belohnung ansehen 🎁"
+                                ? intl.formatMessage({ id: "playroute.collect_reward" })
                                 : intl.formatMessage({ id: "playroute.return_base" })
                             }
                         </Button>

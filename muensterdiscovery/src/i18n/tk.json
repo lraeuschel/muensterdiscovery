@@ -26,6 +26,9 @@
     "imprint.content": "Bu proje, Coğrafi Bilişim ve Mekansal Veri Bilimi Yüksek Lisans programı kapsamında bir öğrenci projesidir. Kaynak kodu ve dokümantasyon GitHub'da mevcuttur:",
     "imprint.github_link_text": "GitHub Deposu",
     "imprint.home_button": "Ana sayfaya dön",
+    "achievement.unlocked": "Başarı açıldı!",
+    "achievement.button": "Harika!",
+    "playroute.collect_reward": "Ödülü görüntüle",
 
     "openworld.loading": "Noel pazarları yükleniyor...",
     "openworld.more_info": "Daha fazla bilgi",

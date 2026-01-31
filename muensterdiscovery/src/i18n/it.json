@@ -26,6 +26,9 @@
     "imprint.content": "Questo progetto è un progetto di studio nell'ambito del corso di laurea magistrale in Geoinformatica e Scienze dei Dati Spaziali. Il codice sorgente e la documentazione sono disponibili su GitHub:",
     "imprint.github_link_text": "Repository GitHub",
     "imprint.home_button": "Torna alla home",
+    "achievement.unlocked": "Obiettivo sbloccato!",
+    "achievement.button": "Fantastico!",
+    "playroute.collect_reward": "Visualizza ricompensa",
 
     "openworld.loading": "Caricamento mercatini di Natale...",
     "openworld.more_info": "Maggiori informazioni",

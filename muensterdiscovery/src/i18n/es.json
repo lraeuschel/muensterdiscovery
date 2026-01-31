@@ -26,6 +26,9 @@
     "imprint.content": "Este proyecto es un proyecto de estudio como parte del programa de Máster en Geoinformática y Ciencia de Datos Espaciales. El código fuente y la documentación están disponibles en GitHub:",
     "imprint.github_link_text": "Repositorio de GitHub",
     "imprint.home_button": "Volver al inicio",
+    "achievement.unlocked": "¡Logro desbloqueado!",
+    "achievement.button": "¡Genial!",
+    "playroute.collect_reward": "Ver recompensa",
 
     "openworld.loading": "Cargando mercados navideños...",
     "openworld.more_info": "Más información",

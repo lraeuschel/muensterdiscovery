@@ -26,6 +26,9 @@
     "imprint.content": "هذا المشروع هو مشروع دراسي كجزء من برنامج الماجستير في الجغرافيا المعلوماتية وعلوم بيانات الفضاء. الشيفرة المصدرية والوثائق متاحة على GitHub:",
     "imprint.github_link_text": "مستودع GitHub",
     "imprint.home_button": "العودة إلى الصفحة الرئيسية",
+    "achievement.unlocked": "تم فتح الإنجاز!",
+    "achievement.button": "رائع!",
+    "playroute.collect_reward": "عرض المكافأة",
 
     "openworld.loading": "جاري تحميل أسواق عيد الميلاد...",
     "openworld.more_info": "مزيد من المعلومات",

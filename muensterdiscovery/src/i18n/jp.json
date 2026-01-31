@@ -26,6 +26,9 @@
     "imprint.content": "本プロジェクトは、地理情報学および空間データサイエンス修士課程の学習プロジェクトです。ソースコードとドキュメントはGitHubで公開されています：",
     "imprint.github_link_text": "GitHub リポジトリ",
     "imprint.home_button": "ホームに戻る",
+    "achievement.unlocked": "実績を解除しました！",
+    "achievement.button": "素晴らしい！",
+    "playroute.collect_reward": "報酬を見る",
 
     "openworld.loading": "クリスマスマーケットを読み込んでいます...",
     "openworld.more_info": "詳細情報",

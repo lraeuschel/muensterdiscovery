@@ -165,6 +165,7 @@
     "playroute.nav.action.turn_left": "Links abbiegen",
     "playroute.nav.action.turn_right": "Rechts abbiegen",
     "playroute.nav.action.arrive": "Ziel erreicht",
+    "playroute.collect_reward": "Belohnung ansehen",
 
 
     "chat.example1": "Welche Erreignisse habe ich bereits abgeschlossen?",
@@ -356,6 +357,8 @@
     "imprint.disclaimer_title": "Haftungsausschluss",
     "imprint.disclaimer_text": "Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.",
     "imprint.copyright_title": "Urheberrecht",
-    "imprint.copyright_text": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers."
+    "imprint.copyright_text": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.",
 
+    "achievement.unlocked": "Erfolg freigeschaltet!",
+    "achievement.button": "Toll!"
 }
