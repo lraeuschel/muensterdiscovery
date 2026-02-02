@@ -1,6 +1,6 @@
 import { supabase } from "../SupabaseClient";
 import default_profile_image from "../assets/Fxrg3QHWAAcQ7pw.jpg";
-import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI, LeaderboardEntry, UserRouteWithDistance } from "../types";
+import type { User, Achievement, POI, Event, Route, Voronoi, VisitedPOI, LeaderboardEntry, UserRouteWithDistance, WalkedKmRow } from "../types";
 
 export async function getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
@@ -263,7 +263,7 @@ export async function updateUserPoints(userId: string, pointsToAdd: number) {
     if (updateError) throw updateError;
 }
 
-export async function getWalkedKilometers() {
+export async function getWalkedKilometers(): Promise<WalkedKmRow[]> {
     const { data, error } = await supabase
         .from("user_routes")
         .select(`
@@ -271,8 +271,11 @@ export async function getWalkedKilometers() {
                 distance
             )
         `);
+
     if (error) throw error;
-    return data ?? [];
+
+    // TypeScript casten
+    return (data as WalkedKmRow[]) ?? [];
 }
 
 export async function getRoutesCompletedByUser(userId: string) {

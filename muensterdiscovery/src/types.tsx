@@ -71,3 +71,9 @@ export type UserRouteWithDistance = {
     distance: number;
   } | null;
 };
+
+export type WalkedKmRow = {
+  routes: {
+    distance: number;
+  }[];
+};
