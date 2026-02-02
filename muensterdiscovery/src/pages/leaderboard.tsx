@@ -36,10 +36,13 @@ export default function Leaderboard() {
                 setTotalDiscoveredPOIs(poisCount);
 
                 console.log("Walked km data:", kmData);
-                const totalKm = kmData.reduce((sum, row) => {
-                    const rowKm = row.routes?.reduce((rSum, r) => rSum + (r.distance ?? 0), 0) ?? 0;
-                    return sum + rowKm;
-                }, 0);
+                const totalKm = kmData.reduce(
+                    (sum, row) => sum + (row.routes?.distance ?? 0),
+                    0
+                );
+
+                console.log("Total walked km calculation test:", totalKm);
+                setTotalWalkedKm(totalKm);
 
                 setTotalWalkedKm(totalKm);
 

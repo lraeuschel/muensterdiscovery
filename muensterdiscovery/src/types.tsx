@@ -75,5 +75,5 @@ export type UserRouteWithDistance = {
 export type WalkedKmRow = {
   routes: {
     distance: number;
-  }[];
+  };
 };

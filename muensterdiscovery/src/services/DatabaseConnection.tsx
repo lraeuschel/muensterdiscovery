@@ -263,6 +263,7 @@ export async function updateUserPoints(userId: string, pointsToAdd: number) {
     if (updateError) throw updateError;
 }
 
+
 export async function getWalkedKilometers(): Promise<WalkedKmRow[]> {
     const { data, error } = await supabase
         .from("user_routes")
@@ -274,8 +275,10 @@ export async function getWalkedKilometers(): Promise<WalkedKmRow[]> {
 
     if (error) throw error;
 
-    // TypeScript casten
-    return (data as WalkedKmRow[]) ?? [];
+    // Zuerst als unknown casten, dann zu WalkedKmRow[]
+    const typedData = data as unknown as WalkedKmRow[];
+
+    return typedData ?? [];
 }
 
 export async function getRoutesCompletedByUser(userId: string) {
